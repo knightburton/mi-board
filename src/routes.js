@@ -25,8 +25,8 @@ export default (
   <App>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/workout" component={Workout} />
-      <Route exact path="/calendar" component={Calendar} />
+      <Route path="/workout" component={Workout} />
+      <Route path="/calendar" component={Calendar} />
       <Redirect to="/" />
     </Switch>
   </App>

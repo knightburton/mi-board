@@ -11,7 +11,7 @@ export default class App extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div className="wrapper">
+      <div className="wrapper container-fluid">
         <Header />
         {children}
       </div>

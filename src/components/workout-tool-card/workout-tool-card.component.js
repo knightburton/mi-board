@@ -15,7 +15,7 @@ export default class WorkoutToolCard extends React.Component {
     };
 
     return (
-      <div className="card pt-3" style={style}>
+      <div className="card card-link pt-3" style={style}>
         <div className="text-center">
           <FontAwesomeIcon icon={icon} size="6x" />
         </div>
