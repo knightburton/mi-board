@@ -2,10 +2,10 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router';
-import WorkoutToolList from '../workout-tool-list/workout-tool-list.component';
-import WorkoutInterval from '../workout-interval/workout-interval.component';
-import WorkoutCountdown from '../workout-countdown/workout-countdown.component';
-import WorkoutStopwatch from '../workout-stopwatch/workout-stopwatch.component';
+import ToolList from './tool-list/tool-list.component';
+import Interval from './interval/interval.component';
+import Countdown from './countdown/countdown.component';
+import Stopwatch from './stopwatch/stopwatch.component';
 
 export default class Workout extends React.Component {
 
@@ -26,10 +26,10 @@ export default class Workout extends React.Component {
           <h2 className="text-center my-2">Workout</h2>
 
           <Switch>
-            <Route exact path={`${match.path}`} component={WorkoutToolList}/>
-            <Route path={`${match.path}/interval`} component={WorkoutInterval}/>
-            <Route path={`${match.path}/countdown`} component={WorkoutCountdown}/>
-            <Route path={`${match.path}/stopwatch`} component={WorkoutStopwatch}/>
+            <Route exact path={`${match.path}`} component={ToolList}/>
+            <Route path={`${match.path}/interval`} component={Interval}/>
+            <Route path={`${match.path}/countdown`} component={Countdown}/>
+            <Route path={`${match.path}/stopwatch`} component={Stopwatch}/>
           </Switch>
         </div>
       </div>

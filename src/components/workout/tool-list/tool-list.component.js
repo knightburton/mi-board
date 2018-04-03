@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { faClock as farClock } from '@fortawesome/fontawesome-free-regular';
 import { faClock, faStopwatch } from '@fortawesome/fontawesome-free-solid';
-import WorkoutToolCard from '../workout-tool-card/workout-tool-card.component';
+import ToolCard from '../tool-card/tool-card.component';
 
-export default class WorkoutToolList extends React.Component {
+export default class ToolList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ export default class WorkoutToolList extends React.Component {
             <Link
               className="nav-link text-dark"
               to={`${match.path}/interval`}>
-              <WorkoutToolCard
+              <ToolCard
                 icon={faClock}
                 name="Interval timer"
                 text="Round based interval with work and rest time." />
@@ -40,7 +40,7 @@ export default class WorkoutToolList extends React.Component {
             <Link
               className="nav-link text-dark"
               to={`${match.path}/countdown`}>
-              <WorkoutToolCard
+              <ToolCard
                 icon={farClock}
                 name="Countdown timer"
                 text="It goes down second by second until hit the bottom of the time." />
@@ -51,7 +51,7 @@ export default class WorkoutToolList extends React.Component {
             <Link
               className="nav-link text-dark"
               to={`${match.path}/stopwatch`}>
-              <WorkoutToolCard
+              <ToolCard
                 icon={faStopwatch}
                 name="Stopwatch timer"
                 text="Basic stopwatch timer with lap count function." />
@@ -63,6 +63,6 @@ export default class WorkoutToolList extends React.Component {
   }
 }
 
-WorkoutToolList.propTypes = {
+ToolList.propTypes = {
   match: PropTypes.object.isRequired
 };

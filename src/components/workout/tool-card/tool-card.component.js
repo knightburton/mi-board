@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 
-export default class WorkoutToolCard extends React.Component {
+export default class ToolCard extends React.Component {
 
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ export default class WorkoutToolCard extends React.Component {
 }
 
 
-WorkoutToolCard.propTypes = {
+ToolCard.propTypes = {
   icon: PropTypes.object.isRequired,
   name: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired

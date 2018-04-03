@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class WorkoutStopwatch extends React.Component {
+export default class Stopwatch extends React.Component {
 
   constructor(props) {
     super(props);

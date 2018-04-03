@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class WorkoutInterval extends React.Component {
+export default class Interval extends React.Component {
 
   constructor(props) {
     super(props);
