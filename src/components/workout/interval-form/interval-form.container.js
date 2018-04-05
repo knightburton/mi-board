@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: event => event.preventDefault(),
+  handleResetClick: () => dispatch(formState.resetForm()),
   handleRepeatChange: event => dispatch(formState.setRepeat(parseInt(event.target.value))),
   handleWorkChange: event => dispatch(formState.setWork(parseInt(event.target.value))),
   handleRestChange: event => dispatch(formState.setRest(parseInt(event.target.value)))

@@ -4,6 +4,7 @@ import initialState from './initial.state';
 export const SET_REPEAT = 'SET_REPEAT';
 export const SET_WORK = 'SET_WORK';
 export const SET_REST = 'SET_REST';
+export const RESET_FORM = 'RESET_FORM';
 
 // Actions
 export const setRepeat = value => ({
@@ -21,6 +22,10 @@ export const setRest = value => ({
   value
 });
 
+export const resetForm = () => ({
+  type: RESET_FORM
+});
+
 // Selectors
 export const getRepeat = state => state.workout.intervalForm.repeat;
 export const getWork = state => state.workout.intervalForm.work;
@@ -35,6 +40,8 @@ export default (state = initialState, action = {}) => {
       return {...state, work: action.value};
     case SET_REST:
       return {...state, rest: action.value};
+    case RESET_FORM:
+      return initialState;
     default:
       return state;
   }

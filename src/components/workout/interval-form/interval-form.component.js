@@ -14,6 +14,7 @@ export default class IntervalForm extends React.Component {
       work,
       rest,
       handleSubmit,
+      handleResetClick,
       handleRepeatChange,
       handleWorkChange,
       handleRestChange
@@ -48,9 +49,18 @@ export default class IntervalForm extends React.Component {
               value={rest}
               onChange={handleRestChange} />
 
-            <button type="submit" className="btn btn-outline-secondary w-100 mt-4">
-              Start
-            </button>
+            <div className="form-row mt-4">
+              <div className="form-group col-6">
+                <button type="submit" className="btn btn-outline-secondary w-100">
+                  Start
+                </button>
+              </div>
+              <div className="form-group col-6">
+                <button type="button" className="btn btn-outline-danger w-100" onClick={handleResetClick}>
+                  Reset
+                </button>
+              </div>
+            </div>
 
             </form>
         </div>
@@ -64,6 +74,7 @@ IntervalForm.propTypes = {
   work: PropTypes.number.isRequired,
   rest: PropTypes.number.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleResetClick: PropTypes.func.isRequired,
   handleRepeatChange: PropTypes.func.isRequired,
   handleWorkChange: PropTypes.func.isRequired,
   handleRestChange: PropTypes.func.isRequired
