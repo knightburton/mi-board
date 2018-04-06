@@ -89,8 +89,8 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row mt-4">
               <div className="form-group col-6">
-                <button type="submit" className="btn btn-outline-secondary w-100">
-                  Start
+                <button type="submit" className="btn btn-outline-success w-100">
+                  Set
                 </button>
               </div>
               <div className="form-group col-6">
