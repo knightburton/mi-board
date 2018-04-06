@@ -124,6 +124,17 @@ describe('interval-form action creators', () => {
 
 describe('interval-form selectors', () => {
   // Repeat
+  it('should return the repeat value (null)', () => {
+    const state = {
+      workout: {
+        intervalForm: {
+          repeat: null
+        }
+      }
+    };
+    expect(form.getRepeat(state)).toEqual(null);
+  });
+
   it('should return the repeat value (0)', () => {
     const state = {
       workout: {
@@ -147,6 +158,18 @@ describe('interval-form selectors', () => {
   });
 
   // Work
+  it('should return the work value (null)', () => {
+    const state = {
+      workout: {
+        intervalForm: {
+          work: null
+        }
+      }
+    };
+    expect(form.getWork(state)).toEqual(null);
+  });
+
+
   it('should return the work value (0)', () => {
     const state = {
       workout: {
@@ -170,6 +193,17 @@ describe('interval-form selectors', () => {
   });
 
   // Rest
+  it('should return the rest value (null)', () => {
+    const state = {
+      workout: {
+        intervalForm: {
+          rest: null
+        }
+      }
+    };
+    expect(form.getRest(state)).toEqual(null);
+  });
+
   it('should return the rest value (0)', () => {
     const state = {
       workout: {
@@ -193,6 +227,28 @@ describe('interval-form selectors', () => {
   });
 });
 
+describe('interval-form helpers', () => {
+  it('should return a positive value or zero or null (null)', () => {
+    expect(form.positiveValue(null)).toEqual(null);
+  });
+
+  it('should return a positive value or zero or null (0)', () => {
+    expect(form.positiveValue(0)).toEqual(0);
+  });
+
+  it('should return a positive value or zero or null (15)', () => {
+    expect(form.positiveValue(15)).toEqual(15);
+  });
+
+  it('should return a positive value or zero or null (-10)', () => {
+    expect(form.positiveValue(-10)).toEqual(0);
+  });
+
+  it('should return a positive value or zero or null (-99)', () => {
+    expect(form.positiveValue(-99)).toEqual(0);
+  });
+});
+
 describe('interval-form reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
@@ -205,8 +261,8 @@ describe('interval-form reducer', () => {
     };
     const expectedState = {
       repeat: 30,
-      work: 0,
-      rest: 0
+      work: null,
+      rest: null
     };
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
@@ -217,9 +273,9 @@ describe('interval-form reducer', () => {
       value: 45
     };
     const expectedState = {
-      repeat: 0,
+      repeat: null,
       work: 45,
-      rest: 0
+      rest: null
     };
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
@@ -230,8 +286,8 @@ describe('interval-form reducer', () => {
       value: 15
     };
     const expectedState = {
-      repeat: 0,
-      work: 0,
+      repeat: null,
+      work: null,
       rest: 15
     };
     expect(reducer(initialState, action)).toEqual(expectedState);

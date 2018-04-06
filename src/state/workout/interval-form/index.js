@@ -31,6 +31,11 @@ export const getRepeat = state => state.workout.intervalForm.repeat;
 export const getWork = state => state.workout.intervalForm.work;
 export const getRest = state => state.workout.intervalForm.rest;
 
+// Helpers
+export const positiveValue = value => {
+  return value >= 0 ? value : 0;
+};
+
 // Reducers
 export default (state = initialState, action = {}) => {
   switch (action.type) {

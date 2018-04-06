@@ -70,9 +70,9 @@ export default class IntervalForm extends React.Component {
 }
 
 IntervalForm.propTypes = {
-  repeat: PropTypes.number.isRequired,
-  work: PropTypes.number.isRequired,
-  rest: PropTypes.number.isRequired,
+  repeat: PropTypes.number,
+  work: PropTypes.number,
+  rest: PropTypes.number,
   handleSubmit: PropTypes.func.isRequired,
   handleResetClick: PropTypes.func.isRequired,
   handleRepeatChange: PropTypes.func.isRequired,

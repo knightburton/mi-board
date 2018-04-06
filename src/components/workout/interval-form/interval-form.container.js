@@ -11,9 +11,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleSubmit: event => event.preventDefault(),
   handleResetClick: () => dispatch(formState.resetForm()),
-  handleRepeatChange: event => dispatch(formState.setRepeat(parseInt(event.target.value))),
-  handleWorkChange: event => dispatch(formState.setWork(parseInt(event.target.value))),
-  handleRestChange: event => dispatch(formState.setRest(parseInt(event.target.value)))
+  handleRepeatChange: value => dispatch(formState.setRepeat(formState.positiveValue(value))),
+  handleWorkChange: value => dispatch(formState.setWork(formState.positiveValue(value))),
+  handleRestChange: value => dispatch(formState.setRest(formState.positiveValue(value)))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntervalForm);
