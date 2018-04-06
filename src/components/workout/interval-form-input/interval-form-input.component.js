@@ -26,6 +26,11 @@ export default class IntervalFormInput extends React.Component {
           onChange={onChange}
           aria-describedby={`${name}-help`}
           placeholder={placeholder}
+          disabled={false}
+          autoFocus={false}
+          autoComplete="off"
+          autoCorrect="off"
+          mobile
           required />
         <small id={`${name}-help`} className="form-text text-muted">
           <p>{help}</p>
