@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import IntervalTimer from '../interval-timer/interval-timer.container';
 import IntervalForm from '../interval-form/interval-form.container';
 
 export default class Interval extends React.Component {
@@ -16,7 +17,7 @@ export default class Interval extends React.Component {
         <h3 className="text-center">Interval timer</h3>
 
         {active ? (
-          <p>Create timer....</p>
+          <IntervalTimer />
         ) : (
           <IntervalForm />
         )}
