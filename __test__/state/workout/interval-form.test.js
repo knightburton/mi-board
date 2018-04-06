@@ -261,8 +261,8 @@ describe('interval-form reducer', () => {
     };
     const expectedState = {
       repeat: 30,
-      work: null,
-      rest: null
+      work: 0,
+      rest: 0
     };
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
@@ -273,9 +273,9 @@ describe('interval-form reducer', () => {
       value: 45
     };
     const expectedState = {
-      repeat: null,
+      repeat: 1,
       work: 45,
-      rest: null
+      rest: 0
     };
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
@@ -286,8 +286,8 @@ describe('interval-form reducer', () => {
       value: 15
     };
     const expectedState = {
-      repeat: null,
-      work: null,
+      repeat: 1,
+      work: 0,
       rest: 15
     };
     expect(reducer(initialState, action)).toEqual(expectedState);

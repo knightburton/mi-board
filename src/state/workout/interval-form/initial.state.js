@@ -1,5 +1,5 @@
 export default ({
-  work: null,
-  rest: null,
-  repeat: null
+  work: 0,
+  rest: 0,
+  repeat: 1
 });
