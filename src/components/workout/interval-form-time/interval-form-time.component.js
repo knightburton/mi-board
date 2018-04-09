@@ -66,7 +66,7 @@ export default class IntervalFormTime extends React.Component {
           </div>
           <div className="row">
             <div className="col-1">
-              <p>Minut:</p>
+              <p>Minute:</p>
             </div>
             <div className="col">
               <IntervalFormSlider
