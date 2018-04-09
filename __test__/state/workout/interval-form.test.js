@@ -251,7 +251,7 @@ describe('interval-form reducer', () => {
       value: 45
     };
     const expectedState = {
-      repeat: 1,
+      repeat: 0,
       work: 45,
       rest: 0
     };
@@ -264,7 +264,7 @@ describe('interval-form reducer', () => {
       value: 15
     };
     const expectedState = {
-      repeat: 1,
+      repeat: 0,
       work: 0,
       rest: 15
     };
