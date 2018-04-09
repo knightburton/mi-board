@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class IntervalTimer extends React.Component {
 
@@ -7,6 +8,7 @@ export default class IntervalTimer extends React.Component {
   }
 
   render() {
+    const { handleSettingsClick } = this.props;
     const style = {
       width: '50%'
     };
@@ -45,10 +47,14 @@ export default class IntervalTimer extends React.Component {
           </div>
 
           <div className="col-auto">
-            <div className="btn btn-outline-secondary">Settings</div>
+            <div className="btn btn-outline-secondary" onClick={handleSettingsClick}>Settings</div>
           </div>
         </div>
       </div>
     );
   }
 }
+
+IntervalTimer.propTyypes = {
+  handleSettingsClick: PropTypes.func.isRequired
+};
