@@ -22,6 +22,7 @@ export default class IntervalForm extends React.Component {
       handleRestChange
     } = this.props;
     const preset = Array.from(Array(101).keys()).filter(x => x % 5 === 0);
+    const disabled = repeat === 0 || work === 0 ? true : false;
 
     return (
       <div className="row justify-content-center mt-5">
@@ -90,7 +91,10 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row mt-4">
               <div className="form-group col-6">
-                <button type="submit" className="btn btn-outline-success w-100">
+                <button
+                  type="submit"
+                  className={`btn btn-outline-success w-100${disabled ? ' disabled' : ''}`}
+                  disabled={disabled}>
                   Set
                 </button>
               </div>
