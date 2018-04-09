@@ -82,7 +82,7 @@ export default class IntervalForm extends React.Component {
             <div className="form-row">
               <div className="col">
                 <IntervalFormTime
-                  name="work"
+                  name="rest"
                   value={rest}
                   onChange={handleRestChange} />
               </div>
