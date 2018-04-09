@@ -30,7 +30,7 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row">
               <div className="col">
-                <label htmlFor="repeat" className="mb-0">Repeat number:</label>
+                <label htmlFor="repeat" className="mb-0 font-weight-bold">Repeat number:</label>
                 <small id={`${name}-help`} className="form-text text-muted mb-2">
                   How many times do you want to repeat the process.
                 </small>
@@ -56,7 +56,7 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row">
               <div className="col">
-                <label htmlFor="repeat" className="mb-0">Work phase time:</label>
+                <label htmlFor="repeat" className="mb-0 font-weight-bold">Work phase time:</label>
                 <small id="repeat-help" className="form-text text-muted mb-2">
                   How long do you want to work within one repeat.
                 </small>
@@ -73,7 +73,7 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row">
               <div className="col">
-                <label htmlFor="rest" className="mb-0">Rest phase time:</label>
+                <label htmlFor="rest" className="mb-0 font-weight-bold">Rest phase time:</label>
                 <small id="rest-help" className="form-text text-muted mb-2">
                   How long do you want to work within one repeat.
                 </small>
