@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IntervalFormInput from '../interval-form-input/interval-form-input.component';
+import IntervalFormNumber from '../interval-form-number/interval-form-number.component';
 import IntervalFormPreset from '../interval-form-preset/interval-form-preset.component';
+import IntervalFormTime from '../interval-form-time/interval-form-time.component';
 
 export default class IntervalForm extends React.Component {
 
@@ -20,7 +21,7 @@ export default class IntervalForm extends React.Component {
       handleWorkChange,
       handleRestChange
     } = this.props;
-    const preset = [5, 10, 15, 20, 25, 30];
+    const preset = Array.from(Array(101).keys()).filter(x => x % 5 === 0);
 
     return (
       <div className="row justify-content-center mt-5">
@@ -29,9 +30,15 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row">
               <div className="col">
-                <IntervalFormInput
-                  label="Repeat number"
-                  help="How many times do you want to repeat the process."
+                <label htmlFor="repeat" className="mb-0">Repeat number:</label>
+                <small id={`${name}-help`} className="form-text text-muted mb-2">
+                  How many times do you want to repeat the process.
+                </small>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="col">
+                <IntervalFormNumber
                   placeholder="Repeat number"
                   name="repeat"
                   value={repeat}
@@ -41,7 +48,7 @@ export default class IntervalForm extends React.Component {
                 <IntervalFormPreset
                   name="repeat"
                   label="Repeat presets"
-                  values={[...preset, 50, 60]}
+                  values={preset}
                   current={repeat}
                   handleClick={handleRepeatChange} />
               </div>
@@ -49,41 +56,35 @@ export default class IntervalForm extends React.Component {
 
             <div className="form-row">
               <div className="col">
-                <IntervalFormInput
-                  label="Work phase (in seconds)"
-                  help="How long do you want to work within one repeat."
-                  placeholder="Time in seconds"
+                <label htmlFor="repeat" className="mb-0">Work phase time:</label>
+                <small id="repeat-help" className="form-text text-muted mb-2">
+                  How long do you want to work within one repeat.
+                </small>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="col">
+                <IntervalFormTime
                   name="work"
                   value={work}
                   onChange={handleWorkChange} />
-              </div>
-              <div className="col">
-                <IntervalFormPreset
-                  name="work"
-                  label="Work time presets"
-                  values={[...preset, 45, 60]}
-                  current={work}
-                  handleClick={handleWorkChange} />
               </div>
             </div>
 
             <div className="form-row">
               <div className="col">
-                <IntervalFormInput
-                  label="Rest phase (in seconds)"
-                  help="How long do you want to rest within one repeat."
-                  placeholder="Time in seconds"
-                  name="rest"
+                <label htmlFor="rest" className="mb-0">Rest phase time:</label>
+                <small id="rest-help" className="form-text text-muted mb-2">
+                  How long do you want to work within one repeat.
+                </small>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="col">
+                <IntervalFormTime
+                  name="work"
                   value={rest}
                   onChange={handleRestChange} />
-              </div>
-              <div className="col">
-                <IntervalFormPreset
-                  name="rest"
-                  label="Rest time presets"
-                  values={[...preset, 45, 60]}
-                  current={rest}
-                  handleClick={handleRestChange} />
               </div>
             </div>
 

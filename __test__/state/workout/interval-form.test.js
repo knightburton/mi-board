@@ -227,28 +227,6 @@ describe('interval-form selectors', () => {
   });
 });
 
-describe('interval-form helpers', () => {
-  it('should return a positive value or zero or null (null)', () => {
-    expect(form.positiveValue(null)).toEqual(null);
-  });
-
-  it('should return a positive value or zero or null (0)', () => {
-    expect(form.positiveValue(0)).toEqual(0);
-  });
-
-  it('should return a positive value or zero or null (15)', () => {
-    expect(form.positiveValue(15)).toEqual(15);
-  });
-
-  it('should return a positive value or zero or null (-10)', () => {
-    expect(form.positiveValue(-10)).toEqual(0);
-  });
-
-  it('should return a positive value or zero or null (-99)', () => {
-    expect(form.positiveValue(-99)).toEqual(0);
-  });
-});
-
 describe('interval-form reducer', () => {
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
