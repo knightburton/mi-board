@@ -10,13 +10,13 @@ export default class Interval extends React.Component {
   }
 
   render() {
-    const { active } = this.props;
+    const { visible } = this.props;
 
     return (
       <div>
         <h3 className="text-center">Interval timer</h3>
 
-        {active ? (
+        {visible ? (
           <IntervalTimer />
         ) : (
           <IntervalForm />
@@ -27,5 +27,5 @@ export default class Interval extends React.Component {
 }
 
 Interval.propTypes = {
-  active: PropTypes.bool.isRequired
+  visible: PropTypes.bool.isRequired
 };

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import * as formState from '../../../state/workout/interval-form';
-import { setActive } from '../../../state/workout/interval';
+import { toggleVisibility } from '../../../state/workout/interval';
 import IntervalForm from './interval-form.component';
 
 const mapStateToProps = state => ({
@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   handleSubmit: event => {
     event.preventDefault();
-    dispatch(setActive(true));
+    dispatch(toggleVisibility());
   },
   handleResetClick: () => dispatch(formState.resetForm()),
   handleRepeatChange: value => dispatch(formState.setRepeat(value)),

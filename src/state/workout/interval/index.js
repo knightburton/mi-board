@@ -1,22 +1,21 @@
 import initialState from './initial.state';
 
 // Action types
-export const SET_ACTIVE = 'SET_ACTIVE';
+export const TOGGLE_VISIBILITY = 'TOGGLE_VISIBILITY';
 
 // Actions
-export const setActive = active => ({
-  type: SET_ACTIVE,
-  active
+export const toggleVisibility = () => ({
+  type: TOGGLE_VISIBILITY
 });
 
 // Selectors
-export const getActive = state => state.workout.interval.active;
+export const getVisibility = state => state.workout.interval.visible;
 
 // Reducers
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_ACTIVE:
-      return {...state, active: action.active};
+    case TOGGLE_VISIBILITY:
+      return {...state, visible: !state.visible};
     default:
       return state;
   }
