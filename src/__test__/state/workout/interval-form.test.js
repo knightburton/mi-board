@@ -1,5 +1,5 @@
-import reducer, * as form from '../../../src/state/workout/interval-form';
-import initialState from '../../../src/state/workout/interval-form/initial.state';
+import reducer, * as form from '../../../state/workout/interval-form';
+import initialState from '../../../state/workout/interval-form/initial.state';
 
 describe('interval-form action creators', () => {
   // Repeat

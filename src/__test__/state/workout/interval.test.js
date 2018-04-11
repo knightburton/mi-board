@@ -1,5 +1,5 @@
-import reducer, * as interval from '../../../src/state/workout/interval';
-import initialState from '../../../src/state/workout/interval/initial.state';
+import reducer, * as interval from '../../../state/workout/interval';
+import initialState from '../../../state/workout/interval/initial.state';
 
 describe('interval action creators', () => {
   it('should create an action to toggle the visible state', () => {
