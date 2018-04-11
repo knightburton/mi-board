@@ -1,3 +1,4 @@
 export default ({
-  visible: false
+  visible: false,
+  active: false
 });
