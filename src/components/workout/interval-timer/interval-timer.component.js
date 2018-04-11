@@ -8,7 +8,7 @@ export default class IntervalTimer extends React.Component {
   }
 
   render() {
-    const { handleSettingsClick } = this.props;
+    const { active, handleStartStopClick, handleSettingsClick } = this.props;
     const style = {
       width: '50%'
     };
@@ -39,7 +39,11 @@ export default class IntervalTimer extends React.Component {
 
         <div className="row justify-content-center mt-4">
           <div className="col-auto">
-            <div className="btn btn-outline-success">Start/Stop</div>
+            {active ? (
+              <div className="btn btn-outline-danger" onClick={handleStartStopClick}>Stop</div>
+            ) : (
+              <div className="btn btn-outline-success" onClick={handleStartStopClick}>Start</div>
+            )}
           </div>
 
           <div className="col-auto">
@@ -56,5 +60,7 @@ export default class IntervalTimer extends React.Component {
 }
 
 IntervalTimer.propTyypes = {
+  active: PropTypes.bool.isRequired,
+  handleStartStopClick: PropTypes.func.isRequired,
   handleSettingsClick: PropTypes.func.isRequired
 };
