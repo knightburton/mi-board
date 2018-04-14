@@ -9,11 +9,22 @@ describe('interval action creators', () => {
     expect(interval.toggleVisibility()).toEqual(expectedAction);
   });
 
-  it('should create an action to toggle the active state', () => {
+  it('should create an action to set the active state (true)', () => {
+    const active = true;
     const expectedAction = {
-      type: interval.TOGGLE_ACTIVE
+      type: interval.SET_ACTIVE,
+      active
     };
-    expect(interval.toggleActive()).toEqual(expectedAction);
+    expect(interval.setActive(true)).toEqual(expectedAction);
+  });
+
+  it('should create an action to set the active state (false)', () => {
+    const active = false;
+    const expectedAction = {
+      type: interval.SET_ACTIVE,
+      active
+    };
+    expect(interval.setActive(false)).toEqual(expectedAction);
   });
 });
 
@@ -95,9 +106,11 @@ describe('interval reducer', () => {
     expect(reducer(initState, action)).toEqual(expectedState);
   });
 
-  it('should handle TOGGLE_ACTIVE (false -> true)', () => {
+  it('should handle SET_ACTIVE (false -> true)', () => {
+    const active = true;
     const action = {
-      type: interval.TOGGLE_ACTIVE
+      type: interval.SET_ACTIVE,
+      active
     };
     const expectedState = {
       visible: false,
@@ -106,9 +119,11 @@ describe('interval reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle TOGGLE_ACTIVE (true -> false)', () => {
+  it('should handle SET_ACTIVE (true -> false)', () => {
+    const active = false;
     const action = {
-      type: interval.TOGGLE_ACTIVE
+      type: interval.SET_ACTIVE,
+      active
     };
     const initState = {
       visible: false,
