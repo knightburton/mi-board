@@ -56,7 +56,7 @@ export default (state = initialState, action = {}) => {
     case RESET_TIMER:
       return {
         ...state,
-        clock: null
+        clock: 0
       };
     case INCREASE_TIMER:
       return {
