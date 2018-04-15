@@ -11,3 +11,9 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.btn-outline-success.focus, .btn-outline-success:focus,
+.btn-outline-danger.focus, .btn-outline-danger:focus,
+.btn-outline-secondary.focus, .btn-outline-secondary:focus, {
+  box-shadow: none !important;
+}
