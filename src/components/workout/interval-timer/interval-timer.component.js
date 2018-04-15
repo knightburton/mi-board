@@ -1,10 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getTime } from '../utils/timer';
 
 export default class IntervalTimer extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.getCountDown = () => {
+      const mod = this.props.clock % (this.props.work + this.props.rest);
+      return this.props.clock === ((this.props.work + this.props.rest) * this.props.repeat) ? {
+        value: 0,
+        color: 'dark'
+      } : mod < this.props.work ? {
+        value: this.props.work - mod,
+        color: 'info'
+      } : {
+        value: this.props.rest - (mod - this.props.work),
+        color: 'warning'
+      };
+    };
+
+    this.getPercentage = () => (
+      Math.trunc(this.props.clock / ((this.props.work + this.props.rest) * this.props.repeat) * 100)
+    );
   }
 
   componentWillUnmount() {
@@ -19,19 +38,19 @@ export default class IntervalTimer extends React.Component {
 
   render() {
     const {
+      clock,
       active,
-      percentage,
-      color,
       repeat,
       round,
-      mainTime,
-      overallTime,
       intervalId,
       handleStartClick,
       handleStopClick,
       handleResetClick,
       handleSettingsClick
     } = this.props;
+
+    const countDown = this.getCountDown();
+    const percentage = this.getPercentage();
 
     const digitStyle = {
       fontSize: '220px'
@@ -47,15 +66,15 @@ export default class IntervalTimer extends React.Component {
           <div className="col text-center">
             <div className="row">
               <div className="col">
-                <p className={`display-1 font-weight-bold font-monospace text-${color}`} style={digitStyle}>
-                  {mainTime}
+                <p className={`display-1 font-weight-bold font-monospace text-${countDown.color}`} style={digitStyle}>
+                  {getTime(countDown.value)}
                 </p>
               </div>
             </div>
             <div className="row">
               <div className="col text-right border-right">
                 <p className="h4 mb-0">Overall time</p>
-                <p className="display-4 font-weight-bold font-monospace">{overallTime}</p>
+                <p className="display-4 font-weight-bold font-monospace">{getTime(clock)}</p>
               </div>
               <div className="col text-left border-left">
                 <p className="h4 mb-0">Rounds</p>
@@ -113,13 +132,12 @@ export default class IntervalTimer extends React.Component {
 }
 
 IntervalTimer.propTyypes = {
+  work: PropTypes.number.isRequired,
+  rest: PropTypes.number.isRequired,
   repeat: PropTypes.number.isRequired,
+  clock: PropTypes.number.isRequired,
   round: PropTypes.number.isRequired,
   active: PropTypes.bool.isRequired,
-  percentage: PropTypes.number.isRequired,
-  color: PropTypes.string.isRequired,
-  mainTime: PropTypes.string.isRequired,
-  overallTime: PropTypes.string.isRequired,
   intervalId: PropTypes.number,
   handleStartClick: PropTypes.func.isRequired,
   handleStopClick: PropTypes.func.isRequired,

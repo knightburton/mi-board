@@ -1,34 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import IntervalFormSlider from '../interval-form-slider/interval-form-slider.component';
+import * as timerUtils from '../utils/timer';
 
 export default class IntervalFormTime extends React.Component {
 
   constructor(props) {
     super(props);
 
-    this.getHour = value => Math.floor(value / 3600);
-    this.getMinute = value => Math.floor(value % 3600 / 60);
-    this.getSecond = value => Math.floor(value % 3600 % 60);
-
-    this.getTime = value => {
-      const h = this.getHour(value);
-      const m = this.getMinute(value);
-      const s = this.getSecond(value);
-
-      return `${h < 10 ? `0${h}` : h}:${m < 10 ? `0${m}` : m}:${s < 10 ? `0${s}` : s}`;
-    };
-
     this.handleHourChange = event => {
-      this.props.onChange(this.props.value - (this.getHour(this.props.value) * 3600) + (event.value * 3600));
+      this.props.onChange(this.props.value - (timerUtils.getHour(this.props.value) * 3600) + (event.value * 3600));
     };
 
     this.handleMinuteChange = event => {
-      this.props.onChange(this.props.value - (this.getMinute(this.props.value) * 60) + (event.value * 60));
+      this.props.onChange(this.props.value - (timerUtils.getMinute(this.props.value) * 60) + (event.value * 60));
     };
 
     this.handleSecondChange = event => {
-      this.props.onChange(this.props.value - this.getSecond(this.props.value) + event.value);
+      this.props.onChange(this.props.value - timerUtils.getSecond(this.props.value) + event.value);
     };
   }
 
@@ -46,7 +35,7 @@ export default class IntervalFormTime extends React.Component {
               role="button"
               aria-expanded="false"
               aria-controls={`${name}-collapse`}>
-              <span className="font-weight-bold h3">{this.getTime(value)}</span>
+              <span className="font-weight-bold h3">{timerUtils.getTime(value)}</span>
             </div>
           </div>
         </div>
@@ -60,7 +49,7 @@ export default class IntervalFormTime extends React.Component {
                 id="hour-time"
                 min={0}
                 max={23}
-                value={this.getHour(value)}
+                value={timerUtils.getHour(value)}
                 onChange={this.handleHourChange} />
             </div>
           </div>
@@ -72,7 +61,7 @@ export default class IntervalFormTime extends React.Component {
               <IntervalFormSlider
                 min={0}
                 max={59}
-                value={this.getMinute(value)}
+                value={timerUtils.getMinute(value)}
                 onChange={this.handleMinuteChange} />
             </div>
           </div>
@@ -84,7 +73,7 @@ export default class IntervalFormTime extends React.Component {
               <IntervalFormSlider
                 min={0}
                 max={59}
-                value={this.getSecond(value)}
+                value={timerUtils.getSecond(value)}
                 onChange={this.handleSecondChange} />
             </div>
           </div>
