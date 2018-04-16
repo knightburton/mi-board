@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch } from 'react-router';
 import ToolList from './tool-list/tool-list.component';
 import Interval from './interval/interval.container';
-import Countdown from './countdown/countdown.component';
+import Countdown from './countdown/countdown.container';
 import Stopwatch from './stopwatch/stopwatch.component';
 
 export default class Workout extends React.Component {
