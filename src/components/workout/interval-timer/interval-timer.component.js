@@ -53,9 +53,6 @@ export default class IntervalTimer extends React.Component {
     const countDown = this.getCountDown();
     const percentage = this.getPercentage();
 
-    const digitStyle = {
-      fontSize: '220px'
-    };
     const progressBarStyle = {
       width: `${percentage}%`
     };
@@ -67,7 +64,7 @@ export default class IntervalTimer extends React.Component {
           <div className="col text-center">
             <div className="row">
               <div className="col">
-                <p className={`display-1 font-weight-bold font-monospace text-${countDown.color}`} style={digitStyle}>
+                <p className={`display-1 font-weight-bold font-monospace font-time text-${countDown.color}`}>
                   {getTime(countDown.value)}
                 </p>
               </div>
