@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import Interval from './interval.component';
-import { getVisibility } from '../../../state/workout/interval';
+import { getIntervalVisibility } from '../../../state/workout/interval';
 
 const mapStateToProps = state => ({
-  visible: getVisibility(state)
+  visible: getIntervalVisibility(state)
 });
 
 const mapDispatchToProps = () => ({});

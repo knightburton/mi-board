@@ -1,4 +1,4 @@
-import reducer, * as form from '../../../state/workout/interval-form';
+import * as form from '../../../state/workout/interval-form';
 import initialState from '../../../state/workout/interval-form/initial.state';
 
 describe('interval-form action creators', () => {
@@ -6,119 +6,119 @@ describe('interval-form action creators', () => {
   it('should create an action to set repeat value (1)', () => {
     const value = 1;
     const expectedAction = {
-      type: form.SET_REPEAT,
+      type: form.SET_INTERVAL_REPEAT,
       value
     };
-    expect(form.setRepeat(value)).toEqual(expectedAction);
+    expect(form.setIntervalRepeat(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set repeat value (2)', () => {
     const value = 2;
     const expectedAction = {
-      type: form.SET_REPEAT,
+      type: form.SET_INTERVAL_REPEAT,
       value
     };
-    expect(form.setRepeat(value)).toEqual(expectedAction);
+    expect(form.setIntervalRepeat(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set repeat value (-1)', () => {
     const value = -1;
     const expectedAction = {
-      type: form.SET_REPEAT,
+      type: form.SET_INTERVAL_REPEAT,
       value
     };
-    expect(form.setRepeat(value)).toEqual(expectedAction);
+    expect(form.setIntervalRepeat(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set repeat value (0)', () => {
     const value = 0;
     const expectedAction = {
-      type: form.SET_REPEAT,
+      type: form.SET_INTERVAL_REPEAT,
       value
     };
-    expect(form.setRepeat(value)).toEqual(expectedAction);
+    expect(form.setIntervalRepeat(value)).toEqual(expectedAction);
   });
 
   // Work
   it('should create an action to set work value (1)', () => {
     const value = 1;
     const expectedAction = {
-      type: form.SET_WORK,
+      type: form.SET_INTERVAL_WORK,
       value
     };
-    expect(form.setWork(value)).toEqual(expectedAction);
+    expect(form.setIntervalWork(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set work value (2)', () => {
     const value = 2;
     const expectedAction = {
-      type: form.SET_WORK,
+      type: form.SET_INTERVAL_WORK,
       value
     };
-    expect(form.setWork(value)).toEqual(expectedAction);
+    expect(form.setIntervalWork(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set work value (-1)', () => {
     const value = -1;
     const expectedAction = {
-      type: form.SET_WORK,
+      type: form.SET_INTERVAL_WORK,
       value
     };
-    expect(form.setWork(value)).toEqual(expectedAction);
+    expect(form.setIntervalWork(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set work value (0)', () => {
     const value = 0;
     const expectedAction = {
-      type: form.SET_WORK,
+      type: form.SET_INTERVAL_WORK,
       value
     };
-    expect(form.setWork(value)).toEqual(expectedAction);
+    expect(form.setIntervalWork(value)).toEqual(expectedAction);
   });
 
   // Rest
   it('should create an action to set rest value (1)', () => {
     const value = 1;
     const expectedAction = {
-      type: form.SET_REST,
+      type: form.SET_INTERVAL_REST,
       value
     };
-    expect(form.setRest(value)).toEqual(expectedAction);
+    expect(form.setIntervalRest(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set rest value (2)', () => {
     const value = 2;
     const expectedAction = {
-      type: form.SET_REST,
+      type: form.SET_INTERVAL_REST,
       value
     };
-    expect(form.setRest(value)).toEqual(expectedAction);
+    expect(form.setIntervalRest(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set rest value (-1)', () => {
     const value = -1;
     const expectedAction = {
-      type: form.SET_REST,
+      type: form.SET_INTERVAL_REST,
       value
     };
-    expect(form.setRest(value)).toEqual(expectedAction);
+    expect(form.setIntervalRest(value)).toEqual(expectedAction);
   });
 
   it('should create an action to set rest value (0)', () => {
     const value = 0;
     const expectedAction = {
-      type: form.SET_REST,
+      type: form.SET_INTERVAL_REST,
       value
     };
-    expect(form.setRest(value)).toEqual(expectedAction);
+    expect(form.setIntervalRest(value)).toEqual(expectedAction);
   });
 
   // Reset
   it('should create an action to reset values', () => {
     const expectedAction = {
-      type: form.RESET_FORM
+      type: form.RESET_INTERVAL_FORM
     };
-    expect(form.resetForm()).toEqual(expectedAction);
+    expect(form.resetIntervalForm()).toEqual(expectedAction);
   });
 });
 
@@ -132,7 +132,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRepeat(state)).toEqual(null);
+    expect(form.getIntervalRepeat(state)).toEqual(null);
   });
 
   it('should return the repeat value (0)', () => {
@@ -143,7 +143,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRepeat(state)).toEqual(0);
+    expect(form.getIntervalRepeat(state)).toEqual(0);
   });
 
   it('should return the repeat value (10)', () => {
@@ -154,7 +154,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRepeat(state)).toEqual(10);
+    expect(form.getIntervalRepeat(state)).toEqual(10);
   });
 
   // Work
@@ -166,7 +166,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getWork(state)).toEqual(null);
+    expect(form.getIntervalWork(state)).toEqual(null);
   });
 
 
@@ -178,7 +178,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getWork(state)).toEqual(0);
+    expect(form.getIntervalWork(state)).toEqual(0);
   });
 
   it('should return the work value (45)', () => {
@@ -189,7 +189,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getWork(state)).toEqual(45);
+    expect(form.getIntervalWork(state)).toEqual(45);
   });
 
   // Rest
@@ -201,7 +201,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRest(state)).toEqual(null);
+    expect(form.getIntervalRest(state)).toEqual(null);
   });
 
   it('should return the rest value (0)', () => {
@@ -212,7 +212,7 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRest(state)).toEqual(0);
+    expect(form.getIntervalRest(state)).toEqual(0);
   });
 
   it('should return the rest value (33)', () => {
@@ -223,18 +223,18 @@ describe('interval-form selectors', () => {
         }
       }
     };
-    expect(form.getRest(state)).toEqual(33);
+    expect(form.getIntervalRest(state)).toEqual(33);
   });
 });
 
 describe('interval-form reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(form.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle SET_REPEAT', () => {
+  it('should handle SET_INTERVAL_REPEAT', () => {
     const action = {
-      type: form.SET_REPEAT,
+      type: form.SET_INTERVAL_REPEAT,
       value: 30
     };
     const expectedState = {
@@ -242,12 +242,12 @@ describe('interval-form reducer', () => {
       work: 0,
       rest: 0
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    expect(form.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle SET_WORK', () => {
+  it('should handle SET_INTERVAL_WORK', () => {
     const action = {
-      type: form.SET_WORK,
+      type: form.SET_INTERVAL_WORK,
       value: 45
     };
     const expectedState = {
@@ -255,12 +255,12 @@ describe('interval-form reducer', () => {
       work: 45,
       rest: 0
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    expect(form.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle SET_REST', () => {
+  it('should handle SET_INTERVAL_REST', () => {
     const action = {
-      type: form.SET_REST,
+      type: form.SET_INTERVAL_REST,
       value: 15
     };
     const expectedState = {
@@ -268,18 +268,18 @@ describe('interval-form reducer', () => {
       work: 0,
       rest: 15
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    expect(form.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle RESET_FORM', () => {
+  it('should handle RESET_INTERVAL_FORM', () => {
     const action = {
-      type: form.RESET_FORM
+      type: form.RESET_INTERVAL_FORM
     };
     const state = {
       repeat: 30,
       work: 45,
       rest: 15
     };
-    expect(reducer(state, action)).toEqual(initialState);
+    expect(form.default(state, action)).toEqual(initialState);
   });
 });

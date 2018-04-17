@@ -1,23 +1,26 @@
 import { connect } from 'react-redux';
-import * as formState from '../../../state/workout/interval-form';
-import { toggleVisibility } from '../../../state/workout/interval';
+import {
+  getIntervalRepeat, getIntervalWork, getIntervalRest,
+  resetIntervalForm, setIntervalRepeat, setIntervalWork, setIntervalRest
+} from '../../../state/workout/interval-form';
+import { toggleIntervalVisibility } from '../../../state/workout/interval';
 import IntervalForm from './interval-form.component';
 
 const mapStateToProps = state => ({
-  repeat: formState.getRepeat(state),
-  work: formState.getWork(state),
-  rest: formState.getRest(state)
+  repeat: getIntervalRepeat(state),
+  work: getIntervalWork(state),
+  rest: getIntervalRest(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   handleSubmit: event => {
     event.preventDefault();
-    dispatch(toggleVisibility());
+    dispatch(toggleIntervalVisibility());
   },
-  handleResetClick: () => dispatch(formState.resetForm()),
-  handleRepeatChange: value => dispatch(formState.setRepeat(value)),
-  handleWorkChange: value => dispatch(formState.setWork(value)),
-  handleRestChange: value => dispatch(formState.setRest(value))
+  handleResetClick: () => dispatch(resetIntervalForm()),
+  handleRepeatChange: value => dispatch(setIntervalRepeat(value)),
+  handleWorkChange: value => dispatch(setIntervalWork(value)),
+  handleRestChange: value => dispatch(setIntervalRest(value))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntervalForm);

@@ -1,35 +1,35 @@
 import { connect } from 'react-redux';
 import IntervalTimer from './interval-timer.component';
-import * as form from '../../../state/workout/interval-form';
-import * as interval from '../../../state/workout/interval';
-import { toggleVisibility } from '../../../state/workout/interval';
-import * as timer from '../../../state/workout/timer';
+import { getIntervalWork, getIntervalRest, getIntervalRepeat } from '../../../state/workout/interval-form';
+import { getIntervalActive, setIntervalActive } from '../../../state/workout/interval';
+import { toggleIntervalVisibility } from '../../../state/workout/interval';
+import { getClock, getInterval, startTimer, stopTimer, resetTimer, increaseTimer } from '../../../state/workout/timer';
 
 const mapStateToProps = state => ({
-  work: form.getWork(state),
-  rest: form.getRest(state),
-  repeat: form.getRepeat(state),
-  round: Math.floor(timer.getClock(state) / (form.getWork(state) + form.getRest(state))) + 1,
-  clock: timer.getClock(state),
-  active: interval.getActive(state),
-  intervalId: timer.getInterval(state)
+  work: getIntervalWork(state),
+  rest: getIntervalRest(state),
+  repeat: getIntervalRepeat(state),
+  round: Math.floor(getClock(state) / (getIntervalWork(state) + getIntervalRest(state))) + 1,
+  clock: getClock(state),
+  active: getIntervalActive(state),
+  intervalId: getInterval(state)
 });
 
 const mapDispatchToProps = dispatch => ({
   handleStartClick: () => {
-    dispatch(interval.setActive(true));
-    dispatch(timer.startTimer(
+    dispatch(setIntervalActive(true));
+    dispatch(startTimer(
       Date.now(),
-      setInterval(() => dispatch(timer.increaseTimer()), 1000)
+      setInterval(() => dispatch(increaseTimer()), 1000)
     ));
   },
   handleStopClick: intervalId => {
-    dispatch(interval.setActive(false));
+    dispatch(setIntervalActive(false));
     clearInterval(intervalId);
-    dispatch(timer.stopTimer());
+    dispatch(stopTimer());
   },
-  handleResetClick: () => dispatch(timer.resetTimer()),
-  handleSettingsClick: () => dispatch(toggleVisibility())
+  handleResetClick: () => dispatch(resetTimer()),
+  handleSettingsClick: () => dispatch(toggleIntervalVisibility())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IntervalTimer);

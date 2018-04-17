@@ -4,27 +4,27 @@ import initialState from '../../../state/workout/interval/initial.state';
 describe('interval action creators', () => {
   it('should create an action to toggle the visible state', () => {
     const expectedAction = {
-      type: interval.TOGGLE_VISIBILITY
+      type: interval.TOGGLE_INTERVAL_VISIBILITY
     };
-    expect(interval.toggleVisibility()).toEqual(expectedAction);
+    expect(interval.toggleIntervalVisibility()).toEqual(expectedAction);
   });
 
   it('should create an action to set the active state (true)', () => {
     const active = true;
     const expectedAction = {
-      type: interval.SET_ACTIVE,
+      type: interval.SET_INTERVAL_ACTIVE,
       active
     };
-    expect(interval.setActive(true)).toEqual(expectedAction);
+    expect(interval.setIntervalActive(true)).toEqual(expectedAction);
   });
 
   it('should create an action to set the active state (false)', () => {
     const active = false;
     const expectedAction = {
-      type: interval.SET_ACTIVE,
+      type: interval.SET_INTERVAL_ACTIVE,
       active
     };
-    expect(interval.setActive(false)).toEqual(expectedAction);
+    expect(interval.setIntervalActive(false)).toEqual(expectedAction);
   });
 });
 
@@ -37,7 +37,7 @@ describe('interval selectors', () => {
         }
       }
     };
-    expect(interval.getVisibility(state)).toEqual(true);
+    expect(interval.getIntervalVisibility(state)).toEqual(true);
   });
 
   it('should return the visible state (false)', () => {
@@ -48,7 +48,7 @@ describe('interval selectors', () => {
         }
       }
     };
-    expect(interval.getVisibility(state)).toEqual(false);
+    expect(interval.getIntervalVisibility(state)).toEqual(false);
   });
 
   it('should return the active state (true)', () => {
@@ -59,7 +59,7 @@ describe('interval selectors', () => {
         }
       }
     };
-    expect(interval.getActive(state)).toEqual(true);
+    expect(interval.getIntervalActive(state)).toEqual(true);
   });
 
 
@@ -71,7 +71,7 @@ describe('interval selectors', () => {
         }
       }
     };
-    expect(interval.getActive(state)).toEqual(false);
+    expect(interval.getIntervalActive(state)).toEqual(false);
   });
 });
 
@@ -80,9 +80,9 @@ describe('interval reducer', () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle TOGGLE_VISIBILITY (false -> true)', () => {
+  it('should handle TOGGLE_INTERVAL_VISIBILITY (false -> true)', () => {
     const action = {
-      type: interval.TOGGLE_VISIBILITY
+      type: interval.TOGGLE_INTERVAL_VISIBILITY
     };
     const expectedState = {
       visible: true,
@@ -91,9 +91,9 @@ describe('interval reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle TOGGLE_VISIBILITY (true -> false)', () => {
+  it('should handle TOGGLE_INTERVAL_VISIBILITY (true -> false)', () => {
     const action = {
-      type: interval.TOGGLE_VISIBILITY
+      type: interval.TOGGLE_INTERVAL_VISIBILITY
     };
     const initState = {
       visible: true,
@@ -106,10 +106,10 @@ describe('interval reducer', () => {
     expect(reducer(initState, action)).toEqual(expectedState);
   });
 
-  it('should handle SET_ACTIVE (false -> true)', () => {
+  it('should handle SET_INTERVAL_ACTIVE (false -> true)', () => {
     const active = true;
     const action = {
-      type: interval.SET_ACTIVE,
+      type: interval.SET_INTERVAL_ACTIVE,
       active
     };
     const expectedState = {
@@ -119,10 +119,10 @@ describe('interval reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle SET_ACTIVE (true -> false)', () => {
+  it('should handle SET_INTERVAL_ACTIVE (true -> false)', () => {
     const active = false;
     const action = {
-      type: interval.SET_ACTIVE,
+      type: interval.SET_INTERVAL_ACTIVE,
       active
     };
     const initState = {
