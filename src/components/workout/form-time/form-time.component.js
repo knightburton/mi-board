@@ -22,7 +22,8 @@ export default class FormTime extends React.Component {
   }
 
   render() {
-    const { name, value } = this.props;
+    const { name, value, collapsed } = this.props;
+    const sClass = !collapsed && ' show';
 
     return (
       <div className="form-group">
@@ -33,13 +34,13 @@ export default class FormTime extends React.Component {
               data-toggle="collapse"
               href={`#${name}-collapse`}
               role="button"
-              aria-expanded="false"
+              aria-expanded={!collapsed}
               aria-controls={`${name}-collapse`}>
               <span className="font-weight-bold h3">{timerUtils.getTime(value)}</span>
             </div>
           </div>
         </div>
-        <div className="collapse border rounded px-3" id={`${name}-collapse`}>
+        <div className={`collapse border rounded px-3${sClass}`} id={`${name}-collapse`}>
           <div className="row mt-5">
             <div className="col-1">
               <p>Hour:</p>
@@ -86,5 +87,10 @@ export default class FormTime extends React.Component {
 FormTime.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
+  collapsed: PropTypes.bool,
   onChange: PropTypes.func.isRequired
+};
+
+FormTime.defaultProps = {
+  collapsed: true
 };

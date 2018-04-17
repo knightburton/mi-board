@@ -30,6 +30,7 @@ export default class CountdownForm extends React.Component {
                   <FormTime
                     name="time"
                     value={time}
+                    collapsed={false}
                     onChange={handleTimeChange} />
                 </div>
               </div>
