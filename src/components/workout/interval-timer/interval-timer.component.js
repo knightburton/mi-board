@@ -27,6 +27,7 @@ export default class IntervalTimer extends React.Component {
   }
 
   componentWillUnmount() {
+    this.props.handleStopClick(this.props.intervalId);
     this.props.handleResetClick();
   }
 
