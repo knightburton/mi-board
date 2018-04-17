@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IntervalFormSlider from '../interval-form-slider/interval-form-slider.component';
+import FormSlider from '../form-slider/form-slider.component';
 import * as timerUtils from '../utils/timer';
 
-export default class IntervalFormTime extends React.Component {
+export default class FormTime extends React.Component {
 
   constructor(props) {
     super(props);
@@ -45,7 +45,7 @@ export default class IntervalFormTime extends React.Component {
               <p>Hour:</p>
             </div>
             <div className="col">
-              <IntervalFormSlider
+              <FormSlider
                 id="hour-time"
                 min={0}
                 max={23}
@@ -58,7 +58,7 @@ export default class IntervalFormTime extends React.Component {
               <p>Minute:</p>
             </div>
             <div className="col">
-              <IntervalFormSlider
+              <FormSlider
                 min={0}
                 max={59}
                 value={timerUtils.getMinute(value)}
@@ -70,7 +70,7 @@ export default class IntervalFormTime extends React.Component {
               <p>Second:</p>
             </div>
             <div className="col">
-              <IntervalFormSlider
+              <FormSlider
                 min={0}
                 max={59}
                 value={timerUtils.getSecond(value)}
@@ -83,7 +83,7 @@ export default class IntervalFormTime extends React.Component {
   }
 }
 
-IntervalFormTime.propTypes = {
+FormTime.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired

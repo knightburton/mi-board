@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class IntervalFormPreset extends React.Component {
+export default class FormPreset extends React.Component {
 
   constructor(props) {
     super(props);
@@ -30,7 +30,7 @@ export default class IntervalFormPreset extends React.Component {
   }
 }
 
-IntervalFormPreset.propTypes = {
+FormPreset.propTypes = {
   name: PropTypes.string.isRequired,
   values: PropTypes.array.isRequired,
   handleClick: PropTypes.func.isRequired

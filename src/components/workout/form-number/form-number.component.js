@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NumericInput from 'react-numeric-input';
 
-export default class IntervalFormInput extends React.Component {
+export default class FormNumber extends React.Component {
 
   constructor(props) {
     super(props);
@@ -32,7 +32,7 @@ export default class IntervalFormInput extends React.Component {
   }
 }
 
-IntervalFormInput.propTypes = {
+FormNumber.propTypes = {
   placeholder: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   value: PropTypes.number,

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactSimpleRange from 'react-simple-range';
 
-export default class IntervalFormSlider extends React.Component {
+export default class FormSlider extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,7 +28,7 @@ export default class IntervalFormSlider extends React.Component {
   }
 }
 
-IntervalFormSlider.propTypes = {
+FormSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   value: PropTypes.number.isRequired,

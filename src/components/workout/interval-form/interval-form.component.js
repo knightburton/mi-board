@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IntervalFormNumber from '../interval-form-number/interval-form-number.component';
-import IntervalFormPreset from '../interval-form-preset/interval-form-preset.component';
-import IntervalFormTime from '../interval-form-time/interval-form-time.component';
+import FormNumber from '../form-number/form-number.component';
+import FormPreset from '../form-preset/form-preset.component';
+import FormTime from '../form-time/form-time.component';
 
 export default class IntervalForm extends React.Component {
 
@@ -39,14 +39,14 @@ export default class IntervalForm extends React.Component {
             </div>
             <div className="form-row">
               <div className="col">
-                <IntervalFormNumber
+                <FormNumber
                   placeholder="Repeat number"
                   name="repeat"
                   value={repeat}
                   onChange={handleRepeatChange} />
               </div>
               <div className="col">
-                <IntervalFormPreset
+                <FormPreset
                   name="repeat"
                   label="Repeat presets"
                   values={preset}
@@ -65,7 +65,7 @@ export default class IntervalForm extends React.Component {
             </div>
             <div className="form-row">
               <div className="col">
-                <IntervalFormTime
+                <FormTime
                   name="work"
                   value={work}
                   onChange={handleWorkChange} />
@@ -82,7 +82,7 @@ export default class IntervalForm extends React.Component {
             </div>
             <div className="form-row">
               <div className="col">
-                <IntervalFormTime
+                <FormTime
                   name="rest"
                   value={rest}
                   onChange={handleRestChange} />
