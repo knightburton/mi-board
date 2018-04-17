@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CountdownTimer from '../countdown-timer/countdown-timer.conponent';
-import CountdownForm from '../countdown-form/countdown-form.component';
+import CountdownForm from '../countdown-form/countdown-form.container';
 
 export default class Countdown extends React.Component {
 
