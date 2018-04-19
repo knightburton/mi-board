@@ -1,4 +1,4 @@
-import reducer, * as interval from '../../../state/workout/interval';
+import * as interval from '../../../state/workout/interval';
 import initialState from '../../../state/workout/interval/initial.state';
 
 describe('interval action creators', () => {
@@ -77,7 +77,7 @@ describe('interval selectors', () => {
 
 describe('interval reducer', () => {
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(interval.default(undefined, {})).toEqual(initialState);
   });
 
   it('should handle TOGGLE_INTERVAL_VISIBILITY (false -> true)', () => {
@@ -88,7 +88,7 @@ describe('interval reducer', () => {
       visible: true,
       active: false
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    expect(interval.default(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle TOGGLE_INTERVAL_VISIBILITY (true -> false)', () => {
@@ -103,7 +103,7 @@ describe('interval reducer', () => {
       visible: false,
       active: false
     };
-    expect(reducer(initState, action)).toEqual(expectedState);
+    expect(interval.default(initState, action)).toEqual(expectedState);
   });
 
   it('should handle SET_INTERVAL_ACTIVE (false -> true)', () => {
@@ -116,7 +116,7 @@ describe('interval reducer', () => {
       visible: false,
       active: true
     };
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    expect(interval.default(initialState, action)).toEqual(expectedState);
   });
 
   it('should handle SET_INTERVAL_ACTIVE (true -> false)', () => {
@@ -133,6 +133,6 @@ describe('interval reducer', () => {
       visible: false,
       active: false
     };
-    expect(reducer(initState, action)).toEqual(expectedState);
+    expect(interval.default(initState, action)).toEqual(expectedState);
   });
 });
