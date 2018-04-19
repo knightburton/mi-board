@@ -2,13 +2,6 @@ import * as stopwatch from '../../../state/workout/stopwatch';
 import initialState from '../../../state/workout/stopwatch/initial.state';
 
 describe('stopwatch action creators', () => {
-  it('should create an action to toggle the visibility', () => {
-    const expectedAction = {
-      type: stopwatch.TOGGLE_STOPWATCH_VISIBILITY
-    };
-    expect(stopwatch.toggleStopwatchVisibility()).toEqual(expectedAction);
-  });
-
   it('should create an action to set the active state (true)', () => {
     const active = true;
     const expectedAction = {
@@ -54,28 +47,6 @@ describe('stopwatch action creators', () => {
 });
 
 describe('stopwatch selectors', () => {
-  it('should return the visible state (false)', () => {
-    const state = {
-      workout: {
-        stopwatch: {
-          visible: false
-        }
-      }
-    };
-    expect(stopwatch.getStopwatchVisibility(state)).toEqual(false);
-  });
-
-  it('should return the visible state (true)', () => {
-    const state = {
-      workout: {
-        stopwatch: {
-          visible: true
-        }
-      }
-    };
-    expect(stopwatch.getStopwatchVisibility(state)).toEqual(true);
-  });
-
   it('should return the active state (false)', () => {
     const state = {
       workout: {
@@ -140,32 +111,6 @@ describe('stopwatch reducers', () => {
     expect(stopwatch.default(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle the TOGGLE_STOPWATCH_VISIBILITY action (false -> true)', () => {
-    const action = {
-      type: stopwatch.TOGGLE_STOPWATCH_VISIBILITY
-    };
-    const expectedState = {
-      ...initialState,
-      visible: true
-    };
-    expect(stopwatch.default(initialState, action)).toEqual(expectedState);
-  });
-
-  it('should handle the TOGGLE_STOPWATCH_VISIBILITY action (true -> false)', () => {
-    const action = {
-      type: stopwatch.TOGGLE_STOPWATCH_VISIBILITY
-    };
-    const state = {
-      ...initialState,
-      visible: true
-    };
-    const expectedState = {
-      ...initialState,
-      visible: false
-    };
-    expect(stopwatch.default(state, action)).toEqual(expectedState);
-  });
-
   it('should handle the SET_STOPWATCH_ACTIVE action (true)', () => {
     const active = true;
     const action = {
@@ -192,7 +137,7 @@ describe('stopwatch reducers', () => {
     expect(stopwatch.default(initialState, action)).toEqual(expectedState);
   });
 
-  it('should handle the ADD_STOPWATCH_LAP action', () => {
+  it('should handle the ADD_STOPWATCH_LAP action [123], [123, 7896]', () => {
     const lap = 123;
     const action = {
       type: stopwatch.ADD_STOPWATCH_LAP,
@@ -216,7 +161,7 @@ describe('stopwatch reducers', () => {
     expect(stopwatch.default(expectedState, action2)).toEqual(expectedState2);
   });
 
-  it('should handle the ADD_STOPWATCH_LAP action', () => {
+  it('should handle the ADD_STOPWATCH_LAP action [9874]', () => {
     const lap = 9874;
     const action = {
       type: stopwatch.ADD_STOPWATCH_LAP,
