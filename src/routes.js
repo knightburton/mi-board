@@ -21,12 +21,18 @@ const Calendar = Loadable({
   loading: Loading
 });
 
+const Todos = Loadable({
+  loader: () => import('./components/todos/todos.component'),
+  loading: Loading
+});
+
 export default (
   <App>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/workout" component={Workout} />
       <Route path="/calendar" component={Calendar} />
+      <Route path="/todos" component={Todos} />
       <Redirect to="/" />
     </Switch>
   </App>

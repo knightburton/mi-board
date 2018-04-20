@@ -20,6 +20,9 @@ export default class Header extends React.Component {
             <li className="nav-item">
               <NavLink className="nav-link" activeClassName="active" to="/calendar">Calendar</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" activeClassName="active" to="/todos">Todos</NavLink>
+            </li>
           </ul>
         </nav>
       </header>
