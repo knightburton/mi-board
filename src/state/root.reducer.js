@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
 import workout from './workout/workout.reducer';
+import todos from './todos';
 
 export default combineReducers({
-  router: routerReducer,
-  workout
+  workout,
+  todos
 });
