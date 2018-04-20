@@ -17,7 +17,7 @@ export default class Stopwatch extends React.Component {
   render() {
     const {
       laps, clock, active, intervalId,
-      handleStartClick, handleStopClick, handleResetClick, handleClearLapsClick
+      handleStartClick, handleStopClick, handleResetClick, handleLapClick, handleClearLapsClick
     } = this.props;
 
     const lapList = laps.map((l, i) => {
@@ -80,7 +80,7 @@ export default class Stopwatch extends React.Component {
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-success" disabled={!active} onClick={this.addLap}>
+            <button className="btn btn-outline-success" disabled={!active} onClick={() => handleLapClick(clock)}>
               Lap
             </button>
           </div>
