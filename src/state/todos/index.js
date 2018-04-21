@@ -23,11 +23,11 @@ export const completeTodo = id => ({
   id
 });
 
-export const completeAll = () => ({
+export const completeAllTodos = () => ({
   type: COMPLETE_ALL_TODOS
 });
 
-export const removeCompleted = () => ({
+export const removeCompletedTodos = () => ({
   type: REMOVE_COMPLETED_TODOS
 });
 
