@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import TodosHeader from './todos-header/todos-header.component';
+import TodosHeader from './todos-header/todos-header.container';
 import TodosList from './todos-list/todos-list.component';
 import TodosFooter from './todos-footer/todos-footer.component';
 
