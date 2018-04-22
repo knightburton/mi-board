@@ -57,7 +57,7 @@ export default (state = initialState, action = {}) => {
         list: state.list.map(todo => todo.id === action.id ? {...todo, completed: !todo.completed} : todo)
       };
     case COMPLETE_ALL_TODOS: {
-      const alreadyCompleted = state.every(({completed}) => completed);
+      const alreadyCompleted = state.list.every(({completed}) => completed);
       return {
         ...state,
         list: state.list.map(todo => ({...todo, completed: !alreadyCompleted}))
