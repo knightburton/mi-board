@@ -6,6 +6,7 @@ export const REMOVE_TODO = 'REMOVE_TODO';
 export const COMPLETE_TODO = 'COMPLETE_TODO';
 export const COMPLETE_ALL_TODOS = 'COMPLETE_ALL_TODOS';
 export const REMOVE_COMPLETED_TODOS = 'REMOVE_COMPLETED_TODOS';
+export const CHANGE_TODOS_FILTER = 'CHANGE_TODOS_FILTER';
 
 // Action creators
 export const addTodo = text => ({
@@ -31,8 +32,17 @@ export const removeCompletedTodos = () => ({
   type: REMOVE_COMPLETED_TODOS
 });
 
+export const changeTodosFilter = filter => ({
+  type: CHANGE_TODOS_FILTER,
+  filter
+});
+
 // Selectors
 export const getTodos = state => state.todos.list;
+export const getTodosFilter = state => state.todos.filter;
+
+// Helpers
+const filters = ['all', 'active', 'completed'];
 
 // Reducers
 export default (state = initialState, action = {}) => {
@@ -67,6 +77,11 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         list: state.list.filter(todo => todo.completed === false)
+      };
+    case CHANGE_TODOS_FILTER:
+      return {
+        ...state,
+        filter: filters.includes(action.filter) ? action.filter : initialState.filter
       };
     default:
       return state;

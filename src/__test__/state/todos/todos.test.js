@@ -36,11 +36,38 @@ describe('todos actions', () => {
     expect(todos.completeAllTodos()).toEqual(expectedAction);
   });
 
-  it('should create an action to removve completed todos', () => {
+  it('should create an action to remove completed todos', () => {
     const expectedAction = {
       type: todos.REMOVE_COMPLETED_TODOS
     };
     expect(todos.removeCompletedTodos()).toEqual(expectedAction);
+  });
+
+  it('should create an action to change the filter (all)', () => {
+    const filter = 'all';
+    const expectedAction = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    expect(todos.changeTodosFilter(filter)).toEqual(expectedAction);
+  });
+
+  it('should create an action to change the filter (active)', () => {
+    const filter = 'active';
+    const expectedAction = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    expect(todos.changeTodosFilter(filter)).toEqual(expectedAction);
+  });
+
+  it('should create an action to change the filter (completed)', () => {
+    const filter = 'completed';
+    const expectedAction = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    expect(todos.changeTodosFilter(filter)).toEqual(expectedAction);
   });
 });
 
@@ -88,6 +115,48 @@ describe('todos selectors', () => {
       }
     };
     expect(todos.getTodos(state)).toEqual(list);
+  });
+
+  it('should return the initial filter value (active)', () => {
+    const state = {
+      todos: {
+        ...initialState
+      }
+    };
+    expect(todos.getTodosFilter(state)).toEqual('active');
+  });
+
+  it('should return the filter value (all)', () => {
+    const filter = 'active';
+    const state = {
+      todos: {
+        ...initialState,
+        filter
+      }
+    };
+    expect(todos.getTodosFilter(state)).toEqual(filter);
+  });
+
+  it('should return the filter value (active)', () => {
+    const filter = 'active';
+    const state = {
+      todos: {
+        ...initialState,
+        filter
+      }
+    };
+    expect(todos.getTodosFilter(state)).toEqual(filter);
+  });
+
+  it('should return the filter value (completed)', () => {
+    const filter = 'completed';
+    const state = {
+      todos: {
+        ...initialState,
+        filter
+      }
+    };
+    expect(todos.getTodosFilter(state)).toEqual(filter);
   });
 });
 
@@ -225,5 +294,87 @@ describe('todos reducers', () => {
       list: state.list.filter(t => t.completed === false)
     };
     expect(todos.default(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (active -> all)', () => {
+    const filter = 'all';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    const expectedState = {
+      ...state,
+      filter
+    };
+    expect(todos.default(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (active -> completed)', () => {
+    const filter = 'completed';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    const expectedState = {
+      ...state,
+      filter
+    };
+    expect(todos.default(state, action)).toEqual(expectedState);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (all -> completed)', () => {
+    const filter = 'completed';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    const localState = {
+      ...state,
+      filter: 'all'
+    };
+    const expectedState = {
+      ...state,
+      filter
+    };
+    expect(todos.default(localState, action)).toEqual(expectedState);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (completed -> active)', () => {
+    const filter = 'active';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    const localState = {
+      ...state,
+      filter: 'completed'
+    };
+    const expectedState = {
+      ...state,
+      filter
+    };
+    expect(todos.default(localState, action)).toEqual(expectedState);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (completed -> fresh - invalid)', () => {
+    const filter = 'fresh';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    const localState = {
+      ...state,
+      filter: 'completed'
+    };
+    expect(todos.default(localState, action)).toEqual(state);
+  });
+
+  it('should handle the CHANGE_TODOS_FILTER action (active -> old - invalid)', () => {
+    const filter = 'fresh';
+    const action = {
+      type: todos.CHANGE_TODOS_FILTER,
+      filter
+    };
+    expect(todos.default(state, action)).toEqual(state);
   });
 });
