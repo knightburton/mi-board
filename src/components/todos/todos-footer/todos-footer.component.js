@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faCheckSquare } from '@fortawesome/fontawesome-free-solid';
 
@@ -9,12 +10,17 @@ export default class TodosFooter extends React.Component {
   }
 
   render() {
+    const { todos, handleRemoveCompletedClick, handleCompleteAllClick } = this.props;
+    const activeLeft = todos.reduce((left, {completed}) => completed ? left : left + 1, 0);
+
     return (
       <div className="row mt-2">
         <div className="col">
           <div className="row px-1 align-items-center">
             <div className="col-md-2 text-left">
-              <span>1 items left</span>
+              <p>
+                <span className="font-weight-bold text-info">{activeLeft}</span> items left
+              </p>
             </div>
 
             <div className="col-md-8 text-center">
@@ -63,14 +69,14 @@ export default class TodosFooter extends React.Component {
             </div>
 
             <div className="col-md-2 text-right">
-              <span title="Remove completed todos">
+              <span title="Remove completed todos" onClick={handleRemoveCompletedClick}>
                 <FontAwesomeIcon
                   icon={faMinusSquare}
                   size="2x"
                   className="text-danger cursor-pointer mr-2" />
               </span>
 
-              <span title="Complete all todos">
+              <span title="Complete all todos" onClick={handleCompleteAllClick}>
                 <FontAwesomeIcon
                   icon={faCheckSquare}
                   size="2x"
@@ -83,3 +89,9 @@ export default class TodosFooter extends React.Component {
     );
   }
 }
+
+TodosFooter.propTypes = {
+  todos: PropTypes.array.isRequired,
+  handleRemoveCompletedClick: PropTypes.func.isRequired,
+  handleCompleteAllClick: PropTypes.func.isRequired
+};

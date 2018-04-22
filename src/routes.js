@@ -22,7 +22,7 @@ const Calendar = Loadable({
 });
 
 const Todos = Loadable({
-  loader: () => import('./components/todos/todos.component'),
+  loader: () => import('./components/todos/todos.container'),
   loading: Loading
 });
 

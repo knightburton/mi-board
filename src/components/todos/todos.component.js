@@ -1,8 +1,9 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import PropTypes from 'prop-types';
 import TodosHeader from './todos-header/todos-header.container';
 import TodosList from './todos-list/todos-list.container';
-import TodosFooter from './todos-footer/todos-footer.component';
+import TodosFooter from './todos-footer/todos-footer.container';
 
 export default class Todos extends React.Component {
 
@@ -11,6 +12,8 @@ export default class Todos extends React.Component {
   }
 
   render() {
+    const { todos } = this.props;
+
     return (
       <div className="wrapper">
         <Helmet>
@@ -22,8 +25,8 @@ export default class Todos extends React.Component {
 
           <div className="container">
             <TodosHeader />
-            <TodosList todos={[]}/>
-            <TodosFooter />
+            <TodosList todos={todos}/>
+            <TodosFooter todos={todos}/>
           </div>
 
         </div>
@@ -31,3 +34,7 @@ export default class Todos extends React.Component {
     );
   }
 }
+
+Todos.propTypes = {
+  todos: PropTypes.array.isRequired
+};
