@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TodosListItem from '../todos-list-item/todos-list-item.component';
 
 export default class TodosList extends React.Component {
@@ -32,3 +33,9 @@ export default class TodosList extends React.Component {
     );
   }
 }
+
+TodosList.propTypes = {
+  todos: PropTypes.array.isRequired,
+  handleTodoClick: PropTypes.func.isRequired,
+  handleRemoveTodoClick: PropTypes.func.isRequired
+};

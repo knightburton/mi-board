@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import TodosHeader from './todos-header/todos-header.container';
-import TodosList from './todos-list/todos-list.component';
+import TodosList from './todos-list/todos-list.container';
 import TodosFooter from './todos-footer/todos-footer.component';
 
 export default class Todos extends React.Component {
