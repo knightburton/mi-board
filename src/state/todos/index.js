@@ -51,7 +51,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         list: [...state.list, {
-          id: state.list.length,
+          id: state.list.reduce((max, todo) => Math.max(todo.id, max), -1) + 1,
           completed: false,
           text: action.text
         }]
