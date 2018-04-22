@@ -7,10 +7,12 @@ export default class TodosFooter extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.getFilterClass = current => this.props.filter === current ? 'text-info' : 'text-muted';
   }
 
   render() {
-    const { todos, handleRemoveCompletedClick, handleCompleteAllClick } = this.props;
+    const { todos, filter, handleRemoveCompletedClick, handleCompleteAllClick, handleFilterChange } = this.props;
     const activeLeft = todos.reduce((left, {completed}) => completed ? left : left + 1, 0);
 
     return (
@@ -18,7 +20,7 @@ export default class TodosFooter extends React.Component {
         <div className="col">
           <div className="row px-1 align-items-center">
             <div className="col-md-2 text-left">
-              <p>
+              <p className="pt-2">
                 <span className="font-weight-bold text-info">{activeLeft}</span> items left
               </p>
             </div>
@@ -28,13 +30,14 @@ export default class TodosFooter extends React.Component {
                 <input
                   className="form-check-input cursor-pointer"
                   type="radio"
-                  name="visibility"
-                  id="visibility-all"
+                  name="filter"
+                  id="filter-all"
                   value="all"
-                  checked={true} />
+                  onChange={() => handleFilterChange('all')}
+                  checked={filter === 'all'} />
                 <label
-                  className="form-check-label cursor-pointer"
-                  htmlFor="visibility-all">
+                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('all')}`}
+                  htmlFor="filter-all">
                   All
                 </label>
               </div>
@@ -43,12 +46,14 @@ export default class TodosFooter extends React.Component {
                 <input
                   className="form-check-input cursor-pointercursor-pointer"
                   type="radio"
-                  name="visibility"
-                  id="visibility-active"
-                  value="active" />
+                  name="filter"
+                  id="filter-active"
+                  value="active"
+                  onChange={() => handleFilterChange('active')}
+                  checked={filter === 'active'} />
                 <label
-                  className="form-check-label cursor-pointer"
-                  htmlFor="visibility-active">
+                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('active')}`}
+                  htmlFor="filter-active">
                   Active
                 </label>
               </div>
@@ -57,12 +62,14 @@ export default class TodosFooter extends React.Component {
                 <input
                   className="form-check-input cursor-pointer"
                   type="radio"
-                  name="visibility"
-                  id="visibility-completed"
-                  value="completed" />
+                  name="filter"
+                  id="filter-completed"
+                  value="completed"
+                  onChange={() => handleFilterChange('completed')}
+                  checked={filter === 'completed'} />
                 <label
-                  className="form-check-label cursor-pointer"
-                  htmlFor="visibility-completed">
+                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('completed')}`}
+                  htmlFor="filter-completed">
                   Completed
                 </label>
               </div>
@@ -92,6 +99,7 @@ export default class TodosFooter extends React.Component {
 
 TodosFooter.propTypes = {
   todos: PropTypes.array.isRequired,
+  filter: PropTypes.string.isRequired,
   handleRemoveCompletedClick: PropTypes.func.isRequired,
   handleCompleteAllClick: PropTypes.func.isRequired
 };

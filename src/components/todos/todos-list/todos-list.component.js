@@ -9,8 +9,20 @@ export default class TodosList extends React.Component {
   }
 
   render() {
-    const { todos, handleTodoClick, handleRemoveTodoClick } = this.props;
-    const list = todos.map((todo, index) => {
+    const { todos, filter, handleTodoClick, handleRemoveTodoClick } = this.props;
+
+    const filteredTodos = todos.filter(t => {
+      switch (filter) {
+        case 'completed':
+          return t.completed;
+        case 'active':
+          return !t.completed;
+        default:
+          return true;
+      }
+    });
+
+    const list = filteredTodos.map((todo, index) => {
       return (
         <TodosListItem
           key={index.toString()}
@@ -25,7 +37,7 @@ export default class TodosList extends React.Component {
     return (
       <ul className="list-group pb-4 px-1 border-bottom">
         {list.length === 0 ? (
-          <p className="text-center text-info font-weight-bold">You have nothing to do.</p>
+          <p className="text-center text-info font-weight-bold">The list is empty.</p>
         ) : (
           list
         )}
@@ -36,6 +48,7 @@ export default class TodosList extends React.Component {
 
 TodosList.propTypes = {
   todos: PropTypes.array.isRequired,
+  filter: PropTypes.string.isRequired,
   handleTodoClick: PropTypes.func.isRequired,
   handleRemoveTodoClick: PropTypes.func.isRequired
 };
