@@ -19,7 +19,7 @@ export default class TodosHeader extends React.Component {
     };
 
     this.handleKeyDown = event => {
-      if (event.which === 13) {
+      if (event.which === 13 && this.state.text !== '') {
         this.props.handleTodoSubmit(this.state.text);
 
         this.setState({
