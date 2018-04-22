@@ -19,7 +19,7 @@ export default class TodosListItem extends React.Component {
             className="form-check-input cursor-pointer"
             type="checkbox"
             id={`todo-${id}`}
-            onClick={() => handleTodoClick(id)}
+            onChange={() => handleTodoClick(id)}
             checked={checked} />
           <label
             className={`form-check-label cursor-pointer font-weight-bold${textClass}`}
