@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesomeIcon from '@fortawesome/react-fontawesome';
 import { faMinusSquare, faCheckSquare } from '@fortawesome/fontawesome-free-solid';
+import TodosFilterList from '../todos-filter-list/todos-filter-list.component';
 
 export default class TodosFooter extends React.Component {
 
@@ -12,7 +13,7 @@ export default class TodosFooter extends React.Component {
   }
 
   render() {
-    const { todos, filter, handleRemoveCompletedClick, handleCompleteAllClick, handleFilterChange } = this.props;
+    const { todos, handleRemoveCompletedClick, handleCompleteAllClick } = this.props;
     const activeLeft = todos.reduce((left, {completed}) => completed ? left : left + 1, 0);
 
     return (
@@ -26,53 +27,7 @@ export default class TodosFooter extends React.Component {
             </div>
 
             <div className="col-md-8 text-center">
-              <div className="form-check form-check-inline mr-2">
-                <input
-                  className="form-check-input cursor-pointer"
-                  type="radio"
-                  name="filter"
-                  id="filter-all"
-                  value="all"
-                  onChange={() => handleFilterChange('all')}
-                  checked={filter === 'all'} />
-                <label
-                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('all')}`}
-                  htmlFor="filter-all">
-                  All
-                </label>
-              </div>
-
-              <div className="form-check form-check-inline mx-2">
-                <input
-                  className="form-check-input cursor-pointercursor-pointer"
-                  type="radio"
-                  name="filter"
-                  id="filter-active"
-                  value="active"
-                  onChange={() => handleFilterChange('active')}
-                  checked={filter === 'active'} />
-                <label
-                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('active')}`}
-                  htmlFor="filter-active">
-                  Active
-                </label>
-              </div>
-
-              <div className="form-check form-check-inline ml-2">
-                <input
-                  className="form-check-input cursor-pointer"
-                  type="radio"
-                  name="filter"
-                  id="filter-completed"
-                  value="completed"
-                  onChange={() => handleFilterChange('completed')}
-                  checked={filter === 'completed'} />
-                <label
-                  className={`form-check-label cursor-pointer font-weight-bold ${this.getFilterClass('completed')}`}
-                  htmlFor="filter-completed">
-                  Completed
-                </label>
-              </div>
+              <TodosFilterList filters={['all', 'active', 'completed']} />
             </div>
 
             <div className="col-md-2 text-right">
@@ -99,7 +54,6 @@ export default class TodosFooter extends React.Component {
 
 TodosFooter.propTypes = {
   todos: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
   handleRemoveCompletedClick: PropTypes.func.isRequired,
   handleCompleteAllClick: PropTypes.func.isRequired
 };

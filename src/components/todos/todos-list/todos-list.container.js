@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
-import { completeTodo, removeTodo } from '../../../state/todos';
+import { completeTodo, removeTodo, getTodosFilter } from '../../../state/todos';
 import TodosList from './todos-list.component';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  filter: getTodosFilter(state)
+});
 
 const mapDispatchToProps = dispatch => ({
   handleTodoClick: id => dispatch(completeTodo(id)),

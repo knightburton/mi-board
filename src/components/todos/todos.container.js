@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import { getTodos, getTodosFilter } from '../../state/todos';
+import { getTodos } from '../../state/todos';
 import Todos from './todos.component';
 
 const mapStateToProps = state => ({
-  todos: getTodos(state),
-  filter: getTodosFilter(state)
+  todos: getTodos(state)
 });
 
 const mapDispatchToProps = () => ({});

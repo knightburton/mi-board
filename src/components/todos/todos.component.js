@@ -12,7 +12,7 @@ export default class Todos extends React.Component {
   }
 
   render() {
-    const { todos, filter } = this.props;
+    const { todos } = this.props;
 
     return (
       <div className="wrapper">
@@ -25,8 +25,8 @@ export default class Todos extends React.Component {
 
           <div className="container">
             <TodosHeader />
-            <TodosList todos={todos} filter={filter} />
-            <TodosFooter todos={todos} filter={filter} />
+            <TodosList todos={todos} />
+            <TodosFooter todos={todos} />
           </div>
 
         </div>
@@ -36,6 +36,5 @@ export default class Todos extends React.Component {
 }
 
 Todos.propTypes = {
-  todos: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired
+  todos: PropTypes.array.isRequired
 };
