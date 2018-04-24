@@ -86,6 +86,9 @@ module.exports = {
     compress: true,
     inline: true,
     historyApiFallback: true,
-    port: 5001
+    port: 5001,
+    proxy: {
+      '/api': 'http://localhost:5005'
+    }
   }
 };
