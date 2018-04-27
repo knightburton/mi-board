@@ -1,4 +1,6 @@
 export default ({
   list: [],
-  filter: 'active'
+  filter: 'active',
+  loading: false,
+  error: null
 });

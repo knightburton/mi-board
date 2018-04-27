@@ -11,6 +11,10 @@ export default class Todos extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchTodos();
+  }
+
   render() {
     const { todos } = this.props;
 
@@ -36,5 +40,6 @@ export default class Todos extends React.Component {
 }
 
 Todos.propTypes = {
-  todos: PropTypes.array.isRequired
+  todos: PropTypes.array.isRequired,
+  fetchTodos: PropTypes.func.isRequired
 };
