@@ -134,6 +134,8 @@ export const removeCompletedTodos = () => dispatch => {
 // Selectors
 export const getTodos = state => state.todos.list;
 export const getTodosFilter = state => state.todos.filter;
+export const getTodosLoading = state => state.todos.loading;
+export const getTodosError = state => state.todos.error;
 
 // Helpers
 const filters = ['all', 'active', 'completed'];

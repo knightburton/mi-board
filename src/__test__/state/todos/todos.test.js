@@ -537,6 +537,64 @@ describe('todos selectors', () => {
     };
     expect(todos.getTodosFilter(state)).toEqual(filter);
   });
+
+  it('Should return with the loading state (false)', () => {
+    const loading = false;
+    const state = {
+      todos: {
+        ...initialState,
+        loading
+      }
+    };
+    expect(todos.getTodosLoading(state)).toEqual(loading);
+  });
+
+  it('Should return with the loading state (true)', () => {
+    const loading = true;
+    const state = {
+      todos: {
+        ...initialState,
+        loading
+      }
+    };
+    expect(todos.getTodosLoading(state)).toEqual(loading);
+  });
+
+  it('Should return with the error state (string)', () => {
+    const error = 'Some random error message.';
+    const state = {
+      todos: {
+        ...initialState,
+        error
+      }
+    };
+    expect(todos.getTodosError(state)).toEqual(error);
+  });
+
+  it('Should return with the error state (Error object)', () => {
+    const error = new Error('Some random error message.');
+    const state = {
+      todos: {
+        ...initialState,
+        error
+      }
+    };
+    expect(todos.getTodosError(state)).toEqual(error);
+  });
+
+  it('Should return with the error state (object)', () => {
+    const error = {
+      object: new Error('Some random error message.'),
+      data: 'Something data'
+    };
+    const state = {
+      todos: {
+        ...initialState,
+        error
+      }
+    };
+    expect(todos.getTodosError(state)).toEqual(error);
+  });
 });
 
 describe('todos reducer', () => {
