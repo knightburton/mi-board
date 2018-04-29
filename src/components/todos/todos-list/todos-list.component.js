@@ -26,7 +26,7 @@ export default class TodosList extends React.Component {
       return (
         <TodosListItem
           key={index.toString()}
-          id={todo.id}
+          id={todo._id}
           text={todo.text}
           checked={todo.completed}
           handleTodoClick={handleTodoClick}

@@ -98,21 +98,21 @@ export const fetchTodos = () => dispatch => {
 
 export const addTodo = text => dispatch => {
   dispatch(todosAsyncRequest());
-  return axios.post('/api/todos/add', {text})
+  return axios.post('/api/todos', {text})
     .then(response => dispatch(addTodoSuccess(response.data.todo)))
     .catch(error => dispatch(addTodoFailure(error)));
 };
 
 export const removeTodo = id => dispatch => {
   dispatch(todosAsyncRequest());
-  return axios.post('/api/todos/remove', {id})
+  return axios.delete(`/api/todos/${id}`)
     .then(response => dispatch(removeTodoSuccess(response.data.id)))
     .catch(error => dispatch(removeTodoFailure(error)));
 };
 
 export const completeTodo = id => dispatch => {
   dispatch(todosAsyncRequest());
-  return axios.post('/api/todos/complete', {id})
+  return axios.post(`/api/todos/complete/${id}`)
     .then(response => dispatch(completeTodoSuccess(response.data.id)))
     .catch(error => dispatch(completeTodoFailure(error)));
 };
@@ -173,12 +173,12 @@ export default (state = initialState, action = {}) => {
     case REMOVE_TODO_SUCCESS:
       return {
         ...state,
-        list: state.list.filter(todo => todo.id !== action.id)
+        list: state.list.filter(todo => todo._id !== action.id)
       };
     case COMPLETE_TODO_SUCCESS:
       return {
         ...state,
-        list: state.list.map(todo => todo.id === action.id ? {...todo, completed: !todo.completed} : todo)
+        list: state.list.map(todo => todo._id === action.id ? {...todo, completed: !todo.completed} : todo)
       };
     case COMPLETE_ALL_TODOS_SUCCESS: {
       const alreadyCompleted = state.list.every(({completed}) => completed);

@@ -690,9 +690,9 @@ describe('todos reducer', () => {
   // Remove
   it('should handle REMOVE_TODO_SUCCESS', () => {
     const list = [
-      {id: 34, completed: false, text: 'A todo again'},
-      {id: 55, completed: true, text: 'Here we go...'},
-      {id: 29, completed: true, text: 'This is important!'}
+      {_id: 34, completed: false, text: 'A todo again'},
+      {_id: 55, completed: true, text: 'Here we go...'},
+      {_id: 29, completed: true, text: 'This is important!'}
     ];
     const expectedList = [list[0], list[2]];
     const action = {
@@ -728,9 +728,9 @@ describe('todos reducer', () => {
   it('should handle COMPLETE_TODO_SUCCESS', () => {
     const id = 34;
     const list = [
-      {id: id, completed: false, text: 'A todo again'},
-      {id: 55, completed: true, text: 'Here we go...'},
-      {id: 29, completed: true, text: 'This is important!'}
+      {_id: id, completed: false, text: 'A todo again'},
+      {_id: 55, completed: true, text: 'Here we go...'},
+      {_id: 29, completed: true, text: 'This is important!'}
     ];
     const action = {
       type: todos.COMPLETE_TODO_SUCCESS,
