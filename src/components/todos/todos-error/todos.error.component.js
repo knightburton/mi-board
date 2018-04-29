@@ -12,10 +12,10 @@ export default class TodosError extends React.Component {
 
     this.getErrorMessage = () => {
       const { error } = this.props;
-      const statusText = error.response.statusText ? `${error.response.statusText}.` : 'Something went wrong.';
-      const message = error.response.data.message ? error.response.data.message : 'It\'s not a bug, it\'s a feature.';
+      const statusText = error.response.statusText ? error.response.statusText : 'Something went wrong';
+      const message = error.response.data.message ? error.response.data.message : 'it\'s not a bug, it\'s a feature.';
 
-      return `${statusText} ${message}`;
+      return `${statusText}, ${message}`;
     };
   }
 
