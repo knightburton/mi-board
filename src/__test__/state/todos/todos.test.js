@@ -485,13 +485,13 @@ describe('todos selectors', () => {
     expect(todos.getTodos(state)).toEqual(list);
   });
 
-  it('Should return with the selected filter (initial state -> active)', () => {
+  it('Should return with the selected filter (initial state -> all)', () => {
     const state = {
       todos: {
         ...initialState
       }
     };
-    expect(todos.getTodosFilter(state)).toEqual('active');
+    expect(todos.getTodosFilter(state)).toEqual('all');
   });
 
   it('Should return with the selected filter (active)', () => {
