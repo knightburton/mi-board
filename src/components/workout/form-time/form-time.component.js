@@ -23,7 +23,7 @@ export default class FormTime extends React.Component {
 
   render() {
     const { name, value, collapsed } = this.props;
-    const sClass = !collapsed && ' show';
+    const sClass = !collapsed ? ' show' : '';
 
     return (
       <div className="form-group">

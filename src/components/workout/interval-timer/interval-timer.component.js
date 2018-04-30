@@ -22,8 +22,8 @@ export default class IntervalTimer extends React.Component {
     };
 
     this.getPercentage = () => (
-      Math.trunc(this.props.clock / ((this.props.work + this.props.rest) * this.props.repeat) * 100)
-    );
+      this.props.clock / ((this.props.work + this.props.rest) * this.props.repeat) * 100
+    ).toFixed(2);
   }
 
   componentWillUnmount() {
