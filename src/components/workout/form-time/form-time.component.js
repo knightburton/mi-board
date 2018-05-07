@@ -30,13 +30,13 @@ export default class FormTime extends React.Component {
         <div className="row">
           <div className="col">
             <div
-              className="rounded border p-2 text-center mb-3 cursor-pointer"
+              className="rounded border p-1 text-center mb-3 cursor-pointer"
               data-toggle="collapse"
               href={`#${name}-collapse`}
               role="button"
               aria-expanded={!collapsed}
               aria-controls={`${name}-collapse`}>
-              <span className="font-weight-bold h3">{timerUtils.getTime(value)}</span>
+              <span className="font-weight-bold h4">{timerUtils.getTime(value)}</span>
             </div>
           </div>
         </div>

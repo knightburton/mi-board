@@ -22,7 +22,7 @@ export default class FormPreset extends React.Component {
 
     return (
       <div className="form-group">
-        <div className="btn-group" id={`${name}-presets`} role="group" aria-label={`${name} presets`}>
+        <div className="btn-group btn-group-sm" id={`${name}-presets`} role="group" aria-label={`${name} presets`}>
           {buttons}
         </div>
       </div>

@@ -57,30 +57,33 @@ export default class Stopwatch extends React.Component {
         <div className="row justify-content-center mt-4">
           <div className="col-auto">
             {active ? (
-              <div className="btn btn-outline-danger" onClick={() => handleStopClick(intervalId)}>
+              <div className="btn btn-outline-danger btn-sm" onClick={() => handleStopClick(intervalId)}>
                 Stop
               </div>
             ) : (
-              <button className="btn btn-outline-success" disabled={active} onClick={handleStartClick}>
+              <button className="btn btn-outline-success btn-sm" disabled={active} onClick={handleStartClick}>
                 Start
               </button>
             )}
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-danger" disabled={active} onClick={handleResetClick}>
+            <button className="btn btn-outline-danger btn-sm" disabled={active} onClick={handleResetClick}>
               Reset
             </button>
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-success" disabled={laps.length === 0} onClick={handleClearLapsClick}>
+            <button
+              className="btn btn-outline-success btn-sm"
+              disabled={laps.length === 0}
+              onClick={handleClearLapsClick}>
               Clear laps
             </button>
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-success" disabled={!active} onClick={() => handleLapClick(clock)}>
+            <button className="btn btn-outline-success btn-sm" disabled={!active} onClick={() => handleLapClick(clock)}>
               Lap
             </button>
           </div>

@@ -50,24 +50,24 @@ export default class CountdownTimer extends React.Component {
         <div className="row justify-content-center mt-4">
           <div className="col-auto">
             {active ? (
-              <div className="btn btn-outline-danger" onClick={() => handleStopClick(intervalId)}>
+              <div className="btn btn-outline-danger btn-sm" onClick={() => handleStopClick(intervalId)}>
                 Stop
               </div>
             ) : (
-              <button className="btn btn-outline-success" disabled={disabled} onClick={handleStartClick}>
+              <button className="btn btn-outline-success btn-sm" disabled={disabled} onClick={handleStartClick}>
                 Start
               </button>
             )}
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-danger" disabled={active} onClick={handleResetClick}>
+            <button className="btn btn-outline-danger btn-sm" disabled={active} onClick={handleResetClick}>
               Reset
             </button>
           </div>
 
           <div className="col-auto">
-            <button className="btn btn-outline-secondary" disabled={active} onClick={handleSettingsClick}>
+            <button className="btn btn-outline-secondary btn-sm" disabled={active} onClick={handleSettingsClick}>
               Settings
             </button>
           </div>

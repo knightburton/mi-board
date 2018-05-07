@@ -13,7 +13,7 @@ export default class FormNumber extends React.Component {
 
     return (
       <NumericInput
-        className="form-control"
+        className="form-control form-control-sm"
         min={0}
         max={100}
         value={value}

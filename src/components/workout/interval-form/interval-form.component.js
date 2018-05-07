@@ -93,13 +93,13 @@ export default class IntervalForm extends React.Component {
               <div className="form-group col-6">
                 <button
                   type="submit"
-                  className={`btn btn-outline-success w-100${disabled ? ' disabled' : ''}`}
+                  className={`btn btn-outline-success btn-sm w-100${disabled ? ' disabled' : ''}`}
                   disabled={disabled}>
                   Set
                 </button>
               </div>
               <div className="form-group col-6">
-                <div className="btn btn-outline-danger w-100" onClick={handleResetClick}>
+                <div className="btn btn-outline-danger btn-sm w-100" onClick={handleResetClick}>
                   Reset
                 </div>
               </div>
