@@ -81,17 +81,17 @@ export default class Calendar extends React.Component {
 
                       <div className="row">
                         <div className="col">
-                          <div className="input-group mb-3">
+                          <div className="input-group input-group-sm mb-3">
                             <div className="input-group-prepend">
                               <span className="input-group-text" id="">From</span>
                             </div>
-                            <select className="custom-select" id="calendar-new-from-h">
+                            <select className="custom-select form-control form-control-sm" id="calendar-new-from-h">
                               <option defaultValue>Choose...</option>
                               <option value="0">00</option>
                               <option value="1">01</option>
                               <option value="2">02</option>
                             </select>
-                            <select className="custom-select" id="calendar-new-from-m">
+                            <select className="custom-select form-control form-control-sm" id="calendar-new-from-m">
                               <option defaultValue>Choose...</option>
                               <option value="0">00</option>
                               <option value="15">15</option>
@@ -101,17 +101,17 @@ export default class Calendar extends React.Component {
                           </div>
                         </div>
                         <div className="col">
-                          <div className="input-group mb-3">
+                          <div className="input-group input-group-sm mb-3">
                             <div className="input-group-prepend">
                               <span className="input-group-text" id="">To</span>
                             </div>
-                            <select className="custom-select" id="calendar-new-to-h">
+                            <select className="custom-select form-control form-control-sm" id="calendar-new-to-h">
                               <option defaultValue>Choose...</option>
                               <option value="0">00</option>
                               <option value="1">01</option>
                               <option value="2">02</option>
                             </select>
-                            <select className="custom-select" id="calendar-new-to-m">
+                            <select className="custom-select form-control form-control-sm" id="calendar-new-to-m">
                               <option defaultValue>Choose...</option>
                               <option value="0">00</option>
                               <option value="15">15</option>
