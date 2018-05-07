@@ -34,7 +34,7 @@ export default class TodosHeader extends React.Component {
       <div className="form-group mt-5 mb-4">
         <input
           type="text"
-          className="form-control"
+          className="form-control form-control-sm"
           id="todo-text"
           placeholder="What do you need to do?"
           autoComplete="false"
