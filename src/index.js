@@ -1,19 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import configureStore from './state/configure.store';
-import routes from './routes';
+import { store } from './store/configure.store';
+import { Router } from 'react-router-dom';
+import history from './side.effects/history';
+import * as serviceWorker from './serviceWorker';
 
-import '../public/style/index.scss';
+import App from './components/app.component';
 
-const store = configureStore();
+import './index.scss';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      {routes}
-    </BrowserRouter>
-  </Provider>,
-  document.getElementById('root')
-);
+store.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Router history={history}>
+        <App />
+      </Router>
+    </Provider>,
+    document.getElementById('root')
+  );
+
+  serviceWorker.unregister();
+});
