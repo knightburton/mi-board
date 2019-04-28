@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker';
 
 import App from './components/app.component';
 
+import 'typeface-roboto';
 import './index.scss';
 
 store.firebaseAuthIsReady.then(() => {

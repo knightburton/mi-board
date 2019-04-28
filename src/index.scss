@@ -1,4 +1,10 @@
-@import '../node_modules/bootstrap/dist/css/bootstrap.css';
+@import '~bootswatch/dist/materia/_variables.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootswatch/dist/materia/_bootswatch.scss';
+
+body {
+  font-family: 'Roboto';
+}
 
 /**
  * Z-INDEXES
