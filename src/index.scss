@@ -2,14 +2,14 @@
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootswatch/dist/materia/_bootswatch.scss';
 
+// GENERAL
 body {
   font-family: 'Roboto';
 }
 
-/**
- * Z-INDEXES
- */
- .zi {
+
+// Z-INDEXES
+.zi {
   &-0 { z-index: 0; }
   &-1 { z-index: 100; }
   &-2 { z-index: 200; }
@@ -25,4 +25,17 @@ body {
   &-12 { z-index: 1200; }
   &-13 { z-index: 1300; }  // Waiting backdrop
   &-14 { z-index: 1400; }  // Waiting dialog
+}
+
+// NAVBAR
+.navbar {
+  .dropdown-menu {
+    left: unset;
+    right: 0;
+  }
+}
+
+// FONT-AWESOME
+.svg-inline--fa {
+  min-width: 1.2em;
 }

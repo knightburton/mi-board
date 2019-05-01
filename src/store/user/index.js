@@ -68,3 +68,13 @@ export const login = (firebase, credentials) => async dispatch => {
     await dispatch(setAuthInProgress(false));
   }
 };
+
+export const logout = firebase => async dispatch => {
+  await dispatch(setAuthInProgress(true));
+  try {
+    await firebase.logout();
+  } catch (error) {
+  } finally {
+    await dispatch(setAuthInProgress(false));
+  }
+};
