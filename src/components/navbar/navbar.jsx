@@ -16,6 +16,7 @@ class Navbar extends React.PureComponent {
         <Bar.Collapse id="mi-board-navbar-nav">
           <Nav className="mr-auto">
             <NavLink to="/" className="nav-link" exact>Dashboard</NavLink>
+            <NavLink to="/time" className="nav-link">Time</NavLink>
           </Nav>
           <Nav>
             <NavDropdown title={<FontAwesomeIcon icon={['far', 'user']} />} id="mi-board-nav-dropdown">

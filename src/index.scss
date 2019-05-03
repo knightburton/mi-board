@@ -7,6 +7,17 @@ body {
   font-family: 'Roboto';
 }
 
+// CURSOR
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+  &-hover:hover {
+    transform: scale(1.05);
+    transition: transform .1s linear;
+  }
+}
+
 
 // Z-INDEXES
 .zi {

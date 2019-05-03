@@ -7,6 +7,7 @@ import Login from './login/login';
 import Navbar from './navbar/navbar';
 
 import Dashboard from './dashboard/dashboard';
+import Time from './time/time';
 
 class App extends React.PureComponent {
   render() {
@@ -21,6 +22,7 @@ class App extends React.PureComponent {
           {!authIsLoaded && <Route render={() => <Waiting screen />} />}
           {authIsEmpty && <Route component={Login} />}
           <Route exact path="/" component={Dashboard} />
+          <Route path="/time" component={Time} />
           <Redirect to="/" />
         </Switch>
       </Fragment>
