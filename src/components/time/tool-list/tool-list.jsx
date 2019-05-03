@@ -17,11 +17,13 @@ export default class ToolList extends React.PureComponent {
             <Col key={tool.id} xs={12} sm={4} md={3}>
               <LinkContainer to={tool.link}>
                 <Card className="text-center h-100 cursor-pointer cursor-hover">
-                  <Card.Header className="display-4">
-                    <FontAwesomeIcon icon={tool.icon} />
+                  <Card.Header className="font-weight-bold">
+                    {tool.title}
                   </Card.Header>
                   <Card.Body>
-                    <Card.Title>{tool.title}</Card.Title>
+                    <Card.Title>
+                      <FontAwesomeIcon icon={tool.icon} className="h1" />
+                    </Card.Title>
                     <Card.Text>
                       {tool.text.replace(/\s+/g,' ').trim()}
                     </Card.Text>
