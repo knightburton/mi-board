@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Spinner from '../spinner/spinner';
+import Spinner from '../spinner/spinner.container';
 
 export default class Waiting extends React.PureComponent {
   render() {

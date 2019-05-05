@@ -12,7 +12,7 @@ import history from './side.effects/history';
 import firebase from './side.effects/firebase';
 import * as serviceWorker from './serviceWorker';
 
-import App from './components/app';
+import App from './components/app.container';
 
 import 'typeface-roboto';
 import './index.scss';

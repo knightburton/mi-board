@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 
-import Spinner from '../common/spinner/spinner';
+import Spinner from '../common/spinner/spinner.container';
 
 export default class Login extends React.PureComponent {
 

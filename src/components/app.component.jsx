@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Waiting from './common/waiting/waiting';
+import Waiting from './common/waiting/waiting.container';
 
-import Login from './login/login';
-import Navbar from './navbar/navbar';
+import Login from './login/login.container';
+import Navbar from './navbar/navbar.container';
 
-import Dashboard from './dashboard/dashboard';
-import Time from './time/time';
+import Dashboard from './dashboard/dashboard.container';
+import Time from './time/time.container';
 
 class App extends React.PureComponent {
   render() {

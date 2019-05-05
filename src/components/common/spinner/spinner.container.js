@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Spinner from './spinner.jsx';
+import Spinner from './spinner.component';
 
 Spinner.propTypes = {
   variant: PropTypes.string,

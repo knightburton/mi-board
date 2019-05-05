@@ -9,9 +9,9 @@ import { Route, Switch } from 'react-router';
 // import Countdown from './countdown/countdown.container';
 // import Stopwatch from './stopwatch/stopwatch.container';
 
-import Title from '../common/title/title';
+import Title from '../common/title/title.container';
 
-import ToolList from './tool-list/tool-list';
+import ToolList from './tool-list/tool-list.container';
 
 export default class Time extends React.Component {
   render() {

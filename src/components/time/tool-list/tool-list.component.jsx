@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import { tools } from '../constants';
+import { tools } from '../time.constants';
 
 export default class ToolList extends React.PureComponent {
   render() {

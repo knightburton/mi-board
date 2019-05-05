@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Title from './title.jsx';
+import Title from './title.component';
 
 Title.propTypes = {
   text: PropTypes.string.isRequired,

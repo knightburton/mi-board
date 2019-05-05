@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import Waiting from './waiting.jsx';
+import Waiting from './waiting.component';
 
 Waiting.propTypes = {
   screen: PropTypes.bool,
