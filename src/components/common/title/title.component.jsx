@@ -6,7 +6,7 @@ export default class Title extends React.PureComponent {
     const { text, icon, variant, uppercase, align } = this.props;
 
     return (
-      <h2 className={`my-3 ${uppercase ? ' text-uppercase ' : ''}text-${variant} text-${align}`}>
+      <h2 className={`my-3 ml-3 ${uppercase ? ' text-uppercase ' : ''}text-${variant} text-${align}`}>
         {icon &&
           <FontAwesomeIcon icon={icon} />
         }
