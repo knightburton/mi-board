@@ -24,7 +24,9 @@ export const intialState = {
   },
   stopwatch: {
     laps: []
-  }
+  },
+  active: null,
+  visible: null
 };
 
 /**
@@ -45,6 +47,9 @@ export const RESET_COUNTDOWN_TIME = 'RESET_COUNTDOWN_TIME';
 
 export const ADD_STOPWATCH_LAP = 'ADD_STOPWATCH_LAP';
 export const CLEAR_STOPWATCH_LAPS = 'CLEAR_STOPWATCH_LAPS';
+
+export const SET_ACTIVE_TIMER = 'SET_ACTIVE_TIMER';
+export const SET_VISIBLE_TIMER = 'SET_VISIBLE_TIMER';
 
 /**
  * ACTION CREATORS
@@ -91,6 +96,15 @@ export const clearStopwatchLaps = createAction(
   CLEAR_STOPWATCH_LAPS
 );
 
+export const setActiveTimer = createAction(
+  SET_ACTIVE_TIMER,
+  timer => timer
+);
+export const setVisibleTimer = createAction(
+  SET_VISIBLE_TIMER,
+  timer => timer
+);
+
 /**
  * SELECTORS
  */
@@ -107,6 +121,9 @@ export const getIntervalRepeat = state => state.time.interval.repeat;
 export const getCountdownTime = state => state.time.countdown.time;
 
 export const getStopwatchLaps = state => state.time.stopwatch.laps;
+
+export const getActiveTimer = state => state.time.active;
+export const getVisibleTimer = state => state.time.visible;
 
 /**
  * REDUCER
@@ -126,7 +143,10 @@ export const reducer = handleActions(
     [resetCountdownTime]: state => ({ ...state, countdown: intialState.countdown }),
 
     [addStopwatchLap]: (state, { payload: lap }) => ({ ...state, stopwatch: { lap: [ ...state.stopwatch.laps, lap ] } }),
-    [clearStopwatchLaps]: state => ({ ...state, stopwatch: intialState.stopwatch })
+    [clearStopwatchLaps]: state => ({ ...state, stopwatch: intialState.stopwatch }),
+
+    [setActiveTimer]: (state, { payload: timer }) => ({ ...state, active: timer }),
+    [setVisibleTimer]: (state, { payload: timer }) => ({ ...state, visible: timer })
   },
   intialState
 );
