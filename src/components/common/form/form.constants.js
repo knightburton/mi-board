@@ -8,7 +8,8 @@ export const CONTROL_TYPES = {
   TEXT: 'text',
   TEXTAREA: 'textarea',
   NUMBER: 'number',
-  SELECT: 'select'
+  SELECT: 'select',
+  RANGE: 'range',
 };
 
 export const CONTROL_DEFAULTS = {
@@ -18,5 +19,8 @@ export const CONTROL_DEFAULTS = {
   NUMBER_MAX: 100,
   NUMBER_STEP: 1,
   TEXTAREA_ROWS: 3,
-  SELECT_OPTIONS: null
+  SELECT_OPTIONS: null,
+  RANGE_MIN: 0,
+  RANGE_MAX: 100,
+  RANGE_STEP: 5
 };

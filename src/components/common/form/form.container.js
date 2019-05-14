@@ -5,17 +5,17 @@ import { FORM_TYPES, CONTROL_TYPES } from './form.constants';
 
 Form.propTypes = {
   type: PropTypes.oneOf(Object.keys(FORM_TYPES)),
-  modalTitle: PropTypes.string,
   controls: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string.isRequired,
     type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
-    label: PropTypes.string.isRequired,
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
+    label: PropTypes.string,
+    placeholder: PropTypes.string,
     required: PropTypes.bool,
     disabled: PropTypes.bool,
     validFeedback: PropTypes.string,
     invalidFeedback: PropTypes.string,
     validator: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
@@ -26,14 +26,17 @@ Form.propTypes = {
         label: PropTypes.string.isRequired
       })),
       PropTypes.arrayOf(PropTypes.string)
-    ])
-  }))
+    ]),
+    indicator: PropTypes.bool,
+  })).isRequired,
+  modalTitle: PropTypes.string,
+  smallControls: PropTypes.bool
 };
 
 Form.defaultProps = {
   type: FORM_TYPES.MODAL,
   modalTitle: 'Form',
-  controls: []
+  smallControls: false
 };
 
 export default Form;

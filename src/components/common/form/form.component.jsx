@@ -1,10 +1,34 @@
 import React, { Fragment } from 'react';
 import Forma from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import Badge from 'react-bootstrap/Badge';
 
 import { FORM_TYPES, CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
 
 export default class Form extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      ...props.controls.reduce((o, { key, defaultValue }) => ({
+        ...o,
+        [key]: {
+          value: defaultValue,
+          isValid: false,
+          isInvalid: false
+        }
+      }), {})
+    };
+  }
+
+  getExtraControlProps = control => {
+    const { showPlaceholders, smallControls } = this.props;
+
+    return {
+      size: smallControls ? 'sm' : null,
+      placeholder: showPlaceholders ? control.placeholder : null
+    };
+  };
 
   handleChange = (key, value) => this.setState({
     [key]: {
@@ -14,9 +38,7 @@ export default class Form extends React.PureComponent {
     }
   });
 
-  renderLabel = ({ label, required }) => (
-    <Forma.Label className="mb-1 text-muted">{label}{required && ' *'}</Forma.Label>
-  );
+  renderLabel = ({ label, required }) => label ? <Forma.Label className="mb-1 text-muted">{label}{required && ' *'}</Forma.Label> : null;
 
   renderFeedback = ({ validFeedback, invalidFeedback }) => (
     <Fragment>
@@ -34,12 +56,12 @@ export default class Form extends React.PureComponent {
       {this.renderLabel(control)}
       <Forma.Control
         type={control.type}
-        size="sm"
+        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
         isValid={this.state[control.key].isValid}
         isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        autocomplete="off"
+        autoComplete="off"
         disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
         required={control.required || CONTROL_DEFAULTS.REQUIRED}
         min={control.min || CONTROL_DEFAULTS.NUMBER_MIN}
@@ -51,29 +73,29 @@ export default class Form extends React.PureComponent {
   );
 
   renderTextControl = control => (
-    <Form.Group key={control.key} controlId={control.key}>
+    <Forma.Group key={control.key} controlId={control.key}>
       {this.renderLabel(control)}
-      <Form.Control
+      <Forma.Control
         type={control.type}
-        size="sm"
+        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
         isValid={this.state[control.key].isValid}
         isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        autocomplete="off"
+        autoComplete="off"
         disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
         required={control.required || CONTROL_DEFAULTS.REQUIRED}
       />
       {this.renderFeedback(control)}
-    </Form.Group>
+    </Forma.Group>
   );
 
   renderTextareaControl = control => (
-    <Form.Group key={control.key} controlId={control.key}>
+    <Forma.Group key={control.key} controlId={control.key}>
       {this.renderLabel(control)}
-      <Form.Control
-        size="sm"
+      <Forma.Control
         as={control.type}
+        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
         isValid={this.state[control.key].isValid}
         isInvalid={this.state[control.key].isInvalid}
@@ -87,17 +109,17 @@ export default class Form extends React.PureComponent {
             {option.label || option}
           </option>
         ))}
-      </Form.Control>
+      </Forma.Control>
       {this.renderFeedback(control)}
-    </Form.Group>
+    </Forma.Group>
   );
 
   renderSelectControl = control => (
-    <Form.Group key={control.key} controlId={control.key}>
+    <Forma.Group key={control.key} controlId={control.key}>
       {this.renderLabel(control)}
-      <Form.Control
-        size="sm"
+      <Forma.Control
         as={control.type}
+        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
         isValid={this.state[control.key].isValid}
         isInvalid={this.state[control.key].isInvalid}
@@ -110,9 +132,37 @@ export default class Form extends React.PureComponent {
             {option.label || option}
           </option>
         ))}
-      </Form.Control>
+      </Forma.Control>
       {this.renderFeedback(control)}
-    </Form.Group>
+    </Forma.Group>
+  );
+
+  renderRangeControl = control => (
+    <Forma.Group key={control.key} controlId={control.key}>
+      {this.renderLabel(control)}
+      {control.indicator &&
+        <span className="h5">
+          <Badge variant="primary" className="ml-2">
+            {this.state[control.key].value}
+          </Badge>
+        </span>
+      }
+      <Forma.Control
+        type={control.type}
+        size={this.props.smallControls ? 'sm' : null}
+        value={this.state[control.key].value}
+        isValid={this.state[control.key].isValid}
+        isInvalid={this.state[control.key].isInvalid}
+        onChange={e => this.handleChange(control.key, e.target.value)}
+        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
+        required={control.required || CONTROL_DEFAULTS.REQUIRED}
+        min={control.min || CONTROL_DEFAULTS.RANGE_MIN}
+        max={control.max || CONTROL_DEFAULTS.RANGE_MAX}
+        step={control.step || CONTROL_DEFAULTS.RANGE_STEP}
+        className="custom-range shadow-none"
+      />
+      {this.renderFeedback(control)}
+    </Forma.Group>
   );
 
   render() {
@@ -124,6 +174,7 @@ export default class Form extends React.PureComponent {
       if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, this.renderTextareaControl(control)];
       if (control.type === CONTROL_TYPES.NUMBER) return [...acc, this.renderNumberControl(control)];
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, this.renderSelectControl(control)];
+      if (control.type === CONTROL_TYPES.RANGE) return [...acc, this.renderRangeControl(control)];
       return acc;
     }, []);
 
