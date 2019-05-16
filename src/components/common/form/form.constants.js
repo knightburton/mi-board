@@ -1,8 +1,3 @@
-export const FORM_TYPES = {
-  MODAL: 'MODAL',
-  FLAT: 'FLAT'
-};
-
 export const CONTROL_TYPES = {
   PASSWORD: 'password',
   TEXT: 'text',
@@ -20,7 +15,5 @@ export const CONTROL_DEFAULTS = {
   NUMBER_STEP: 1,
   TEXTAREA_ROWS: 3,
   SELECT_OPTIONS: null,
-  RANGE_MIN: 0,
-  RANGE_MAX: 100,
-  RANGE_STEP: 5
+  AUTOCOMPLETE: 'noneAtAll'
 };

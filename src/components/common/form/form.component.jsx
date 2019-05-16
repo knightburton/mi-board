@@ -1,11 +1,26 @@
-import React, { Fragment } from 'react';
-import Forma from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Badge from 'react-bootstrap/Badge';
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
-import { FORM_TYPES, CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
 
-export default class Form extends React.PureComponent {
+import { CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
+
+const styles = theme => ({
+  formControl: {
+    marginBottom: theme.spacing(1.5)
+  },
+  submitButton: {
+    marginTop: theme.spacing(1)
+  }
+});
+
+class Form extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -14,188 +29,199 @@ export default class Form extends React.PureComponent {
         ...o,
         [key]: {
           value: defaultValue,
-          isValid: false,
-          isInvalid: false
+          error: false
         }
       }), {})
     };
   }
 
-  getExtraControlProps = control => {
-    const { showPlaceholders, smallControls } = this.props;
+  isFormValid = () => {
+    const { controls } = this.props;
 
-    return {
-      size: smallControls ? 'sm' : null,
-      placeholder: showPlaceholders ? control.placeholder : null
-    };
+    return controls.every(control => this.isControlValid(control));
   };
 
-  handleChange = (key, value) => this.setState({
-    [key]: {
-      value,
-      isValid: false,
-      isInvalid: false
-    }
-  });
+  isControlValid = ({ key, required, validator }) => {
+    const value = this.state[key].value;
 
-  renderLabel = ({ label, required }) => label ? <Forma.Label className="mb-1 text-muted">{label}{required && ' *'}</Forma.Label> : null;
+    return required
+      ? validator
+        ? !!value && this.validateControl(validator, value)
+        : !!value
+      : validator
+        ? this.validateControl(validator, value)
+        : true
+  };
 
-  renderFeedback = ({ validFeedback, invalidFeedback }) => (
-    <Fragment>
-      {validFeedback &&
-        <Forma.Control.Feedback type="valid">{validFeedback}</Forma.Control.Feedback>
-      }
-      {invalidFeedback &&
-        <Forma.Control.Feedback type="invalid">{invalidFeedback}</Forma.Control.Feedback>
-      }
-    </Fragment>
+  validateControl = (validator, value) => {
+    if (typeof validator === 'function') return validator(value);
+    return validator.test(value);
+  };
+
+  validateForm = () => {
+    const { controls } = this.props;
+
+    controls.forEach(control => {
+      const isControlValid = this.isControlValid(control);
+
+      this.setState(state => ({
+        [control.key]: {
+          ...state[control.key],
+          error: !isControlValid
+        }
+      }));
+    })
+  };
+
+  handleChange = (key, value) => this.setState({ [key]: { value, error: false } });
+
+  handleSubmit = e => {
+    const { submitFunction, controls } = this.props;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isFormValid = this.isFormValid();
+    if (isFormValid) return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.state[key].value }), {}));
+    this.validateForm();
+  };
+
+  renderFormHelperText = ({ key, helperText, errorText }) => (
+    <FormHelperText id={`${key}-helper-text`}>{this.state[key].error ? errorText : helperText}</FormHelperText>
   );
 
   renderNumberControl = control => (
-    <Forma.Group key={control.key} controlId={control.key}>
-      {this.renderLabel(control)}
-      <Forma.Control
+    <FormControl
+      key={control.key}
+      error={this.state[control.key].error}
+      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
+      required={control.required || CONTROL_DEFAULTS.REQUIRED}
+      className={this.props.classes.formControl}
+      fullWidth
+    >
+      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+      <Input
+        id={control.key}
         type={control.type}
-        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
-        isValid={this.state[control.key].isValid}
-        isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        autoComplete="off"
-        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-        required={control.required || CONTROL_DEFAULTS.REQUIRED}
-        min={control.min || CONTROL_DEFAULTS.NUMBER_MIN}
-        max={control.max || CONTROL_DEFAULTS.NUMBER_MAX}
-        step={control.step || CONTROL_DEFAULTS.NUMBER_STEP}
+        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
+        autoFocus={false}
+        inputProps={{
+          min: control.min || CONTROL_DEFAULTS.NUMBER_MIN,
+          max: control.max || CONTROL_DEFAULTS.NUMBER_MAX,
+          step: control.step || CONTROL_DEFAULTS.NUMBER_STEP
+        }}
+        aria-describedby={`${control.key}-helper-text`}
       />
-      {this.renderFeedback(control)}
-    </Forma.Group>
+      {this.renderFormHelperText(control)}
+    </FormControl>
   );
 
   renderTextControl = control => (
-    <Forma.Group key={control.key} controlId={control.key}>
-      {this.renderLabel(control)}
-      <Forma.Control
+    <FormControl
+      key={control.key}
+      error={this.state[control.key].error}
+      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
+      required={control.required || CONTROL_DEFAULTS.REQUIRED}
+      className={this.props.classes.formControl}
+      fullWidth
+    >
+      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+      <Input
+        id={control.key}
         type={control.type}
-        size={this.props.smallControls ? 'sm' : null}
         value={this.state[control.key].value}
-        isValid={this.state[control.key].isValid}
-        isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        autoComplete="off"
-        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-        required={control.required || CONTROL_DEFAULTS.REQUIRED}
+        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
+        autoFocus={false}
+        aria-describedby={`${control.key}-helper-text`}
       />
-      {this.renderFeedback(control)}
-    </Forma.Group>
+      {this.renderFormHelperText(control)}
+    </FormControl>
   );
 
   renderTextareaControl = control => (
-    <Forma.Group key={control.key} controlId={control.key}>
-      {this.renderLabel(control)}
-      <Forma.Control
-        as={control.type}
-        size={this.props.smallControls ? 'sm' : null}
+    <FormControl
+      key={control.key}
+      error={this.state[control.key].error}
+      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
+      required={control.required || CONTROL_DEFAULTS.REQUIRED}
+      className={this.props.classes.formControl}
+      fullWidth
+    >
+      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+      <Input
+        id={control.key}
         value={this.state[control.key].value}
-        isValid={this.state[control.key].isValid}
-        isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-        required={control.required || CONTROL_DEFAULTS.REQUIRED}
+        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
+        autoFocus={false}
+        aria-describedby={`${control.key}-helper-text`}
         rows={control.rows || CONTROL_DEFAULTS.TEXTAREA_ROWS}
-      >
-        {control.options && control.options.map(option => (
-          <option key={option.value || option} value={option.value || option}>
-            {option.label || option}
-          </option>
-        ))}
-      </Forma.Control>
-      {this.renderFeedback(control)}
-    </Forma.Group>
+        multiline
+      />
+      {this.renderFormHelperText(control)}
+    </FormControl>
   );
 
   renderSelectControl = control => (
-    <Forma.Group key={control.key} controlId={control.key}>
-      {this.renderLabel(control)}
-      <Forma.Control
-        as={control.type}
-        size={this.props.smallControls ? 'sm' : null}
+    <FormControl
+      key={control.key}
+      error={this.state[control.key].error}
+      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
+      required={control.required || CONTROL_DEFAULTS.REQUIRED}
+      className={this.props.classes.formControl}
+      fullWidth
+    >
+      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+      <Select
+        id={control.key}
         value={this.state[control.key].value}
-        isValid={this.state[control.key].isValid}
-        isInvalid={this.state[control.key].isInvalid}
         onChange={e => this.handleChange(control.key, e.target.value)}
-        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-        required={control.required || CONTROL_DEFAULTS.REQUIRED}
+        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
+        autoFocus={false}
+        aria-describedby={`${control.key}-helper-text`}
       >
         {control.options && control.options.map(option => (
-          <option key={option.value || option} value={option.value || option}>
+          <MenuItem key={option.value || option} value={option.value || option}>
             {option.label || option}
-          </option>
+          </MenuItem>
         ))}
-      </Forma.Control>
-      {this.renderFeedback(control)}
-    </Forma.Group>
-  );
-
-  renderRangeControl = control => (
-    <Forma.Group key={control.key} controlId={control.key}>
-      {this.renderLabel(control)}
-      {control.indicator &&
-        <span className="h5">
-          <Badge variant="primary" className="ml-2">
-            {this.state[control.key].value}
-          </Badge>
-        </span>
-      }
-      <Forma.Control
-        type={control.type}
-        size={this.props.smallControls ? 'sm' : null}
-        value={this.state[control.key].value}
-        isValid={this.state[control.key].isValid}
-        isInvalid={this.state[control.key].isInvalid}
-        onChange={e => this.handleChange(control.key, e.target.value)}
-        disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-        required={control.required || CONTROL_DEFAULTS.REQUIRED}
-        min={control.min || CONTROL_DEFAULTS.RANGE_MIN}
-        max={control.max || CONTROL_DEFAULTS.RANGE_MAX}
-        step={control.step || CONTROL_DEFAULTS.RANGE_STEP}
-        className="custom-range shadow-none"
-      />
-      {this.renderFeedback(control)}
-    </Forma.Group>
+      </Select>
+      {this.renderFormHelperText(control)}
+    </FormControl>
   );
 
   render() {
-    const { type, modalTitle, controls } = this.props;
+    const { controls, submitLabel, submitFullWith, submitDisabled, submitSize, classes } = this.props;
 
-    const inputs = controls.reduce((acc, control) => {
+    const formControls = controls.reduce((acc, control) => {
       if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, this.renderTextControl(control)];
       if (control.type === CONTROL_TYPES.TEXT) return [...acc, this.renderTextControl(control)];
       if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, this.renderTextareaControl(control)];
       if (control.type === CONTROL_TYPES.NUMBER) return [...acc, this.renderNumberControl(control)];
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, this.renderSelectControl(control)];
-      if (control.type === CONTROL_TYPES.RANGE) return [...acc, this.renderRangeControl(control)];
       return acc;
     }, []);
 
-    return type === FORM_TYPES.MODAL ? (
-      <Modal show={true} size="lg" backdrop="static" backdropClassName="zi-10" className="zi-11" centered>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {modalTitle}
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-
-        </Modal.Body>
-        <Modal.Footer>
-
-        </Modal.Footer>
-      </Modal>
-    ) : (
-      <Forma>
-        {inputs}
-      </Forma>
+    return (
+      <form onSubmit={this.handleSubmit} noValidate>
+        {formControls}
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth={submitFullWith}
+          disabled={submitDisabled}
+          size={submitSize}
+          className={classes.submitButton}
+        >
+          {submitLabel}
+        </Button>
+      </form>
     );
   }
 }
+
+export default withStyles(styles)(Form);
