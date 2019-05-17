@@ -198,7 +198,15 @@ class Form extends React.PureComponent {
   );
 
   render() {
-    const { controls, submitLabel, submitFullWith, submitDisabled, submitSize, classes } = this.props;
+    const {
+      controls,
+      submitLabel,
+      submitFullWith,
+      submitDisabled,
+      submitSize,
+      submitVariant,
+      classes
+    } = this.props;
 
     const formControls = controls.reduce((acc, control) => {
       if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, this.renderTextControl(control)];
@@ -214,7 +222,7 @@ class Form extends React.PureComponent {
         {formControls}
         <Button
           type="submit"
-          variant="contained"
+          variant={submitVariant}
           color="primary"
           fullWidth={submitFullWith}
           disabled={submitDisabled}

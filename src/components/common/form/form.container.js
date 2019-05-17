@@ -31,14 +31,16 @@ Form.propTypes = {
   submitLabel: PropTypes.string,
   submitFullWith: PropTypes.bool,
   submitDisabled: PropTypes.bool,
-  submitSize: PropTypes.oneOf(['small', 'medium', 'large'])
+  submitSize: PropTypes.oneOf(['small', 'medium', 'large']),
+  submitVariant: PropTypes.oneOf(['text', 'outlined', 'contained'])
 };
 
 Form.defaultProps = {
   submitLabel: 'Submit',
   submitFullWith: false,
   submitDisabled: false,
-  submitSize: 'medium'
+  submitSize: 'medium',
+  submitVariant: 'contained'
 };
 
 export default Form;

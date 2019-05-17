@@ -17,6 +17,12 @@ const styles = theme => ({
   grid: {
     height: '100vh'
   },
+  textBold: {
+    fontWeight: 'bold'
+  },
+  textLight: {
+    fontWeight: 'light'
+  },
   avatarWrapper: {
     position: 'relative',
     display: 'flex',
@@ -25,13 +31,13 @@ const styles = theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.light
+    backgroundColor: theme.palette.primary.main
   },
   progressCircle: {
     position: 'absolute',
     top: theme.spacing(.5),
     alignSelf: 'center',
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.light,
     zIndex: 1
   }
 });
@@ -53,7 +59,8 @@ class Login extends React.PureComponent {
               }
             </div>
             <Typography variant="h6" component="h6" align="center" gutterBottom>
-              MI - Board
+              <Typography variant="body1" component="span" className={classes.textBold}>MI-B</Typography>
+              <Typography variant="body1" component="span" className={classes.textLight}>oard</Typography>
             </Typography>
             {error &&
               <Typography variant="body1" component="p" align="center" color="error" gutterBottom>
@@ -86,7 +93,7 @@ class Login extends React.PureComponent {
               submitFunction={credentials => login(credentials)}
               submitLabel="Login"
               submitDisabled={authInProgress}
-              submitFullWith
+              submitVariant="text"
             />
           </Grid>
         </Grid>
