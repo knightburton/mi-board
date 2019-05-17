@@ -5,6 +5,7 @@ import Waiting from './common/waiting/waiting.container';
 
 import Login from './login/login.container';
 import AppBar from './appbar/appbar.container';
+import Drawer from './drawer/drawer.container';
 
 import Dashboard from './dashboard/dashboard.container';
 // import Time from './time/time.container';
@@ -16,7 +17,10 @@ class App extends React.PureComponent {
     return (
       <Fragment>
         {authIsLoaded && !authIsEmpty &&
-          <AppBar />
+          <Fragment>
+            <AppBar />
+            <Drawer />
+          </Fragment>
         }
         <Switch>
           {!authIsLoaded && <Route render={() => <Waiting screen />} />}
