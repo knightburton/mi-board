@@ -1,43 +1,50 @@
 import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { withStyles } from '@material-ui/core/styles';
 
-import Spinner from '../spinner/spinner.container';
+import Grid from '@material-ui/core/Grid';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
+import Dialog from '@material-ui/core/Dialog';
 
-export default class Waiting extends React.PureComponent {
+const styles = theme => ({
+  grid: {
+    minHeight: '100vh'
+  },
+  text: {
+    marginLeft: theme.spacing(4),
+    fontWeight: '300'
+  },
+  spinner: {
+    position: 'absolute',
+    marginTop: theme.spacing(.3)
+  },
+  dialog: {
+    padding: theme.spacing(3, 6)
+  }
+});
+
+class Waiting extends React.PureComponent {
   render() {
-    const { screen, show, label } = this.props;
+    const { screen, open, label, classes } = this.props;
 
     return screen ? (
-      <Container className="vh-100 bg-secondary" fluid>
-        <Row className="h-100">
-          <Col xs={12} className="my-auto text-center">
-            <Row className="justify-content-center">
-              <Col>
-                <Spinner variant="dark" grow />
-                <span className="ml-2 h1 font-weight-light">{label}</span>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+      <Grid spacing={0} direction="column" alignItems="center" justify="center" alignContent="center" className={classes.grid} container>
+        <Grid item>
+          <CircularProgress size={24} className={classes.spinner} />
+          <Typography variant="h5" className={classes.text}>
+            {label}
+          </Typography>
+        </Grid>
+      </Grid>
     ) : (
-      <Modal
-        show={show}
-        size="sm"
-        backdrop="static"
-        className="d-block zi-14"
-        backdropClassName="show zi-13"
-        animation={false}
-        centered
-      >
-        <Modal.Body className="text-center">
-          <Spinner variant="dark" small />
-          <span className="ml-2">{label}</span>
-        </Modal.Body>
-      </Modal>
+      <Dialog open={open} PaperProps={{ className: classes.dialog }} disableBackdropClick disableEscapeKeyDown>
+        <CircularProgress size={24} className={classes.spinner} />
+        <Typography variant="h5" className={classes.text}>
+          {label}
+        </Typography>
+      </Dialog>
     );
   }
 }
+
+export default withStyles(styles)(Waiting);

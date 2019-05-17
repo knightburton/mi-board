@@ -3,13 +3,13 @@ import Waiting from './waiting.component';
 
 Waiting.propTypes = {
   screen: PropTypes.bool,
-  show: PropTypes.bool,
+  open: PropTypes.bool,
   label: PropTypes.string
 };
 
 Waiting.defaultProps = {
   screen: false,
-  show: true,
+  open: true,
   label: 'Loading...'
 };
 
