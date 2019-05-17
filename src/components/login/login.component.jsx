@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from '../common/form/form.container';
 
@@ -13,6 +16,23 @@ const styles = theme => ({
   },
   grid: {
     height: '100vh'
+  },
+  avatarWrapper: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.primary.light
+  },
+  progressCircle: {
+    position: 'absolute',
+    top: theme.spacing(.5),
+    alignSelf: 'center',
+    color: theme.palette.primary.main,
+    zIndex: 1
   }
 });
 
@@ -23,9 +43,17 @@ class Login extends React.PureComponent {
     return (
       <Container component="main" maxWidth="xs" className={classes.container}>
         <Grid spacing={0} direction="row" alignItems="center" justify="center" className={classes.grid} container>
-          <Grid xs={12} item>
+          <Grid xs={12} sm={12} md={10} item>
+            <div className={classes.avatarWrapper}>
+              <Avatar className={classes.avatar}>
+                <LockOutlinedIcon />
+              </Avatar>
+              {authInProgress &&
+                <CircularProgress size={48} className={classes.progressCircle} />
+              }
+            </div>
             <Typography variant="h6" component="h6" align="center" gutterBottom>
-              MI
+              MI - Board
             </Typography>
             {error &&
               <Typography variant="body1" component="p" align="center" color="error" gutterBottom>

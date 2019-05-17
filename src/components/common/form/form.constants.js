@@ -15,5 +15,17 @@ export const CONTROL_DEFAULTS = {
   NUMBER_STEP: 1,
   TEXTAREA_ROWS: 3,
   SELECT_OPTIONS: null,
-  AUTOCOMPLETE: 'noneAtAll'
+  AUTOCOMPLETE: 'nope'
+};
+
+export const VALIDATORS = {
+  REQUIRED: /\S/,
+  ONLY_NUMBER: /^\d+$/,
+  ONLY_ALPHANUMERIC: /^[A-Za-z]+$/
+};
+
+export const VALIDTOR_TEXTS = {
+  REQUIRED: 'This field is required',
+  ONLY_NUMBER: 'This field can only contain numbers',
+  ONLY_ALPHANUMERIC: 'This field can only contain alphanumeric characters'
 };

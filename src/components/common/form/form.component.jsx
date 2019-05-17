@@ -12,6 +12,10 @@ import Button from '@material-ui/core/Button';
 import { CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
 
 const styles = theme => ({
+  form: {
+    padding: theme.spacing(3, 2),
+    textAlign: 'center'
+  },
   formControl: {
     marginBottom: theme.spacing(1.5)
   },
@@ -206,7 +210,7 @@ class Form extends React.PureComponent {
     }, []);
 
     return (
-      <form onSubmit={this.handleSubmit} noValidate>
+      <form onSubmit={this.handleSubmit} className={classes.form} noValidate>
         {formControls}
         <Button
           type="submit"
