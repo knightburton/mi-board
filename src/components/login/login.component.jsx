@@ -9,6 +9,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from '../common/form/form.container';
+import ProjectTitle from '../common/project-title/project-title.component';
 
 const styles = theme => ({
   container: {
@@ -16,12 +17,6 @@ const styles = theme => ({
   },
   grid: {
     height: '100vh'
-  },
-  textBold: {
-    fontWeight: 'bold'
-  },
-  textLight: {
-    fontWeight: 'light'
   },
   avatarWrapper: {
     position: 'relative',
@@ -58,10 +53,7 @@ class Login extends React.PureComponent {
                 <CircularProgress size={48} className={classes.progressCircle} />
               }
             </div>
-            <Typography variant="h6" component="h6" align="center" gutterBottom>
-              <Typography variant="body1" component="span" className={classes.textBold}>MI-B</Typography>
-              <Typography variant="body1" component="span" className={classes.textLight}>oard</Typography>
-            </Typography>
+            <ProjectTitle />
             {error &&
               <Typography variant="body1" component="p" align="center" color="error" gutterBottom>
                 {error}

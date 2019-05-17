@@ -4,7 +4,7 @@ import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Waiting from './common/waiting/waiting.container';
 
 import Login from './login/login.container';
-import Navbar from './navbar/navbar.container';
+import AppBar from './appbar/appbar.container';
 
 import Dashboard from './dashboard/dashboard.container';
 import Time from './time/time.container';
@@ -16,7 +16,7 @@ class App extends React.PureComponent {
     return (
       <Fragment>
         {authIsLoaded && !authIsEmpty &&
-          <Navbar />
+          <AppBar />
         }
         <Switch>
           {!authIsLoaded && <Route render={() => <Waiting screen />} />}
