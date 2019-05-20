@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 import MuiDrawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-// import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
@@ -14,8 +13,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import DashboardIcon from '@material-ui/icons/Dashboard';
-// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
 
 import ProjectTitle from '../common/project-title/project-title.component';
@@ -49,7 +48,7 @@ const styles = theme => ({
     }
   },
   avatar: {
-    margin: theme.spacing(.5, 2, 0, .5)
+    margin: theme.spacing(0, 2, 0, .5)
   },
   toolbar: {
     padding: theme.spacing(0, 1.5),
@@ -63,14 +62,21 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   toggleButton: {
-    borderRadius: 0,
-    width: '100%'
+    margin: theme.spacing(1),
+    padding: theme.spacing(1, 2),
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    cursor: 'pointer',
+    '&:hover': {
+      color: theme.palette.secondary.main
+    }
   }
 });
 
 class Drawer extends React.PureComponent {
   renderDrawerContent = (toggleDrawer, isMobile = false) => {
-    const { classes, /*isDrawerOpened*/ } = this.props;
+    const { classes, isDrawerOpened } = this.props;
 
     return (
       <Fragment>
@@ -94,16 +100,20 @@ class Drawer extends React.PureComponent {
           </ListItem>
         </List>
         <Divider />
-        {/* <Hidden xsDown>
+        <Hidden xsDown>
           <Toolbar className={classes.toggleToolbar}>
-            <Button onClick={() => toggleDrawer()} className={classes.toggleButton}>
+            <div
+              onClick={() => toggleDrawer()}
+              className={classes.toggleButton}
+              aria-label="expand or collapse navigation bar"
+            >
               {!isMobile && isDrawerOpened
                 ? <ChevronLeftIcon />
                 : <ChevronRightIcon />
               }
-            </Button>
+            </div>
           </Toolbar>
-        </Hidden> */}
+        </Hidden>
       </Fragment>
     );
   };
