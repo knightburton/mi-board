@@ -81,7 +81,7 @@ class Drawer extends React.PureComponent {
   };
 
   renderDrawerContent = (toggleDrawer, isMobile = false) => {
-    const { classes, isDrawerOpened } = this.props;
+    const { classes, isDrawerOpened, isMobileDrawerOpened, toggleMobileDrawer } = this.props;
 
     return (
       <Fragment>
@@ -99,6 +99,7 @@ class Drawer extends React.PureComponent {
               component={Link}
               to={item.to}
               selected={this.getIsMenuItemSelected(item)}
+              onClick={() => isMobileDrawerOpened ? toggleMobileDrawer() : null}
               button
             >
               <ListItemIcon className={classes.listItemIcon}>
