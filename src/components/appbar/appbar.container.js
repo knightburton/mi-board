@@ -1,7 +1,7 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { logout } from '../../store/user';
-import { getIsDrawerOpened, toggleDrawer } from '../../store/app';
+import { getIsDrawerOpened, toggleMobileDrawer } from '../../store/app';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
 import AppBar from './appbar.component';
 
@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
   logout: () => dispatch(logout(firebase)),
-  toggleDrawer: () => dispatch(toggleDrawer())
+  toggleMobileDrawer: () => dispatch(toggleMobileDrawer())
 });
 
 export default compose(

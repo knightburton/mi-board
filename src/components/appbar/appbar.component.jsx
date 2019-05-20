@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import MuiAppBar from '@material-ui/core/AppBar';
+import Hidden from '@material-ui/core/Hidden';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -16,31 +17,31 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import ProjectTitle from '../common/project-title/project-title.component';
-
 import { DRAWER_WIDTH } from '../../constants';
 
 const styles = theme => ({
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${theme.spacing(9) + 1}px)`,
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    }
   },
   appBarShift: {
-    marginLeft: DRAWER_WIDTH,
-    width: `calc(100% - ${DRAWER_WIDTH}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: DRAWER_WIDTH,
+      width: `calc(100% - ${DRAWER_WIDTH}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    }
   },
   menuButton: {
     marginRight: 36,
-  },
-  hide: {
-    display: 'none',
   },
   grow: {
     flexGrow: 1
@@ -99,24 +100,25 @@ class AppBar extends React.PureComponent {
   };
 
   render() {
-    const { isDrawerOpened, toggleDrawer, classes } = this.props;
+    const { isDrawerOpened, toggleMobileDrawer, classes } = this.props;
     const { accountMenu } = this.state;
 
     const appBarClasses = clsx(classes.appBar, { [classes.appBarShift]: isDrawerOpened });
-    const iconButtonClasses = clsx(classes.menuButton, { [classes.hide]: isDrawerOpened });
 
     return (
       <MuiAppBar position="fixed" className={appBarClasses}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            edge="start"
-            onClick={() => toggleDrawer()} className={iconButtonClasses}
-          >
-            <MenuIcon />
-          </IconButton>
-          <ProjectTitle />
+          <Hidden smUp>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              edge="start"
+              onClick={() => toggleMobileDrawer()}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
           <div className={classes.grow} />
           <IconButton
             edge="end"

@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
 import MuiDrawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+// import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
+import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+// import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+// import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
+
+import ProjectTitle from '../common/project-title/project-title.component';
 
 import { DRAWER_WIDTH } from '../../constants';
 
 const styles = theme => ({
   drawer: {
-    width: DRAWER_WIDTH,
+    [theme.breakpoints.up('sm')]: {
+      width: DRAWER_WIDTH
+    },
+    width: 0,
     flexShrink: 0,
     whiteSpace: 'nowrap',
   },
@@ -24,51 +39,121 @@ const styles = theme => ({
     }),
   },
   drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(9) + 1
+    }
+  },
+  avatar: {
+    margin: theme.spacing(.5, 2, 0, .5)
   },
   toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
+    padding: theme.spacing(0, 1.5),
+    ...theme.mixins.toolbar
+  },
+  listItemIcon: {
+    paddingLeft: theme.spacing(1)
+  },
+  toggleToolbar: {
+    padding: 0,
     ...theme.mixins.toolbar,
   },
+  toggleButton: {
+    borderRadius: 0,
+    width: '100%'
+  }
 });
 
 class Drawer extends React.PureComponent {
-  render() {
-    const { isDrawerOpened, toggleDrawer, classes } = this.props;
+  renderDrawerContent = (toggleDrawer, isMobile = false) => {
+    const { classes, /*isDrawerOpened*/ } = this.props;
 
     return (
-      <MuiDrawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: isDrawerOpened,
-          [classes.drawerClose]: !isDrawerOpened,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: isDrawerOpened,
-            [classes.drawerClose]: !isDrawerOpened,
-          }),
-        }}
-        open={isDrawerOpened}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={() => toggleDrawer()}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
+      <Fragment>
+        <Toolbar className={classes.toolbar}>
+          <Avatar className={classes.avatar}>MI</Avatar>
+          <ProjectTitle />
+        </Toolbar>
         <Divider />
-      </MuiDrawer>
+        <List>
+          <ListItem button>
+            <ListItemIcon className={classes.listItemIcon}>
+              <DashboardIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon className={classes.listItemIcon}>
+              <WatchLaterIcon />
+            </ListItemIcon>
+            <ListItemText primary="Time" />
+          </ListItem>
+        </List>
+        <Divider />
+        {/* <Hidden xsDown>
+          <Toolbar className={classes.toggleToolbar}>
+            <Button onClick={() => toggleDrawer()} className={classes.toggleButton}>
+              {!isMobile && isDrawerOpened
+                ? <ChevronLeftIcon />
+                : <ChevronRightIcon />
+              }
+            </Button>
+          </Toolbar>
+        </Hidden> */}
+      </Fragment>
+    );
+  };
+
+  render() {
+    const {
+      isDrawerOpened,
+      isMobileDrawerOpened,
+      toggleDrawer,
+      toggleMobileDrawer,
+      classes
+    } = this.props;
+
+    return (
+      <Fragment>
+        <Hidden xsDown>
+          <MuiDrawer
+            variant="permanent"
+            className={clsx(classes.drawer, {
+              [classes.drawerOpen]: isDrawerOpened,
+              [classes.drawerClose]: !isDrawerOpened,
+            })}
+            classes={{
+              paper: clsx({
+                [classes.drawerOpen]: isDrawerOpened,
+                [classes.drawerClose]: !isDrawerOpened,
+              }),
+            }}
+            open={isDrawerOpened}
+          >
+            {this.renderDrawerContent(toggleDrawer)}
+          </MuiDrawer>
+        </Hidden>
+        <Hidden smUp>
+          <MuiDrawer
+            variant="temporary"
+            className={clsx(classes.drawer, classes.drawerOpen)}
+            classes={{
+              paper: classes.drawerOpen,
+            }}
+            open={isMobileDrawerOpened}
+            onClose={() => toggleMobileDrawer()}
+            ModalProps={{
+              keepMounted: true
+            }}
+          >
+            {this.renderDrawerContent(toggleMobileDrawer, true)}
+          </MuiDrawer>
+        </Hidden>
+      </Fragment>
     );
   }
 }

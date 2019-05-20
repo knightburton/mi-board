@@ -1,13 +1,20 @@
 import { connect } from 'react-redux';
-import { getIsDrawerOpened, toggleDrawer } from '../../store/app';
+import {
+  getIsDrawerOpened,
+  getIsMobileDrawerOpened,
+  toggleDrawer,
+  toggleMobileDrawer
+} from '../../store/app';
 import Drawer from './drawer.component';
 
 const mapStateToProps = state => ({
-  isDrawerOpened: getIsDrawerOpened(state)
+  isDrawerOpened: getIsDrawerOpened(state),
+  isMobileDrawerOpened: getIsMobileDrawerOpened(state)
 });
 
 const mapDispatchToProps = {
-  toggleDrawer
+  toggleDrawer,
+  toggleMobileDrawer
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drawer);
