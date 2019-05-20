@@ -17,7 +17,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { DRAWER_WIDTH } from '../../constants';
+import { DRAWER_WIDTH } from '../drawer/drawer.constants';
 
 const styles = theme => ({
   appBar: {

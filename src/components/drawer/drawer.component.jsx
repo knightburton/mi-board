@@ -1,25 +1,24 @@
 import React, { Fragment } from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter, Link } from 'react-router-dom';
 
 import MuiDrawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import Avatar from '@material-ui/core/Avatar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import DashboardIcon from '@material-ui/icons/Dashboard';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import WatchLaterIcon from '@material-ui/icons/WatchLaterOutlined';
 
 import ProjectTitle from '../common/project-title/project-title.component';
 
-import { DRAWER_WIDTH } from '../../constants';
+import { DRAWER_WIDTH, DRAWER_MENU } from './drawer.constants';
 
 const styles = theme => ({
   drawer: {
@@ -75,30 +74,40 @@ const styles = theme => ({
 });
 
 class Drawer extends React.PureComponent {
+  getIsMenuItemSelected = ({ to, exact }) => {
+    const { location: { pathname } } = this.props;
+
+    return exact ? to === pathname : pathname.includes(to)
+  };
+
   renderDrawerContent = (toggleDrawer, isMobile = false) => {
     const { classes, isDrawerOpened } = this.props;
 
     return (
       <Fragment>
         <Toolbar className={classes.toolbar}>
-          <Avatar className={classes.avatar}>MI</Avatar>
+          <Avatar className={classes.avatar}>
+            MI
+          </Avatar>
           <ProjectTitle />
         </Toolbar>
         <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon className={classes.listItemIcon}>
-              <DashboardIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon className={classes.listItemIcon}>
-              <WatchLaterIcon />
-            </ListItemIcon>
-            <ListItemText primary="Time" />
-          </ListItem>
-        </List>
+        <MenuList>
+          {DRAWER_MENU.map(item => (
+            <MenuItem
+              key={item.key}
+              component={Link}
+              to={item.to}
+              selected={this.getIsMenuItemSelected(item)}
+              button
+            >
+              <ListItemIcon className={classes.listItemIcon}>
+                <item.icon />
+              </ListItemIcon>
+              <ListItemText primary={item.text} />
+            </MenuItem>
+          ))}
+        </MenuList>
         <Divider />
         <Hidden xsDown>
           <Toolbar className={classes.toggleToolbar}>
@@ -168,4 +177,4 @@ class Drawer extends React.PureComponent {
   }
 }
 
-export default withStyles(styles)(Drawer);
+export default withRouter(withStyles(styles)(Drawer));

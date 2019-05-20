@@ -8,7 +8,7 @@ import AppBar from './appbar/appbar.container';
 import Drawer from './drawer/drawer.container';
 
 import Dashboard from './dashboard/dashboard.container';
-// import Time from './time/time.container';
+import Time from './time/time.container';
 
 class App extends React.PureComponent {
   render() {
@@ -25,9 +25,9 @@ class App extends React.PureComponent {
         <Switch>
           {!authIsLoaded && <Route render={() => <Waiting screen />} />}
           {authIsEmpty && <Route component={Login} />}
-          <Route exact path="/" component={Dashboard} />
-          {/* <Route path="/time" component={Time} /> */}
-          <Redirect to="/" />
+          <Route exact path="/dashboard" component={Dashboard} />
+          <Route path="/time" component={Time} />
+          <Redirect to="/dashboard" />
         </Switch>
       </Fragment>
     );
