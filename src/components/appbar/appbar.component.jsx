@@ -22,6 +22,7 @@ import { DRAWER_WIDTH } from '../drawer/drawer.constants';
 const styles = theme => ({
   appBar: {
     [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(9) + 1,
       width: `calc(100% - ${theme.spacing(9) + 1}px)`,
       zIndex: theme.zIndex.drawer + 1,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -106,7 +107,7 @@ class AppBar extends React.PureComponent {
     const appBarClasses = clsx(classes.appBar, { [classes.appBarShift]: isDrawerOpened });
 
     return (
-      <MuiAppBar position="fixed" className={appBarClasses}>
+      <MuiAppBar position="sticky" className={appBarClasses}>
         <Toolbar>
           <Hidden smUp>
             <IconButton
