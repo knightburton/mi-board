@@ -27,20 +27,20 @@ const styles = theme => ({
     },
     width: 0,
     flexShrink: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   drawerOpen: {
     width: DRAWER_WIDTH,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     }),
   },
   drawerClose: {
     [theme.breakpoints.up('sm')]: {
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
+        duration: theme.transitions.duration.leavingScreen
       }),
       overflowX: 'hidden',
       width: theme.spacing(9) + 1
@@ -58,7 +58,7 @@ const styles = theme => ({
   },
   toggleToolbar: {
     padding: 0,
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
   toggleButton: {
     margin: theme.spacing(1),

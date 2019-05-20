@@ -11,26 +11,22 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing(3)
   },
-  contentLeaving: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    })
-  },
-  contentEntering: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    })
-  },
   contentFull: {
     marginLeft: 0
   },
   contentCollapse: {
-    marginLeft: DRAWER_WIDTH
+    marginLeft: DRAWER_WIDTH,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
   },
   contentExpand: {
-    marginLeft: theme.spacing(9) + 1
+    marginLeft: theme.spacing(9) + 1,
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen
+    })
   }
 });
 
@@ -42,8 +38,6 @@ class Wrapper extends React.PureComponent {
       <Fragment>
         <Hidden xsDown>
           <main className={clsx(classes.content, {
-            [classes.contentLeaving]: isDrawerOpened,
-            [classes.contentEntering]: !isDrawerOpened,
             [classes.contentCollapse]: isDrawerOpened,
             [classes.contentExpand]: !isDrawerOpened
           })}>
