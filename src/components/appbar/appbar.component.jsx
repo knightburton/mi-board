@@ -28,7 +28,8 @@ const styles = theme => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       })
-    }
+    },
+    boxShadow: 'none'
   },
   appBarShift: {
     [theme.breakpoints.up('sm')]: {

@@ -9,7 +9,7 @@ import { DRAWER_WIDTH } from '../drawer/drawer.constants';
 const styles = theme => ({
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    // padding: theme.spacing(3)
   },
   contentFull: {
     marginLeft: 0

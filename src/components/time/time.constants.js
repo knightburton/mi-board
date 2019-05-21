@@ -1,7 +1,7 @@
-export const tools = [
+export const TOOLS = [
   {
-    id: 'interval-timer',
-    title: 'Interval Timer',
+    key: 'interval-timer',
+    label: 'Interval Timer',
     icon: 'wave-square',
     link: '/time/interval',
     text: `
@@ -9,8 +9,8 @@ export const tools = [
       and subsequent logic states that appear after a predetermined delay.
     `
   }, {
-    id: 'countdown-timer',
-    title: 'Countdown Timer',
+    key: 'countdown-timer',
+    label: 'Countdown Timer',
     icon: 'clock',
     link: '/time/countdown',
     text: `
@@ -18,8 +18,8 @@ export const tools = [
       or date to indicate the beginning or end of an event or offer.
     `
   }, {
-    id: 'stopwatch-timer',
-    title: 'Stopwatch Timer',
+    key: 'stopwatch-timer',
+    label: 'Stopwatch Timer',
     icon: 'stopwatch',
     link: '/time/stopwatch',
     text: `
