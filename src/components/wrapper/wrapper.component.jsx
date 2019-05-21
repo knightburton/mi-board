@@ -8,8 +8,10 @@ import { DRAWER_WIDTH } from '../drawer/drawer.constants';
 
 const styles = theme => ({
   content: {
+    display: 'flex',
+    flexDirection: 'column',
     flexGrow: 1,
-    // padding: theme.spacing(3)
+    padding: theme.spacing(3)
   },
   contentFull: {
     marginLeft: 0
@@ -24,7 +26,7 @@ const styles = theme => ({
   contentExpand: {
     marginLeft: theme.spacing(9) + 1,
     transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
+      easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
   }
