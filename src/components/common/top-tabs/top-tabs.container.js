@@ -4,8 +4,10 @@ import TopTabs from './top-tabs.component';
 TopTabs.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string,
-    label: PropTypes.string
-  })).isRequired
+    label: PropTypes.string,
+    to: PropTypes.string
+  })).isRequired,
+  selectedByDefault: PropTypes.string.isRequired
 };
 
 TopTabs.defaultProps = {};

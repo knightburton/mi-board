@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -7,7 +8,8 @@ import Tab from '@material-ui/core/Tab';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText
+    color: theme.palette.primary.contrastText,
+    padding: theme.spacing(0, 1)
   },
   tab: {
     minWidth: '80px',
@@ -17,9 +19,17 @@ const styles = theme => ({
 });
 
 class TopTabs extends React.Component {
-  state = {
-    selected: 0
-  };
+  constructor(props) {
+    super(props);
+
+    const { items, selectedByDefault } = props;
+
+    this.state = {
+      selected: items.map(({ to }) => to).includes(selectedByDefault)
+        ? selectedByDefault
+        : items[0].to
+    };
+  }
 
   handleChange = selected => this.setState({ selected });
 
@@ -28,9 +38,21 @@ class TopTabs extends React.Component {
     const { selected } = this.state;
 
     return (
-      <Tabs value={selected} onChange={(e, value) => this.handleChange(value)} className={classes.root}>
+      <Tabs
+        value={selected}
+        onChange={(e, value) => this.handleChange(value)}
+        className={classes.root}
+      >
         {items.map(item => (
-          <Tab key={item.key} label={item.label} className={classes.tab} />
+          <Tab
+            key={item.key}
+            value={item.to}
+            label={item.label}
+            className={classes.tab}
+            component={Link}
+            to={item.to}
+            disableRipple
+          />
         ))}
       </Tabs>
     );
