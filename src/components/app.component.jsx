@@ -16,27 +16,23 @@ class App extends React.PureComponent {
     const { authIsLoaded, authIsEmpty } = this.props;
 
     return (
-      <Fragment>
-        {authIsLoaded && !authIsEmpty &&
+      <Switch>
+        {!authIsLoaded && <Route render={() => <Waiting screen />} />}
+        {authIsEmpty && <Route component={Login} />}
+        <Route render={() => (
           <Fragment>
-            <AppBar />
             <Drawer />
-          </Fragment>
-        }
-        <Switch>
-          {!authIsLoaded && <Route render={() => <Waiting screen />} />}
-          {authIsEmpty && <Route component={Login} />}
-          <Route render={() => (
             <Wrapper>
+              <AppBar />
               <Switch>
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route path="/time" component={Time} />
                 <Redirect to="/dashboard" />
               </Switch>
             </Wrapper>
-          )} />
-        </Switch>
-      </Fragment>
+          </Fragment>
+        )} />
+      </Switch>
     );
   }
 }

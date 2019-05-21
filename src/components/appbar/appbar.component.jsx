@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -17,32 +16,12 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import { DRAWER_WIDTH } from '../drawer/drawer.constants';
-
 const styles = theme => ({
   appBar: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(9) + 1,
-      width: `calc(100% - ${theme.spacing(9) + 1}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      })
-    },
     boxShadow: 'none'
   },
-  appBarShift: {
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: DRAWER_WIDTH,
-      width: `calc(100% - ${DRAWER_WIDTH}px)`,
-      transition: theme.transitions.create(['width', 'margin'], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen
-      })
-    }
-  },
   menuButton: {
-    marginRight: 36,
+    marginRight: theme.spacing(4),
   },
   grow: {
     flexGrow: 1
@@ -101,13 +80,11 @@ class AppBar extends React.PureComponent {
   };
 
   render() {
-    const { isDrawerOpened, toggleMobileDrawer, classes } = this.props;
+    const { toggleMobileDrawer, classes } = this.props;
     const { accountMenu } = this.state;
 
-    const appBarClasses = clsx(classes.appBar, { [classes.appBarShift]: isDrawerOpened });
-
     return (
-      <MuiAppBar position="sticky" className={appBarClasses}>
+      <MuiAppBar position="sticky" className={classes.appBar}>
         <Toolbar>
           <Hidden smUp>
             <IconButton

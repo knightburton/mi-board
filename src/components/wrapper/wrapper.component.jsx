@@ -10,8 +10,7 @@ const styles = theme => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
-    padding: theme.spacing(3)
+    flexGrow: 1
   },
   contentFull: {
     marginLeft: 0

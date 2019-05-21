@@ -9,8 +9,7 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
-    padding: theme.spacing(0, 1),
-    margin: theme.spacing(-3, -3, 3)
+    padding: theme.spacing(0, 1)
   },
   tab: {
     minWidth: '80px',
