@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import CheckIcon from '@material-ui/icons/Check';
+
 import Form from './form.component';
 
 import { CONTROL_TYPES } from './form.constants';
@@ -13,8 +15,8 @@ Form.propTypes = {
     disabled: PropTypes.bool,
     autocomplete: PropTypes.string,
     helperText: PropTypes.string,
-    errorText: PropTypes.string,
-    validator: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    errorTexts: PropTypes.arrayOf(PropTypes.string),
+    validators: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.func])),
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
@@ -27,6 +29,9 @@ Form.propTypes = {
       PropTypes.arrayOf(PropTypes.string)
     ])
   })).isRequired,
+  submitFloating: PropTypes.bool,
+  submitFloatingClasses: PropTypes.string,
+  submitFloatingIcon: PropTypes.object,
   submitFunction: PropTypes.func.isRequired,
   submitLabel: PropTypes.string,
   submitFullWith: PropTypes.bool,
@@ -36,6 +41,9 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
+  submitFloating: false,
+  submitFloatingClasses: '',
+  submitFloatingIcon: CheckIcon,
   submitLabel: 'Submit',
   submitFullWith: false,
   submitDisabled: false,

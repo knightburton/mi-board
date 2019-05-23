@@ -3,8 +3,7 @@ export const CONTROL_TYPES = {
   TEXT: 'text',
   TEXTAREA: 'textarea',
   NUMBER: 'number',
-  SELECT: 'select',
-  RANGE: 'range',
+  SELECT: 'select'
 };
 
 export const CONTROL_DEFAULTS = {
@@ -21,11 +20,17 @@ export const CONTROL_DEFAULTS = {
 export const VALIDATORS = {
   REQUIRED: /\S/,
   ONLY_NUMBER: /^\d+$/,
-  ONLY_ALPHANUMERIC: /^[A-Za-z]+$/
+  ONLY_ALPHANUMERIC: /^[A-Za-z]+$/,
+  NUMBER_MIN: min => value => value >= min,
+  NUMBER_MAX: max => value => value <= max,
+  NUMBER_BETWEEN: (min, max) => value => value >= min && value <= max,
 };
 
-export const VALIDTOR_TEXTS = {
+export const ERROR_TEXTS = {
   REQUIRED: 'This field is required',
   ONLY_NUMBER: 'This field can only contain numbers',
-  ONLY_ALPHANUMERIC: 'This field can only contain alphanumeric characters'
+  ONLY_ALPHANUMERIC: 'This field can only contain alphanumeric characters',
+  NUMBER_MIN: min => `This field must be greater or qeual than ${min}`,
+  NUMBER_MAX: max => `This field must be smaller or qeual than ${max}`,
+  NUMBER_BETWEEN: (min, max) => `This field must be between ${min} and ${max}`
 };

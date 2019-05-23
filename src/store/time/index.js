@@ -15,9 +15,11 @@ export const intialState = {
   clock: 0,
   intervalID: null,
   interval: {
-    work: 0,
-    rest: 0,
-    repeat: 0
+    repeat: 0,
+    warmup: 0,
+    high: 0,
+    low: 0,
+    cooldown: 0
   },
   countdown: {
     time: 0
@@ -74,7 +76,7 @@ export const decreaseTimer = createAction(
 
 export const setIntervalParams = createAction(
   SET_INTERVAL_PARAMS,
-  (work, rest, repeat) => ({ work, rest, repeat })
+  (repeat, warmup, hight, low, cooldown) => ({ repeat, warmup, hight, low, cooldown })
 );
 export const resetIntervalParams = createAction(
   RESET_INTERVAL_PARAMS
@@ -114,9 +116,11 @@ export const getClock = state => state.time.clock;
 export const getIntervalID = state => state.time.intervalID;
 
 export const getIntervalParams = state => state.time.interval;
-export const getIntervalWork = state => state.time.interval.work;
-export const getIntervalRest = state => state.time.interval.rest;
 export const getIntervalRepeat = state => state.time.interval.repeat;
+export const getIntervalWarmup = state => state.time.interval.warmup;
+export const getIntervalHight = state => state.time.interval.high;
+export const getIntervalLow = state => state.time.interval.low;
+export const getIntervalCooldown = state => state.time.interval.cooldown;
 
 export const getCountdownTime = state => state.time.countdown.time;
 
@@ -136,7 +140,7 @@ export const reducer = handleActions(
     [increaseTimer]: state => ({ ...state, clock: state.clock === MAX_CLOCK_VALUE ? state.clock : ++state.clock }),
     [decreaseTimer]: state => ({ ...state, clock: state.clock === MIN_CLOCK_VALUE ? state.clock : --state.clock }),
 
-    [setIntervalParams]: (state, { payload: { work, rest, repeat } }) => ({ ...state, interval: { work, rest, repeat } }),
+    [setIntervalParams]: (state, { payload: { repeat, warmup, hight, low, cooldown } }) => ({ ...state, interval: { repeat, warmup, hight, low, cooldown } }),
     [resetIntervalParams]: state => ({ ...state, interval: intialState.interval }),
 
     [setCountdownTime]: (state, { payload: time }) => ({ ...state, countdown: { time } }),

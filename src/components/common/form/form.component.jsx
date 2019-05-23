@@ -8,11 +8,13 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 
 import { CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
 
 const styles = theme => ({
   form: {
+    position: 'relative',
     padding: theme.spacing(3, 2),
     textAlign: 'center'
   },
@@ -200,6 +202,9 @@ class Form extends React.PureComponent {
   render() {
     const {
       controls,
+      submitFloating,
+      submitFloatingClasses,
+      submitFloatingIcon: SubmitFloatingIcon,
       submitLabel,
       submitFullWith,
       submitDisabled,
@@ -220,17 +225,31 @@ class Form extends React.PureComponent {
     return (
       <form onSubmit={this.handleSubmit} className={classes.form} noValidate>
         {formControls}
-        <Button
-          type="submit"
-          variant={submitVariant}
-          color="primary"
-          fullWidth={submitFullWith}
-          disabled={submitDisabled}
-          size={submitSize}
-          className={classes.submitButton}
-        >
-          {submitLabel}
-        </Button>
+        {submitFloating ? (
+          <Fab
+            type="submit"
+            color="secondary"
+            disabled={submitDisabled}
+            aria-label={submitLabel}
+            size={submitSize}
+            className={submitFloatingClasses}
+          >
+            <SubmitFloatingIcon />
+          </Fab>
+        ) : (
+          <Button
+            type="submit"
+            variant={submitVariant}
+            color="secondary"
+            fullWidth={submitFullWith}
+            disabled={submitDisabled}
+            size={submitSize}
+            aria-label={submitLabel}
+            className={classes.submitButton}
+          >
+            {submitLabel}
+          </Button>
+        )}
       </form>
     );
   }
