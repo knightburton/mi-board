@@ -116,7 +116,7 @@ class Interval extends React.PureComponent {
             submitFloating
           />
           <Fab
-            color="primary"
+            color="default"
             size="small"
             className={classes.secondaryButton}
           >

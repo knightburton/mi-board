@@ -5,11 +5,12 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Form from '../common/form/form.container';
 import ProjectTitle from '../common/project-title/project-title.component';
+
+import Logo from '../../assets/images/icon.png';
 
 const styles = theme => ({
   container: {
@@ -25,12 +26,11 @@ const styles = theme => ({
     alignItems: 'center'
   },
   avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.primary.main
+    margin: theme.spacing(1)
   },
   progressCircle: {
     position: 'absolute',
-    top: theme.spacing(.5),
+    top: theme.spacing(.25),
     alignSelf: 'center',
     color: theme.palette.primary.light,
     zIndex: 1
@@ -46,11 +46,9 @@ class Login extends React.PureComponent {
         <Grid spacing={0} direction="row" alignItems="center" justify="center" className={classes.grid} container>
           <Grid xs={12} sm={12} md={10} item>
             <div className={classes.avatarWrapper}>
-              <Avatar className={classes.avatar}>
-                <LockOutlinedIcon />
-              </Avatar>
+              <Avatar className={classes.avatar} src={Logo} />
               {authInProgress &&
-                <CircularProgress size={48} className={classes.progressCircle} />
+                <CircularProgress size={52} className={classes.progressCircle} />
               }
             </div>
             <ProjectTitle />

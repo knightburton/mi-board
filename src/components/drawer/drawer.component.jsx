@@ -18,6 +18,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import ProjectTitle from '../common/project-title/project-title.component';
 
+import Logo from '../../assets/images/icon.png';
+
 import { DRAWER_WIDTH, DRAWER_MENU } from './drawer.constants';
 
 const styles = theme => ({
@@ -86,9 +88,7 @@ class Drawer extends React.PureComponent {
     return (
       <Fragment>
         <Toolbar className={classes.toolbar}>
-          <Avatar className={classes.avatar}>
-            MI
-          </Avatar>
+          <Avatar className={classes.avatar} src={Logo} alt="Project Logo" />
           <ProjectTitle />
         </Toolbar>
         <Divider />
