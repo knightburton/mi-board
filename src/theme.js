@@ -1,15 +1,22 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import deepOrange from '@material-ui/core/colors/deepOrange';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#8f8f8f',
-      main: '#747474',
-      dark: '#515151',
+      light: '#fbaf37',
+      main: '#fb9b05',
+      dark: '#af6c03',
       contrastText: '#fff'
     },
-    secondary: deepOrange,
+    secondary: {
+      light: '#aaabab',
+      main: '#959697',
+      dark: '#686969',
+      contrastText: '#fff'
+    },
+    background: {
+      default: '#eceff1'
+    }
   },
 });
 

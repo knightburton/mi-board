@@ -210,6 +210,7 @@ class Form extends React.PureComponent {
       submitDisabled,
       submitSize,
       submitVariant,
+      submitColor,
       classes
     } = this.props;
 
@@ -228,7 +229,7 @@ class Form extends React.PureComponent {
         {submitFloating ? (
           <Fab
             type="submit"
-            color="secondary"
+            color={submitColor}
             disabled={submitDisabled}
             aria-label={submitLabel}
             size={submitSize}
@@ -240,7 +241,7 @@ class Form extends React.PureComponent {
           <Button
             type="submit"
             variant={submitVariant}
-            color="secondary"
+            color={submitColor}
             fullWidth={submitFullWith}
             disabled={submitDisabled}
             size={submitSize}

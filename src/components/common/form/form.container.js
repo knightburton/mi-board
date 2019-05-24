@@ -37,7 +37,8 @@ Form.propTypes = {
   submitFullWith: PropTypes.bool,
   submitDisabled: PropTypes.bool,
   submitSize: PropTypes.oneOf(['small', 'medium', 'large']),
-  submitVariant: PropTypes.oneOf(['text', 'outlined', 'contained'])
+  submitVariant: PropTypes.oneOf(['text', 'outlined', 'contained']),
+  submitColor: PropTypes.oneOf(['primary', 'secondary'])
 };
 
 Form.defaultProps = {
@@ -48,7 +49,8 @@ Form.defaultProps = {
   submitFullWith: false,
   submitDisabled: false,
   submitSize: 'medium',
-  submitVariant: 'contained'
+  submitVariant: 'contained',
+  submitColor: 'primary'
 };
 
 export default Form;

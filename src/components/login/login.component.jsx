@@ -32,7 +32,7 @@ const styles = theme => ({
     position: 'absolute',
     top: theme.spacing(.25),
     alignSelf: 'center',
-    color: theme.palette.primary.light,
+    color: theme.palette.primary.main,
     zIndex: 1
   }
 });
@@ -48,7 +48,7 @@ class Login extends React.PureComponent {
             <div className={classes.avatarWrapper}>
               <Avatar className={classes.avatar} src={Logo} />
               {authInProgress &&
-                <CircularProgress size={52} className={classes.progressCircle} />
+                <CircularProgress size={52} thickness={1.8} className={classes.progressCircle} />
               }
             </div>
             <ProjectTitle />

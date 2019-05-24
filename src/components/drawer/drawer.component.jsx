@@ -55,8 +55,19 @@ const styles = theme => ({
     padding: theme.spacing(0, 1.5),
     ...theme.mixins.toolbar
   },
+  list: {
+    padding: theme.spacing(3, 0)
+  },
+  listItem: {
+    paddingTop: 0,
+    paddingBottom: 0,
+    minHeight: theme.spacing(2)
+  },
   listItemIcon: {
     paddingLeft: theme.spacing(1)
+  },
+  listItemText: {
+    fontWeight: 'bold'
   },
   toggleToolbar: {
     padding: 0,
@@ -71,6 +82,17 @@ const styles = theme => ({
     cursor: 'pointer',
     '&:hover': {
       color: theme.palette.secondary.main
+    }
+  },
+  selected: {
+    '&.Mui-selected': {
+      backgroundColor: 'transparent',
+      '&:hover': {
+        backgroundColor: theme.palette.action.hover
+      }
+    },
+    '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+      color: theme.palette.primary.main
     }
   }
 });
@@ -92,7 +114,7 @@ class Drawer extends React.PureComponent {
           <ProjectTitle />
         </Toolbar>
         <Divider />
-        <MenuList>
+        <MenuList className={classes.list}>
           {DRAWER_MENU.map(item => (
             <MenuItem
               key={item.key}
@@ -100,12 +122,14 @@ class Drawer extends React.PureComponent {
               to={item.to}
               selected={this.getIsMenuItemSelected(item)}
               onClick={() => isMobileDrawerOpened ? toggleMobileDrawer() : null}
-              button
+              classes={{ selected: classes.selected }}
+              className={classes.listItem}
+              disableRipple
             >
               <ListItemIcon className={classes.listItemIcon}>
                 <item.icon />
               </ListItemIcon>
-              <ListItemText primary={item.text} />
+              <ListItemText primary={item.text} classes={{ primary: classes.listItemText }} />
             </MenuItem>
           ))}
         </MenuList>
