@@ -134,7 +134,7 @@ class Drawer extends React.PureComponent {
           ))}
         </MenuList>
         <Divider />
-        <Hidden xsDown>
+        <Hidden smDown>
           <Toolbar className={classes.toggleToolbar}>
             <div
               onClick={() => toggleDrawer()}
@@ -163,7 +163,7 @@ class Drawer extends React.PureComponent {
 
     return (
       <Fragment>
-        <Hidden xsDown>
+        <Hidden smDown>
           <MuiDrawer
             variant="permanent"
             className={clsx(classes.drawer, {
@@ -181,7 +181,7 @@ class Drawer extends React.PureComponent {
             {this.renderDrawerContent(toggleDrawer)}
           </MuiDrawer>
         </Hidden>
-        <Hidden smUp>
+        <Hidden mdUp>
           <MuiDrawer
             variant="temporary"
             className={clsx(classes.drawer, classes.drawerOpen)}

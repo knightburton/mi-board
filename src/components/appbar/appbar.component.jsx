@@ -86,7 +86,7 @@ class AppBar extends React.PureComponent {
     return (
       <MuiAppBar position="sticky" className={classes.appBar}>
         <Toolbar>
-          <Hidden smUp>
+          <Hidden mdUp>
             <IconButton
               color="inherit"
               aria-label="Open drawer"

@@ -37,7 +37,7 @@ class Wrapper extends React.PureComponent {
 
     return (
       <Fragment>
-        <Hidden xsDown>
+        <Hidden smDown>
           <main className={clsx(classes.content, {
             [classes.contentCollapse]: isDrawerOpened,
             [classes.contentExpand]: !isDrawerOpened
@@ -45,7 +45,7 @@ class Wrapper extends React.PureComponent {
             {children}
           </main>
         </Hidden>
-        <Hidden smUp>
+        <Hidden mdUp>
           <main className={clsx(classes.content, classes.contentFull)}>
             {children}
           </main>
