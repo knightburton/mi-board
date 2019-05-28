@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl';
@@ -10,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 
-import { CONTROL_DEFAULTS, CONTROL_TYPES } from './form.constants';
+import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_TYPES, BUTTON_SIZES } from './form.constants';
 
 const styles = theme => ({
   form: {
@@ -21,8 +22,24 @@ const styles = theme => ({
   formControl: {
     marginBottom: theme.spacing(1.5)
   },
-  submitButton: {
-    marginTop: theme.spacing(1)
+  button: {
+    margin: theme.spacing(1, 1, 0, 1)
+  },
+  floatingButton: {
+    position: 'absolute',
+    '&[type="submit"]': { right: 0 }
+  },
+  small: {
+    bottom: -theme.spacing(5.5),
+    '&[type="button"]': { right: theme.spacing(6.5) }
+  },
+  medium: {
+    bottom: -theme.spacing(6),
+    '&[type="button"]': { right: theme.spacing(7.5) }
+  },
+  large: {
+    bottom: -theme.spacing(6.5),
+    '&[type="button"]': { right: theme.spacing(8.5) }
   }
 });
 
@@ -199,20 +216,89 @@ class Form extends React.PureComponent {
     </FormControl>
   );
 
-  render() {
+  renderButtons = () => {
     const {
-      controls,
-      submitFloating,
-      submitFloatingClasses,
-      submitFloatingIcon: SubmitFloatingIcon,
+      classes,
+      buttonType,
+      buttonFullWitdth,
+      buttonSize,
+      submitIcon: SubmitIcon,
       submitLabel,
-      submitFullWith,
       submitDisabled,
-      submitSize,
       submitVariant,
       submitColor,
-      classes
+      secondaryIcon: SecondaryIcon,
+      secondaryLabel,
+      secondaryDisabled,
+      secondaryVariant,
+      secondaryColor,
+      secondaryFunction
     } = this.props;
+
+    const submitCommonProps = {
+      color: submitColor,
+      disabled: submitDisabled,
+      size: buttonSize,
+      'aria-label': submitLabel
+    };
+
+    const secondaryCommonProps = {
+      color: secondaryColor,
+      disabled: secondaryDisabled,
+      size: buttonSize,
+      'aria-label': secondaryLabel
+    };
+
+    const floatingClasses = clsx(
+      {
+        [classes.small]: buttonSize === BUTTON_SIZES.SMALL,
+        [classes.medium]: buttonSize === BUTTON_SIZES.MEDIUM,
+        [classes.large]: buttonSize === BUTTON_SIZES.LARGE
+      },
+      classes.floatingButton
+    );
+
+    if (buttonType === BUTTON_TYPES.FLAT) return (
+      <Fragment>
+        {secondaryFunction &&
+          <Button
+            variant={secondaryVariant}
+            fullWidth={buttonFullWitdth}
+            className={classes.button}
+            onClick={() => secondaryFunction()}
+            {...secondaryCommonProps}
+          >
+            {secondaryLabel}
+          </Button>
+        }
+        <Button
+          type="submit"
+          variant={submitVariant}
+          fullWidth={buttonFullWitdth}
+          className={classes.button}
+          {...submitCommonProps}
+        >
+          {submitLabel}
+        </Button>
+      </Fragment>
+    );
+    if (buttonType === BUTTON_TYPES.FLOATING) return (
+      <Fragment>
+        {secondaryFunction &&
+          <Fab onClick={() => secondaryFunction()} className={floatingClasses} {...secondaryCommonProps}>
+            <SecondaryIcon />
+          </Fab>
+        }
+        <Fab type="submit" className={floatingClasses} {...submitCommonProps}>
+          <SubmitIcon />
+        </Fab>
+      </Fragment>
+    );
+    return null;
+  };
+
+  render() {
+    const { controls, classes } = this.props;
 
     const formControls = controls.reduce((acc, control) => {
       if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, this.renderTextControl(control)];
@@ -223,34 +309,12 @@ class Form extends React.PureComponent {
       return acc;
     }, []);
 
+    const buttons = this.renderButtons();
+
     return (
       <form onSubmit={this.handleSubmit} className={classes.form} noValidate>
         {formControls}
-        {submitFloating ? (
-          <Fab
-            type="submit"
-            color={submitColor}
-            disabled={submitDisabled}
-            aria-label={submitLabel}
-            size={submitSize}
-            className={submitFloatingClasses}
-          >
-            <SubmitFloatingIcon />
-          </Fab>
-        ) : (
-          <Button
-            type="submit"
-            variant={submitVariant}
-            color={submitColor}
-            fullWidth={submitFullWith}
-            disabled={submitDisabled}
-            size={submitSize}
-            aria-label={submitLabel}
-            className={classes.submitButton}
-          >
-            {submitLabel}
-          </Button>
-        )}
+        {buttons}
       </form>
     );
   }

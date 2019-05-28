@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
 
 import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
 import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
@@ -38,6 +37,53 @@ const styles = theme => ({
 class Interval extends React.PureComponent {
   render() {
     const { classes } = this.props;
+    const controls = [
+      {
+        key: 'repeat',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'Number of Sets',
+        required: true,
+        helperText: 'How many times do you want to repeat the process'
+      },
+      {
+        key: 'warmup',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'Warmup Duration',
+        required: false,
+        helperText: 'How long do you want to prepare to start (in seconds)'
+      },
+      {
+        key: 'high',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'High Intensity Duration',
+        required: true,
+        helperText: 'How long do you want to last the high intensity (in seconds)'
+      },
+      {
+        key: 'low',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'Low Intensity Duration',
+        required: true,
+        helperText: 'How long do you want to last the low intensity (in seconds)'
+      },
+      {
+        key: 'cooldown',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'Cooldown Duration',
+        required: false,
+        helperText: 'How long do you want to rest at the end (in seconds)'
+      }
+    ].map(control => ({
+      ...control,
+      max: 3600,
+      validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
+      errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
+    }));
 
     return (
       <Container maxWidth="md" className={classes.root}>
@@ -52,76 +98,16 @@ class Interval extends React.PureComponent {
         </Typography>
         <Paper className={classes.paper}>
           <Form
-            controls={[
-              {
-                key: 'repeat',
-                type: CONTROL_TYPES.NUMBER,
-                defaultValue: '',
-                label: 'Number of Sets',
-                required: true,
-                max: 3600,
-                helperText: 'How many times do you want to repeat the process',
-                validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
-                errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
-              },
-              {
-                key: 'warmup',
-                type: CONTROL_TYPES.NUMBER,
-                defaultValue: '',
-                label: 'Warmup Duration',
-                required: false,
-                max: 3600,
-                helperText: 'How long do you want to prepare to start (in seconds)',
-                validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
-                errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
-              },
-              {
-                key: 'high',
-                type: CONTROL_TYPES.NUMBER,
-                defaultValue: '',
-                label: 'High Intensity Duration',
-                required: true,
-                max: 3600,
-                helperText: 'How long do you want to last the high intensity (in seconds)',
-                validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
-                errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
-              },
-              {
-                key: 'low',
-                type: CONTROL_TYPES.NUMBER,
-                defaultValue: '',
-                label: 'Low Intensity Duration',
-                required: true,
-                max: 3600,
-                helperText: 'How long do you want to last the low intensity (in seconds)',
-                validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
-                errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
-              },
-              {
-                key: 'cooldown',
-                type: CONTROL_TYPES.NUMBER,
-                defaultValue: '',
-                label: 'Cooldown Duration',
-                required: false,
-                max: 3600,
-                helperText: 'How long do you want to rest at the end (in seconds)',
-                validators: [ VALIDATORS.NUMBER_BETWEEN(0, 3600) ],
-                errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 3600) ]
-              }
-            ]}
+            controls={controls}
+            submitIcon={PlayIcon}
             submitFunction={() => {}}
-            submitSize="small"
-            submitFloatingClasses={classes.submitButton}
-            submitFloatingIcon={PlayIcon}
-            submitFloating
+            secondaryColor="secondary"
+            secondarySize="medium"
+            secondaryIcon={SetBackIcon}
+            secondaryFunction={() => {}}
+            buttonType="floating"
+            buttonSize="small"
           />
-          <Fab
-            color="default"
-            size="small"
-            className={classes.secondaryButton}
-          >
-            <SetBackIcon />
-          </Fab>
         </Paper>
       </Container>
     );

@@ -17,6 +17,28 @@ export const CONTROL_DEFAULTS = {
   AUTOCOMPLETE: 'nope'
 };
 
+export const BUTTON_SIZES = {
+  SMALL: 'small',
+  MEDIUM: 'medium',
+  LARGE: 'large'
+};
+
+export const BUTTON_VARIANTS = {
+  TEXT: 'text',
+  OUTLINED: 'outlined',
+  CONTAINED: 'contained'
+};
+
+export const BUTTON_COLORS = {
+  PRIMARY: 'primary',
+  SECONDARY: 'secondary'
+};
+
+export const BUTTON_TYPES = {
+  FLOATING: 'floating',
+  FLAT: 'flat'
+};
+
 export const VALIDATORS = {
   REQUIRED: /\S/,
   ONLY_NUMBER: /^\d+$/,

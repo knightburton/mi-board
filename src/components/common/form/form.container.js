@@ -1,9 +1,16 @@
 import PropTypes from 'prop-types';
 import CheckIcon from '@material-ui/icons/Check';
+import CloseIcon from '@material-ui/icons/Close';
 
 import Form from './form.component';
 
-import { CONTROL_TYPES } from './form.constants';
+import {
+  CONTROL_TYPES,
+  BUTTON_TYPES,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS,
+  BUTTON_COLORS
+} from './form.constants';
 
 Form.propTypes = {
   controls: PropTypes.arrayOf(PropTypes.shape({
@@ -29,28 +36,38 @@ Form.propTypes = {
       PropTypes.arrayOf(PropTypes.string)
     ])
   })).isRequired,
-  submitFloating: PropTypes.bool,
-  submitFloatingClasses: PropTypes.string,
-  submitFloatingIcon: PropTypes.object,
+  buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
+  buttonFullWidth: PropTypes.bool,
+  buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
+  submitIcon: PropTypes.object,
   submitFunction: PropTypes.func.isRequired,
   submitLabel: PropTypes.string,
-  submitFullWith: PropTypes.bool,
   submitDisabled: PropTypes.bool,
-  submitSize: PropTypes.oneOf(['small', 'medium', 'large']),
-  submitVariant: PropTypes.oneOf(['text', 'outlined', 'contained']),
-  submitColor: PropTypes.oneOf(['primary', 'secondary'])
+  submitVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
+  submitColor: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
+  secondaryIcon: PropTypes.object,
+  secondaryFunction: PropTypes.func,
+  secondaryLabel: PropTypes.string,
+  secondaryDisabled: PropTypes.bool,
+  secondaryVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
+  secondaryColor: PropTypes.oneOf(Object.values(BUTTON_COLORS))
 };
 
 Form.defaultProps = {
-  submitFloating: false,
-  submitFloatingClasses: '',
-  submitFloatingIcon: CheckIcon,
+  buttonType: BUTTON_TYPES.FLAT,
+  buttonFullWidth: false,
+  buttonSize: 'medium',
+  submitIcon: CheckIcon,
   submitLabel: 'Submit',
-  submitFullWith: false,
   submitDisabled: false,
-  submitSize: 'medium',
-  submitVariant: 'contained',
-  submitColor: 'primary'
+  submitVariant: BUTTON_VARIANTS.CONTAINED,
+  submitColor: BUTTON_COLORS.PRIMARY,
+  secondaryIcon: CloseIcon,
+  secondaryFunction: null,
+  secondaryLabel: 'Cancel',
+  secondaryDisabled: false,
+  secondaryVariant: BUTTON_VARIANTS.CONTAINED,
+  secondaryColor: BUTTON_COLORS.PRIMARY,
 };
 
 export default Form;
