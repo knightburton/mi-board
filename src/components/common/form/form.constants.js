@@ -34,9 +34,10 @@ export const BUTTON_COLORS = {
   SECONDARY: 'secondary'
 };
 
-export const BUTTON_TYPES = {
-  FLOATING: 'floating',
-  FLAT: 'flat'
+export const BUTTON_POSITIONS = {
+  LEFT: 'left',
+  CENTER: 'center',
+  RIGHT: 'right'
 };
 
 export const VALIDATORS = {

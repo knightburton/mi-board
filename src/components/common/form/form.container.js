@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
-import CheckIcon from '@material-ui/icons/Check';
-import CloseIcon from '@material-ui/icons/Close';
 
 import Form from './form.component';
 
 import {
   CONTROL_TYPES,
-  BUTTON_TYPES,
   BUTTON_SIZES,
   BUTTON_VARIANTS,
-  BUTTON_COLORS
+  BUTTON_COLORS,
+  BUTTON_POSITIONS
 } from './form.constants';
 
 Form.propTypes = {
@@ -36,7 +34,8 @@ Form.propTypes = {
       PropTypes.arrayOf(PropTypes.string)
     ])
   })).isRequired,
-  buttonType: PropTypes.oneOf(Object.values(BUTTON_TYPES)),
+  buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
+  buttonFloated: PropTypes.bool,
   buttonFullWidth: PropTypes.bool,
   buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
   submitIcon: PropTypes.object,
@@ -54,15 +53,16 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
-  buttonType: BUTTON_TYPES.FLAT,
+  buttonPosition: BUTTON_POSITIONS.CENTER,
+  buttonFloated: false,
   buttonFullWidth: false,
   buttonSize: 'medium',
-  submitIcon: CheckIcon,
+  submitIcon: null,
   submitLabel: 'Submit',
   submitDisabled: false,
   submitVariant: BUTTON_VARIANTS.CONTAINED,
   submitColor: BUTTON_COLORS.PRIMARY,
-  secondaryIcon: CloseIcon,
+  secondaryIcon: null,
   secondaryFunction: null,
   secondaryLabel: 'Cancel',
   secondaryDisabled: false,

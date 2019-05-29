@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -9,37 +9,48 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
 
-import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_TYPES, BUTTON_SIZES } from './form.constants';
+import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_POSITIONS } from './form.constants';
 
 const styles = theme => ({
   form: {
     position: 'relative',
-    padding: theme.spacing(3, 2),
+    padding: theme.spacing(0, 2),
     textAlign: 'center'
   },
   formControl: {
     marginBottom: theme.spacing(1.5)
   },
-  button: {
-    margin: theme.spacing(1, 1, 0, 1)
+  left: {
+    textAlign: 'left'
   },
-  floatingButton: {
+  center: {
+    textAlign: 'center'
+  },
+  right: {
+    textAlign: 'right'
+  },
+  buttonWrapper: {
+    marginTop: theme.spacing(1)
+  },
+  floated: {
     position: 'absolute',
-    '&[type="submit"]': { right: 0 }
+    width: `calc(100% - ${theme.spacing(4)}px)`
   },
   small: {
-    bottom: -theme.spacing(5.5),
-    '&[type="button"]': { right: theme.spacing(6.5) }
+    bottom: -theme.spacing(5)
   },
   medium: {
-    bottom: -theme.spacing(6),
-    '&[type="button"]': { right: theme.spacing(7.5) }
+    bottom: -theme.spacing(5)
   },
   large: {
-    bottom: -theme.spacing(6.5),
-    '&[type="button"]': { right: theme.spacing(8.5) }
+    bottom: -theme.spacing(5.5)
+  },
+  secondaryButton: {
+    marginRight: theme.spacing(2)
+  },
+  buttonIcon: {
+    marginLeft: theme.spacing(1)
   }
 });
 
@@ -219,7 +230,8 @@ class Form extends React.PureComponent {
   renderButtons = () => {
     const {
       classes,
-      buttonType,
+      buttonPosition,
+      buttonFloated,
       buttonFullWitdth,
       buttonSize,
       submitIcon: SubmitIcon,
@@ -235,66 +247,46 @@ class Form extends React.PureComponent {
       secondaryFunction
     } = this.props;
 
-    const submitCommonProps = {
-      color: submitColor,
-      disabled: submitDisabled,
-      size: buttonSize,
-      'aria-label': submitLabel
-    };
-
-    const secondaryCommonProps = {
-      color: secondaryColor,
-      disabled: secondaryDisabled,
-      size: buttonSize,
-      'aria-label': secondaryLabel
-    };
-
-    const floatingClasses = clsx(
+    const wrapperClasses = clsx(
       {
-        [classes.small]: buttonSize === BUTTON_SIZES.SMALL,
-        [classes.medium]: buttonSize === BUTTON_SIZES.MEDIUM,
-        [classes.large]: buttonSize === BUTTON_SIZES.LARGE
+        [classes.floated]: buttonFloated,
+        [classes[buttonSize]]: buttonFloated,
+        [classes[buttonPosition]]: Object.values(BUTTON_POSITIONS).includes(buttonPosition)
       },
-      classes.floatingButton
+      classes.buttonWrapper
     );
 
-    if (buttonType === BUTTON_TYPES.FLAT) return (
-      <Fragment>
+    return (
+      <div className={wrapperClasses}>
         {secondaryFunction &&
           <Button
             variant={secondaryVariant}
             fullWidth={buttonFullWitdth}
-            className={classes.button}
+            className={classes.secondaryButton}
             onClick={() => secondaryFunction()}
-            {...secondaryCommonProps}
+            color={secondaryColor}
+            disabled={secondaryDisabled}
+            size={buttonSize}
+            aria-label={secondaryLabel}
           >
             {secondaryLabel}
+            {SecondaryIcon && <SecondaryIcon className={classes.buttonIcon} />}
           </Button>
         }
         <Button
           type="submit"
           variant={submitVariant}
           fullWidth={buttonFullWitdth}
-          className={classes.button}
-          {...submitCommonProps}
+          color={submitColor}
+          disabled={submitDisabled}
+          size={buttonSize}
+          aria-label={submitLabel}
         >
           {submitLabel}
+          {SubmitIcon && <SubmitIcon className={classes.buttonIcon} />}
         </Button>
-      </Fragment>
+      </div>
     );
-    if (buttonType === BUTTON_TYPES.FLOATING) return (
-      <Fragment>
-        {secondaryFunction &&
-          <Fab onClick={() => secondaryFunction()} className={floatingClasses} {...secondaryCommonProps}>
-            <SecondaryIcon />
-          </Fab>
-        }
-        <Fab type="submit" className={floatingClasses} {...submitCommonProps}>
-          <SubmitIcon />
-        </Fab>
-      </Fragment>
-    );
-    return null;
   };
 
   render() {

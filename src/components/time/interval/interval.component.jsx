@@ -100,13 +100,15 @@ class Interval extends React.PureComponent {
           <Form
             controls={controls}
             submitIcon={PlayIcon}
+            submitLabel="Start"
             submitFunction={() => {}}
             secondaryColor="secondary"
-            secondarySize="medium"
             secondaryIcon={SetBackIcon}
+            secondaryLabel="Reset"
             secondaryFunction={() => {}}
-            buttonType="floating"
+            buttonPosition="right"
             buttonSize="small"
+            buttonFloated
           />
         </Paper>
       </Container>
