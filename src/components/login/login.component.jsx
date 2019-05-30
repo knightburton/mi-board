@@ -66,8 +66,7 @@ class Login extends React.PureComponent {
                   autocomplete: 'email',
                   defaultValue: '',
                   disabled: authInProgress,
-                  required: true,
-                  errorText: 'This field is required'
+                  required: true
                 },
                 {
                   key: 'password',
@@ -76,8 +75,7 @@ class Login extends React.PureComponent {
                   autocomplete: 'password',
                   defaultValue: '',
                   disabled: authInProgress,
-                  required: true,
-                  errorText: 'This field is required'
+                  required: true
                 }
               ]}
               submitFunction={credentials => login(credentials)}
