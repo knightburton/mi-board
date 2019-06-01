@@ -1,42 +1,18 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
 import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
 
 import Form from '../../common/form/form.container';
+import Section from '../../common/section/section.container';
+
 import { CONTROL_TYPES, VALIDATORS, ERROR_TEXTS } from '../../common/form/form.constants';
 
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing(3)
-  },
-  paper: {
-    position: 'relative',
-    padding: theme.spacing(3, 2)
-  },
-  subtitle: {
-    paddingTop: theme.spacing(3)
-  },
-  submitButton: {
-    position: 'absolute',
-    bottom: -theme.spacing(5.5),
-    right: 0
-  },
-  secondaryButton: {
-    position: 'absolute',
-    bottom: -theme.spacing(2.5),
-    right: theme.spacing(8.5)
-  }
-});
-
-class Interval extends React.PureComponent {
+export default class Interval extends React.PureComponent {
   render() {
-    const { classes } = this.props;
     const controls = [
       {
         key: 'repeat',
@@ -86,17 +62,16 @@ class Interval extends React.PureComponent {
     }));
 
     return (
-      <Container maxWidth="md" className={classes.root}>
-        <Paper className={classes.paper}>
+      <Container maxWidth="md">
+
+        <Section>
           <Typography variant="body1">
             A digital circuit that is used to determine the time interval between an initial trigger pulse
             and subsequent logic states that appear after a predetermined delay.
           </Typography>
-        </Paper>
-        <Typography variant="subtitle1" className={classes.subtitle}>
-          Settings
-        </Typography>
-        <Paper className={classes.paper}>
+        </Section>
+
+        <Section title="Settings">
           <Form
             controls={controls}
             submitIcon={PlayIcon}
@@ -110,10 +85,9 @@ class Interval extends React.PureComponent {
             buttonSize="small"
             buttonFloated
           />
-        </Paper>
+        </Section>
+
       </Container>
     );
   }
 }
-
-export default withStyles(styles)(Interval);
