@@ -12,12 +12,15 @@ const styles = theme => ({
   },
   marginTop: {
     marginTop: theme.spacing(3)
+  },
+  marginBottom: {
+    marginBottom: theme.spacing(3)
   }
 });
 
 class Section extends React.PureComponent {
   render() {
-    const { title, children, classes } = this.props;
+    const { title, gutterBottom, children, classes } = this.props;
 
     return (
       <Fragment>
@@ -26,7 +29,15 @@ class Section extends React.PureComponent {
             {title}
           </Typography>
         }
-        <Paper className={clsx({ [classes.marginTop]: !title }, classes.paper)}>
+        <Paper
+          className={clsx(
+            {
+              [classes.marginTop]: !title,
+              [classes.marginBottom]: gutterBottom
+            },
+            classes.paper
+          )}
+        >
           {children}
         </Paper>
       </Fragment>

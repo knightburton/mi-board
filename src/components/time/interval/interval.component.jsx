@@ -71,7 +71,7 @@ export default class Interval extends React.PureComponent {
           </Typography>
         </Section>
 
-        <Section title="Settings">
+        <Section title="Settings" gutterBottom>
           <Form
             controls={controls}
             submitIcon={PlayIcon}

@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import Paper from './section.component';
 
 Paper.propTypes = {
-  title: PropTypes.string
+  title: PropTypes.string,
+  gutterBottom: PropTypes.bool,
+  children: PropTypes.any.isRequired
 };
 
 Paper.defaultProps = {
-  title: ''
+  title: '',
+  gutterBottom: false
 };
 
 export default Paper;
