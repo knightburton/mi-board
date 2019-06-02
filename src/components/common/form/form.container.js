@@ -22,6 +22,8 @@ Form.propTypes = {
     helperText: PropTypes.string,
     errorTexts: PropTypes.arrayOf(PropTypes.string),
     validators: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.func])),
+    inline: PropTypes.bool,
+    gutterRight: PropTypes.bool,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,

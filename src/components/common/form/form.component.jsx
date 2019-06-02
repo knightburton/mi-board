@@ -15,11 +15,20 @@ import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_POSITIONS, ERROR_TEXTS } from '
 const styles = theme => ({
   form: {
     position: 'relative',
-    padding: theme.spacing(0, 2),
+    padding: 0,
     textAlign: 'center'
   },
   formControl: {
-    marginBottom: theme.spacing(1.5)
+    marginBottom: theme.spacing(1.5),
+    padding: theme.spacing(0, 1.5)
+  },
+  inline: {
+    [theme.breakpoints.up('sm')]: {
+      width: '50%'
+    }
+  },
+  inputLabel: {
+    marginLeft: theme.spacing(1.5)
   },
   left: {
     textAlign: 'left'
@@ -31,11 +40,11 @@ const styles = theme => ({
     textAlign: 'right'
   },
   buttonWrapper: {
-    marginTop: theme.spacing(1)
+    margin: theme.spacing(1, 1.5, 0, 1.5)
   },
   floated: {
     position: 'absolute',
-    width: `calc(100% - ${theme.spacing(4)}px)`
+    width: `calc(100% - ${theme.spacing(3)}px)`
   },
   small: {
     bottom: -theme.spacing(5)
@@ -117,20 +126,41 @@ class Form extends React.PureComponent {
     if (isFormValid) return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.state[key].value }), {}));
   };
 
+  getFormControlProps = ({ key, disabled, required, inline }) => {
+    const { classes } = this.props;
+
+    return {
+      key,
+      error: !!this.state[key].error,
+      disabled: disabled || CONTROL_DEFAULTS.DISABLED,
+      required: required || CONTROL_DEFAULTS.REQUIRED,
+      className: clsx(
+        {
+          [classes.inline]: inline
+        },
+        classes.formControl
+      ),
+      fullWidth: true
+    };
+  };
+
   renderFormHelperText = ({ key, helperText }) => (
     <FormHelperText id={`${key}-helper-text`}>{this.state[key].error || helperText}</FormHelperText>
   );
 
+  renderInputLabel = ({ key, label }) => {
+    const { classes } = this.props;
+
+    return (
+      <InputLabel htmlFor={key} className={classes.inputLabel}>
+        {label}
+      </InputLabel>
+    );
+  };
+
   renderNumberControl = control => (
-    <FormControl
-      key={control.key}
-      error={!!this.state[control.key].error}
-      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-      required={control.required || CONTROL_DEFAULTS.REQUIRED}
-      className={this.props.classes.formControl}
-      fullWidth
-    >
-      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+    <FormControl {...this.getFormControlProps(control)}>
+      {this.renderInputLabel(control)}
       <Input
         id={control.key}
         type={control.type}
@@ -150,15 +180,8 @@ class Form extends React.PureComponent {
   );
 
   renderTextControl = control => (
-    <FormControl
-      key={control.key}
-      error={!!this.state[control.key].error}
-      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-      required={control.required || CONTROL_DEFAULTS.REQUIRED}
-      className={this.props.classes.formControl}
-      fullWidth
-    >
-      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+    <FormControl {...this.getFormControlProps(control)}>
+      {this.renderInputLabel(control)}
       <Input
         id={control.key}
         type={control.type}
@@ -173,15 +196,8 @@ class Form extends React.PureComponent {
   );
 
   renderTextareaControl = control => (
-    <FormControl
-      key={control.key}
-      error={!!this.state[control.key].error}
-      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-      required={control.required || CONTROL_DEFAULTS.REQUIRED}
-      className={this.props.classes.formControl}
-      fullWidth
-    >
-      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+    <FormControl {...this.getFormControlProps(control)}>
+      {this.renderInputLabel(control)}
       <Input
         id={control.key}
         value={this.state[control.key].value}
@@ -197,15 +213,8 @@ class Form extends React.PureComponent {
   );
 
   renderSelectControl = control => (
-    <FormControl
-      key={control.key}
-      error={!!this.state[control.key].error}
-      disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
-      required={control.required || CONTROL_DEFAULTS.REQUIRED}
-      className={this.props.classes.formControl}
-      fullWidth
-    >
-      <InputLabel htmlFor={control.key}>{control.label}</InputLabel>
+    <FormControl {...this.getFormControlProps(control)}>
+      {this.renderInputLabel(control)}
       <Select
         id={control.key}
         value={this.state[control.key].value}

@@ -31,12 +31,22 @@ export default class Interval extends React.PureComponent {
         helperText: 'How long do you want to prepare to start (in seconds)'
       },
       {
-        key: 'high',
+        key: 'high-min',
         type: CONTROL_TYPES.NUMBER,
         defaultValue: '',
         label: 'High Intensity Duration',
         required: true,
-        helperText: 'How long do you want to last the high intensity (in seconds)'
+        helperText: 'How long do you want to last the high intensity (in seconds)',
+        inline: true
+      },
+      {
+        key: 'high-sec',
+        type: CONTROL_TYPES.NUMBER,
+        defaultValue: '',
+        label: 'High Intensity Duration',
+        required: true,
+        helperText: 'How long do you want to last the high intensity (in seconds)',
+        inline: true
       },
       {
         key: 'low',
