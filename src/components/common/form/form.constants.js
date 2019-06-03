@@ -3,7 +3,8 @@ export const CONTROL_TYPES = {
   TEXT: 'text',
   TEXTAREA: 'textarea',
   NUMBER: 'number',
-  SELECT: 'select'
+  SELECT: 'select',
+  SLIDER: 'slider'
 };
 
 export const CONTROL_DEFAULTS = {
@@ -14,7 +15,10 @@ export const CONTROL_DEFAULTS = {
   NUMBER_STEP: 1,
   TEXTAREA_ROWS: 3,
   SELECT_OPTIONS: null,
-  AUTOCOMPLETE: 'nope'
+  AUTOCOMPLETE: 'nope',
+  SLIDER_MIN: 0,
+  SLIDER_MAX: 60,
+  SLIDER_STEP: 1
 };
 
 export const BUTTON_SIZES = {

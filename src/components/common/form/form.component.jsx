@@ -9,6 +9,14 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/lab/Slider';
+
+import { fade } from '@material-ui/core/styles/colorManipulator';
+
+import LeftIcon from '@material-ui/icons/ChevronLeft';
+import RightIcon from '@material-ui/icons/ChevronRight';
 
 import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_POSITIONS, ERROR_TEXTS } from './form.constants';
 
@@ -21,6 +29,46 @@ const styles = theme => ({
   formControl: {
     marginBottom: theme.spacing(1.5),
     padding: theme.spacing(0, 1.5)
+  },
+  sliderControl: {
+    display: 'inline-flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
+    padding: theme.spacing(0, 1.5),
+    width: '100%'
+  },
+  slider: {
+    padding: theme.spacing(3, 1)
+  },
+  sliderLabel: {
+    width: '100%',
+    textAlign: 'left',
+    color: theme.palette.action.active
+  },
+  sliderContent: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'nowrap',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'stretch'
+  },
+  sliderButton: {
+    '&:first-child': {
+      marginRight: theme.spacing(1),
+      marginLeft: -theme.spacing(1.5)
+    },
+    '&:last-child': {
+      marginLeft: theme.spacing(1),
+      marginRight: -theme.spacing(1.5)
+    }
+  },
+  thumbText: {
+    ...theme.typography.caption,
+    paddingTop: '1px'
   },
   inline: {
     [theme.breakpoints.up('sm')]: {
@@ -60,7 +108,25 @@ const styles = theme => ({
   },
   buttonIcon: {
     marginLeft: theme.spacing(1)
-  }
+  },
+  thumb: {
+    height: theme.spacing(3),
+    width: theme.spacing(3),
+    backgroundColor: theme.palette.common.white,
+    border: `2px solid ${theme.palette.primary.main}`,
+    '&$focused, &:hover': {
+      boxShadow: `0 0 0 ${theme.spacing(.5)}px ${fade(theme.palette.primary.main, .16)}`,
+    },
+    '&$activated': {
+      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, .16)}`,
+    },
+    '&$jumped': {
+      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, .16)}`,
+    },
+  },
+  focused: {},
+  activated: {},
+  jumped: {}
 });
 
 class Form extends React.PureComponent {
@@ -115,6 +181,30 @@ class Form extends React.PureComponent {
   };
 
   handleChange = (key, value) => this.setState({ [key]: { value, error: null } });
+
+  handleIncreaseClick = ({ key, max }) => {
+    const currentValue = this.state[key].value
+    const nextValue = currentValue + 1;
+
+    this.setState({
+      [key]: {
+        value: nextValue <= (max || CONTROL_DEFAULTS.SLIDER_MAX) ? nextValue : currentValue,
+        error: null
+      }
+    });
+  };
+
+  handleDecreaseClick = ({ key, min }) => {
+    const currentValue = this.state[key].value
+    const nextValue = currentValue - 1;
+
+    this.setState({
+      [key]: {
+        value: nextValue >= (min || CONTROL_DEFAULTS.SLIDER_MIN) ? nextValue : currentValue,
+        error: null
+      }
+    });
+  };
 
   handleSubmit = e => {
     const { submitFunction, controls } = this.props;
@@ -233,6 +323,70 @@ class Form extends React.PureComponent {
     </FormControl>
   );
 
+  renderSliderControl = control => {
+    const { classes } = this.props;
+    const className = clsx(
+      { [classes.inline]: control.inline },
+      classes.sliderControl
+    );
+    const sliderClasses = {
+      thumb: classes.thumb,
+      focused: classes.focused,
+      activated: classes.activated,
+      jumped: classes.jumped
+    };
+    const thumb = (
+      <Typography className={classes.thumbText}>
+        {this.state[control.key].value}
+      </Typography>
+    );
+
+    return (
+      <div key={control.key} className={className}>
+        {control.label &&
+          <Typography
+            id={`${control.key}-label`}
+            variant="caption"
+            className={classes.sliderLabel}
+          >
+            {control.label}
+          </Typography>
+        }
+        <div className={classes.sliderContent}>
+          {control.buttons &&
+            <IconButton
+              size="small"
+              className={classes.sliderButton}
+              onClick={() => this.handleDecreaseClick(control)}
+            >
+              <LeftIcon />
+            </IconButton>
+          }
+          <Slider
+            value={this.state[control.key].value}
+            aria-labelledby={`${control.key}-label`}
+            className={classes.slider}
+            onChange={(e, value) => this.handleChange(control.key, value)}
+            min={control.min || CONTROL_DEFAULTS.SLIDER_MIN}
+            max={control.max || CONTROL_DEFAULTS.SLIDER_MAX}
+            step={control.step || CONTROL_DEFAULTS.SLIDER_STEP}
+            classes={control.indicator ? sliderClasses : {}}
+            {...control.indicator ? { thumb } : {}}
+          />
+          {control.buttons &&
+            <IconButton
+              size="small"
+              className={classes.sliderButton}
+              onClick={() => this.handleIncreaseClick(control)}
+            >
+              <RightIcon />
+            </IconButton>
+          }
+        </div>
+      </div>
+    );
+  };
+
   renderButtons = () => {
     const {
       classes,
@@ -304,6 +458,7 @@ class Form extends React.PureComponent {
       if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, this.renderTextareaControl(control)];
       if (control.type === CONTROL_TYPES.NUMBER) return [...acc, this.renderNumberControl(control)];
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, this.renderSelectControl(control)];
+      if (control.type === CONTROL_TYPES.SLIDER) return [...acc, this.renderSliderControl(control)];
       return acc;
     }, []);
 

@@ -5,14 +5,26 @@ const from1To100 = {
   validators: [ VALIDATORS.NUMBER_BETWEEN(1, 100) ]
 };
 
-const from0To120 = {
-  errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 120) ],
-  validators: [ VALIDATORS.NUMBER_BETWEEN(0, 120) ]
+const minuteProps = {
+  type: CONTROL_TYPES.SLIDER,
+  defaultValue: 0,
+  min: 0,
+  max: 60,
+  step: 1,
+  indicator: true,
+  buttons: true,
+  inline: true
 };
 
-const from0To59 = {
-  errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(0, 59) ],
-  validators: [ VALIDATORS.NUMBER_BETWEEN(0, 59) ]
+const secondProps = {
+  type: CONTROL_TYPES.SLIDER,
+  defaultValue: 0,
+  min: 0,
+  max: 59,
+  step: 1,
+  indicator: true,
+  buttons: true,
+  inline: true
 };
 
 export default [
@@ -36,74 +48,42 @@ export default [
   },
   {
     key: 'warmup-min',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Warmup minutes',
-    required: false,
-    inline: true,
-    ...from0To120
+    ...minuteProps
   },
   {
     key: 'warmup-sec',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Warmup seconds',
-    required: false,
-    inline: true,
-    ...from0To59
+    ...secondProps
   },
   {
     key: 'high-min',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'High Intensity minutes',
-    required: true,
-    inline: true,
-    ...from0To120
+    ...minuteProps
   },
   {
     key: 'high-sec',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'High Intensity seconds',
-    required: true,
-    inline: true,
-    ...from0To59
+    ...secondProps
   },
   {
     key: 'low-min',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Low Intensity minutes',
-    required: true,
-    inline: true,
-    ...from0To120
+    ...minuteProps
   },
   {
     key: 'low-sec',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Low Intensity seconds',
-    required: true,
-    inline: true,
-    ...from0To59
+    ...secondProps
   },
   {
     key: 'cooldown-min',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Cooldown minutes',
-    required: false,
-    inline: true,
-    ...from0To120
+    ...minuteProps
   },
   {
     key: 'cooldown-sec',
-    type: CONTROL_TYPES.NUMBER,
-    defaultValue: '',
     label: 'Cooldown seconds',
-    required: false,
-    inline: true,
-    ...from0To59
+    ...secondProps
   }
 ];

@@ -17,7 +17,14 @@ const theme = createMuiTheme({
     background: {
       default: '#eceff1'
     }
-  }
+  },
+  props: {
+    MuiTypography: {
+      variantMapping: {
+        body2: 'span'
+      }
+    }
+  },
 });
 
 export default theme;
