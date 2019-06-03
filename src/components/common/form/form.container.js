@@ -23,6 +23,8 @@ Form.propTypes = {
     errorTexts: PropTypes.arrayOf(PropTypes.string),
     validators: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.func])),
     inline: PropTypes.bool,
+    indicator: PropTypes.bool,
+    buttons: PropTypes.bool,
     gutterRight: PropTypes.bool,
     min: PropTypes.number,
     max: PropTypes.number,
