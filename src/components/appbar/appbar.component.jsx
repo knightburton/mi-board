@@ -16,17 +16,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-const styles = theme => ({
-  appBar: {
-    boxShadow: 'none'
-  },
-  menuButton: {
-    marginRight: theme.spacing(4),
-  },
-  grow: {
-    flexGrow: 1
-  }
-});
+import styles from './appbar.styles';
 
 class AppBar extends React.PureComponent {
   state = {

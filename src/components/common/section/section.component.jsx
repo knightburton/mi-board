@@ -5,18 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
-const styles = theme => ({
-  paper: {
-    position: 'relative',
-    padding: theme.spacing(3, 2)
-  },
-  marginTop: {
-    marginTop: theme.spacing(3)
-  },
-  marginBottom: {
-    marginBottom: theme.spacing(3)
-  }
-});
+import styles from './section.styles';
 
 class Section extends React.PureComponent {
   render() {

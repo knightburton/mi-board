@@ -6,22 +6,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 
-const styles = theme => ({
-  grid: {
-    minHeight: '100vh'
-  },
-  text: {
-    marginLeft: theme.spacing(4),
-    fontWeight: '300'
-  },
-  spinner: {
-    position: 'absolute',
-    marginTop: theme.spacing(.3)
-  },
-  dialog: {
-    padding: theme.spacing(3, 6)
-  }
-});
+import styles from './waiting.styles';
 
 class Waiting extends React.PureComponent {
   render() {
