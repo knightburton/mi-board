@@ -6,8 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
 import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
 
-import Form from '../../common/form/form.container';
-import Section from '../../common/section/section.container';
+import Form from '../../common/form/form.component';
+import Section from '../../common/section/section.component';
 
 import controls from './interval.constants';
 

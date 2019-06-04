@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
-import TopTabs from '../common/top-tabs/top-tabs.container';
+import TopTabs from '../common/top-tabs/top-tabs.component';
 
 import Countdown from './countdown/countdown.container';
 import Interval from './interval/interval.container';

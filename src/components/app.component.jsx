@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Waiting from './common/waiting/waiting.container';
+import Waiting from './common/waiting/waiting.component';
 
 import Login from './login/login.container';
 import AppBar from './appbar/appbar.container';
@@ -21,21 +21,19 @@ class App extends React.PureComponent {
         {!authIsLoaded && <Route render={() => <Waiting screen />} />}
         {authIsEmpty && <Route component={Login} />}
         <Route
-          render={
-            () => (
-              <Fragment>
-                <Drawer />
-                <Wrapper>
-                  <AppBar />
-                  <Switch>
-                    <Route exact path="/dashboard" component={Dashboard} />
-                    <Route path="/time" component={Time} />
-                    <Redirect to="/dashboard" />
-                  </Switch>
-                </Wrapper>
-              </Fragment>
-            )
-          }
+          render={() => (
+            <Fragment>
+              <Drawer />
+              <Wrapper>
+                <AppBar />
+                <Switch>
+                  <Route exact path="/dashboard" component={Dashboard} />
+                  <Route path="/time" component={Time} />
+                  <Redirect to="/dashboard" />
+                </Switch>
+              </Wrapper>
+            </Fragment>
+          )}
         />
       </Switch>
     );

@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import Form from '../common/form/form.container';
+import Form from '../common/form/form.component';
 import ProjectTitle from '../common/project-title/project-title.component';
 
 import Logo from '../../assets/images/icon.png';
