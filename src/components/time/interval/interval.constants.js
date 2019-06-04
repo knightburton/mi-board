@@ -12,7 +12,7 @@ const minuteProps = {
   max: 60,
   step: 1,
   indicator: true,
-  buttons: true,
+  // buttons: true,
   inline: true
 };
 
@@ -23,7 +23,7 @@ const secondProps = {
   max: 59,
   step: 1,
   indicator: true,
-  buttons: true,
+  // buttons: true,
   inline: true
 };
 
