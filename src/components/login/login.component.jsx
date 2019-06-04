@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
@@ -12,30 +13,7 @@ import ProjectTitle from '../common/project-title/project-title.component';
 
 import Logo from '../../assets/images/icon.png';
 
-const styles = theme => ({
-  container: {
-    height: '100vh'
-  },
-  grid: {
-    height: '100vh'
-  },
-  avatarWrapper: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  },
-  avatar: {
-    margin: theme.spacing(1)
-  },
-  progressCircle: {
-    position: 'absolute',
-    top: theme.spacing(.25),
-    alignSelf: 'center',
-    color: theme.palette.primary.main,
-    zIndex: 1
-  }
-});
+import styles from './login.styles';
 
 class Login extends React.PureComponent {
   render() {
@@ -47,16 +25,16 @@ class Login extends React.PureComponent {
           <Grid xs={12} sm={12} md={10} item>
             <div className={classes.avatarWrapper}>
               <Avatar className={classes.avatar} src={Logo} />
-              {authInProgress &&
+              {authInProgress && (
                 <CircularProgress size={52} thickness={1.8} className={classes.progressCircle} />
-              }
+              )}
             </div>
             <ProjectTitle />
-            {error &&
+            {error && (
               <Typography variant="body1" component="p" align="center" color="error" gutterBottom>
                 {error}
               </Typography>
-            }
+            )}
             <Form
               controls={[
                 {
@@ -89,5 +67,15 @@ class Login extends React.PureComponent {
     );
   }
 }
+
+Login.propTypes = {
+  authInProgress: PropTypes.bool.isRequired,
+  error: PropTypes.string,
+  login: PropTypes.func.isRequired
+};
+
+Login.defaultProps = {
+  error: null,
+};
 
 export default withStyles(styles)(Login);

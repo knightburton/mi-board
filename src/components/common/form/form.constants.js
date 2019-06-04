@@ -50,7 +50,7 @@ export const VALIDATORS = {
   ONLY_ALPHANUMERIC: /^[A-Za-z]+$/,
   NUMBER_MIN: min => value => value >= min,
   NUMBER_MAX: max => value => value <= max,
-  NUMBER_BETWEEN: (min, max) => value => value >= min && value <= max,
+  NUMBER_BETWEEN: (min, max) => value => value >= min && value <= max
 };
 
 export const ERROR_TEXTS = {

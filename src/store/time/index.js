@@ -137,16 +137,19 @@ export const reducer = handleActions(
     [startTimer]: (state, { payload: { offset, intervalID } }) => ({ ...state, offset, intervalID }),
     [stopTimer]: state => ({ ...state, intervalID: null }),
     [resetTimer]: state => ({ ...state, clock: 0 }),
-    [increaseTimer]: state => ({ ...state, clock: state.clock === MAX_CLOCK_VALUE ? state.clock : ++state.clock }),
-    [decreaseTimer]: state => ({ ...state, clock: state.clock === MIN_CLOCK_VALUE ? state.clock : --state.clock }),
+    [increaseTimer]: state => ({ ...state, clock: state.clock === MAX_CLOCK_VALUE ? state.clock : state.clock + 1 }),
+    [decreaseTimer]: state => ({ ...state, clock: state.clock === MIN_CLOCK_VALUE ? state.clock : state.clock + 1 }),
 
-    [setIntervalParams]: (state, { payload: { repeat, warmup, hight, low, cooldown } }) => ({ ...state, interval: { repeat, warmup, hight, low, cooldown } }),
+    [setIntervalParams]: (state, { payload: { repeat, warmup, hight, low, cooldown } }) => ({
+      ...state,
+      interval: { repeat, warmup, hight, low, cooldown }
+    }),
     [resetIntervalParams]: state => ({ ...state, interval: intialState.interval }),
 
     [setCountdownTime]: (state, { payload: time }) => ({ ...state, countdown: { time } }),
     [resetCountdownTime]: state => ({ ...state, countdown: intialState.countdown }),
 
-    [addStopwatchLap]: (state, { payload: lap }) => ({ ...state, stopwatch: { lap: [ ...state.stopwatch.laps, lap ] } }),
+    [addStopwatchLap]: (state, { payload: lap }) => ({ ...state, stopwatch: { lap: [...state.stopwatch.laps, lap] } }),
     [clearStopwatchLaps]: state => ({ ...state, stopwatch: intialState.stopwatch }),
 
     [setActiveTimer]: (state, { payload: timer }) => ({ ...state, active: timer }),

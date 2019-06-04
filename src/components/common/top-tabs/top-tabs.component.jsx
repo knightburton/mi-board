@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
@@ -48,5 +49,14 @@ class TopTabs extends React.Component {
     );
   }
 }
+
+TopTabs.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string,
+    label: PropTypes.string,
+    to: PropTypes.string
+  })).isRequired,
+  selectedByDefault: PropTypes.string.isRequired
+};
 
 export default withStyles(styles)(TopTabs);

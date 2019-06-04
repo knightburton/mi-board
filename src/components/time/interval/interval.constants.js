@@ -1,8 +1,8 @@
 import { CONTROL_TYPES, VALIDATORS, ERROR_TEXTS } from '../../common/form/form.constants';
 
 const from1To100 = {
-  errorTexts: [ ERROR_TEXTS.NUMBER_BETWEEN(1, 100) ],
-  validators: [ VALIDATORS.NUMBER_BETWEEN(1, 100) ]
+  errorTexts: [ERROR_TEXTS.NUMBER_BETWEEN(1, 100)],
+  validators: [VALIDATORS.NUMBER_BETWEEN(1, 100)]
 };
 
 const minuteProps = {

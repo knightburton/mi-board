@@ -1,11 +1,13 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
+
 import { logout } from '../../store/user';
 import { toggleMobileDrawer } from '../../store/app';
-import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
+
 import AppBar from './appbar.component';
 
-const mapStateToProps = state => ({});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
   logout: () => dispatch(logout(firebase)),

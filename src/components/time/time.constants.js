@@ -1,4 +1,4 @@
-export const TOOLS = [
+export default [
   {
     key: 'interval',
     label: 'Interval',

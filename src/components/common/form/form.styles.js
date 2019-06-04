@@ -95,13 +95,13 @@ export default theme => ({
     backgroundColor: theme.palette.common.white,
     border: `2px solid ${theme.palette.primary.main}`,
     '&$focused, &:hover': {
-      boxShadow: `0 0 0 ${theme.spacing(.5)}px ${fade(theme.palette.primary.main, .16)}`,
+      boxShadow: `0 0 0 ${theme.spacing(0.5)}px ${fade(theme.palette.primary.main, 0.16)}`,
     },
     '&$activated': {
-      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, .16)}`,
+      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, 0.16)}`,
     },
     '&$jumped': {
-      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, .16)}`,
+      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, 0.16)}`,
     },
   },
   focused: {},

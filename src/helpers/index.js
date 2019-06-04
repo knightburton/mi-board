@@ -2,7 +2,7 @@
 
 export const getElapsedHours = value => Math.floor(value / 3600);
 
-export const getElapsedMinutes = value => Math.floor(value % 3600 / 60);
+export const getElapsedMinutes = value => Math.floor((value % 3600) / 60);
 
 export const getElapsedSeconds = value => Math.floor(value % 3600 % 60);
 

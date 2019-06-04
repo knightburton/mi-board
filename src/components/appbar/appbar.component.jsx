@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -103,5 +104,10 @@ class AppBar extends React.PureComponent {
     );
   }
 }
+
+AppBar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  toggleMobileDrawer: PropTypes.func.isRequired
+};
 
 export default withRouter(withStyles(styles)(AppBar));

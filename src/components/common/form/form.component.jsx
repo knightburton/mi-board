@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -16,7 +17,15 @@ import Slider from '@material-ui/lab/Slider';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 
-import { CONTROL_DEFAULTS, CONTROL_TYPES, BUTTON_POSITIONS, ERROR_TEXTS } from './form.constants';
+import {
+  CONTROL_DEFAULTS,
+  CONTROL_TYPES,
+  BUTTON_POSITIONS,
+  ERROR_TEXTS,
+  BUTTON_SIZES,
+  BUTTON_VARIANTS,
+  BUTTON_COLORS
+} from './form.constants';
 
 import styles from './form.styles';
 
@@ -36,15 +45,17 @@ class Form extends React.PureComponent {
   }
 
   getInvalidValidatorIndex = (value, validators) => {
-    for (const [index, validator] of validators.entries()) {
-      if (typeof validator === 'function' && !validator(value)) return index;
-      if (typeof validator === 'object' && !validator.test(value)) return index;
-    }
+    const invalidIndex = validators.findIndex(validator => (
+      (typeof validator === 'function' && !validator(value))
+      || (typeof validator === 'object' && !validator.test(value))
+    ));
+
+    if (invalidIndex !== -1) return invalidIndex;
     return null;
   };
 
   validateControl = ({ key, required, validators, errorTexts }) => {
-    const value = this.state[key].value;
+    const { value } = this.getControlState(key);
 
     if (required && !value) return ERROR_TEXTS.REQUIRED;
     if (validators) {
@@ -68,30 +79,30 @@ class Form extends React.PureComponent {
       }));
     });
 
-    return controls.every(control => this.state[control.key].error === null);
+    return controls.every(control => this.getControlState(control.key).error === null);
   };
 
   handleChange = (key, value) => this.setState({ [key]: { value, error: null } });
 
   handleIncreaseClick = ({ key, max }) => {
-    const currentValue = this.state[key].value
-    const nextValue = currentValue + 1;
+    const { value } = this.getControlState(key);
+    const nextValue = value + 1;
 
     this.setState({
       [key]: {
-        value: nextValue <= (max || CONTROL_DEFAULTS.SLIDER_MAX) ? nextValue : currentValue,
+        value: nextValue <= (max || CONTROL_DEFAULTS.SLIDER_MAX) ? nextValue : value,
         error: null
       }
     });
   };
 
   handleDecreaseClick = ({ key, min }) => {
-    const currentValue = this.state[key].value
-    const nextValue = currentValue - 1;
+    const { value } = this.getControlState(key);
+    const nextValue = value - 1;
 
     this.setState({
       [key]: {
-        value: nextValue >= (min || CONTROL_DEFAULTS.SLIDER_MIN) ? nextValue : currentValue,
+        value: nextValue >= (min || CONTROL_DEFAULTS.SLIDER_MIN) ? nextValue : value,
         error: null
       }
     });
@@ -104,29 +115,34 @@ class Form extends React.PureComponent {
     e.stopPropagation();
 
     const isFormValid = this.validateForm();
-    if (isFormValid) return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.state[key].value }), {}));
+    if (isFormValid) submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
   };
 
   getFormControlProps = ({ key, disabled, required, inline }) => {
     const { classes } = this.props;
+    const { error } = this.getControlState(key);
 
     return {
       key,
-      error: !!this.state[key].error,
+      error: !!error,
       disabled: disabled || CONTROL_DEFAULTS.DISABLED,
       required: required || CONTROL_DEFAULTS.REQUIRED,
       className: clsx(
-        {
-          [classes.inline]: inline
-        },
+        { [classes.inline]: inline },
         classes.formControl
       ),
       fullWidth: true
     };
   };
 
+  getControlState = key => {
+    const { [key]: control } = this.state;
+
+    return control;
+  };
+
   renderFormHelperText = ({ key, helperText }) => (
-    <FormHelperText id={`${key}-helper-text`}>{this.state[key].error || helperText}</FormHelperText>
+    <FormHelperText id={`${key}-helper-text`}>{this.getControlState(key).error || helperText}</FormHelperText>
   );
 
   renderInputLabel = ({ key, label }) => {
@@ -145,7 +161,7 @@ class Form extends React.PureComponent {
       <Input
         id={control.key}
         type={control.type}
-        value={this.state[control.key].value}
+        value={this.getControlState(control.key).value}
         onChange={e => this.handleChange(control.key, e.target.value)}
         autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
         autoFocus={false}
@@ -166,7 +182,7 @@ class Form extends React.PureComponent {
       <Input
         id={control.key}
         type={control.type}
-        value={this.state[control.key].value}
+        value={this.getControlState(control.key).value}
         onChange={e => this.handleChange(control.key, e.target.value)}
         autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
         autoFocus={false}
@@ -181,7 +197,7 @@ class Form extends React.PureComponent {
       {this.renderInputLabel(control)}
       <Input
         id={control.key}
-        value={this.state[control.key].value}
+        value={this.getControlState(control.key).value}
         onChange={e => this.handleChange(control.key, e.target.value)}
         autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
         autoFocus={false}
@@ -198,7 +214,7 @@ class Form extends React.PureComponent {
       {this.renderInputLabel(control)}
       <Select
         id={control.key}
-        value={this.state[control.key].value}
+        value={this.getControlState(control.key).value}
         onChange={e => this.handleChange(control.key, e.target.value)}
         autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
         autoFocus={false}
@@ -228,13 +244,13 @@ class Form extends React.PureComponent {
     };
     const thumb = (
       <Typography className={classes.thumbText}>
-        {this.state[control.key].value}
+        {this.getControlState(control.key).value}
       </Typography>
     );
 
     return (
       <div key={control.key} className={className}>
-        {control.label &&
+        {control.label && (
           <Typography
             id={`${control.key}-label`}
             variant="caption"
@@ -242,9 +258,9 @@ class Form extends React.PureComponent {
           >
             {control.label}
           </Typography>
-        }
+        )}
         <div className={classes.sliderContent}>
-          {control.buttons &&
+          {control.buttons && (
             <IconButton
               size="small"
               className={classes.sliderButton}
@@ -252,9 +268,9 @@ class Form extends React.PureComponent {
             >
               <LeftIcon />
             </IconButton>
-          }
+          )}
           <Slider
-            value={this.state[control.key].value}
+            value={this.getControlState(control.key).value}
             aria-labelledby={`${control.key}-label`}
             className={classes.slider}
             onChange={(e, value) => this.handleChange(control.key, value)}
@@ -264,7 +280,7 @@ class Form extends React.PureComponent {
             classes={control.indicator ? sliderClasses : {}}
             {...control.indicator ? { thumb } : {}}
           />
-          {control.buttons &&
+          {control.buttons && (
             <IconButton
               size="small"
               className={classes.sliderButton}
@@ -272,7 +288,7 @@ class Form extends React.PureComponent {
             >
               <RightIcon />
             </IconButton>
-          }
+          )}
         </div>
       </div>
     );
@@ -283,7 +299,7 @@ class Form extends React.PureComponent {
       classes,
       buttonPosition,
       buttonFloated,
-      buttonFullWitdth,
+      buttonFullWidth,
       buttonSize,
       submitIcon: SubmitIcon,
       submitLabel,
@@ -309,10 +325,10 @@ class Form extends React.PureComponent {
 
     return (
       <div className={wrapperClasses}>
-        {secondaryFunction &&
+        {secondaryFunction && (
           <Button
             variant={secondaryVariant}
-            fullWidth={buttonFullWitdth}
+            fullWidth={buttonFullWidth}
             className={classes.secondaryButton}
             onClick={() => secondaryFunction()}
             color={secondaryColor}
@@ -323,11 +339,11 @@ class Form extends React.PureComponent {
             {secondaryLabel}
             {SecondaryIcon && <SecondaryIcon className={classes.buttonIcon} />}
           </Button>
-        }
+        )}
         <Button
           type="submit"
           variant={submitVariant}
-          fullWidth={buttonFullWitdth}
+          fullWidth={buttonFullWidth}
           color={submitColor}
           disabled={submitDisabled}
           size={buttonSize}
@@ -363,5 +379,69 @@ class Form extends React.PureComponent {
     );
   }
 }
+
+Form.propTypes = {
+  controls: PropTypes.arrayOf(PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
+    label: PropTypes.string,
+    required: PropTypes.bool,
+    disabled: PropTypes.bool,
+    autocomplete: PropTypes.string,
+    helperText: PropTypes.string,
+    errorTexts: PropTypes.arrayOf(PropTypes.string),
+    validators: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.func])),
+    inline: PropTypes.bool,
+    indicator: PropTypes.bool,
+    buttons: PropTypes.bool,
+    gutterRight: PropTypes.bool,
+    min: PropTypes.number,
+    max: PropTypes.number,
+    step: PropTypes.number,
+    rows: PropTypes.number,
+    options: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.shape({
+        value: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired
+      })),
+      PropTypes.arrayOf(PropTypes.string)
+    ])
+  })).isRequired,
+  buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
+  buttonFloated: PropTypes.bool,
+  buttonFullWidth: PropTypes.bool,
+  buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
+  submitIcon: PropTypes.object,
+  submitFunction: PropTypes.func.isRequired,
+  submitLabel: PropTypes.string,
+  submitDisabled: PropTypes.bool,
+  submitVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
+  submitColor: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
+  secondaryIcon: PropTypes.object,
+  secondaryFunction: PropTypes.func,
+  secondaryLabel: PropTypes.string,
+  secondaryDisabled: PropTypes.bool,
+  secondaryVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
+  secondaryColor: PropTypes.oneOf(Object.values(BUTTON_COLORS))
+};
+
+Form.defaultProps = {
+  buttonPosition: BUTTON_POSITIONS.CENTER,
+  buttonFloated: false,
+  buttonFullWidth: false,
+  buttonSize: 'medium',
+  submitIcon: null,
+  submitLabel: 'Submit',
+  submitDisabled: false,
+  submitVariant: BUTTON_VARIANTS.CONTAINED,
+  submitColor: BUTTON_COLORS.PRIMARY,
+  secondaryIcon: null,
+  secondaryFunction: null,
+  secondaryLabel: 'Cancel',
+  secondaryDisabled: false,
+  secondaryVariant: BUTTON_VARIANTS.CONTAINED,
+  secondaryColor: BUTTON_COLORS.PRIMARY,
+};
 
 export default withStyles(styles)(Form);

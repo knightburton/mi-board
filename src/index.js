@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { createFirestoreInstance } from 'redux-firestore';
 import { Router } from 'react-router-dom';
 
-import { store } from './store/configure.store';
+import store from './store/configure.store';
 import history from './side.effects/history';
 import firebase from './side.effects/firebase';
 import theme from './theme';

@@ -8,7 +8,7 @@ export default theme => ({
   },
   spinner: {
     position: 'absolute',
-    marginTop: theme.spacing(.3)
+    marginTop: theme.spacing(0.3)
   },
   dialog: {
     padding: theme.spacing(3, 6)

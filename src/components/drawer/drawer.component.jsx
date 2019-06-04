@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { withRouter, Link } from 'react-router-dom';
@@ -10,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Divider from '@material-ui/core/Divider';
 import MenuList from '@material-ui/core/MenuList';
 import MenuItem from '@material-ui/core/MenuItem';
+import Box from '@material-ui/core/Box';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -20,92 +22,25 @@ import ProjectTitle from '../common/project-title/project-title.component';
 
 import Logo from '../../assets/images/icon.png';
 
-import { DRAWER_WIDTH, DRAWER_MENU } from './drawer.constants';
+import { DRAWER_MENU } from './drawer.constants';
 
-const styles = theme => ({
-  drawer: {
-    [theme.breakpoints.up('sm')]: {
-      width: DRAWER_WIDTH
-    },
-    width: 0,
-    flexShrink: 0,
-    whiteSpace: 'nowrap'
-  },
-  drawerOpen: {
-    width: DRAWER_WIDTH,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    }),
-  },
-  drawerClose: {
-    [theme.breakpoints.up('sm')]: {
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen
-      }),
-      overflowX: 'hidden',
-      width: theme.spacing(9) + 1
-    }
-  },
-  avatar: {
-    margin: theme.spacing(0, 2, 0, .5)
-  },
-  toolbar: {
-    padding: theme.spacing(0, 1.5),
-    ...theme.mixins.toolbar
-  },
-  list: {
-    padding: theme.spacing(3, 0)
-  },
-  listItem: {
-    paddingTop: 0,
-    paddingBottom: 0,
-    minHeight: theme.spacing(2)
-  },
-  listItemIcon: {
-    paddingLeft: theme.spacing(1)
-  },
-  listItemText: {
-    fontWeight: 'bold'
-  },
-  toggleToolbar: {
-    padding: 0,
-    ...theme.mixins.toolbar
-  },
-  toggleButton: {
-    margin: theme.spacing(1),
-    padding: theme.spacing(1, 2),
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'flex-end',
-    cursor: 'pointer',
-    '&:hover': {
-      color: theme.palette.secondary.main
-    }
-  },
-  selected: {
-    '&.Mui-selected': {
-      backgroundColor: 'transparent',
-      '&:hover': {
-        backgroundColor: theme.palette.action.hover
-      }
-    },
-    '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-      color: theme.palette.primary.main
-    }
-  }
-});
+import styles from './drawer.styles';
 
 class Drawer extends React.PureComponent {
-  getIsMenuItemSelected = ({ to, exact }) => {
+  isMenuItemSelected = ({ to, exact }) => {
     const { location: { pathname } } = this.props;
 
-    return exact ? to === pathname : pathname.includes(to)
+    return exact ? to === pathname : pathname.includes(to);
+  };
+
+  handleMenuItemClick = () => {
+    const { isMobileDrawerOpened, toggleMobileDrawer } = this.props;
+
+    if (isMobileDrawerOpened) toggleMobileDrawer();
   };
 
   renderDrawerContent = (toggleDrawer, isMobile = false) => {
-    const { classes, isDrawerOpened, isMobileDrawerOpened, toggleMobileDrawer } = this.props;
+    const { classes, isDrawerOpened } = this.props;
 
     return (
       <Fragment>
@@ -120,8 +55,8 @@ class Drawer extends React.PureComponent {
               key={item.key}
               component={Link}
               to={item.to}
-              selected={this.getIsMenuItemSelected(item)}
-              onClick={() => isMobileDrawerOpened ? toggleMobileDrawer() : null}
+              selected={this.isMenuItemSelected(item)}
+              onClick={() => this.handleMenuItemClick()}
               classes={{ selected: classes.selected }}
               className={classes.listItem}
               disableRipple
@@ -136,7 +71,7 @@ class Drawer extends React.PureComponent {
         <Divider />
         <Hidden smDown>
           <Toolbar className={classes.toggleToolbar}>
-            <div
+            <Box
               onClick={() => toggleDrawer()}
               className={classes.toggleButton}
               aria-label="expand or collapse navigation bar"
@@ -145,7 +80,7 @@ class Drawer extends React.PureComponent {
                 ? <ChevronLeftIcon />
                 : <ChevronRightIcon />
               }
-            </div>
+            </Box>
           </Toolbar>
         </Hidden>
       </Fragment>
@@ -201,5 +136,15 @@ class Drawer extends React.PureComponent {
     );
   }
 }
+
+Drawer.propTypes = {
+  isDrawerOpened: PropTypes.bool.isRequired,
+  isMobileDrawerOpened: PropTypes.bool.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
+  toggleMobileDrawer: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired
+  }).isRequired
+};
 
 export default withRouter(withStyles(styles)(Drawer));

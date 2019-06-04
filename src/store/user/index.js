@@ -61,20 +61,12 @@ export const reducer = handleActions(
 
 export const login = (firebase, credentials) => async dispatch => {
   await dispatch(setAuthInProgress(true));
-  try {
-    await firebase.login(credentials);
-  } catch (error) {
-  } finally {
-    await dispatch(setAuthInProgress(false));
-  }
+  await firebase.login(credentials);
+  await dispatch(setAuthInProgress(false));
 };
 
 export const logout = firebase => async dispatch => {
   await dispatch(setAuthInProgress(true));
-  try {
-    await firebase.logout();
-  } catch (error) {
-  } finally {
-    await dispatch(setAuthInProgress(false));
-  }
+  await firebase.logout();
+  await dispatch(setAuthInProgress(false));
 };

@@ -16,6 +16,6 @@ const enhancers = [
   middlewares
 ];
 
-export const store = isDevelopment
+export default isDevelopment
   ? createStore(rootReducer, composeWithDevTools(...enhancers))
   : createStore(rootReducer, compose(...enhancers));
