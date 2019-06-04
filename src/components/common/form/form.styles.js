@@ -48,7 +48,8 @@ export default theme => ({
   },
   thumbText: {
     ...theme.typography.caption,
-    paddingTop: '1px'
+    paddingTop: '1px',
+    paddingLeft: '1px'
   },
   inline: {
     [theme.breakpoints.up('sm')]: {
