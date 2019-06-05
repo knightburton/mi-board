@@ -10,7 +10,6 @@ export default [
     max: 60,
     step: 1,
     indicator: true,
-    buttons: true,
     inline: true
   },
   {
@@ -22,7 +21,6 @@ export default [
     max: 59,
     step: 1,
     indicator: true,
-    buttons: true,
     inline: true
   }
 ];
