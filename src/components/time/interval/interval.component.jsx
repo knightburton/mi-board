@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -13,6 +14,16 @@ import SectionSelect from '../../common/section-select/section-select.component'
 import { controls, optionsMap } from './interval.constants';
 
 export default class Interval extends React.PureComponent {
+  static propTypes = {
+    setIntervalParams: PropTypes.func.isRequired
+  };
+
+  handleFormSubmit = data => {
+    const { setIntervalParams } = this.props;
+
+    setIntervalParams(data);
+  };
+
   render() {
     return (
       <Container maxWidth="md">
@@ -37,7 +48,7 @@ export default class Interval extends React.PureComponent {
             controls={controls}
             submitIcon={PlayIcon}
             submitLabel="Start"
-            submitFunction={() => {}}
+            submitFunction={data => this.handleFormSubmit(data)}
             secondaryColor="secondary"
             secondaryIcon={SetBackIcon}
             secondaryLabel="Reset"

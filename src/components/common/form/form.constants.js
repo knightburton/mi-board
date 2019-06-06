@@ -2,7 +2,7 @@ export const CONTROL_TYPES = {
   PASSWORD: 'password',
   TEXT: 'text',
   TEXTAREA: 'textarea',
-  NUMBER: 'number',
+  NUMBER: 'Number',
   SELECT: 'select',
   SLIDER: 'slider'
 };

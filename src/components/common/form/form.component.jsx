@@ -44,6 +44,12 @@ class Form extends React.PureComponent {
     };
   }
 
+  getControlState = key => {
+    const { [key]: control } = this.state;
+
+    return control;
+  };
+
   getInvalidValidatorIndex = (value, validators) => {
     const invalidIndex = validators.findIndex(validator => (
       (typeof validator === 'function' && !validator(value))
@@ -135,12 +141,6 @@ class Form extends React.PureComponent {
     };
   };
 
-  getControlState = key => {
-    const { [key]: control } = this.state;
-
-    return control;
-  };
-
   renderFormHelperText = ({ key, helperText }) => (
     <FormHelperText id={`${key}-helper-text`}>{this.getControlState(key).error || helperText}</FormHelperText>
   );
@@ -161,8 +161,8 @@ class Form extends React.PureComponent {
       <Input
         id={control.key}
         type={control.type}
-        value={this.getControlState(control.key).value}
-        onChange={e => this.handleChange(control.key, e.target.value)}
+        value={+this.getControlState(control.key).value}
+        onChange={e => this.handleChange(control.key, +e.target.value)}
         autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
         autoFocus={false}
         inputProps={{

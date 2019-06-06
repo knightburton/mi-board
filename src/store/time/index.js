@@ -15,11 +15,16 @@ export const intialState = {
   clock: 0,
   intervalID: null,
   interval: {
-    repeat: 0,
-    warmup: 0,
-    high: 0,
-    low: 0,
-    cooldown: 0
+    tasks: 0,
+    repeats: 0,
+    warmupMin: 0,
+    warmupSec: 0,
+    highMin: 0,
+    highSec: 0,
+    lowMin: 0,
+    lowSec: 0,
+    cooldownMin: 0,
+    cooldownSec: 0,
   },
   countdown: {
     time: 0
@@ -76,7 +81,7 @@ export const decreaseTimer = createAction(
 
 export const setIntervalParams = createAction(
   SET_INTERVAL_PARAMS,
-  (repeat, warmup, hight, low, cooldown) => ({ repeat, warmup, hight, low, cooldown })
+  params => params
 );
 export const resetIntervalParams = createAction(
   RESET_INTERVAL_PARAMS
@@ -140,10 +145,7 @@ export const reducer = handleActions(
     [increaseTimer]: state => ({ ...state, clock: state.clock === MAX_CLOCK_VALUE ? state.clock : state.clock + 1 }),
     [decreaseTimer]: state => ({ ...state, clock: state.clock === MIN_CLOCK_VALUE ? state.clock : state.clock + 1 }),
 
-    [setIntervalParams]: (state, { payload: { repeat, warmup, hight, low, cooldown } }) => ({
-      ...state,
-      interval: { repeat, warmup, hight, low, cooldown }
-    }),
+    [setIntervalParams]: (state, { payload: params }) => ({ ...state, interval: params }),
     [resetIntervalParams]: state => ({ ...state, interval: intialState.interval }),
 
     [setCountdownTime]: (state, { payload: time }) => ({ ...state, countdown: { time } }),
