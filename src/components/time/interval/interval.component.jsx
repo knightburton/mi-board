@@ -8,8 +8,9 @@ import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
 
 import Form from '../../common/form/form.component';
 import Section from '../../common/section/section.component';
+import SectionSelect from '../../common/section-select/section-select.component';
 
-import controls from './interval.constants';
+import { controls, optionsMap } from './interval.constants';
 
 export default class Interval extends React.PureComponent {
   render() {
@@ -22,6 +23,14 @@ export default class Interval extends React.PureComponent {
             and subsequent logic states that appear after a predetermined delay.
           </Typography>
         </Section>
+
+        <SectionSelect
+          title="Presets"
+          options={optionsMap}
+          selectedByDefault="zero"
+          onSelect={() => {}}
+          breakpoints={{ xs: 12, sm: 6 }}
+        />
 
         <Section title="Settings" gutterBottom>
           <Form

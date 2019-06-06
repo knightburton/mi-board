@@ -22,7 +22,7 @@ class Section extends React.PureComponent {
     return (
       <Fragment>
         {title && (
-          <Typography variant="subtitle1" className={clsx({ [classes.marginTop]: !!title })}>
+          <Typography variant="subtitle1" className={classes.marginTop}>
             {title}
           </Typography>
         )}
