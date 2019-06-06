@@ -20,6 +20,11 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import styles from './appbar.styles';
 
 class AppBar extends React.PureComponent {
+  static propTypes = {
+    logout: PropTypes.func.isRequired,
+    toggleMobileDrawer: PropTypes.func.isRequired
+  };
+
   state = {
     accountMenu: null
   };
@@ -104,10 +109,5 @@ class AppBar extends React.PureComponent {
     );
   }
 }
-
-AppBar.propTypes = {
-  logout: PropTypes.func.isRequired,
-  toggleMobileDrawer: PropTypes.func.isRequired
-};
 
 export default withRouter(withStyles(styles)(AppBar));

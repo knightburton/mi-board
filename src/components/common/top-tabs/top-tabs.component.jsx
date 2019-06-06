@@ -9,6 +9,15 @@ import Tab from '@material-ui/core/Tab';
 import styles from './top-tabs.styles';
 
 class TopTabs extends React.Component {
+  static propTypes = {
+    items: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.string,
+      label: PropTypes.string,
+      to: PropTypes.string
+    })).isRequired,
+    selectedByDefault: PropTypes.string.isRequired
+  };
+
   constructor(props) {
     super(props);
 
@@ -49,14 +58,5 @@ class TopTabs extends React.Component {
     );
   }
 }
-
-TopTabs.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string,
-    label: PropTypes.string,
-    to: PropTypes.string
-  })).isRequired,
-  selectedByDefault: PropTypes.string.isRequired
-};
 
 export default withStyles(styles)(TopTabs);

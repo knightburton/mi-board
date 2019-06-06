@@ -9,6 +9,17 @@ import Paper from '@material-ui/core/Paper';
 import styles from './section.styles';
 
 class Section extends React.PureComponent {
+  static propTypes = {
+    title: PropTypes.string,
+    gutterBottom: PropTypes.bool,
+    children: PropTypes.node.isRequired
+  };
+
+  static defaultProps = {
+    title: '',
+    gutterBottom: false
+  };
+
   render() {
     const { title, gutterBottom, children, classes } = this.props;
     const paperClassNames = clsx(
@@ -33,16 +44,5 @@ class Section extends React.PureComponent {
     );
   }
 }
-
-Section.propTypes = {
-  title: PropTypes.string,
-  gutterBottom: PropTypes.bool,
-  children: PropTypes.node.isRequired
-};
-
-Section.defaultProps = {
-  title: '',
-  gutterBottom: false
-};
 
 export default withStyles(styles)(Section);

@@ -27,6 +27,16 @@ import { DRAWER_MENU } from './drawer.constants';
 import styles from './drawer.styles';
 
 class Drawer extends React.PureComponent {
+  static propTypes = {
+    isDrawerOpened: PropTypes.bool.isRequired,
+    isMobileDrawerOpened: PropTypes.bool.isRequired,
+    toggleDrawer: PropTypes.func.isRequired,
+    toggleMobileDrawer: PropTypes.func.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired
+  };
+
   isMenuItemSelected = ({ to, exact }) => {
     const { location: { pathname } } = this.props;
 
@@ -136,15 +146,5 @@ class Drawer extends React.PureComponent {
     );
   }
 }
-
-Drawer.propTypes = {
-  isDrawerOpened: PropTypes.bool.isRequired,
-  isMobileDrawerOpened: PropTypes.bool.isRequired,
-  toggleDrawer: PropTypes.func.isRequired,
-  toggleMobileDrawer: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
-};
 
 export default withRouter(withStyles(styles)(Drawer));

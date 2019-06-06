@@ -16,6 +16,16 @@ import Logo from '../../assets/images/icon.png';
 import styles from './login.styles';
 
 class Login extends React.PureComponent {
+  static propTypes = {
+    authInProgress: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+    login: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    error: null,
+  };
+
   render() {
     const { error, authInProgress, login, classes } = this.props;
 
@@ -67,15 +77,5 @@ class Login extends React.PureComponent {
     );
   }
 }
-
-Login.propTypes = {
-  authInProgress: PropTypes.bool.isRequired,
-  error: PropTypes.string,
-  login: PropTypes.func.isRequired
-};
-
-Login.defaultProps = {
-  error: null,
-};
 
 export default withStyles(styles)(Login);

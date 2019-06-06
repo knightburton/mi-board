@@ -13,6 +13,11 @@ import Dashboard from './dashboard/dashboard.container';
 import Time from './time/time.container';
 
 class App extends React.PureComponent {
+  static propTypes = {
+    authIsLoaded: PropTypes.bool.isRequired,
+    authIsEmpty: PropTypes.bool.isRequired
+  };
+
   render() {
     const { authIsLoaded, authIsEmpty } = this.props;
 
@@ -39,10 +44,5 @@ class App extends React.PureComponent {
     );
   }
 }
-
-App.propTypes = {
-  authIsLoaded: PropTypes.bool.isRequired,
-  authIsEmpty: PropTypes.bool.isRequired
-};
 
 export default withRouter(App);

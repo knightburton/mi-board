@@ -8,6 +8,11 @@ import Hidden from '@material-ui/core/Hidden';
 import styles from './wrapper.styles';
 
 class Wrapper extends React.PureComponent {
+  static propTypes = {
+    isDrawerOpened: PropTypes.bool.isRequired,
+    children: PropTypes.node.isRequired
+  };
+
   render() {
     const { isDrawerOpened, classes, children } = this.props;
     const smallClasses = clsx(classes.content, {
@@ -32,10 +37,5 @@ class Wrapper extends React.PureComponent {
     );
   }
 }
-
-Wrapper.propTypes = {
-  isDrawerOpened: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired
-};
 
 export default withStyles(styles)(Wrapper);

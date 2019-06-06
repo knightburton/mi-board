@@ -10,6 +10,18 @@ import Dialog from '@material-ui/core/Dialog';
 import styles from './waiting.styles';
 
 class Waiting extends React.PureComponent {
+  static propTypes = {
+    screen: PropTypes.bool,
+    open: PropTypes.bool,
+    label: PropTypes.string
+  };
+
+  static defaultProps = {
+    screen: false,
+    open: true,
+    label: 'Loading...'
+  };
+
   render() {
     const { screen, open, label, classes } = this.props;
 
@@ -45,17 +57,5 @@ class Waiting extends React.PureComponent {
     );
   }
 }
-
-Waiting.propTypes = {
-  screen: PropTypes.bool,
-  open: PropTypes.bool,
-  label: PropTypes.string
-};
-
-Waiting.defaultProps = {
-  screen: false,
-  open: true,
-  label: 'Loading...'
-};
 
 export default withStyles(styles)(Waiting);

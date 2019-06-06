@@ -14,6 +14,31 @@ import Box from '@material-ui/core/Box';
 import styles from './section-select.styles';
 
 class SectionSelect extends React.PureComponent {
+  static propTypes = {
+    title: PropTypes.string,
+    gutterBottom: PropTypes.bool,
+    options: PropTypes.arrayOf(PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired
+    })).isRequired,
+    onSelect: PropTypes.func.isRequired,
+    selectedByDefault: PropTypes.string,
+    breakpoints: PropTypes.shape({
+      xs: PropTypes.number,
+      sm: PropTypes.number,
+      md: PropTypes.number,
+      lg: PropTypes.number
+    })
+  };
+
+  static defaultProps = {
+    title: '',
+    gutterBottom: false,
+    selectedByDefault: null,
+    breakpoints: { xs: 12 }
+  };
+
   state = {
     selected: null
   };
@@ -80,30 +105,5 @@ class SectionSelect extends React.PureComponent {
     );
   }
 }
-
-SectionSelect.propTypes = {
-  title: PropTypes.string,
-  gutterBottom: PropTypes.bool,
-  options: PropTypes.arrayOf(PropTypes.shape({
-    key: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
-  })).isRequired,
-  onSelect: PropTypes.func.isRequired,
-  selectedByDefault: PropTypes.string,
-  breakpoints: PropTypes.shape({
-    xs: PropTypes.number,
-    sm: PropTypes.number,
-    md: PropTypes.number,
-    lg: PropTypes.number
-  })
-};
-
-SectionSelect.defaultProps = {
-  title: '',
-  gutterBottom: false,
-  selectedByDefault: null,
-  breakpoints: { xs: 12 }
-};
 
 export default withStyles(styles)(SectionSelect);
