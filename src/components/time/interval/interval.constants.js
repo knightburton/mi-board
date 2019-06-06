@@ -32,7 +32,6 @@ export const controls = [
     defaultValue: '',
     label: 'Number of Tasks',
     required: true,
-    helperText: 'How many task do you have',
     ...from1To100
   },
   {
@@ -41,7 +40,6 @@ export const controls = [
     defaultValue: '',
     label: 'Number of Sets',
     required: true,
-    helperText: 'How many times do you want to repeat the tasks',
     ...from1To100
   },
   {
