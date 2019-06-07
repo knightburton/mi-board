@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import { setIntervalParams } from '../../../store/time';
+import { getVisibleTimer } from '../../../store/time';
 import Interval from './interval.component';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  visibleTimer: getVisibleTimer(state)
+});
 
-const mapDispatchToProps = {
-  setIntervalParams
-};
+const mapDispatchToProps = {};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Interval);
