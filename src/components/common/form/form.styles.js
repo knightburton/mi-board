@@ -90,6 +90,8 @@ export default theme => ({
   buttonIcon: {
     marginLeft: theme.spacing(1)
   },
+
+  // Slider overrides
   thumb: {
     height: theme.spacing(3),
     width: theme.spacing(3),
@@ -107,5 +109,11 @@ export default theme => ({
   },
   focused: {},
   activated: {},
-  jumped: {}
+  jumped: {},
+
+  datePicker: {
+    '& > label:first-of-type': {
+      marginLeft: theme.spacing(1.5)
+    }
+  }
 });

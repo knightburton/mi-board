@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/lab/Slider';
+import { DatePicker } from '@material-ui/pickers';
 
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -36,7 +37,7 @@ class Form extends React.PureComponent {
       key: PropTypes.string.isRequired,
       type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
       defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
-      label: PropTypes.string,
+      label: PropTypes.string.isRequired,
       required: PropTypes.bool,
       disabled: PropTypes.bool,
       autocomplete: PropTypes.string,
@@ -57,7 +58,8 @@ class Form extends React.PureComponent {
           label: PropTypes.string.isRequired
         })),
         PropTypes.arrayOf(PropTypes.string)
-      ])
+      ]),
+      format: PropTypes.string
     })).isRequired,
     allowControlsChange: PropTypes.bool,
     buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
@@ -199,7 +201,7 @@ class Form extends React.PureComponent {
     if (isFormValid) submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
   };
 
-  getFormControlProps = ({ key, disabled, required, inline }) => {
+  getFormControlProps = ({ key, type, disabled, required, inline }) => {
     const { classes } = this.props;
     const { error } = this.getControlState(key);
 
@@ -209,7 +211,10 @@ class Form extends React.PureComponent {
       disabled: disabled || CONTROL_DEFAULTS.DISABLED,
       required: required || CONTROL_DEFAULTS.REQUIRED,
       className: clsx(
-        { [classes.inline]: inline },
+        {
+          [classes.inline]: inline,
+          [classes.datePicker]: type === CONTROL_TYPES.DATE
+        },
         classes.formControl
       ),
       fullWidth: true
@@ -369,6 +374,21 @@ class Form extends React.PureComponent {
     );
   };
 
+  renderDateControl = control => (
+    <DatePicker
+      {...this.getFormControlProps(control)}
+      id={control.key}
+      label={control.label}
+      value={this.getControlState(control.key).value}
+      onChange={date => this.handleChange(control.key, date)}
+      invalidDateMessage={this.getControlState(control.key).error}
+      helperText={control.helperText || null}
+      format={control.format || CONTROL_DEFAULTS.DATE_FORMAT}
+      animateYearScrolling
+      showTodayButton
+    />
+  );
+
   renderButtons = () => {
     const {
       classes,
@@ -441,6 +461,7 @@ class Form extends React.PureComponent {
       if (control.type === CONTROL_TYPES.NUMBER) return [...acc, this.renderNumberControl(control)];
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, this.renderSelectControl(control)];
       if (control.type === CONTROL_TYPES.SLIDER) return [...acc, this.renderSliderControl(control)];
+      if (control.type === CONTROL_TYPES.DATE) return [...acc, this.renderDateControl(control)];
       return acc;
     }, []);
 

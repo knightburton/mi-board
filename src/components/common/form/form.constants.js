@@ -4,7 +4,8 @@ export const CONTROL_TYPES = {
   TEXTAREA: 'textarea',
   NUMBER: 'Number',
   SELECT: 'select',
-  SLIDER: 'slider'
+  SLIDER: 'slider',
+  DATE: 'date'
 };
 
 export const CONTROL_DEFAULTS = {
@@ -18,7 +19,8 @@ export const CONTROL_DEFAULTS = {
   AUTOCOMPLETE: 'nope',
   SLIDER_MIN: 0,
   SLIDER_MAX: 60,
-  SLIDER_STEP: 1
+  SLIDER_STEP: 1,
+  DATE_FORMAT: 'YYYY-MM-DD'
 };
 
 export const BUTTON_SIZES = {
