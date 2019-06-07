@@ -20,11 +20,12 @@ import RightIcon from '@material-ui/icons/ChevronRight';
 import {
   CONTROL_DEFAULTS,
   CONTROL_TYPES,
-  BUTTON_POSITIONS,
   ERROR_TEXTS,
+  BUTTON_POSITIONS,
   BUTTON_SIZES,
   BUTTON_VARIANTS,
-  BUTTON_COLORS
+  BUTTON_COLORS,
+  VALIDATORS
 } from './form.constants';
 
 import styles from './form.styles';
@@ -137,7 +138,7 @@ class Form extends React.PureComponent {
   validateControl = ({ key, required, validators, errorTexts }) => {
     const { value } = this.getControlState(key);
 
-    if (required && !value) return ERROR_TEXTS.REQUIRED;
+    if (required && !VALIDATORS.REQUIRED.test(value)) return ERROR_TEXTS.REQUIRED;
     if (validators) {
       const invalidValidatorIndex = this.getInvalidValidatorIndex(value, validators);
       return invalidValidatorIndex !== null ? errorTexts[invalidValidatorIndex] : null;

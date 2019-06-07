@@ -1,6 +1,9 @@
 import { CONTROL_TYPES, VALIDATORS, ERROR_TEXTS } from '../../common/form/form.constants';
 
 const from1To100 = {
+  min: 1,
+  max: 100,
+  step: 1,
   errorTexts: [ERROR_TEXTS.NUMBER_BETWEEN(1, 100)],
   validators: [VALIDATORS.NUMBER_BETWEEN(1, 100)]
 };

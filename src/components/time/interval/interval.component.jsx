@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
-import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
-import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
+import CheckIcon from '@material-ui/icons/Check';
 
 import Form from '../../common/form/form.component';
 import Section from '../../common/section/section.component';
@@ -63,16 +62,11 @@ export default class Interval extends React.PureComponent {
         <Section title="Settings" gutterBottom>
           <Form
             controls={formControls}
-            submitIcon={PlayIcon}
-            submitLabel="Start"
+            submitIcon={CheckIcon}
+            submitLabel="Set"
             submitFunction={data => this.handleFormSubmit(data)}
-            secondaryColor="secondary"
-            secondaryIcon={SetBackIcon}
-            secondaryLabel="Reset"
-            secondaryFunction={() => {}}
             buttonPosition="right"
             buttonSize="small"
-            buttonFloated
             allowControlsChange
           />
         </Section>
