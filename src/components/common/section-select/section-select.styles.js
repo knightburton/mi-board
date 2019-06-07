@@ -9,10 +9,13 @@ export default theme => ({
     display: 'flex',
     flexDirection: 'row'
   },
+  icon: {
+    marginTop: theme.spacing(0.4)
+  },
   title: {
-    margin: theme.spacing(0.5, 0, 0, 1),
+    marginLeft: theme.spacing(2)
   },
   description: {
-    marginLeft: theme.spacing(6.5)
+    marginLeft: theme.spacing(5)
   }
 });

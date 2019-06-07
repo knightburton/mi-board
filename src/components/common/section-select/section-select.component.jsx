@@ -8,8 +8,10 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import Radio from '@material-ui/core/Radio';
 import Box from '@material-ui/core/Box';
+
+import CheckedIcon from '@material-ui/icons/RadioButtonChecked';
+import UncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 import styles from './section-select.styles';
 
@@ -79,13 +81,10 @@ class SectionSelect extends React.PureComponent {
                 <CardActionArea onClick={() => this.handleCardClick(option.key)} disableRipple>
                   <CardContent>
                     <Box className={classes.header}>
-                      <Radio
-                        checked={selected === option.key}
-                        color={selected === option.key ? 'primary' : 'default'}
-                        value={option.key}
-                        name={`${option.key}-radio`}
-                        inputProps={{ 'aria-label': option.key }}
-                      />
+                      {selected === option.key
+                        ? <CheckedIcon color="primary" className={classes.icon} />
+                        : <UncheckedIcon className={classes.icon} />
+                      }
                       <Typography className={classes.title} variant="h5" component="p" gutterBottom>
                         {option.title}
                       </Typography>
