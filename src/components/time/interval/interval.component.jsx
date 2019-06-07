@@ -11,12 +11,27 @@ import Form from '../../common/form/form.component';
 import Section from '../../common/section/section.component';
 import SectionSelect from '../../common/section-select/section-select.component';
 
-import { controls, optionsMap } from './interval.constants';
+import { controls, options, optionsMap } from './interval.constants';
 
 export default class Interval extends React.PureComponent {
   static propTypes = {
     setIntervalParams: PropTypes.func.isRequired
   };
+
+  state = {
+    formControls: controls
+  };
+
+  componentWillMount() {
+    this.setState({ formControls: this.changeFormValuesTo('zero') });
+  }
+
+  changeFormValuesTo = key => controls.map(control => ({
+    ...control,
+    defaultValue: options[key].data[control.key]
+  }));
+
+  handleSectionSelect = key => this.setState({ formControls: this.changeFormValuesTo(key) });
 
   handleFormSubmit = data => {
     const { setIntervalParams } = this.props;
@@ -25,6 +40,8 @@ export default class Interval extends React.PureComponent {
   };
 
   render() {
+    const { formControls } = this.state;
+
     return (
       <Container maxWidth="md">
 
@@ -39,13 +56,13 @@ export default class Interval extends React.PureComponent {
           title="Presets"
           options={optionsMap}
           selectedByDefault="zero"
-          onSelect={() => {}}
+          onSelect={key => this.handleSectionSelect(key)}
           breakpoints={{ xs: 12, sm: 6 }}
         />
 
         <Section title="Settings" gutterBottom>
           <Form
-            controls={controls}
+            controls={formControls}
             submitIcon={PlayIcon}
             submitLabel="Start"
             submitFunction={data => this.handleFormSubmit(data)}
@@ -56,6 +73,7 @@ export default class Interval extends React.PureComponent {
             buttonPosition="right"
             buttonSize="small"
             buttonFloated
+            allowControlsChange
           />
         </Section>
 

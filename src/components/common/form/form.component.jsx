@@ -58,6 +58,7 @@ class Form extends React.PureComponent {
         PropTypes.arrayOf(PropTypes.string)
       ])
     })).isRequired,
+    allowControlsChange: PropTypes.bool,
     buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
     buttonFloated: PropTypes.bool,
     buttonFullWidth: PropTypes.bool,
@@ -77,6 +78,7 @@ class Form extends React.PureComponent {
   };
 
   static defaultProps = {
+    allowControlsChange: false,
     buttonPosition: BUTTON_POSITIONS.CENTER,
     buttonFloated: false,
     buttonFullWidth: false,
@@ -98,15 +100,23 @@ class Form extends React.PureComponent {
     super(props);
 
     this.state = {
-      ...props.controls.reduce((o, { key, defaultValue }) => ({
-        ...o,
-        [key]: {
-          value: defaultValue,
-          error: null
-        }
-      }), {})
+      ...this.getDefaultControlValuesFrom(props.controls)
     };
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { allowControlsChange, controls } = this.props;
+
+    if (allowControlsChange && controls !== nextProps.controls) this.setState({ ...this.getDefaultControlValuesFrom(nextProps.controls) });
+  }
+
+  getDefaultControlValuesFrom = controls => controls.reduce((o, { key, defaultValue }) => ({
+    ...o,
+    [key]: {
+      value: defaultValue,
+      error: null
+    }
+  }), {});
 
   getControlState = key => {
     const { [key]: control } = this.state;
