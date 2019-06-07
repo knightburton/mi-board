@@ -11,6 +11,7 @@ import Wrapper from './wrapper/wrapper.container';
 
 import Dashboard from './dashboard/dashboard.container';
 import Time from './time/time.container';
+import Todo from './todo/todo.container';
 
 class App extends React.PureComponent {
   static propTypes = {
@@ -34,6 +35,7 @@ class App extends React.PureComponent {
                 <Switch>
                   <Route exact path="/dashboard" component={Dashboard} />
                   <Route path="/time" component={Time} />
+                  <Route path="/todo" component={Todo} />
                   <Redirect to="/dashboard" />
                 </Switch>
               </Wrapper>
