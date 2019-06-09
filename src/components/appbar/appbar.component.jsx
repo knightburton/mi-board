@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
 import MuiAppBar from '@material-ui/core/AppBar';
@@ -22,7 +22,12 @@ import styles from './appbar.styles';
 class AppBar extends React.PureComponent {
   static propTypes = {
     logout: PropTypes.func.isRequired,
-    toggleMobileDrawer: PropTypes.func.isRequired
+    toggleMobileDrawer: PropTypes.func.isRequired,
+    profileDisplayName: PropTypes.string
+  };
+
+  static defaultProps = {
+    profileDisplayName: null
   };
 
   state = {
@@ -50,20 +55,20 @@ class AppBar extends React.PureComponent {
         anchorEl={accountMenu}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'right'
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right',
+          horizontal: 'right'
         }}
         open={open}
         onClose={() => this.handleAccountMenuClose()}
       >
-        <MenuItem onClick={() => this.handleAccountMenuClose()}>
+        <MenuItem component={Link} to="/profile" onClick={() => this.handleAccountMenuClose()}>
           <ListItemIcon>
             <PersonOutlineIcon />
           </ListItemIcon>
-          <Typography variant="inherit">Details</Typography>
+          <Typography variant="inherit">Profile</Typography>
         </MenuItem>
         <MenuItem onClick={() => this.handleLogoutClick()}>
           <ListItemIcon>
@@ -76,7 +81,7 @@ class AppBar extends React.PureComponent {
   };
 
   render() {
-    const { toggleMobileDrawer, classes } = this.props;
+    const { toggleMobileDrawer, profileDisplayName, classes } = this.props;
     const { accountMenu } = this.state;
 
     return (
@@ -94,6 +99,9 @@ class AppBar extends React.PureComponent {
             </IconButton>
           </Hidden>
           <div className={classes.grow} />
+          {profileDisplayName && (
+            <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
+          )}
           <IconButton
             edge="end"
             aria-owns={accountMenu ? 'material-appbar' : undefined}

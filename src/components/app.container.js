@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import App from './app.component';
-import { getFirebaseAuthIsLoaded, getFirebaseAuthIsEmpty } from '../store/user';
+import { getFirebaseAuthIsLoaded, getFirebaseAuthIsEmpty } from '../store/profile';
 
 const mapStateToProps = state => ({
   authIsLoaded: getFirebaseAuthIsLoaded(state),

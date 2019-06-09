@@ -1,7 +1,7 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
-import { getAuthInProgress, getFirebaseAuthErrorMessage, login } from '../../store/user';
+import { getAuthInProgress, getFirebaseAuthErrorMessage, login } from '../../store/profile';
 import Login from './login.component';
 
 const mapStateToProps = state => ({

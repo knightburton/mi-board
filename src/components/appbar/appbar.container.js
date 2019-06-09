@@ -2,12 +2,14 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
 
-import { logout } from '../../store/user';
+import { logout, getDisplayName } from '../../store/profile';
 import { toggleMobileDrawer } from '../../store/app';
 
 import AppBar from './appbar.component';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  profileDisplayName: getDisplayName(state)
+});
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
   logout: () => dispatch(logout(firebase)),

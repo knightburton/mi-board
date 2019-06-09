@@ -7,5 +7,8 @@ export default theme => ({
   },
   grow: {
     flexGrow: 1
+  },
+  profileName: {
+    marginRight: theme.spacing(0.5)
   }
 });

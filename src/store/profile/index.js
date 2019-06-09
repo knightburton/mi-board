@@ -44,6 +44,10 @@ export const getFirebaseAuthIsEmpty = createSelector(
   getFirebaseAuth,
   auth => auth && auth.isEmpty
 );
+export const getDisplayName = createSelector(
+  getFirebaseAuth,
+  auth => ((auth && auth.displayName) || auth.email) || null
+);
 
 /**
  * REDUCER
