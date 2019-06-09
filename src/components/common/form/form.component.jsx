@@ -105,6 +105,12 @@ class Form extends React.PureComponent {
     return null;
   };
 
+  getIsFormValid = () => {
+    const { controls } = this.props;
+
+    return controls.every(control => this.validateControl(control) === null);
+  };
+
   validateControl = ({ key, required, validators, errorTexts }) => {
     const { value } = this.getControlState(key);
 
@@ -129,8 +135,6 @@ class Form extends React.PureComponent {
         }
       }));
     });
-
-    return controls.every(control => this.getControlState(control.key).error === null);
   };
 
   handleChange = (key, value) => this.setState({ [key]: { value, error: null } });
@@ -165,8 +169,9 @@ class Form extends React.PureComponent {
     e.preventDefault();
     e.stopPropagation();
 
-    const isFormValid = this.validateForm();
-    if (isFormValid) submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
+    const isFormValid = this.getIsFormValid();
+    if (isFormValid) return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
+    return this.validateForm();
   };
 
   renderButtons = () => {
