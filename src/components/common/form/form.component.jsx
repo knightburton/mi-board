@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
-import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import InputLabel from '@material-ui/core/InputLabel';
 
 import ControlText from './controls/control-text.component';
 import ControlTextarea from './controls/control-textarea.component';
@@ -11,66 +12,39 @@ import ControlNumber from './controls/control-number.component';
 import ControlSelect from './controls/control-select.component';
 import ControlSlider from './controls/control-slider.component';
 import ControlDate from './controls/control-date.component';
+import ButtonsDefault from './buttons/buttons-default.component';
+import ButtonsSingle from './buttons/buttons-single.component';
 
 import {
   CONTROL_DEFAULTS,
   CONTROL_TYPES,
   ERROR_TEXTS,
-  BUTTON_POSITIONS,
-  BUTTON_SIZES,
-  BUTTON_VARIANTS,
-  BUTTON_COLORS,
   VALIDATORS
 } from './form.constants';
 
 import { controlPropTypes } from './controls/control.proptypes';
+import { buttonsPropTypes, buttonsDefaultProps } from './buttons/buttons.proptypes';
 import styles from './form.styles';
 
 class Form extends React.PureComponent {
   static propTypes = {
     controls: PropTypes.arrayOf(controlPropTypes).isRequired,
+    single: PropTypes.bool,
     allowControlsChange: PropTypes.bool,
-    buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
-    buttonFloated: PropTypes.bool,
-    buttonFullWidth: PropTypes.bool,
-    buttonSize: PropTypes.oneOf(Object.values(BUTTON_SIZES)),
-    submitIcon: PropTypes.object,
-    submitFunction: PropTypes.func.isRequired,
-    submitLabel: PropTypes.string,
-    submitDisabled: PropTypes.bool,
-    submitVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
-    submitColor: PropTypes.oneOf(Object.values(BUTTON_COLORS)),
-    secondaryIcon: PropTypes.object,
-    secondaryFunction: PropTypes.func,
-    secondaryLabel: PropTypes.string,
-    secondaryDisabled: PropTypes.bool,
-    secondaryVariant: PropTypes.oneOf(Object.values(BUTTON_VARIANTS)),
-    secondaryColor: PropTypes.oneOf(Object.values(BUTTON_COLORS))
+    ...buttonsPropTypes
   };
 
   static defaultProps = {
+    single: false,
     allowControlsChange: false,
-    buttonPosition: BUTTON_POSITIONS.CENTER,
-    buttonFloated: false,
-    buttonFullWidth: false,
-    buttonSize: 'medium',
-    submitIcon: null,
-    submitLabel: 'Submit',
-    submitDisabled: false,
-    submitVariant: BUTTON_VARIANTS.CONTAINED,
-    submitColor: BUTTON_COLORS.PRIMARY,
-    secondaryIcon: null,
-    secondaryFunction: null,
-    secondaryLabel: 'Cancel',
-    secondaryDisabled: false,
-    secondaryVariant: BUTTON_VARIANTS.CONTAINED,
-    secondaryColor: BUTTON_COLORS.PRIMARY,
+    ...buttonsDefaultProps
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
+      singleEdit: false,
       ...this.getDefaultControlValuesFrom(props.controls)
     };
   }
@@ -164,87 +138,43 @@ class Form extends React.PureComponent {
   };
 
   handleSubmit = e => {
-    const { submitFunction, controls } = this.props;
+    const { submitFunction, controls, single } = this.props;
+    const { singleEdit } = this.state;
 
     e.preventDefault();
     e.stopPropagation();
 
     const isFormValid = this.getIsFormValid();
-    if (isFormValid) return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
+    if (isFormValid) {
+      if (single && singleEdit) this.setState({ singleEdit: false });
+      return submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
+    }
     return this.validateForm();
   };
 
-  renderButtons = () => {
-    const {
-      classes,
-      buttonPosition,
-      buttonFloated,
-      buttonFullWidth,
-      buttonSize,
-      submitIcon: SubmitIcon,
-      submitLabel,
-      submitDisabled,
-      submitVariant,
-      submitColor,
-      secondaryIcon: SecondaryIcon,
-      secondaryLabel,
-      secondaryDisabled,
-      secondaryVariant,
-      secondaryColor,
-      secondaryFunction
-    } = this.props;
+  handleSingleEditEnable = () => this.setState({ singleEdit: true });
 
-    const wrapperClasses = clsx(
-      {
-        [classes.floated]: buttonFloated,
-        [classes[buttonSize]]: buttonFloated,
-        [classes[buttonPosition]]: Object.values(BUTTON_POSITIONS).includes(buttonPosition)
-      },
-      classes.buttonWrapper
-    );
+  handleSingleEditDisable = () => {
+    const { controls } = this.props;
 
-    return (
-      <div className={wrapperClasses}>
-        {secondaryFunction && (
-          <Button
-            variant={secondaryVariant}
-            fullWidth={buttonFullWidth}
-            className={classes.secondaryButton}
-            onClick={() => secondaryFunction()}
-            color={secondaryColor}
-            disabled={secondaryDisabled}
-            size={buttonSize}
-            aria-label={secondaryLabel}
-          >
-            {secondaryLabel}
-            {SecondaryIcon && <SecondaryIcon className={classes.buttonIcon} />}
-          </Button>
-        )}
-        <Button
-          type="submit"
-          variant={submitVariant}
-          fullWidth={buttonFullWidth}
-          color={submitColor}
-          disabled={submitDisabled}
-          size={buttonSize}
-          aria-label={submitLabel}
-        >
-          {submitLabel}
-          {SubmitIcon && <SubmitIcon className={classes.buttonIcon} />}
-        </Button>
-      </div>
-    );
+    this.setState({
+      singleEdit: false,
+      ...this.getDefaultControlValuesFrom(controls)
+    });
   };
 
-  render() {
-    const { controls, classes } = this.props;
+  collectFormControls = () => {
+    const { controls } = this.props;
 
-    const formControls = controls.reduce((acc, control) => {
+    return controls.reduce((acc, control) => {
       const props = {
         key: control.key,
         control,
         state: this.getControlState(control.key),
-        onChange: this.handleChange
+        onChange: this.handleChange,
+        ...control.type === CONTROL_TYPES.SLIDER
+          ? { onDecrease: this.handleDecreaseClick, onIncrease: this.handleIncreaseClick }
+          : {}
       };
 
       if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, <ControlText {...props} />];
@@ -252,19 +182,42 @@ class Form extends React.PureComponent {
       if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, <ControlTextarea {...props} />];
       if (control.type === CONTROL_TYPES.NUMBER) return [...acc, <ControlNumber {...props} />];
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, <ControlSelect {...props} />];
-      if (control.type === CONTROL_TYPES.SLIDER) {
-        return [...acc, <ControlSlider {...props} onDecrease={this.handleDecreaseClick} onIncrease={this.handleIncreaseClick} />];
-      }
+      if (control.type === CONTROL_TYPES.SLIDER) return [...acc, <ControlSlider {...props} />];
       if (control.type === CONTROL_TYPES.DATE) return [...acc, <ControlDate {...props} />];
       return acc;
     }, []);
+  };
 
-    const buttons = this.renderButtons();
+  render() {
+    const { controls, single, classes, ...restProps } = this.props;
+    const { singleEdit } = this.state;
 
-    return (
-      <form onSubmit={this.handleSubmit} className={classes.form} noValidate>
-        {formControls}
-        {buttons}
+    return single ? (
+      <Box className={classes.single}>
+        {singleEdit
+          ? this.collectFormControls()
+          : (
+            <Box className={classes.singleValue}>
+              <InputLabel className={classes.singleLabel}>
+                {(controls.length && controls[0].label) || 'n/a'}
+              </InputLabel>
+              <Typography variant="body1">
+                {(controls.length && controls[0].key && this.getControlState(controls[0].key).value) || 'n/a'}
+              </Typography>
+            </Box>
+          )
+        }
+        <ButtonsSingle
+          edit={singleEdit}
+          onSubmit={e => this.handleSubmit(e)}
+          onEditEnable={() => this.handleSingleEditEnable()}
+          onEditDisable={() => this.handleSingleEditDisable()}
+        />
+      </Box>
+    ) : (
+      <form onSubmit={e => this.handleSubmit(e)} className={classes.form} noValidate>
+        {this.collectFormControls()}
+        <ButtonsDefault {...restProps} />
       </form>
     );
   }
