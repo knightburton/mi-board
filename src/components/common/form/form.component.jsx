@@ -3,20 +3,14 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 
-import FormControl from '@material-ui/core/FormControl';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/lab/Slider';
-import { DatePicker } from '@material-ui/pickers';
 
-import LeftIcon from '@material-ui/icons/ChevronLeft';
-import RightIcon from '@material-ui/icons/ChevronRight';
+import ControlText from './controls/control-text.component';
+import ControlTextarea from './controls/control-textarea.component';
+import ControlNumber from './controls/control-number.component';
+import ControlSelect from './controls/control-select.component';
+import ControlSlider from './controls/control-slider.component';
+import ControlDate from './controls/control-date.component';
 
 import {
   CONTROL_DEFAULTS,
@@ -29,38 +23,12 @@ import {
   VALIDATORS
 } from './form.constants';
 
+import { controlPropTypes } from './controls/control.proptypes';
 import styles from './form.styles';
 
 class Form extends React.PureComponent {
   static propTypes = {
-    controls: PropTypes.arrayOf(PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
-      defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
-      label: PropTypes.string.isRequired,
-      required: PropTypes.bool,
-      disabled: PropTypes.bool,
-      autocomplete: PropTypes.string,
-      helperText: PropTypes.string,
-      errorTexts: PropTypes.arrayOf(PropTypes.string),
-      validators: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object, PropTypes.func])),
-      inline: PropTypes.bool,
-      indicator: PropTypes.bool,
-      buttons: PropTypes.bool,
-      gutterRight: PropTypes.bool,
-      min: PropTypes.number,
-      max: PropTypes.number,
-      step: PropTypes.number,
-      rows: PropTypes.number,
-      options: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.shape({
-          value: PropTypes.string.isRequired,
-          label: PropTypes.string.isRequired
-        })),
-        PropTypes.arrayOf(PropTypes.string)
-      ]),
-      format: PropTypes.string
-    })).isRequired,
+    controls: PropTypes.arrayOf(controlPropTypes).isRequired,
     allowControlsChange: PropTypes.bool,
     buttonPosition: PropTypes.oneOf(Object.values(BUTTON_POSITIONS)),
     buttonFloated: PropTypes.bool,
@@ -201,194 +169,6 @@ class Form extends React.PureComponent {
     if (isFormValid) submitFunction(controls.reduce((acc, { key }) => ({ ...acc, [key]: this.getControlState(key).value }), {}));
   };
 
-  getFormControlProps = ({ key, type, disabled, required, inline }) => {
-    const { classes } = this.props;
-    const { error } = this.getControlState(key);
-
-    return {
-      key,
-      error: !!error,
-      disabled: disabled || CONTROL_DEFAULTS.DISABLED,
-      required: required || CONTROL_DEFAULTS.REQUIRED,
-      className: clsx(
-        {
-          [classes.inline]: inline,
-          [classes.datePicker]: type === CONTROL_TYPES.DATE
-        },
-        classes.formControl
-      ),
-      fullWidth: true
-    };
-  };
-
-  renderFormHelperText = ({ key, helperText }) => (
-    <FormHelperText id={`${key}-helper-text`}>{this.getControlState(key).error || helperText}</FormHelperText>
-  );
-
-  renderInputLabel = ({ key, label }) => {
-    const { classes } = this.props;
-
-    return (
-      <InputLabel htmlFor={key} className={classes.inputLabel}>
-        {label}
-      </InputLabel>
-    );
-  };
-
-  renderNumberControl = control => (
-    <FormControl {...this.getFormControlProps(control)}>
-      {this.renderInputLabel(control)}
-      <Input
-        id={control.key}
-        type={control.type}
-        value={+this.getControlState(control.key).value}
-        onChange={e => this.handleChange(control.key, +e.target.value)}
-        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
-        autoFocus={false}
-        inputProps={{
-          min: control.min || CONTROL_DEFAULTS.NUMBER_MIN,
-          max: control.max || CONTROL_DEFAULTS.NUMBER_MAX,
-          step: control.step || CONTROL_DEFAULTS.NUMBER_STEP
-        }}
-        aria-describedby={`${control.key}-helper-text`}
-      />
-      {this.renderFormHelperText(control)}
-    </FormControl>
-  );
-
-  renderTextControl = control => (
-    <FormControl {...this.getFormControlProps(control)}>
-      {this.renderInputLabel(control)}
-      <Input
-        id={control.key}
-        type={control.type}
-        value={this.getControlState(control.key).value}
-        onChange={e => this.handleChange(control.key, e.target.value)}
-        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
-        autoFocus={false}
-        aria-describedby={`${control.key}-helper-text`}
-      />
-      {this.renderFormHelperText(control)}
-    </FormControl>
-  );
-
-  renderTextareaControl = control => (
-    <FormControl {...this.getFormControlProps(control)}>
-      {this.renderInputLabel(control)}
-      <Input
-        id={control.key}
-        value={this.getControlState(control.key).value}
-        onChange={e => this.handleChange(control.key, e.target.value)}
-        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
-        autoFocus={false}
-        aria-describedby={`${control.key}-helper-text`}
-        rows={control.rows || CONTROL_DEFAULTS.TEXTAREA_ROWS}
-        multiline
-      />
-      {this.renderFormHelperText(control)}
-    </FormControl>
-  );
-
-  renderSelectControl = control => (
-    <FormControl {...this.getFormControlProps(control)}>
-      {this.renderInputLabel(control)}
-      <Select
-        id={control.key}
-        value={this.getControlState(control.key).value}
-        onChange={e => this.handleChange(control.key, e.target.value)}
-        autoComplete={control.autocomplete || CONTROL_DEFAULTS.AUTOCOMPLETE}
-        autoFocus={false}
-        aria-describedby={`${control.key}-helper-text`}
-      >
-        {control.options && control.options.map(option => (
-          <MenuItem key={option.value || option} value={option.value || option}>
-            {option.label || option}
-          </MenuItem>
-        ))}
-      </Select>
-      {this.renderFormHelperText(control)}
-    </FormControl>
-  );
-
-  renderSliderControl = control => {
-    const { classes } = this.props;
-    const className = clsx(
-      { [classes.inline]: control.inline },
-      classes.sliderControl
-    );
-    const sliderClasses = {
-      thumb: classes.thumb,
-      focused: classes.focused,
-      activated: classes.activated,
-      jumped: classes.jumped
-    };
-    const thumb = (
-      <Typography className={classes.thumbText}>
-        {this.getControlState(control.key).value}
-      </Typography>
-    );
-
-    return (
-      <div key={control.key} className={className}>
-        {control.label && (
-          <Typography
-            id={`${control.key}-label`}
-            variant="caption"
-            className={classes.sliderLabel}
-          >
-            {control.label}
-          </Typography>
-        )}
-        <div className={classes.sliderContent}>
-          {control.buttons && (
-            <IconButton
-              size="small"
-              className={classes.sliderButton}
-              onClick={() => this.handleDecreaseClick(control)}
-            >
-              <LeftIcon />
-            </IconButton>
-          )}
-          <Slider
-            value={this.getControlState(control.key).value}
-            aria-labelledby={`${control.key}-label`}
-            className={classes.slider}
-            onChange={(e, value) => this.handleChange(control.key, value)}
-            min={control.min || CONTROL_DEFAULTS.SLIDER_MIN}
-            max={control.max || CONTROL_DEFAULTS.SLIDER_MAX}
-            step={control.step || CONTROL_DEFAULTS.SLIDER_STEP}
-            classes={control.indicator ? sliderClasses : {}}
-            {...control.indicator ? { thumb } : {}}
-          />
-          {control.buttons && (
-            <IconButton
-              size="small"
-              className={classes.sliderButton}
-              onClick={() => this.handleIncreaseClick(control)}
-            >
-              <RightIcon />
-            </IconButton>
-          )}
-        </div>
-      </div>
-    );
-  };
-
-  renderDateControl = control => (
-    <DatePicker
-      {...this.getFormControlProps(control)}
-      id={control.key}
-      label={control.label}
-      value={this.getControlState(control.key).value}
-      onChange={date => this.handleChange(control.key, date)}
-      invalidDateMessage={this.getControlState(control.key).error}
-      helperText={control.helperText || null}
-      format={control.format || CONTROL_DEFAULTS.DATE_FORMAT}
-      animateYearScrolling
-      showTodayButton
-    />
-  );
-
   renderButtons = () => {
     const {
       classes,
@@ -455,13 +235,22 @@ class Form extends React.PureComponent {
     const { controls, classes } = this.props;
 
     const formControls = controls.reduce((acc, control) => {
-      if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, this.renderTextControl(control)];
-      if (control.type === CONTROL_TYPES.TEXT) return [...acc, this.renderTextControl(control)];
-      if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, this.renderTextareaControl(control)];
-      if (control.type === CONTROL_TYPES.NUMBER) return [...acc, this.renderNumberControl(control)];
-      if (control.type === CONTROL_TYPES.SELECT) return [...acc, this.renderSelectControl(control)];
-      if (control.type === CONTROL_TYPES.SLIDER) return [...acc, this.renderSliderControl(control)];
-      if (control.type === CONTROL_TYPES.DATE) return [...acc, this.renderDateControl(control)];
+      const props = {
+        key: control.key,
+        control,
+        state: this.getControlState(control.key),
+        onChange: this.handleChange
+      };
+
+      if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, <ControlText {...props} />];
+      if (control.type === CONTROL_TYPES.TEXT) return [...acc, <ControlText {...props} />];
+      if (control.type === CONTROL_TYPES.TEXTAREA) return [...acc, <ControlTextarea {...props} />];
+      if (control.type === CONTROL_TYPES.NUMBER) return [...acc, <ControlNumber {...props} />];
+      if (control.type === CONTROL_TYPES.SELECT) return [...acc, <ControlSelect {...props} />];
+      if (control.type === CONTROL_TYPES.SLIDER) {
+        return [...acc, <ControlSlider {...props} onDecrease={this.handleDecreaseClick} onIncrease={this.handleIncreaseClick} />];
+      }
+      if (control.type === CONTROL_TYPES.DATE) return [...acc, <ControlDate {...props} />];
       return acc;
     }, []);
 
