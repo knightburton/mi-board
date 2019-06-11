@@ -1,4 +1,5 @@
 import { createAction, handleActions } from 'redux-actions';
+import { createSelector } from 'reselect';
 
 /**
  * INITIAL STATE
@@ -7,7 +8,7 @@ import { createAction, handleActions } from 'redux-actions';
 export const initialState = {
   isDrawerOpened: true,
   isMobileDrawerOpened: false,
-  isAppWaiting: false,
+  isAppWaiting: 0,
   notifications: []
 };
 
@@ -58,7 +59,11 @@ export const removeAllNotification = createAction(
 
 export const getIsDrawerOpened = state => state.app.isDrawerOpened;
 export const getIsMobileDrawerOpened = state => state.app.isMobileDrawerOpened;
-export const getIsAppWaiting = state => state.app.isAppWaiting;
+export const getIsAppWaitingCounter = state => state.app.isAppWaiting;
+export const getIsAppWaiting = createSelector(
+  getIsAppWaitingCounter,
+  counter => counter > 0
+);
 
 /**
  * REDUCER
@@ -68,7 +73,10 @@ export const reducer = handleActions(
   {
     [toggleDrawer]: state => ({ ...state, isDrawerOpened: !state.isDrawerOpened }),
     [toggleMobileDrawer]: state => ({ ...state, isMobileDrawerOpened: !state.isMobileDrawerOpened }),
-    [setAppWaiting]: (state, { payload: waiting }) => ({ ...state, isAppWaiting: waiting }),
+    [setAppWaiting]: (state, { payload: waiting }) => ({
+      ...state,
+      isAppWaiting: waiting ? state.isAppWaiting + 1 : state.isAppWaiting - 1
+    }),
     [addNotification]: (state, { payload: { message, variant = 'information' } }) => ({
       ...state,
       notifications: [
