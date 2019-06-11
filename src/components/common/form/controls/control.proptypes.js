@@ -5,8 +5,8 @@ import { CONTROL_TYPES } from '../form.constants';
 export const controlPropTypes = PropTypes.shape({
   key: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]).isRequired,
   label: PropTypes.string.isRequired,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   autocomplete: PropTypes.string,

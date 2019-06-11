@@ -44,6 +44,20 @@ export const getFirebaseAuthIsEmpty = createSelector(
   getFirebaseAuth,
   auth => auth && auth.isEmpty
 );
+export const getProfileData = createSelector(
+  getFirebaseAuth,
+  auth => {
+    if (!auth) return null;
+    return {
+      name: auth.displayName,
+      email: auth.email,
+      emailVerified: auth.emailVerified,
+      photoURL: auth.photoURL,
+      lastLoginAt: auth.lastLoginAt,
+      createdAt: auth.createdAt
+    };
+  }
+);
 export const getDisplayName = createSelector(
   getFirebaseAuth,
   auth => ((auth && auth.displayName) || auth.email) || null

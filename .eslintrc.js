@@ -23,7 +23,7 @@ module.exports = {
     'arrow-parens': ['error', 'as-needed'],
     'comma-dangle': ['error', 'only-multiline'],
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
-    'max-len': ['error', { code: 140 }],
+    'max-len': ['error', { code: 140, ignoreTemplateLiterals: true, ignoreRegExpLiterals: true }],
     'react/prop-types': ['error', { ignore: ['classes'] }],
     'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }]
   },
