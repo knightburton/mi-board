@@ -64,6 +64,7 @@ export const getIsAppWaiting = createSelector(
   getIsAppWaitingCounter,
   counter => counter > 0
 );
+export const getNotifications = state => state.app.notifications;
 
 /**
  * REDUCER
