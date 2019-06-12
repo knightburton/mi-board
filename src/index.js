@@ -1,19 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import ReactReduxFirebaseProvider from 'react-redux-firebase/lib/ReactReduxFirebaseProvider';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import MomentUtils from '@date-io/moment';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import { Provider } from 'react-redux';
-import configureStore from './state/configure.store';
-import routes from './routes';
+import { createFirestoreInstance } from 'redux-firestore';
+import { Router } from 'react-router-dom';
 
-import '../public/style/index.scss';
+import store from './store/configure.store';
+import history from './side.effects/history';
+import firebase from './side.effects/firebase';
+import theme from './theme';
+import * as serviceWorker from './serviceWorker';
 
-const store = configureStore();
+import App from './components/app.container';
+
+import 'typeface-roboto';
+
+const rrfProps = {
+  firebase,
+  config: {
+    userProfile: 'users',
+    useFirestoreForProfile: true
+  },
+  dispatch: store.dispatch,
+  createFirestoreInstance
+};
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      {routes}
-    </BrowserRouter>
+    <ReactReduxFirebaseProvider {...rrfProps}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <MuiPickersUtilsProvider utils={MomentUtils}>
+          <Router history={history}>
+            <App />
+          </Router>
+        </MuiPickersUtilsProvider>
+      </MuiThemeProvider>
+    </ReactReduxFirebaseProvider>
   </Provider>,
   document.getElementById('root')
 );
+
+serviceWorker.unregister();
