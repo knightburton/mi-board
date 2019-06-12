@@ -17,11 +17,12 @@ import Todo from './todo/todo.container';
 class App extends React.PureComponent {
   static propTypes = {
     authIsLoaded: PropTypes.bool.isRequired,
-    authIsEmpty: PropTypes.bool.isRequired
+    authIsEmpty: PropTypes.bool.isRequired,
+    isAppWaiting: PropTypes.bool.isRequired
   };
 
   render() {
-    const { authIsLoaded, authIsEmpty } = this.props;
+    const { authIsLoaded, authIsEmpty, isAppWaiting } = this.props;
 
     return (
       <Switch>
@@ -41,6 +42,7 @@ class App extends React.PureComponent {
                   <Redirect to="/dashboard" />
                 </Switch>
               </Wrapper>
+              <Waiting open={isAppWaiting} />
             </Fragment>
           )}
         />
