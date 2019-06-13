@@ -8,6 +8,7 @@ import Login from './login/login.container';
 import AppBar from './appbar/appbar.container';
 import Drawer from './drawer/drawer.container';
 import Wrapper from './wrapper/wrapper.container';
+import Snackbars from './snackbars/snackbars.container';
 
 import Profile from './profile/profile.container';
 import Dashboard from './dashboard/dashboard.container';
@@ -43,6 +44,7 @@ class App extends React.PureComponent {
                 </Switch>
               </Wrapper>
               <Waiting open={isAppWaiting} />
+              <Snackbars />
             </Fragment>
           )}
         />

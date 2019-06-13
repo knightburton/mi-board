@@ -78,7 +78,7 @@ export const reducer = handleActions(
       ...state,
       isAppWaiting: waiting ? state.isAppWaiting + 1 : state.isAppWaiting - 1
     }),
-    [addNotification]: (state, { payload: { message, variant = 'information' } }) => ({
+    [addNotification]: (state, { payload: { message, variant = 'info' } }) => ({
       ...state,
       notifications: [
         ...state.notifications,
