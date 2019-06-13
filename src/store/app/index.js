@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
  */
 
 export const initialState = {
-  isDrawerOpened: true,
+  isDrawerOpened: false,
   isMobileDrawerOpened: false,
   isAppWaiting: 0,
   notifications: []
