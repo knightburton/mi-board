@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
+import { setAppWaiting, addNotification } from '../app';
 
 /**
  * INITIAL STATE
@@ -78,13 +79,24 @@ export const reducer = handleActions(
  */
 
 export const login = (firebase, credentials) => async dispatch => {
-  await dispatch(setAuthInProgress(true));
+  dispatch(setAuthInProgress(true));
   await firebase.login(credentials);
-  await dispatch(setAuthInProgress(false));
+  dispatch(setAuthInProgress(false));
 };
 
 export const logout = firebase => async dispatch => {
-  await dispatch(setAuthInProgress(true));
+  dispatch(setAuthInProgress(true));
   await firebase.logout();
-  await dispatch(setAuthInProgress(false));
+  dispatch(setAuthInProgress(false));
+};
+
+export const updataAuthAndProfile = (firebase, attributes) => async dispatch => {
+  dispatch(setAppWaiting(true));
+  try {
+    await firebase.updateAuth(attributes, true);
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  } finally {
+    dispatch(setAppWaiting(false));
+  }
 };

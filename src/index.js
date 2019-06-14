@@ -22,7 +22,7 @@ import 'typeface-roboto';
 const rrfProps = {
   firebase,
   config: {
-    userProfile: 'users',
+    userProfile: 'profiles',
     useFirestoreForProfile: true
   },
   dispatch: store.dispatch,

@@ -2,7 +2,7 @@ import { CONTROL_TYPES, VALIDATORS, ERROR_TEXTS } from '../common/form/form.cons
 
 export default {
   NAME: {
-    key: 'profileName',
+    key: 'displayName',
     type: CONTROL_TYPES.TEXT,
     label: 'Name',
     required: true,
@@ -10,7 +10,7 @@ export default {
     errorTexts: [ERROR_TEXTS.TEXT_MIN(3)]
   },
   EMAIL: {
-    key: 'profileEmail',
+    key: 'email',
     type: CONTROL_TYPES.TEXT,
     label: 'Email',
     required: true,

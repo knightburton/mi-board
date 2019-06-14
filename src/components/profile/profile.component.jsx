@@ -13,7 +13,8 @@ export default class Profile extends React.PureComponent {
     profileData: PropTypes.shape({
       name: PropTypes.string,
       email: PropTypes.string
-    })
+    }),
+    updataAuthAndProfile: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -21,20 +22,15 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
-    const { profileData } = this.props;
+    const { profileData, updataAuthAndProfile } = this.props;
 
     return (
       <Container maxWidth="md">
 
         <Section>
           <Form
-            controls={[{ ...PROFILE_CONTROLS.NAME, defaultValue: profileData.name || undefined }]}
-            submitFunction={() => {}}
-            single
-          />
-          <Form
-            controls={[{ ...PROFILE_CONTROLS.EMAIL, defaultValue: profileData.email || undefined }]}
-            submitFunction={() => {}}
+            controls={[{ ...PROFILE_CONTROLS.NAME, defaultValue: profileData.name || '' }]}
+            submitFunction={attributes => updataAuthAndProfile(attributes)}
             single
           />
         </Section>
