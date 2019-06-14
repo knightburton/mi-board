@@ -4,7 +4,10 @@ export default theme => ({
   box: {
     position: 'absolute',
     bottom: 0,
-    right: 0
+    right: 0,
+    [theme.breakpoints.up('sm')]: {
+      maxWidth: 500
+    },
   },
   snackbar: {
     position: 'relative',
@@ -17,7 +20,10 @@ export default theme => ({
   },
   snackbarContent: {
     flexWrap: 'nowrap',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    [theme.breakpoints.up('sm')]: {
+      flexGrow: 1
+    }
   },
   success: {
     backgroundColor: green[500]
