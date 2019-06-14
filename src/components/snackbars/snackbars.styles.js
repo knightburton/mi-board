@@ -7,7 +7,7 @@ export default theme => ({
     right: 0,
     [theme.breakpoints.up('sm')]: {
       maxWidth: 500
-    },
+    }
   },
   snackbar: {
     position: 'relative',
@@ -23,6 +23,14 @@ export default theme => ({
     alignItems: 'flex-start',
     [theme.breakpoints.up('sm')]: {
       flexGrow: 1
+    }
+  },
+  button: {
+    position: 'absolute',
+    top: -theme.spacing(7),
+    right: theme.spacing(1),
+    [theme.breakpoints.down('xs')]: {
+      top: -theme.spacing(5)
     }
   },
   success: {

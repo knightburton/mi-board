@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import {
   getNotifications,
-  removeNotification
+  removeNotification,
+  removeAllNotification
 } from '../../store/app';
 import Snackbars from './snackbars.component';
 
@@ -10,7 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  removeNotification
+  removeNotification,
+  removeAllNotification
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Snackbars);

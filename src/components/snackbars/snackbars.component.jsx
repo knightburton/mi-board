@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
 
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -29,7 +30,8 @@ class Snackbars extends React.PureComponent {
       variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
       message: PropTypes.string.isRequired
     })),
-    removeNotification: PropTypes.func.isRequired
+    removeNotification: PropTypes.func.isRequired,
+    removeAllNotification: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -50,10 +52,21 @@ class Snackbars extends React.PureComponent {
   };
 
   render() {
-    const { notifications, removeNotification, classes } = this.props;
+    const { notifications, removeNotification, removeAllNotification, classes } = this.props;
 
+    if (!notifications.length) return null;
     return (
       <Box className={classes.box}>
+        {notifications.length > 1 && (
+          <Button
+            color="primary"
+            size="small"
+            className={classes.button}
+            onClick={() => removeAllNotification()}
+          >
+            Close All
+          </Button>
+        )}
         {[...notifications].reverse().map((notification, index) => (
           <Snackbar
             key={notification.key}
