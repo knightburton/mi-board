@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 
 import Section from '../common/section/section.component';
 import Form from '../common/form/form.component';
+import FormSingleValue from '../common/form-single-value/form-single-value.component';
 
 import PROFILE_CONTROLS from './profile.constants';
 
@@ -33,6 +34,7 @@ export default class Profile extends React.PureComponent {
             submitFunction={attributes => updataAuthAndProfile(attributes)}
             single
           />
+          <FormSingleValue label="Email" value={profileData.email} />
         </Section>
 
       </Container>

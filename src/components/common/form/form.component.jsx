@@ -2,10 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import InputLabel from '@material-ui/core/InputLabel';
-
 import ControlText from './controls/control-text.component';
 import ControlTextarea from './controls/control-textarea.component';
 import ControlNumber from './controls/control-number.component';
@@ -14,6 +10,7 @@ import ControlSlider from './controls/control-slider.component';
 import ControlDate from './controls/control-date.component';
 import ButtonsDefault from './buttons/buttons-default.component';
 import ButtonsSingle from './buttons/buttons-single.component';
+import FormSingleValue from '../form-single-value/form-single-value.component';
 
 import {
   CONTROL_DEFAULTS,
@@ -197,14 +194,10 @@ class Form extends React.PureComponent {
         {singleEdit
           ? this.collectFormControls()
           : (
-            <Box className={classes.singleValue}>
-              <InputLabel className={classes.singleLabel}>
-                {(controls.length && controls[0].label) || 'n/a'}
-              </InputLabel>
-              <Typography variant="body1">
-                {(controls.length && controls[0].key && this.getControlState(controls[0].key).value) || 'n/a'}
-              </Typography>
-            </Box>
+            <FormSingleValue
+              label={controls.length && controls[0].label}
+              value={controls.length && controls[0].key && this.getControlState(controls[0].key).value}
+            />
           )
         }
         <ButtonsSingle
