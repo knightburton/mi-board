@@ -193,7 +193,7 @@ class Form extends React.PureComponent {
     const { singleEdit } = this.state;
 
     return single ? (
-      <Box className={classes.single}>
+      <form onSubmit={e => this.handleSubmit(e)} className={classes.single} noValidate>
         {singleEdit
           ? this.collectFormControls()
           : (
@@ -209,11 +209,10 @@ class Form extends React.PureComponent {
         }
         <ButtonsSingle
           edit={singleEdit}
-          onSubmit={e => this.handleSubmit(e)}
           onEditEnable={() => this.handleSingleEditEnable()}
           onEditDisable={() => this.handleSingleEditDisable()}
         />
-      </Box>
+      </form>
     ) : (
       <form onSubmit={e => this.handleSubmit(e)} className={classes.form} noValidate>
         {this.collectFormControls()}

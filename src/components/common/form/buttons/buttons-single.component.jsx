@@ -17,7 +17,6 @@ const ButtonsSingle = props => {
   const classes = useStyles();
   const {
     edit,
-    onSubmit,
     onEditEnable,
     onEditDisable
   } = props;
@@ -27,7 +26,7 @@ const ButtonsSingle = props => {
       <IconButton onClick={() => onEditDisable()}>
         <CloseIcon fontSize="small" />
       </IconButton>
-      <IconButton color="primary" onClick={e => onSubmit(e)}>
+      <IconButton type="submit" color="primary">
         <CheckIcon fontSize="small" />
       </IconButton>
     </Box>
@@ -40,7 +39,6 @@ const ButtonsSingle = props => {
 
 ButtonsSingle.propTypes = {
   edit: PropTypes.bool.isRequired,
-  onSubmit: PropTypes.func.isRequired,
   onEditEnable: PropTypes.func.isRequired,
   onEditDisable: PropTypes.func.isRequired
 };
