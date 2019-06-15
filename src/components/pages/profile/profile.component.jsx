@@ -8,7 +8,7 @@ import Form from '../../commons/form/form.component';
 import FormSingleValue from '../../commons/form-single-value/form-single-value.component';
 
 import { getFormattedTimestamp } from '../../../helpers';
-import PROFILE_CONTROLS from './profile.constants';
+import { FORM_DISPLAY_NAME, FORM_EMAIL } from './profile.constants';
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -34,14 +34,14 @@ export default class Profile extends React.PureComponent {
     return (
       <Container maxWidth="md">
 
-        <Section>
+        <Section title="Profile info">
           <Form
-            controls={[{ ...PROFILE_CONTROLS.NAME, defaultValue: profileData.name || '' }]}
+            controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profileData.name || '' }]}
             submitFunction={attributes => updataAuthAndProfile(attributes)}
             single
           />
           <Form
-            controls={[{ ...PROFILE_CONTROLS.EMAIL, defaultValue: profileData.email || '' }]}
+            controls={[{ ...FORM_EMAIL, defaultValue: profileData.email || '' }]}
             submitFunction={({ email }) => updataEmail(email)}
             single
           />
