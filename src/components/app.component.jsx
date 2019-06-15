@@ -2,18 +2,18 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Waiting from './common/waiting/waiting.component';
+import Waiting from './commons/waiting/waiting.component';
 
-import Login from './login/login.container';
-import AppBar from './appbar/appbar.container';
-import Drawer from './drawer/drawer.container';
-import Wrapper from './wrapper/wrapper.container';
-import Snackbars from './snackbars/snackbars.container';
+import AppBar from './widgets/appbar/appbar.container';
+import Drawer from './widgets/drawer/drawer.container';
+import Wrapper from './widgets/wrapper/wrapper.container';
+import Snackbars from './widgets/snackbars/snackbars.container';
 
-import Profile from './profile/profile.container';
-import Dashboard from './dashboard/dashboard.container';
-import Time from './time/time.container';
-import Todo from './todo/todo.container';
+import Login from './pages/login/login.container';
+import Profile from './pages/profile/profile.container';
+import Dashboard from './pages/dashboard/dashboard.container';
+import Time from './pages/time/time.container';
+import Todo from './pages/todo/todo.container';
 
 class App extends React.PureComponent {
   static propTypes = {
