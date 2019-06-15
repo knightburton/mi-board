@@ -7,6 +7,7 @@ import Section from '../common/section/section.component';
 import Form from '../common/form/form.component';
 import FormSingleValue from '../common/form-single-value/form-single-value.component';
 
+import { getFormattedTimestamp } from '../../helpers';
 import PROFILE_CONTROLS from './profile.constants';
 
 export default class Profile extends React.PureComponent {
@@ -35,6 +36,8 @@ export default class Profile extends React.PureComponent {
             single
           />
           <FormSingleValue label="Email" value={profileData.email} />
+          <FormSingleValue label="Created at" value={getFormattedTimestamp(profileData.createdAt)} />
+          <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profileData.lastLoginAt)} />
         </Section>
 
       </Container>
