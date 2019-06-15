@@ -16,7 +16,8 @@ export default class Profile extends React.PureComponent {
       name: PropTypes.string,
       email: PropTypes.string
     }),
-    updataAuthAndProfile: PropTypes.func.isRequired
+    updataAuthAndProfile: PropTypes.func.isRequired,
+    updataEmail: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -24,7 +25,11 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
-    const { profileData, updataAuthAndProfile } = this.props;
+    const {
+      profileData,
+      updataAuthAndProfile,
+      updataEmail
+    } = this.props;
 
     return (
       <Container maxWidth="md">
@@ -35,7 +40,11 @@ export default class Profile extends React.PureComponent {
             submitFunction={attributes => updataAuthAndProfile(attributes)}
             single
           />
-          <FormSingleValue label="Email" value={profileData.email} />
+          <Form
+            controls={[{ ...PROFILE_CONTROLS.EMAIL, defaultValue: profileData.email || '' }]}
+            submitFunction={({ email }) => updataEmail(email)}
+            single
+          />
           <FormSingleValue label="Created at" value={getFormattedTimestamp(profileData.createdAt)} />
           <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profileData.lastLoginAt)} />
         </Section>

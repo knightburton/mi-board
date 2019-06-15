@@ -100,3 +100,14 @@ export const updataAuthAndProfile = (firebase, attributes) => async dispatch => 
     dispatch(setAppWaiting(false));
   }
 };
+
+export const updataEmail = (firebase, email) => async dispatch => {
+  dispatch(setAppWaiting(true));
+  try {
+    await firebase.updateEmail(email, true);
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  } finally {
+    dispatch(setAppWaiting(false));
+  }
+};
