@@ -28,7 +28,7 @@ class Todo extends React.PureComponent {
                 label: 'Date'
               }
             ]}
-            submitFunction={() => console.log('form submited')}
+            submitFunction={() => {}}
           />
         </Section>
 
