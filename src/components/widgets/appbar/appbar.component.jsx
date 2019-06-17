@@ -13,9 +13,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
 
 import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+import Avatar from '../../commons/avatar/avatar.container';
 
 import styles from './appbar.styles';
 
@@ -109,7 +110,7 @@ class AppBar extends React.PureComponent {
             onClick={e => this.handleAccountMenuOpen(e.currentTarget)}
             color="inherit"
           >
-            <AccountCircleIcon />
+            <Avatar size="extraSmall" />
           </IconButton>
           {this.renderAccountMenu()}
         </Toolbar>

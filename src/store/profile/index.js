@@ -63,6 +63,10 @@ export const getDisplayName = createSelector(
   getFirebaseAuth,
   auth => ((auth && auth.displayName) || auth.email) || null
 );
+export const getProfilePhotoUrl = createSelector(
+  getFirebaseAuth,
+  auth => (auth && auth.photoURL) || null
+);
 
 /**
  * REDUCER
