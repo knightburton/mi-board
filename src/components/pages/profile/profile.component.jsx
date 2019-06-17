@@ -41,7 +41,11 @@ export default class Profile extends React.PureComponent {
             single
           />
           <Form
-            controls={[{ ...FORM_EMAIL, defaultValue: profileData.email || '' }]}
+            controls={[{
+              ...FORM_EMAIL,
+              defaultValue: profileData.email || '',
+              label: `Email (${profileData.emailVerified ? 'Verified' : 'Not verified'})`
+            }]}
             submitFunction={({ email }) => updataEmail(email)}
             single
           />
