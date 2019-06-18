@@ -18,6 +18,21 @@ export const FORM_EMAIL = {
   errorTexts: [ERROR_TEXTS.EMAIL]
 };
 
+export const FORM_PHOTO = {
+  key: 'photo',
+  type: CONTROL_TYPES.FILE,
+  label: 'Photo',
+  required: true,
+  validators: [
+    VALIDATORS.FILE_MAX_SIZE(1000000),
+    VALIDATORS.FILE_IMAGE_TYPE
+  ],
+  errorTexts: [
+    ERROR_TEXTS.FILE_MAX_SIZE(1000000),
+    ERROR_TEXTS.FILE_IMAGE_TYPE
+  ]
+};
+
 export const FORM_PASSWORD = [
   {
     key: 'verificationCode',
