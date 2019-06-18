@@ -8,6 +8,7 @@ import ControlNumber from './controls/control-number.component';
 import ControlSelect from './controls/control-select.component';
 import ControlSlider from './controls/control-slider.component';
 import ControlDate from './controls/control-date.component';
+import ControlFile from './controls/control-file.component';
 import ButtonsDefault from './buttons/buttons-default.component';
 import ButtonsSingle from './buttons/buttons-single.component';
 import FormSingleValue from '../form-single-value/form-single-value.component';
@@ -64,6 +65,16 @@ class Form extends React.PureComponent {
     const { [key]: control } = this.state;
 
     return control;
+  };
+
+  getControlDisplayValue = key => {
+    const { controls } = this.props;
+    const { [key]: control } = this.state;
+
+    if (!control) return null;
+    return controls[0].type === CONTROL_TYPES.FILE && control.value.length
+      ? control.value[0].name
+      : control.value;
   };
 
   getInvalidValidatorIndex = (value, validators) => {
@@ -181,6 +192,7 @@ class Form extends React.PureComponent {
       if (control.type === CONTROL_TYPES.SELECT) return [...acc, <ControlSelect {...props} />];
       if (control.type === CONTROL_TYPES.SLIDER) return [...acc, <ControlSlider {...props} />];
       if (control.type === CONTROL_TYPES.DATE) return [...acc, <ControlDate {...props} />];
+      if (control.type === CONTROL_TYPES.FILE) return [...acc, <ControlFile {...props} />];
       return acc;
     }, []);
   };
@@ -196,7 +208,7 @@ class Form extends React.PureComponent {
           : (
             <FormSingleValue
               label={controls.length && controls[0].label}
-              value={controls.length && controls[0].key && this.getControlState(controls[0].key).value}
+              value={controls.length && this.getControlDisplayValue(controls[0].key)}
             />
           )
         }

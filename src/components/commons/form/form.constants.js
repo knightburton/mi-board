@@ -5,7 +5,8 @@ export const CONTROL_TYPES = {
   NUMBER: 'Number',
   SELECT: 'select',
   SLIDER: 'slider',
-  DATE: 'date'
+  DATE: 'date',
+  FILE: 'file'
 };
 
 export const CONTROL_DEFAULTS = {
@@ -57,6 +58,8 @@ export const VALIDATORS = {
   NUMBER_MAX: max => value => value <= max,
   NUMBER_BETWEEN: (min, max) => value => value >= min && value <= max,
   EMAIL: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  FILE_MAX_SIZE: size => list => list && list.length && list[0].size <= size,
+  FILE_IMAGE_TYPE: list => list && list.length && ['image/jpeg', 'image/png'].includes(list[0].type)
 };
 
 export const ERROR_TEXTS = {
@@ -69,5 +72,7 @@ export const ERROR_TEXTS = {
   NUMBER_MIN: min => `This field must be greater or qeual than ${min}`,
   NUMBER_MAX: max => `This field must be smaller or qeual than ${max}`,
   NUMBER_BETWEEN: (min, max) => `This field must be between ${min} and ${max}`,
-  EMAIL: 'This field must be a valid email address'
+  EMAIL: 'This field must be a valid email address',
+  FILE_MAX_SIZE: size => `The selected file must be ${size / 1000000}MB maximum`,
+  FILE_IMAGE_TYPE: 'The selected file must be a jpeg or a png image'
 };
