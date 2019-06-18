@@ -6,7 +6,7 @@ import { createSelector } from 'reselect';
  */
 
 export const initialState = {
-  isDrawerOpened: true,
+  isDrawerOpened: false,
   isMobileDrawerOpened: false,
   isAppWaiting: 0,
   notifications: []
@@ -64,6 +64,7 @@ export const getIsAppWaiting = createSelector(
   getIsAppWaitingCounter,
   counter => counter > 0
 );
+export const getNotifications = state => state.app.notifications;
 
 /**
  * REDUCER
@@ -77,7 +78,7 @@ export const reducer = handleActions(
       ...state,
       isAppWaiting: waiting ? state.isAppWaiting + 1 : state.isAppWaiting - 1
     }),
-    [addNotification]: (state, { payload: { message, variant = 'information' } }) => ({
+    [addNotification]: (state, { payload: { message, variant = 'info' } }) => ({
       ...state,
       notifications: [
         ...state.notifications,
