@@ -38,7 +38,8 @@ export const BUTTON_VARIANTS = {
 
 export const BUTTON_COLORS = {
   PRIMARY: 'primary',
-  SECONDARY: 'secondary'
+  SECONDARY: 'secondary',
+  ERROR: 'error'
 };
 
 export const BUTTON_POSITIONS = {
