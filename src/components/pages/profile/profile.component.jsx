@@ -40,7 +40,7 @@ export default class Profile extends React.PureComponent {
     return (
       <Container maxWidth="md">
 
-        <Section title="Profile info">
+        <Section title="Profile">
           <Grid spacing={4} container>
             <Grid xs={12} sm={4} justify="center" alignItems="center" direction="column" item container>
               <Grid xs item>
