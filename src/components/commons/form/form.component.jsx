@@ -73,7 +73,7 @@ class Form extends React.PureComponent {
 
     if (!control) return null;
     return controls[0].type === CONTROL_TYPES.FILE && control.value.length
-      ? control.value[0].name
+      ? control.value[0].name || controls[0].defaultValue
       : control.value;
   };
 

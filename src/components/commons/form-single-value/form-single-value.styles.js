@@ -7,5 +7,8 @@ export default makeStyles(theme => ({
   },
   label: {
     marginBottom: theme.spacing(0.5)
+  },
+  value: {
+    wordBreak: 'break-word'
   }
 }));

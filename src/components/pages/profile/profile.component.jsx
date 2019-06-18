@@ -18,23 +18,28 @@ import { FORM_DISPLAY_NAME, FORM_EMAIL, FORM_PHOTO } from './profile.constants';
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
-    profileData: PropTypes.shape({
+    profile: PropTypes.shape({
       name: PropTypes.string,
-      email: PropTypes.string
+      email: PropTypes.string,
+      photoURL: PropTypes.string,
+      createdAt: PropTypes.string,
+      lastLoginAt: PropTypes.string
     }),
     updataAuthAndProfile: PropTypes.func.isRequired,
-    updataEmail: PropTypes.func.isRequired
+    updataEmail: PropTypes.func.isRequired,
+    uploadProfilePhoto: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    profileData: {}
+    profile: {}
   };
 
   render() {
     const {
-      profileData,
+      profile,
       updataAuthAndProfile,
-      updataEmail
+      updataEmail,
+      uploadProfilePhoto
     } = this.props;
 
     return (
@@ -54,30 +59,30 @@ export default class Profile extends React.PureComponent {
             </Grid>
             <Grid xs={12} sm={8} item>
               <Form
-                controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profileData.name || '' }]}
+                controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profile.name || '' }]}
                 submitFunction={attributes => updataAuthAndProfile(attributes)}
                 single
               />
               <Form
                 controls={[{
                   ...FORM_EMAIL,
-                  defaultValue: profileData.email || '',
-                  label: `Email (${profileData.emailVerified ? 'Verified' : 'Not verified'})`
+                  defaultValue: profile.email || '',
+                  label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`
                 }]}
                 submitFunction={({ email }) => updataEmail(email)}
                 single
               />
               <Form
-                controls={[{ ...FORM_PHOTO, defaultValue: profileData.photoUrl || '' }]}
-                submitFunction={({ photo }) => photo}
+                controls={[{ ...FORM_PHOTO, defaultValue: profile.photoURL || '' }]}
+                submitFunction={({ photo }) => uploadProfilePhoto(photo[0])}
                 secondaryFunction={() => {}}
                 secondaryIcon={DeleteIcon}
-                secondaryDisabled={!profileData.photoUrl}
+                secondaryDisabled={!profile.photoURL}
                 secondaryColor="error"
                 single
               />
-              <FormSingleValue label="Created at" value={getFormattedTimestamp(profileData.createdAt)} />
-              <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profileData.lastLoginAt)} />
+              <FormSingleValue label="Created at" value={getFormattedTimestamp(profile.createdAt)} />
+              <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profile.lastLoginAt)} />
             </Grid>
           </Grid>
         </Section>

@@ -45,7 +45,7 @@ export const getFirebaseAuthIsEmpty = createSelector(
   getFirebaseAuth,
   auth => auth && auth.isEmpty
 );
-export const getProfileData = createSelector(
+export const getProfile = createSelector(
   getFirebaseAuth,
   auth => {
     if (!auth) return null;
@@ -66,6 +66,10 @@ export const getDisplayName = createSelector(
 export const getProfilePhotoUrl = createSelector(
   getFirebaseAuth,
   auth => (auth && auth.photoURL) || null
+);
+export const getProfileID = createSelector(
+  getFirebaseAuth,
+  auth => (auth && auth.uid) || null
 );
 
 /**
@@ -109,6 +113,26 @@ export const updataEmail = (firebase, email) => async dispatch => {
   dispatch(setAppWaiting(true));
   try {
     await firebase.updateEmail(email, true);
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  } finally {
+    dispatch(setAppWaiting(false));
+  }
+};
+
+export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState) => {
+  dispatch(setAppWaiting(true));
+  try {
+    const storageRef = firebase.storage().ref();
+    const profileID = getProfileID(getState());
+    if (profileID) {
+      const path = `profiles/${profileID}`;
+      const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(path, file);
+      const downloadUrl = await storageRef.child(metadata.fullPath).getDownloadURL();
+      await dispatch(updataAuthAndProfile(firebase, { photoURL: downloadUrl }));
+    } else {
+      dispatch(addNotification('There is no available profile', 'error'));
+    }
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
