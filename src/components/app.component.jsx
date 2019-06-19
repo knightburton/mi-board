@@ -2,12 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-import Waiting from './commons/waiting/waiting.component';
-
 import AppBar from './widgets/appbar/appbar.container';
 import Drawer from './widgets/drawer/drawer.container';
 import Wrapper from './widgets/wrapper/wrapper.container';
 import Snackbars from './widgets/snackbars/snackbars.container';
+import Waiting from './widgets/waiting/waiting.component';
 
 import Login from './pages/login/login.container';
 import Profile from './pages/profile/profile.container';

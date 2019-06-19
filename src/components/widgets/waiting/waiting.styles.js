@@ -3,7 +3,7 @@ export default theme => ({
     minHeight: '100vh'
   },
   text: {
-    marginLeft: theme.spacing(4),
+    marginLeft: theme.spacing(6),
     fontWeight: '300'
   },
   spinner: {
