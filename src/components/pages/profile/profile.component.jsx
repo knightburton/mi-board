@@ -25,9 +25,10 @@ export default class Profile extends React.PureComponent {
       createdAt: PropTypes.string,
       lastLoginAt: PropTypes.string
     }),
-    updataAuthAndProfile: PropTypes.func.isRequired,
+    updataAuth: PropTypes.func.isRequired,
     updataEmail: PropTypes.func.isRequired,
-    uploadProfilePhoto: PropTypes.func.isRequired
+    uploadProfilePhoto: PropTypes.func.isRequired,
+    deleteProfilePhoto: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -37,9 +38,10 @@ export default class Profile extends React.PureComponent {
   render() {
     const {
       profile,
-      updataAuthAndProfile,
+      updataAuth,
       updataEmail,
-      uploadProfilePhoto
+      uploadProfilePhoto,
+      deleteProfilePhoto
     } = this.props;
 
     return (
@@ -60,7 +62,7 @@ export default class Profile extends React.PureComponent {
             <Grid xs={12} sm={8} item>
               <Form
                 controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profile.name || '' }]}
-                submitFunction={attributes => updataAuthAndProfile(attributes)}
+                submitFunction={attributes => updataAuth(attributes)}
                 single
               />
               <Form
@@ -75,10 +77,11 @@ export default class Profile extends React.PureComponent {
               <Form
                 controls={[{ ...FORM_PHOTO, defaultValue: profile.photoURL || '' }]}
                 submitFunction={({ photo }) => uploadProfilePhoto(photo[0])}
-                secondaryFunction={() => {}}
+                secondaryFunction={() => deleteProfilePhoto()}
                 secondaryIcon={DeleteIcon}
                 secondaryDisabled={!profile.photoURL}
                 secondaryColor="error"
+                allowControlsChange
                 single
               />
               <FormSingleValue label="Created at" value={getFormattedTimestamp(profile.createdAt)} />

@@ -23,7 +23,8 @@ const rrfProps = {
   firebase,
   config: {
     userProfile: 'profiles',
-    useFirestoreForProfile: true
+    useFirestoreForProfile: true,
+    useFirestoreForStorageMeta: true
   },
   dispatch: store.dispatch,
   createFirestoreInstance
