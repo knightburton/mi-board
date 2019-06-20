@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CheckIcon from '@material-ui/icons/Check';
 
 import Form from '../../../../commons/form/form.component';
-import Section from '../../../../commons/section/section.component';
+import Section from '../../../../commons/section/section.container';
 import SectionSelect from '../../../../commons/section-select/section-select.component';
 
 import { controls, options, optionsMap } from '../interval.constants';

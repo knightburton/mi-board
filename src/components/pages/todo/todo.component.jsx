@@ -2,7 +2,7 @@ import React from 'react';
 
 import Container from '@material-ui/core/Container';
 
-import Section from '../../commons/section/section.component';
+import Section from '../../commons/section/section.container';
 import Form from '../../commons/form/form.component';
 
 class Todo extends React.PureComponent {

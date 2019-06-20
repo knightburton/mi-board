@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import { setAppWaiting, addNotification } from '../app';
+import { setSectionWaiting, addNotification } from '../app';
 
 /**
  * INITIAL STATE
@@ -104,29 +104,29 @@ export const logout = firebase => async dispatch => {
 };
 
 export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
-  dispatch(setAppWaiting(true));
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateAuth(attributes, updateProfile);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
   }
 };
 
 export const updataEmail = (firebase, email) => async dispatch => {
-  dispatch(setAppWaiting(true));
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateEmail(email, true);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
   }
 };
 
 export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState) => {
-  dispatch(setAppWaiting(true));
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
     const profileID = getProfileID(getState());
     const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(`profiles/${profileID}`, file);
@@ -135,12 +135,12 @@ export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState)
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
   }
 };
 
 export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
-  dispatch(setAppWaiting(true));
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
     const profileID = getProfileID(getState());
     const profilePhotoName = getProfilePhotoName(getState());
@@ -153,6 +153,6 @@ export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
   }
 };

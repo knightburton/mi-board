@@ -42,7 +42,7 @@ class App extends React.PureComponent {
                   <Redirect to="/dashboard" />
                 </Switch>
               </Wrapper>
-              <Waiting open={isAppWaiting} />
+              {isAppWaiting && <Waiting app />}
               <Snackbars />
             </Fragment>
           )}

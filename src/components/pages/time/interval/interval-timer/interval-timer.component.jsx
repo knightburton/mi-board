@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Section from '../../../../commons/section/section.component';
+import Section from '../../../../commons/section/section.container';
 
 export default class IntervalTimer extends React.PureComponent {
   render() {

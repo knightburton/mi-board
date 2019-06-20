@@ -6,22 +6,28 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
+import Waiting from '../../widgets/waiting/waiting.component';
+
 import styles from './section.styles';
 
 class Section extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
     gutterBottom: PropTypes.bool,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    waitingKey: PropTypes.string,
+    isWaiting: PropTypes.bool
   };
 
   static defaultProps = {
     title: '',
-    gutterBottom: false
+    gutterBottom: false,
+    waitingKey: '',
+    isWaiting: false
   };
 
   render() {
-    const { title, gutterBottom, children, classes } = this.props;
+    const { title, gutterBottom, children, waitingKey, isWaiting, classes } = this.props;
     const paperClassNames = clsx(
       {
         [classes.marginTop]: !title,
@@ -39,6 +45,7 @@ class Section extends React.PureComponent {
         )}
         <Paper className={paperClassNames}>
           {children}
+          {waitingKey && isWaiting && <Waiting progressbar />}
         </Paper>
       </Fragment>
     );

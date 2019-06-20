@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 
-import Section from '../../commons/section/section.component';
+import Section from '../../commons/section/section.container';
 import Form from '../../commons/form/form.component';
 import FormSingleValue from '../../commons/form-single-value/form-single-value.component';
 import Avatar from '../../commons/avatar/avatar.container';
@@ -47,7 +47,7 @@ export default class Profile extends React.PureComponent {
     return (
       <Container maxWidth="md">
 
-        <Section title="Profile">
+        <Section title="Profile" waitingKey="profile">
           <Grid spacing={0} justify="flex-end" alignItems="flex-start" container>
             <Grid xs="auto" item>
               <ActionsMenu />

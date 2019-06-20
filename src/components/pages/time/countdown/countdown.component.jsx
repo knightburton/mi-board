@@ -7,7 +7,7 @@ import PlayIcon from '@material-ui/icons/PlayArrowOutlined';
 import SetBackIcon from '@material-ui/icons/SettingsBackupRestoreOutlined';
 
 import Form from '../../../commons/form/form.component';
-import Section from '../../../commons/section/section.component';
+import Section from '../../../commons/section/section.container';
 
 import controls from './countdown.constants';
 
