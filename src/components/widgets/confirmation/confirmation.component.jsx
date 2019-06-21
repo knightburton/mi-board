@@ -8,24 +8,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-const Confirmation = props => {
-  const { key, title, description, onAgree, children } = props;
+const Confirmation = ({ id, title, description, onAgree, toggle }) => {
   const [isShown, setIsShown] = useState(false);
   const hide = () => setIsShown(false);
   const show = () => setIsShown(true);
+  const handleAgree = () => {
+    hide();
+    onAgree();
+  };
 
   return (
     <Fragment>
-      {React.cloneElement(children, { show })}
+      {toggle(show)}
       <Dialog
         open={isShown}
         onClose={() => hide()}
-        aria-labelledby={`${key}-confirmation-dialog-title`}
-        aria-describedby={`${key}-confirmation-dialog-description`}
+        aria-labelledby={`${id}-confirmation-dialog-title`}
+        aria-describedby={`${id}-confirmation-dialog-description`}
       >
-        <DialogTitle id={`${key}-confirmation-dialog-title`}>{title}</DialogTitle>
+        <DialogTitle id={`${id}-confirmation-dialog-title`}>{title}</DialogTitle>
         <DialogContent>
-          <DialogContentText id={`${key}-confirmation-dialog-description`}>
+          <DialogContentText id={`${id}-confirmation-dialog-description`}>
             {description}
           </DialogContentText>
         </DialogContent>
@@ -33,7 +36,7 @@ const Confirmation = props => {
           <Button onClick={() => hide()} color="secondary">
             Disagree
           </Button>
-          <Button onClick={onAgree} color="primary" autoFocus>
+          <Button onClick={() => handleAgree()} color="primary" autoFocus>
             Agree
           </Button>
         </DialogActions>
@@ -43,11 +46,11 @@ const Confirmation = props => {
 };
 
 Confirmation.propTypes = {
-  key: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onAgree: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  toggle: PropTypes.func.isRequired
 };
 
 export default Confirmation;

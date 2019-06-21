@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
 
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 
@@ -10,6 +11,7 @@ import Section from '../../commons/section/section.container';
 import Form from '../../commons/form/form.component';
 import FormSingleValue from '../../commons/form-single-value/form-single-value.component';
 import Avatar from '../../commons/avatar/avatar.container';
+import Confirmation from '../../widgets/confirmation/confirmation.component';
 
 import ActionsMenu from './actions-menu/actions-menu.container';
 
@@ -77,10 +79,19 @@ export default class Profile extends React.PureComponent {
               <Form
                 controls={[{ ...FORM_PHOTO, defaultValue: profile.photoURL || '' }]}
                 submitFunction={({ photo }) => uploadProfilePhoto(photo[0])}
-                secondaryFunction={() => deleteProfilePhoto()}
-                secondaryIcon={DeleteIcon}
-                secondaryDisabled={!profile.photoURL}
-                secondaryColor="error"
+                secondaryButton={(
+                  <Confirmation
+                    id="delete-profile-photo"
+                    title="Delete profile photo?"
+                    description="Your photo will be completely removed from everywhere and will be replaced with the default avatar."
+                    onAgree={() => deleteProfilePhoto()}
+                    toggle={show => (
+                      <IconButton onClick={() => show()} disabled={!profile.photoURL}>
+                        <DeleteIcon fontSize="small" color="error" />
+                      </IconButton>
+                    )}
+                  />
+                )}
                 allowControlsChange
                 single
               />

@@ -5,14 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import IconButton from '@material-ui/core/IconButton';
 
-import DotIcon from '@material-ui/icons/FiberManualRecord';
-
 import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 
 import styles from './buttons.styles';
-import { BUTTON_COLORS } from '../form.constants';
 
 const useStyles = makeStyles(styles);
 
@@ -22,25 +19,8 @@ const ButtonsSingle = props => {
     edit,
     onEditEnable,
     onEditDisable,
-    secondaryFunction,
-    secondaryIcon,
-    secondaryDisabled,
-    secondaryColor
+    secondaryButton
   } = props;
-
-  const SecondaryButton = () => {
-    const color = secondaryDisabled ? 'inherit' : secondaryColor;
-    const Icon = secondaryIcon || DotIcon;
-
-    return (
-      <IconButton
-        onClick={() => secondaryFunction()}
-        disabled={secondaryDisabled}
-      >
-        <Icon color={color} fontSize="small" />
-      </IconButton>
-    );
-  };
 
   return (
     <Box className={classes.single}>
@@ -58,7 +38,7 @@ const ButtonsSingle = props => {
           <IconButton onClick={() => onEditEnable()}>
             <EditIcon fontSize="small" />
           </IconButton>
-          {secondaryFunction && <SecondaryButton />}
+          {secondaryButton}
         </Fragment>
       )}
     </Box>
@@ -69,17 +49,11 @@ ButtonsSingle.propTypes = {
   edit: PropTypes.bool.isRequired,
   onEditEnable: PropTypes.func.isRequired,
   onEditDisable: PropTypes.func.isRequired,
-  secondaryFunction: PropTypes.func,
-  secondaryIcon: PropTypes.object,
-  secondaryDisabled: PropTypes.bool,
-  secondaryColor: PropTypes.string
+  secondaryButton: PropTypes.node
 };
 
 ButtonsSingle.defaultProps = {
-  secondaryFunction: null,
-  secondaryIcon: null,
-  secondaryDisabled: false,
-  secondaryColor: BUTTON_COLORS.PRIMARY
+  secondaryButton: null
 };
 
 export default ButtonsSingle;

@@ -27,15 +27,18 @@ import styles from './form.styles';
 class Form extends React.PureComponent {
   static propTypes = {
     controls: PropTypes.arrayOf(controlPropTypes).isRequired,
+    submitFunction: PropTypes.func.isRequired,
     single: PropTypes.bool,
     allowControlsChange: PropTypes.bool,
-    ...buttonsPropTypes
+    ...buttonsPropTypes,
+    submitButton: PropTypes.node
   };
 
   static defaultProps = {
     single: false,
     allowControlsChange: false,
-    ...buttonsDefaultProps
+    ...buttonsDefaultProps,
+    submitButton: null
   };
 
   constructor(props) {
@@ -199,7 +202,7 @@ class Form extends React.PureComponent {
 
   render() {
     const { controls, single, classes, ...restProps } = this.props;
-    const { secondaryIcon, secondaryFunction, secondaryDisabled, secondaryColor } = restProps;
+    const { secondaryButton } = restProps;
     const { singleEdit } = this.state;
 
     return single ? (
@@ -217,10 +220,7 @@ class Form extends React.PureComponent {
           edit={singleEdit}
           onEditEnable={() => this.handleSingleEditEnable()}
           onEditDisable={() => this.handleSingleEditDisable()}
-          secondaryFunction={secondaryFunction}
-          secondaryIcon={secondaryIcon}
-          secondaryDisabled={secondaryDisabled}
-          secondaryColor={secondaryColor}
+          secondaryButton={secondaryButton}
         />
       </form>
     ) : (

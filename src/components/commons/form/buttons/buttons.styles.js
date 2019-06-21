@@ -13,22 +13,8 @@ export default theme => ({
   },
   floated: {
     position: 'absolute',
-    width: `calc(100% - ${theme.spacing(3)}px)`
-  },
-  small: {
+    width: `calc(100% - ${theme.spacing(3)}px)`,
     bottom: -theme.spacing(5)
-  },
-  medium: {
-    bottom: -theme.spacing(5)
-  },
-  large: {
-    bottom: -theme.spacing(5.5)
-  },
-  secondaryButton: {
-    marginRight: theme.spacing(2)
-  },
-  buttonIcon: {
-    marginLeft: theme.spacing(1)
   },
   single: {
     display: 'flex',
