@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Button from '@material-ui/core/Button';
 
 import Form from '../../commons/form/form.component';
 import ProjectTitle from '../../commons/project-title/project-title.component';
@@ -67,9 +68,11 @@ class Login extends React.PureComponent {
                 }
               ]}
               submitFunction={credentials => login(credentials)}
-              submitLabel="Login"
-              submitDisabled={authInProgress}
-              submitVariant="text"
+              submitButton={(
+                <Button type="submit" color="primary" variant="text" disabled={authInProgress}>
+                  Login
+                </Button>
+              )}
             />
           </Grid>
         </Grid>

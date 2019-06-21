@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
 
 import Section from '../../commons/section/section.container';
 import Form from '../../commons/form/form.component';
@@ -29,6 +30,11 @@ class Todo extends React.PureComponent {
               }
             ]}
             submitFunction={() => {}}
+            submitButton={(
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+            )}
           />
         </Section>
 

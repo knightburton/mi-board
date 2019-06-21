@@ -15,8 +15,8 @@ const ButtonsDefault = props => {
   const {
     buttonPosition,
     buttonFloated,
-    submitButton: SubmitButton,
-    secondaryButton: SecondaryButton
+    submitButton,
+    secondaryButton
   } = props;
 
   const wrapperClasses = clsx(
@@ -29,8 +29,8 @@ const ButtonsDefault = props => {
 
   return (
     <Box className={wrapperClasses}>
-      {SecondaryButton && <SecondaryButton />}
-      <SubmitButton />
+      {secondaryButton}
+      {submitButton}
     </Box>
   );
 };
