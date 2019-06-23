@@ -76,6 +76,10 @@ export const getProfileID = createSelector(
   getFirebaseAuth,
   auth => (auth && auth.uid) || null
 );
+export const getProfileEmailVerified = createSelector(
+  getProfile,
+  profile => profile.emailVerified
+);
 
 /**
  * REDUCER
@@ -154,5 +158,14 @@ export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
     dispatch(addNotification(error.message, 'error'));
   } finally {
     dispatch(setSectionWaiting(false, 'profile'));
+  }
+};
+
+export const sendEmailVerification = firebase => async dispatch => {
+  try {
+    await firebase.auth().currentUser.sendEmailVerification();
+    dispatch(addNotification('Email has been sent tou your address', 'success'));
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
   }
 };
