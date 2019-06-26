@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -10,46 +10,46 @@ import Waiting from '../../widgets/waiting/waiting.component';
 
 import styles from './section.styles';
 
-class Section extends React.PureComponent {
-  static propTypes = {
-    title: PropTypes.string,
-    gutterBottom: PropTypes.bool,
-    children: PropTypes.node.isRequired,
-    waitingKey: PropTypes.string,
-    isWaiting: PropTypes.bool
-  };
+const useStyles = makeStyles(styles);
 
-  static defaultProps = {
-    title: '',
-    gutterBottom: false,
-    waitingKey: '',
-    isWaiting: false
-  };
+const Section = ({ title, gutterBottom, children, waitingKey, isWaiting }) => {
+  const classes = useStyles();
+  const paperClassNames = clsx(
+    {
+      [classes.marginTop]: !title,
+      [classes.marginBottom]: gutterBottom
+    },
+    classes.paper
+  );
 
-  render() {
-    const { title, gutterBottom, children, waitingKey, isWaiting, classes } = this.props;
-    const paperClassNames = clsx(
-      {
-        [classes.marginTop]: !title,
-        [classes.marginBottom]: gutterBottom
-      },
-      classes.paper
-    );
+  return (
+    <Fragment>
+      {title && (
+        <Typography variant="subtitle1" className={classes.marginTop}>
+          {title}
+        </Typography>
+      )}
+      <Paper className={paperClassNames}>
+        {children}
+        {waitingKey && isWaiting && <Waiting progressbar />}
+      </Paper>
+    </Fragment>
+  );
+};
 
-    return (
-      <Fragment>
-        {title && (
-          <Typography variant="subtitle1" className={classes.marginTop}>
-            {title}
-          </Typography>
-        )}
-        <Paper className={paperClassNames}>
-          {children}
-          {waitingKey && isWaiting && <Waiting progressbar />}
-        </Paper>
-      </Fragment>
-    );
-  }
-}
+Section.propTypes = {
+  title: PropTypes.string,
+  gutterBottom: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+  waitingKey: PropTypes.string,
+  isWaiting: PropTypes.bool
+};
 
-export default withStyles(styles)(Section);
+Section.defaultProps = {
+  title: '',
+  gutterBottom: false,
+  waitingKey: '',
+  isWaiting: false
+};
+
+export default Section;
