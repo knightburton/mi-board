@@ -14,42 +14,36 @@ import Dashboard from './pages/dashboard/dashboard.container';
 import Time from './pages/time/time.container';
 import Todo from './pages/todo/todo.container';
 
-class App extends React.PureComponent {
-  static propTypes = {
-    authIsLoaded: PropTypes.bool.isRequired,
-    authIsEmpty: PropTypes.bool.isRequired,
-    isAppWaiting: PropTypes.bool.isRequired
-  };
+const App = ({ authIsLoaded, authIsEmpty, isAppWaiting }) => (
+  <Switch>
+    {!authIsLoaded && <Route render={() => <Waiting screen />} />}
+    {authIsEmpty && <Route component={Login} />}
+    <Route
+      render={() => (
+        <Fragment>
+          <Drawer />
+          <Wrapper>
+            <AppBar />
+            <Switch>
+              <Route exact path="/profile" component={Profile} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route path="/time" component={Time} />
+              <Route path="/todo" component={Todo} />
+              <Redirect to="/dashboard" />
+            </Switch>
+          </Wrapper>
+          {isAppWaiting && <Waiting app />}
+          <Snackbars />
+        </Fragment>
+      )}
+    />
+  </Switch>
+);
 
-  render() {
-    const { authIsLoaded, authIsEmpty, isAppWaiting } = this.props;
-
-    return (
-      <Switch>
-        {!authIsLoaded && <Route render={() => <Waiting screen />} />}
-        {authIsEmpty && <Route component={Login} />}
-        <Route
-          render={() => (
-            <Fragment>
-              <Drawer />
-              <Wrapper>
-                <AppBar />
-                <Switch>
-                  <Route exact path="/profile" component={Profile} />
-                  <Route exact path="/dashboard" component={Dashboard} />
-                  <Route path="/time" component={Time} />
-                  <Route path="/todo" component={Todo} />
-                  <Redirect to="/dashboard" />
-                </Switch>
-              </Wrapper>
-              {isAppWaiting && <Waiting app />}
-              <Snackbars />
-            </Fragment>
-          )}
-        />
-      </Switch>
-    );
-  }
-}
+App.propTypes = {
+  authIsLoaded: PropTypes.bool.isRequired,
+  authIsEmpty: PropTypes.bool.isRequired,
+  isAppWaiting: PropTypes.bool.isRequired
+};
 
 export default withRouter(App);
