@@ -35,7 +35,7 @@ class Login extends React.PureComponent {
         <Grid spacing={0} direction="row" alignItems="center" justify="center" className={classes.grid} container>
           <Grid xs={12} sm={12} md={10} item>
             <div className={classes.avatarWrapper}>
-              <Avatar className={classes.avatar} src={Logo} />
+              <Avatar className={classes.avatar} imgProps={{ draggable: false }} src={Logo} />
               {authInProgress && (
                 <CircularProgress size={52} thickness={1.8} className={classes.progressCircle} />
               )}

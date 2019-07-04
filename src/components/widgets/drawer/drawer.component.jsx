@@ -40,7 +40,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
   const getContent = (isMobile = false) => (
     <Fragment>
       <Toolbar className={classes.toolbar}>
-        <Avatar className={classes.avatar} src={Logo} alt="Project Logo" />
+        <Avatar className={classes.avatar} src={Logo} imgProps={{ draggable: false }} alt="Project Logo" />
         <ProjectTitle />
       </Toolbar>
       <Divider />
