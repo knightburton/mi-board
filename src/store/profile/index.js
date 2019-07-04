@@ -185,3 +185,12 @@ export const sendPasswordResetEmail = firebase => async (dispatch, getState) => 
     dispatch(addNotification(error.message, 'error'));
   }
 };
+
+export const deleteProfile = firebase => async (dispatch, getState, { history }) => {
+  try {
+    await firebase.auth().currentUser.delete();
+    history.push('/');
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  }
+};

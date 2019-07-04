@@ -12,8 +12,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SendIcon from '@material-ui/icons/SendOutlined';
 import PasswordIcon from '@material-ui/icons/VpnKeyOutlined';
 
+import Confirmation from '../../../widgets/confirmation/confirmation.component';
+
 const ActionsMenu = props => {
-  const { emailVerified, sendEmailVerification, sendPasswordResetEmail } = props;
+  const { emailVerified, sendEmailVerification, sendPasswordResetEmail, deleteProfile } = props;
   const [menu, toggleMenu] = React.useState(null);
 
   const handleSendEmailVerification = () => {
@@ -24,6 +26,11 @@ const ActionsMenu = props => {
   const handleSendPasswordResetEmail = () => {
     toggleMenu(null);
     sendPasswordResetEmail();
+  };
+
+  const handleDeleteProfile = show => {
+    toggleMenu(null);
+    show();
   };
 
   return (
@@ -63,12 +70,20 @@ const ActionsMenu = props => {
           </ListItemIcon>
           <ListItemText primary="Send Password Reset Email" />
         </MenuItem>
-        <MenuItem onClick={() => toggleMenu(null)}>
-          <ListItemIcon>
-            <DeleteIcon color="error" />
-          </ListItemIcon>
-          <ListItemText primary="Delete Profile" primaryTypographyProps={{ color: 'error' }} />
-        </MenuItem>
+        <Confirmation
+          id="delete-profile-button"
+          title="Delete profile?"
+          description="Your profile and all of your data will be deleted. After this you cannot login into the application."
+          onAgree={() => deleteProfile()}
+          toggle={show => (
+            <MenuItem onClick={() => handleDeleteProfile(show)}>
+              <ListItemIcon>
+                <DeleteIcon color="error" />
+              </ListItemIcon>
+              <ListItemText primary="Delete Profile" primaryTypographyProps={{ color: 'error' }} />
+            </MenuItem>
+          )}
+        />
       </Menu>
     </Fragment>
   );
@@ -77,7 +92,8 @@ const ActionsMenu = props => {
 ActionsMenu.propTypes = {
   emailVerified: PropTypes.bool.isRequired,
   sendEmailVerification: PropTypes.func.isRequired,
-  sendPasswordResetEmail: PropTypes.func.isRequired
+  sendPasswordResetEmail: PropTypes.func.isRequired,
+  deleteProfile: PropTypes.func.isRequired
 };
 
 export default ActionsMenu;
