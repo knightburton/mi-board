@@ -3,7 +3,7 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 
-import Section from '../../../commons/section/section.component';
+import Section from '../../../commons/section/section.container';
 
 export default class Stopwatch extends React.PureComponent {
   render() {

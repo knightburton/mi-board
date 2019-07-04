@@ -2,11 +2,12 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 import CheckIcon from '@material-ui/icons/Check';
 
 import Form from '../../../../commons/form/form.component';
-import Section from '../../../../commons/section/section.component';
+import Section from '../../../../commons/section/section.container';
 import SectionSelect from '../../../../commons/section-select/section-select.component';
 
 import { controls, options, optionsMap } from '../interval.constants';
@@ -64,10 +65,14 @@ export default class IntervalForm extends React.PureComponent {
           <Form
             controls={formControls}
             submitIcon={CheckIcon}
-            submitLabel="Set"
             submitFunction={data => this.handleFormSubmit(data)}
+            submitButton={(
+              <Button type="submit" variant="contained" size="small" color="primary">
+                Set
+                <CheckIcon />
+              </Button>
+            )}
             buttonPosition="right"
-            buttonSize="small"
             allowControlsChange
           />
         </Section>

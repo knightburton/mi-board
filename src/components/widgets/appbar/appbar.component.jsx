@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import MuiAppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
@@ -20,34 +20,18 @@ import Avatar from '../../commons/avatar/avatar.container';
 
 import styles from './appbar.styles';
 
-class AppBar extends React.PureComponent {
-  static propTypes = {
-    logout: PropTypes.func.isRequired,
-    toggleMobileDrawer: PropTypes.func.isRequired,
-    profileDisplayName: PropTypes.string
-  };
+const useStyles = makeStyles(styles);
 
-  static defaultProps = {
-    profileDisplayName: null
-  };
+const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
+  const classes = useStyles();
+  const [accountMenu, setAccountMenu] = React.useState(null);
 
-  state = {
-    accountMenu: null
-  };
-
-  handleAccountMenuOpen = anchor => this.setState({ accountMenu: anchor });
-
-  handleAccountMenuClose = () => this.setState({ accountMenu: null });
-
-  handleLogoutClick = () => {
-    const { logout } = this.props;
-
+  const handleLogoutClick = () => {
     logout();
-    this.handleAccountMenuClose();
+    setAccountMenu(null);
   };
 
-  renderAccountMenu = () => {
-    const { accountMenu } = this.state;
+  const getAccountMenu = () => {
     const open = Boolean(accountMenu);
 
     return (
@@ -63,15 +47,15 @@ class AppBar extends React.PureComponent {
           horizontal: 'right'
         }}
         open={open}
-        onClose={() => this.handleAccountMenuClose()}
+        onClose={() => setAccountMenu(null)}
       >
-        <MenuItem component={Link} to="/profile" onClick={() => this.handleAccountMenuClose()}>
+        <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
           <ListItemIcon>
             <PersonOutlineIcon />
           </ListItemIcon>
           <Typography variant="inherit">Profile</Typography>
         </MenuItem>
-        <MenuItem onClick={() => this.handleLogoutClick()}>
+        <MenuItem onClick={() => handleLogoutClick()}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -81,42 +65,47 @@ class AppBar extends React.PureComponent {
     );
   };
 
-  render() {
-    const { toggleMobileDrawer, profileDisplayName, classes } = this.props;
-    const { accountMenu } = this.state;
-
-    return (
-      <MuiAppBar position="sticky" className={classes.appBar}>
-        <Toolbar>
-          <Hidden mdUp>
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              edge="start"
-              onClick={() => toggleMobileDrawer()}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Hidden>
-          <div className={classes.grow} />
-          {profileDisplayName && (
-            <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
-          )}
+  return (
+    <MuiAppBar position="sticky" className={classes.appBar}>
+      <Toolbar>
+        <Hidden mdUp>
           <IconButton
-            edge="end"
-            aria-owns={accountMenu ? 'material-appbar' : undefined}
-            aria-haspopup="true"
-            onClick={e => this.handleAccountMenuOpen(e.currentTarget)}
             color="inherit"
+            aria-label="Open drawer"
+            edge="start"
+            onClick={() => toggleMobileDrawer()}
+            className={classes.menuButton}
           >
-            <Avatar size="extraSmall" />
+            <MenuIcon />
           </IconButton>
-          {this.renderAccountMenu()}
-        </Toolbar>
-      </MuiAppBar>
-    );
-  }
-}
+        </Hidden>
+        <div className={classes.grow} />
+        {profileDisplayName && (
+          <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
+        )}
+        <IconButton
+          edge="end"
+          aria-owns={accountMenu ? 'material-appbar' : undefined}
+          aria-haspopup="true"
+          onClick={e => setAccountMenu(e.currentTarget)}
+          color="inherit"
+        >
+          <Avatar size="extraSmall" />
+        </IconButton>
+        {getAccountMenu()}
+      </Toolbar>
+    </MuiAppBar>
+  );
+};
 
-export default withRouter(withStyles(styles)(AppBar));
+AppBar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  toggleMobileDrawer: PropTypes.func.isRequired,
+  profileDisplayName: PropTypes.string
+};
+
+AppBar.defaultProps = {
+  profileDisplayName: null
+};
+
+export default withRouter(AppBar);

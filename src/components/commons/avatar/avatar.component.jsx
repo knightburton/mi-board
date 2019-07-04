@@ -19,6 +19,7 @@ const Avatar = props => {
     <MuiAvatar
       alt={alt}
       src={url}
+      imgProps={{ draggable: false }}
       className={clsx(
         { [classes[size]]: size },
         classes.border

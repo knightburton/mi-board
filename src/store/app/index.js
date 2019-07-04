@@ -8,7 +8,8 @@ import { createSelector } from 'reselect';
 export const initialState = {
   isDrawerOpened: false,
   isMobileDrawerOpened: false,
-  isAppWaiting: 0,
+  appWaiting: 0,
+  sectionWaiting: {},
   notifications: []
 };
 
@@ -20,6 +21,7 @@ export const TOGGLE_DRAWER = 'TOGGLE_DRAWER';
 export const TOGGLE_MOBILE_DRAWER = 'TOGGLE_MOBILE_DRAWER';
 
 export const SET_APP_WAITING = 'SET_APP_WAITING';
+export const SET_SECTION_WAITING = 'SET_SECTION_WAITING';
 
 export const ADD_NOTIFICATION = 'ADD_NOTIFICATION';
 export const REMOVE_NOTIFICATION = 'REMOVE_NOTIFICATION';
@@ -40,6 +42,10 @@ export const setAppWaiting = createAction(
   SET_APP_WAITING,
   waiting => waiting
 );
+export const setSectionWaiting = createAction(
+  SET_SECTION_WAITING,
+  (waiting, section) => ({ waiting, section })
+);
 
 export const addNotification = createAction(
   ADD_NOTIFICATION,
@@ -59,10 +65,15 @@ export const removeAllNotification = createAction(
 
 export const getIsDrawerOpened = state => state.app.isDrawerOpened;
 export const getIsMobileDrawerOpened = state => state.app.isMobileDrawerOpened;
-export const getIsAppWaitingCounter = state => state.app.isAppWaiting;
+export const getAppWaitingCounter = state => state.app.appWaiting;
 export const getIsAppWaiting = createSelector(
-  getIsAppWaitingCounter,
+  getAppWaitingCounter,
   counter => counter > 0
+);
+export const getSectionWaiting = state => state.app.sectionWaiting;
+export const getIsSectionWaiting = section => createSelector(
+  getSectionWaiting,
+  sectionWaiting => !!sectionWaiting[section] && sectionWaiting[section] > 0
 );
 export const getNotifications = state => state.app.notifications;
 
@@ -76,7 +87,18 @@ export const reducer = handleActions(
     [toggleMobileDrawer]: state => ({ ...state, isMobileDrawerOpened: !state.isMobileDrawerOpened }),
     [setAppWaiting]: (state, { payload: waiting }) => ({
       ...state,
-      isAppWaiting: waiting ? state.isAppWaiting + 1 : state.isAppWaiting - 1
+      appWaiting: waiting ? state.appWaiting + 1 : state.appWaiting - 1
+    }),
+    [setSectionWaiting]: (state, { payload: { waiting, section } }) => ({
+      ...state,
+      sectionWaiting: waiting
+        ? { ...state.sectionWaiting, [section]: (state.sectionWaiting[section] || 0) + 1 }
+        : Object.keys(state.sectionWaiting).reduce((o, s) => ({
+          ...o,
+          ...s === section && state.sectionWaiting[section] === 1
+            ? {}
+            : { [section]: state.sectionWaiting[section] - 1 }
+        }), {})
     }),
     [addNotification]: (state, { payload: { message, variant = 'info' } }) => ({
       ...state,

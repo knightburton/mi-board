@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
@@ -11,63 +12,88 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import SendIcon from '@material-ui/icons/SendOutlined';
 import PasswordIcon from '@material-ui/icons/VpnKeyOutlined';
 
-export default class ActionsMenu extends React.PureComponent {
-  state = {
-    actionsMenu: null
+import Confirmation from '../../../widgets/confirmation/confirmation.component';
+
+const ActionsMenu = props => {
+  const { emailVerified, sendEmailVerification, sendPasswordResetEmail, deleteProfile } = props;
+  const [menu, toggleMenu] = React.useState(null);
+
+  const handleSendEmailVerification = () => {
+    toggleMenu(null);
+    sendEmailVerification();
   };
 
-  handleActionMenuOpen = target => this.setState({ actionsMenu: target });
+  const handleSendPasswordResetEmail = () => {
+    toggleMenu(null);
+    sendPasswordResetEmail();
+  };
 
-  handleActionMenuClose = () => this.setState({ actionsMenu: null });
+  const handleDeleteProfile = show => {
+    toggleMenu(null);
+    show();
+  };
 
-  render() {
-    const { actionsMenu } = this.state;
+  return (
+    <Fragment>
+      <IconButton
+        aria-label="Actions"
+        aria-controls="actions-menu"
+        aria-haspopup="true"
+        onClick={e => toggleMenu(e.currentTarget)}
+      >
+        <MoreVertIcon />
+      </IconButton>
+      <Menu
+        id="actions-menu"
+        anchorEl={menu}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        keepMounted
+        open={Boolean(menu)}
+        onClose={() => toggleMenu(null)}
+      >
+        <MenuItem onClick={() => handleSendEmailVerification()} disabled={emailVerified}>
+          <ListItemIcon>
+            <SendIcon />
+          </ListItemIcon>
+          <ListItemText primary="Send Email verification" />
+        </MenuItem>
+        <MenuItem onClick={() => handleSendPasswordResetEmail()}>
+          <ListItemIcon>
+            <PasswordIcon />
+          </ListItemIcon>
+          <ListItemText primary="Send Password Reset Email" />
+        </MenuItem>
+        <Confirmation
+          id="delete-profile-button"
+          title="Delete profile?"
+          description="Your profile and all of your data will be deleted. After this you cannot login into the application."
+          onAgree={() => deleteProfile()}
+          toggle={show => (
+            <MenuItem onClick={() => handleDeleteProfile(show)}>
+              <ListItemIcon>
+                <DeleteIcon color="error" />
+              </ListItemIcon>
+              <ListItemText primary="Delete Profile" primaryTypographyProps={{ color: 'error' }} />
+            </MenuItem>
+          )}
+        />
+      </Menu>
+    </Fragment>
+  );
+};
 
-    return (
-      <Fragment>
-        <IconButton
-          aria-label="Actions"
-          aria-controls="actions-menu"
-          aria-haspopup="true"
-          onClick={e => this.handleActionMenuOpen(e.currentTarget)}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id="actions-menu"
-          anchorEl={actionsMenu}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          keepMounted
-          open={Boolean(actionsMenu)}
-          onClose={() => this.handleActionMenuClose()}
-        >
-          <MenuItem onClick={() => this.handleActionMenuClose()}>
-            <ListItemIcon>
-              <SendIcon />
-            </ListItemIcon>
-            <ListItemText primary="Send Email verification" />
-          </MenuItem>
-          <MenuItem onClick={() => this.handleActionMenuClose()}>
-            <ListItemIcon>
-              <PasswordIcon />
-            </ListItemIcon>
-            <ListItemText primary="Send Password Reset Email" />
-          </MenuItem>
-          <MenuItem onClick={() => this.handleActionMenuClose()}>
-            <ListItemIcon>
-              <DeleteIcon color="error" />
-            </ListItemIcon>
-            <ListItemText primary="Delete Profile" primaryTypographyProps={{ color: 'error' }} />
-          </MenuItem>
-        </Menu>
-      </Fragment>
-    );
-  }
-}
+ActionsMenu.propTypes = {
+  emailVerified: PropTypes.bool.isRequired,
+  sendEmailVerification: PropTypes.func.isRequired,
+  sendPasswordResetEmail: PropTypes.func.isRequired,
+  deleteProfile: PropTypes.func.isRequired
+};
+
+export default ActionsMenu;

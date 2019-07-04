@@ -1,22 +1,11 @@
 import React from 'react';
 
-import Section from '../../../../commons/section/section.component';
+import Section from '../../../../commons/section/section.container';
 
 export default class IntervalTimer extends React.PureComponent {
   render() {
     return (
-      <Section
-        footer={{
-          // align: 'right',
-          actions: [
-            {
-              key: 'settings',
-              function: () => {},
-              label: 'Change Settings'
-            }
-          ]
-        }}
-      >
+      <Section>
         The timer is active
       </Section>
     );

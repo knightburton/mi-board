@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
 
 import { buttonsPropTypes, buttonsDefaultProps } from './buttons.proptypes';
 import { BUTTON_POSITIONS } from '../form.constants';
@@ -16,25 +15,13 @@ const ButtonsDefault = props => {
   const {
     buttonPosition,
     buttonFloated,
-    buttonFullWidth,
-    buttonSize,
-    submitIcon: SubmitIcon,
-    submitLabel,
-    submitDisabled,
-    submitVariant,
-    submitColor,
-    secondaryIcon: SecondaryIcon,
-    secondaryLabel,
-    secondaryDisabled,
-    secondaryVariant,
-    secondaryColor,
-    secondaryFunction
+    submitButton,
+    secondaryButton
   } = props;
 
   const wrapperClasses = clsx(
     {
       [classes.floated]: buttonFloated,
-      [classes[buttonSize]]: buttonFloated,
       [classes[buttonPosition]]: Object.values(BUTTON_POSITIONS).includes(buttonPosition)
     },
     classes.buttonWrapper
@@ -42,33 +29,8 @@ const ButtonsDefault = props => {
 
   return (
     <Box className={wrapperClasses}>
-      {secondaryFunction && (
-        <Button
-          variant={secondaryVariant}
-          fullWidth={buttonFullWidth}
-          className={classes.secondaryButton}
-          onClick={() => secondaryFunction()}
-          color={secondaryColor}
-          disabled={secondaryDisabled}
-          size={buttonSize}
-          aria-label={secondaryLabel}
-        >
-          {secondaryLabel}
-          {SecondaryIcon && <SecondaryIcon className={classes.buttonIcon} />}
-        </Button>
-      )}
-      <Button
-        type="submit"
-        variant={submitVariant}
-        fullWidth={buttonFullWidth}
-        color={submitColor}
-        disabled={submitDisabled}
-        size={buttonSize}
-        aria-label={submitLabel}
-      >
-        {submitLabel}
-        {SubmitIcon && <SubmitIcon className={classes.buttonIcon} />}
-      </Button>
+      {secondaryButton}
+      {submitButton}
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
-import { setAppWaiting, addNotification } from '../app';
+import { setSectionWaiting, addNotification } from '../app';
 
 /**
  * INITIAL STATE
@@ -31,6 +31,7 @@ export const setAuthInProgress = createAction(
 
 export const getAuthInProgress = state => state.user.authInProgress;
 
+export const getFirebaseProfile = state => state.firebase.profile;
 export const getFirebaseAuth = state => state.firebase.auth;
 export const getFirebaseAuthError = state => state.firebase.authError;
 export const getFirebaseAuthErrorMessage = createSelector(
@@ -45,27 +46,43 @@ export const getFirebaseAuthIsEmpty = createSelector(
   getFirebaseAuth,
   auth => auth && auth.isEmpty
 );
-export const getProfileData = createSelector(
-  getFirebaseAuth,
-  auth => {
-    if (!auth) return null;
+export const getProfile = createSelector(
+  [getFirebaseAuth, getFirebaseProfile],
+  (auth, profile) => {
+    if (!auth && !profile) return null;
     return {
-      name: auth.displayName,
-      email: auth.email,
+      name: profile.displayName || auth.displayName,
+      email: profile.email || auth.email,
       emailVerified: auth.emailVerified,
-      photoURL: auth.photoURL,
+      photoURL: profile.photoURL || auth.photoURL,
       lastLoginAt: auth.lastLoginAt,
       createdAt: auth.createdAt
     };
   }
 );
 export const getDisplayName = createSelector(
-  getFirebaseAuth,
-  auth => ((auth && auth.displayName) || auth.email) || null
+  getProfile,
+  profile => ((profile && profile.name) || profile.email) || null
 );
 export const getProfilePhotoUrl = createSelector(
+  getProfile,
+  profile => (profile && profile.photoURL) || null
+);
+export const getProfilePhotoName = createSelector(
+  getFirebaseProfile,
+  profile => (profile && profile.photoName) || null
+);
+export const getProfileID = createSelector(
   getFirebaseAuth,
-  auth => (auth && auth.photoURL) || null
+  auth => (auth && auth.uid) || null
+);
+export const getProfileEmail = createSelector(
+  getFirebaseAuth,
+  auth => (auth && auth.email) || null
+);
+export const getProfileEmailVerified = createSelector(
+  getProfile,
+  profile => profile.emailVerified
 );
 
 /**
@@ -94,24 +111,86 @@ export const logout = firebase => async dispatch => {
   dispatch(setAuthInProgress(false));
 };
 
-export const updataAuthAndProfile = (firebase, attributes) => async dispatch => {
-  dispatch(setAppWaiting(true));
+export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
-    await firebase.updateAuth(attributes, true);
+    await firebase.updateAuth(attributes, updateProfile);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
   }
 };
 
 export const updataEmail = (firebase, email) => async dispatch => {
-  dispatch(setAppWaiting(true));
+  dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateEmail(email, true);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setAppWaiting(false));
+    dispatch(setSectionWaiting(false, 'profile'));
+  }
+};
+
+export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState) => {
+  dispatch(setSectionWaiting(true, 'profile'));
+  try {
+    const profileID = getProfileID(getState());
+    const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(`profiles/${profileID}`, file);
+    const downloadUrl = await firebase.storage().ref().child(metadata.fullPath).getDownloadURL();
+    await dispatch(updataAuth(firebase, { photoURL: downloadUrl, photoName: metadata.name }, true));
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  } finally {
+    dispatch(setSectionWaiting(false, 'profile'));
+  }
+};
+
+export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
+  dispatch(setSectionWaiting(true, 'profile'));
+  try {
+    const profileID = getProfileID(getState());
+    const profilePhotoName = getProfilePhotoName(getState());
+    if (profilePhotoName) {
+      await firebase.deleteFile(`profiles/${profileID}/${profilePhotoName}`);
+      await dispatch(updataAuth(firebase, { photoURL: null, photoName: null }, true));
+    } else {
+      dispatch(addNotification('There is no available profile photo', 'error'));
+    }
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  } finally {
+    dispatch(setSectionWaiting(false, 'profile'));
+  }
+};
+
+export const sendEmailVerification = firebase => async dispatch => {
+  try {
+    await firebase.auth().currentUser.sendEmailVerification();
+    dispatch(addNotification('Email has been sent tou your address', 'success'));
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  }
+};
+
+export const sendPasswordResetEmail = firebase => async (dispatch, getState) => {
+  try {
+    const email = getProfileEmail(getState());
+    const isEmailVerified = getProfileEmailVerified(getState());
+    if (isEmailVerified) await firebase.auth().sendPasswordResetEmail(email);
+    else dispatch(addNotification('You have to verify your email address first', 'warning'));
+    dispatch(addNotification('Password reset email has been sent to your address', 'success'));
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  }
+};
+
+export const deleteProfile = firebase => async (dispatch, getState, { history }) => {
+  try {
+    await firebase.auth().currentUser.delete();
+    history.push('/');
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
   }
 };

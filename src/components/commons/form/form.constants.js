@@ -24,24 +24,6 @@ export const CONTROL_DEFAULTS = {
   DATE_FORMAT: 'YYYY-MM-DD'
 };
 
-export const BUTTON_SIZES = {
-  SMALL: 'small',
-  MEDIUM: 'medium',
-  LARGE: 'large'
-};
-
-export const BUTTON_VARIANTS = {
-  TEXT: 'text',
-  OUTLINED: 'outlined',
-  CONTAINED: 'contained'
-};
-
-export const BUTTON_COLORS = {
-  PRIMARY: 'primary',
-  SECONDARY: 'secondary',
-  ERROR: 'error'
-};
-
 export const BUTTON_POSITIONS = {
   LEFT: 'left',
   CENTER: 'center',

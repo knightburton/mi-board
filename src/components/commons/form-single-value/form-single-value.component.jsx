@@ -16,7 +16,7 @@ const FormSingleValue = props => {
       <InputLabel className={classes.label}>
         {label || 'n/a'}
       </InputLabel>
-      <Typography variant="body1">
+      <Typography variant="body1" className={classes.value}>
         {value || 'n/a'}
       </Typography>
     </Box>
