@@ -76,6 +76,10 @@ export const getProfileID = createSelector(
   getFirebaseAuth,
   auth => (auth && auth.uid) || null
 );
+export const getProfileEmail = createSelector(
+  getFirebaseAuth,
+  auth => (auth && auth.email) || null
+);
 export const getProfileEmailVerified = createSelector(
   getProfile,
   profile => profile.emailVerified
@@ -165,6 +169,18 @@ export const sendEmailVerification = firebase => async dispatch => {
   try {
     await firebase.auth().currentUser.sendEmailVerification();
     dispatch(addNotification('Email has been sent tou your address', 'success'));
+  } catch (error) {
+    dispatch(addNotification(error.message, 'error'));
+  }
+};
+
+export const sendPasswordResetEmail = firebase => async (dispatch, getState) => {
+  try {
+    const email = getProfileEmail(getState());
+    const isEmailVerified = getProfileEmailVerified(getState());
+    if (isEmailVerified) await firebase.auth().sendPasswordResetEmail(email);
+    else dispatch(addNotification('You have to verify your email address first', 'warning'));
+    dispatch(addNotification('Password reset email has been sent to your address', 'success'));
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   }

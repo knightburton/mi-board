@@ -13,12 +13,17 @@ import SendIcon from '@material-ui/icons/SendOutlined';
 import PasswordIcon from '@material-ui/icons/VpnKeyOutlined';
 
 const ActionsMenu = props => {
-  const { emailVerified, sendEmailVerification } = props;
+  const { emailVerified, sendEmailVerification, sendPasswordResetEmail } = props;
   const [menu, toggleMenu] = React.useState(null);
 
   const handleSendEmailVerification = () => {
     toggleMenu(null);
     sendEmailVerification();
+  };
+
+  const handleSendPasswordResetEmail = () => {
+    toggleMenu(null);
+    sendPasswordResetEmail();
   };
 
   return (
@@ -52,7 +57,7 @@ const ActionsMenu = props => {
           </ListItemIcon>
           <ListItemText primary="Send Email verification" />
         </MenuItem>
-        <MenuItem onClick={() => toggleMenu(null)}>
+        <MenuItem onClick={() => handleSendPasswordResetEmail()}>
           <ListItemIcon>
             <PasswordIcon />
           </ListItemIcon>
@@ -71,7 +76,8 @@ const ActionsMenu = props => {
 
 ActionsMenu.propTypes = {
   emailVerified: PropTypes.bool.isRequired,
-  sendEmailVerification: PropTypes.func.isRequired
+  sendEmailVerification: PropTypes.func.isRequired,
+  sendPasswordResetEmail: PropTypes.func.isRequired
 };
 
 export default ActionsMenu;

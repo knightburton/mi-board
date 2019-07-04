@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
 import {
   getProfileEmailVerified,
-  sendEmailVerification
+  sendEmailVerification,
+  sendPasswordResetEmail
 } from '../../../../store/profile';
 
 import ActionsMenu from './actions-menu.component';
@@ -13,7 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
-  sendEmailVerification: () => dispatch(sendEmailVerification(firebase))
+  sendEmailVerification: () => dispatch(sendEmailVerification(firebase)),
+  sendPasswordResetEmail: () => dispatch(sendPasswordResetEmail(firebase))
 });
 
 export default compose(
