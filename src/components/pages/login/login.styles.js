@@ -20,5 +20,9 @@ export default theme => ({
     alignSelf: 'center',
     color: theme.palette.primary.main,
     zIndex: 1
+  },
+  error: {
+    fontWight: 'bold',
+    margin: theme.spacing(2, 0)
   }
 });

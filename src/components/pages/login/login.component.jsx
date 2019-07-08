@@ -42,7 +42,7 @@ class Login extends React.PureComponent {
             </div>
             <ProjectTitle />
             {error && (
-              <Typography variant="body1" component="p" align="center" color="error" gutterBottom>
+              <Typography className={classes.error} variant="body1" component="p" align="center" color="error" gutterBottom>
                 {error}
               </Typography>
             )}

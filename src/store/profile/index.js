@@ -101,14 +101,24 @@ export const reducer = handleActions(
 
 export const login = (firebase, credentials) => async dispatch => {
   dispatch(setAuthInProgress(true));
-  await firebase.login(credentials);
-  dispatch(setAuthInProgress(false));
+  try {
+    await firebase.login(credentials);
+  } catch (error) {
+    /* Handled by react-redux-firebase */
+  } finally {
+    dispatch(setAuthInProgress(false));
+  }
 };
 
 export const logout = firebase => async dispatch => {
   dispatch(setAuthInProgress(true));
-  await firebase.logout();
-  dispatch(setAuthInProgress(false));
+  try {
+    await firebase.logout();
+  } catch (error) {
+    /* Handled by react-redux-firebase */
+  } finally {
+    dispatch(setAuthInProgress(false));
+  }
 };
 
 export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
