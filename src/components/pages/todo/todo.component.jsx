@@ -35,6 +35,7 @@ class Todo extends React.PureComponent {
                 Submit
               </Button>
             )}
+            buttonFloated
           />
         </Section>
 

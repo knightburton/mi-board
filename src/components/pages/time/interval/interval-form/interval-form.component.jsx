@@ -72,7 +72,8 @@ export default class IntervalForm extends React.PureComponent {
                 <CheckIcon />
               </Button>
             )}
-            buttonPosition="right"
+            buttonPosition="center"
+            buttonFloated
             allowControlsChange
           />
         </Section>

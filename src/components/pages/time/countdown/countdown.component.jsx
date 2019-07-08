@@ -29,18 +29,18 @@ export default class Countdown extends React.PureComponent {
             controls={controls}
             submitFunction={() => {}}
             submitButton={(
-              <Button type="submit" size="small">
+              <Button type="submit" variant="contained" size="small" color="primary">
                 Start
                 <PlayIcon />
               </Button>
             )}
             secondaryButton={(
-              <Button type="submit" color="secondary" size="small">
+              <Button type="submit" variant="contained" size="small" color="secondary">
                 Reset
                 <SetBackIcon />
               </Button>
             )}
-            buttonPosition="right"
+            buttonPosition="center"
             buttonFloated
           />
         </Section>

@@ -98,7 +98,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
           }}
           open={isDrawerOpened}
         >
-          {getContent(toggleDrawer)}
+          {getContent()}
         </MuiDrawer>
       </Hidden>
       <Hidden mdUp>
@@ -114,7 +114,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
             keepMounted: true
           }}
         >
-          {getContent(toggleMobileDrawer, true)}
+          {getContent(true)}
         </MuiDrawer>
       </Hidden>
     </Fragment>

@@ -35,7 +35,8 @@ export const controlPropTypes = PropTypes.shape({
 export const statePropTypes = PropTypes.shape({
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number
+    PropTypes.number,
+    PropTypes.object
   ]),
   error: PropTypes.string
 });
