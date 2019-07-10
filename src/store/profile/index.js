@@ -48,16 +48,13 @@ export const getFirebaseAuthIsEmpty = createSelector(
 );
 export const getProfile = createSelector(
   [getFirebaseAuth, getFirebaseProfile],
-  (auth, profile) => {
-    if (!auth && !profile) return null;
-    return {
-      name: profile.displayName || auth.displayName,
-      email: profile.email || auth.email,
-      emailVerified: auth.emailVerified,
-      photoURL: profile.photoURL || auth.photoURL,
-      lastLoginAt: auth.lastLoginAt,
-      createdAt: auth.createdAt
-    };
+  (auth, profile) => auth && profile && {
+    name: profile.displayName || auth.displayName,
+    email: profile.email || auth.email,
+    emailVerified: auth.emailVerified,
+    photoURL: profile.photoURL || auth.photoURL,
+    lastLoginAt: auth.lastLoginAt,
+    createdAt: auth.createdAt
   }
 );
 export const getDisplayName = createSelector(
