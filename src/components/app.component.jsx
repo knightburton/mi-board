@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 
@@ -14,13 +14,15 @@ import Dashboard from './pages/dashboard/dashboard.container';
 import Time from './pages/time/time.container';
 import Todo from './pages/todo/todo.container';
 
+import { ProfileProvider } from './contexts/profile';
+
 const App = ({ authIsLoaded, authIsEmpty, isAppWaiting }) => (
   <Switch>
     {!authIsLoaded && <Route render={() => <Waiting screen />} />}
     {authIsEmpty && <Route component={Login} />}
     <Route
       render={() => (
-        <Fragment>
+        <ProfileProvider>
           <Drawer />
           <Wrapper>
             <AppBar />
@@ -34,7 +36,7 @@ const App = ({ authIsLoaded, authIsEmpty, isAppWaiting }) => (
           </Wrapper>
           {isAppWaiting && <Waiting app />}
           <Snackbars />
-        </Fragment>
+        </ProfileProvider>
       )}
     />
   </Switch>

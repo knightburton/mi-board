@@ -14,8 +14,9 @@ import PasswordIcon from '@material-ui/icons/VpnKeyOutlined';
 
 import Confirmation from '../../../widgets/confirmation/confirmation.component';
 
-const ActionsMenu = props => {
-  const { emailVerified, sendEmailVerification, sendPasswordResetEmail, deleteProfile } = props;
+import { ProfileConsumer } from '../../../contexts/profile';
+
+const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProfile }) => {
   const [menu, toggleMenu] = React.useState(null);
 
   const handleSendEmailVerification = () => {
@@ -58,12 +59,16 @@ const ActionsMenu = props => {
         open={Boolean(menu)}
         onClose={() => toggleMenu(null)}
       >
-        <MenuItem onClick={() => handleSendEmailVerification()} disabled={emailVerified}>
-          <ListItemIcon>
-            <SendIcon />
-          </ListItemIcon>
-          <ListItemText primary="Send Email verification" />
-        </MenuItem>
+        <ProfileConsumer>
+          {({ emailVerified }) => (
+            <MenuItem onClick={() => handleSendEmailVerification()} disabled={emailVerified}>
+              <ListItemIcon>
+                <SendIcon />
+              </ListItemIcon>
+              <ListItemText primary="Send Email verification" />
+            </MenuItem>
+          )}
+        </ProfileConsumer>
         <MenuItem onClick={() => handleSendPasswordResetEmail()}>
           <ListItemIcon>
             <PasswordIcon />
@@ -90,7 +95,6 @@ const ActionsMenu = props => {
 };
 
 ActionsMenu.propTypes = {
-  emailVerified: PropTypes.bool.isRequired,
   sendEmailVerification: PropTypes.func.isRequired,
   sendPasswordResetEmail: PropTypes.func.isRequired,
   deleteProfile: PropTypes.func.isRequired
