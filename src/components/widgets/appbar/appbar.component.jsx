@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
-import Avatar from '../../commons/avatar/avatar.container';
+import Avatar from '../../commons/avatar/avatar.component';
 
 import styles from './appbar.styles';
 

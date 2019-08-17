@@ -2,7 +2,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
 import {
-  getProfile,
   updataAuth,
   updataEmail,
   uploadProfilePhoto,
@@ -11,9 +10,7 @@ import {
 
 import Profile from './profile.component';
 
-const mapStateToProps = state => ({
-  profile: getProfile(state)
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
   updataAuth: attributes => dispatch(updataAuth(firebase, attributes, true)),
