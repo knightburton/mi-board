@@ -85,7 +85,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
               size="small"
               color="primary"
               onClick={() => resetTimer()}
-              disabled={active}
+              disabled={clock === 0 || active}
             >
               Reset
               <ResetIcon />

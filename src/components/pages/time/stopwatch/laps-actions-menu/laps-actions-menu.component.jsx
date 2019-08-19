@@ -11,7 +11,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import ShowAllIcon from '@material-ui/icons/FormatListNumberedOutlined';
 import ClearAllIcon from '@material-ui/icons/ClearAllOutlined';
 
-const LapsActionsMenu = ({ clearStopwatchLaps }) => {
+const LapsActionsMenu = ({ clearDisabled, clearStopwatchLaps }) => {
   const [menu, toggleMenu] = React.useState(null);
 
   const handleClearAll = () => {
@@ -44,7 +44,7 @@ const LapsActionsMenu = ({ clearStopwatchLaps }) => {
         open={Boolean(menu)}
         onClose={() => toggleMenu(null)}
       >
-        <MenuItem onClick={() => handleClearAll()}>
+        <MenuItem onClick={() => handleClearAll()} disabled={clearDisabled}>
           <ListItemIcon>
             <ClearAllIcon />
           </ListItemIcon>
@@ -56,6 +56,7 @@ const LapsActionsMenu = ({ clearStopwatchLaps }) => {
 };
 
 LapsActionsMenu.propTypes = {
+  clearDisabled: PropTypes.bool.isRequired,
   clearStopwatchLaps: PropTypes.func.isRequired
 };
 
