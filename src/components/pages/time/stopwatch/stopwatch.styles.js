@@ -5,5 +5,8 @@ export default theme => ({
   lapIndex: {
     display: 'inline-block',
     minWidth: theme.spacing(4)
+  },
+  buttonContainer: {
+    marginTop: theme.spacing(2)
   }
 });

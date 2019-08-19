@@ -41,7 +41,6 @@ export default class Countdown extends React.PureComponent {
               </Button>
             )}
             buttonPosition="center"
-            buttonFloated
           />
         </Section>
 

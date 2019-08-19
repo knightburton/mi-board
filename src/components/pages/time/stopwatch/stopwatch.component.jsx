@@ -58,7 +58,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
         <Typography variant="h1" align="center">
           {formattedElapsedTime}
         </Typography>
-        <Grid spacing={2} justify="center" alignItems="center" container>
+        <Grid spacing={2} justify="center" alignItems="center" className={classes.buttonContainer} container>
           <Grid xs="auto" item>
             <Button
               variant="contained"
