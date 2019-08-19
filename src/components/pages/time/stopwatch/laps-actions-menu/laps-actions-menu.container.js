@@ -7,7 +7,7 @@ import {
 import LapsActionsMenu from './laps-actions-menu.component';
 
 const mapStateToProps = state => ({
-  clearDisabled: getStopwatchLaps(state).length === 0
+  lapsLength: getStopwatchLaps(state).length
 });
 
 const mapDispatchToProps = {

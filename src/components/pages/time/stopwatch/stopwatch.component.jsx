@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
@@ -23,6 +23,7 @@ const useStyles = makeStyles(styles);
 
 const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLaps, clock, laps, ...props }) => {
   const classes = useStyles();
+  const [noOfVisibleLaps, changeNoOfVisibleLaps] = useState(10);
   const active = activeTimer === 'stopwatch';
   const formattedElapsedTime = clock
     ? moment().hour(0).minute(0).second(clock).format('HH:mm:ss')
@@ -110,10 +111,10 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
       <Section title="Laps">
         <Grid spacing={0} justify="flex-end" alignItems="flex-start" container>
           <Grid xs="auto" item>
-            <LapsActionsMenu />
+            <LapsActionsMenu noOfVisibleLaps={noOfVisibleLaps} changeNoOfVisibleLaps={changeNoOfVisibleLaps} />
           </Grid>
           <Grid xs={12} item>
-            {laps.length ? [...laps].reverse().map((lap, index) => (
+            {laps.length ? [...laps].reverse().splice(0, noOfVisibleLaps).map((lap, index) => (
               <Typography key={Math.random() + lap} variant="body1" align="center">
                 <Typography variant="body2" className={clsx(classes.lapText, classes.lapIndex)}>
                   {`${laps.length - index}.`}
