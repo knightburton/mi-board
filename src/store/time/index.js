@@ -151,7 +151,7 @@ export const reducer = handleActions(
     [setCountdownTime]: (state, { payload: time }) => ({ ...state, countdown: { time } }),
     [resetCountdownTime]: state => ({ ...state, countdown: intialState.countdown }),
 
-    [addStopwatchLap]: (state, { payload: lap }) => ({ ...state, stopwatch: { lap: [...state.stopwatch.laps, lap] } }),
+    [addStopwatchLap]: (state, { payload: lap }) => ({ ...state, stopwatch: { laps: [...state.stopwatch.laps, lap] } }),
     [clearStopwatchLaps]: state => ({ ...state, stopwatch: intialState.stopwatch }),
 
     [setActiveTimer]: (state, { payload: timer }) => ({ ...state, active: timer }),
