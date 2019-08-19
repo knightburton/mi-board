@@ -14,7 +14,6 @@ const minuteProps = {
   min: 0,
   max: 60,
   step: 1,
-  indicator: true,
   inline: true
 };
 
@@ -24,7 +23,6 @@ const secondProps = {
   min: 0,
   max: 59,
   step: 1,
-  indicator: true,
   inline: true
 };
 

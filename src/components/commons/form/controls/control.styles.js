@@ -1,5 +1,3 @@
-import { fade } from '@material-ui/core/styles/colorManipulator';
-
 export default theme => ({
   // General control styles
   formControl: {
@@ -28,9 +26,6 @@ export default theme => ({
   sliderFullWidth: {
     width: '100%'
   },
-  slider: {
-    padding: theme.spacing(3, 1)
-  },
   sliderLabel: {
     width: '100%',
     textAlign: 'left',
@@ -54,31 +49,6 @@ export default theme => ({
       marginRight: -theme.spacing(1.5)
     }
   },
-  thumbText: {
-    ...theme.typography.caption,
-    paddingTop: '1px',
-    paddingLeft: '1px'
-  },
-
-  // Slider Thumb styles
-  thumb: {
-    height: theme.spacing(3),
-    width: theme.spacing(3),
-    backgroundColor: theme.palette.common.white,
-    border: `2px solid ${theme.palette.primary.main}`,
-    '&$focused, &:hover': {
-      boxShadow: `0 0 0 ${theme.spacing(0.5)}px ${fade(theme.palette.primary.main, 0.16)}`,
-    },
-    '&$activated': {
-      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, 0.16)}`,
-    },
-    '&$jumped': {
-      boxShadow: `0 0 0 ${theme.spacing(1)}px ${fade(theme.palette.primary.main, 0.16)}`,
-    },
-  },
-  focused: {},
-  activated: {},
-  jumped: {},
 
   // Date Picker styles
   datePicker: {

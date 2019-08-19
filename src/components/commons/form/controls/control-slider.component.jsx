@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Slider from '@material-ui/lab/Slider';
+import Slider from '@material-ui/core/Slider';
 
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
@@ -27,12 +27,6 @@ const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
     },
     classes.sliderControl
   );
-  const sliderClasses = {
-    thumb: classes.thumb,
-    focused: classes.focused,
-    activated: classes.activated,
-    jumped: classes.jumped
-  };
 
   return (
     <div key={control.key} className={className}>
@@ -58,22 +52,12 @@ const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
         <Slider
           value={state.value}
           aria-labelledby={`${control.key}-label`}
-          className={classes.slider}
           onChange={(e, value) => onChange(control.key, value)}
           min={control.min || CONTROL_DEFAULTS.SLIDER_MIN}
           max={control.max || CONTROL_DEFAULTS.SLIDER_MAX}
           step={control.step || CONTROL_DEFAULTS.SLIDER_STEP}
-          classes={control.indicator ? sliderClasses : {}}
-          {...control.indicator
-            ? {
-              thumb: (
-                <Typography className={classes.thumbText}>
-                  {state.value}
-                </Typography>
-              )
-            }
-            : {}
-          }
+          marks={control.marks || CONTROL_DEFAULTS.SLIDER_MARKS}
+          valueLabelDisplay="auto"
         />
         {control.buttons && (
           <IconButton

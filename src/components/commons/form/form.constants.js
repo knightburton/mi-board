@@ -21,6 +21,7 @@ export const CONTROL_DEFAULTS = {
   SLIDER_MIN: 0,
   SLIDER_MAX: 60,
   SLIDER_STEP: 1,
+  SLIDER_MARKS: Array.from({ length: 12 }, (v, i) => ({ value: i * 5, label: i * 5 })),
   DATE_FORMAT: 'YYYY-MM-DD'
 };
 
