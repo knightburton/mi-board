@@ -61,7 +61,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
       >
         <ProfileConsumer>
           {({ emailVerified }) => (
-            <MenuItem onClick={() => handleSendEmailVerification()} disabled={emailVerified}>
+            <MenuItem onClick={handleSendEmailVerification} disabled={emailVerified}>
               <ListItemIcon>
                 <SendIcon />
               </ListItemIcon>
@@ -69,7 +69,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
             </MenuItem>
           )}
         </ProfileConsumer>
-        <MenuItem onClick={() => handleSendPasswordResetEmail()}>
+        <MenuItem onClick={handleSendPasswordResetEmail}>
           <ListItemIcon>
             <PasswordIcon />
           </ListItemIcon>

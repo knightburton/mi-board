@@ -51,13 +51,13 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
         open={Boolean(menu)}
         onClose={() => toggleMenu(null)}
       >
-        <MenuItem onClick={() => handleChangeNoOfVisibleLaps()} disabled={lapsLength < 10}>
+        <MenuItem onClick={handleChangeNoOfVisibleLaps} disabled={lapsLength < 10}>
           <ListItemIcon>
             {noOfVisibleLaps === 10 ? <MoreIcon /> : <LessIcon />}
           </ListItemIcon>
           <ListItemText primary={noOfVisibleLaps === 10 ? 'Show more' : 'Show less'} />
         </MenuItem>
-        <MenuItem onClick={() => handleClearAll()} disabled={lapsLength === 0}>
+        <MenuItem onClick={handleClearAll} disabled={lapsLength === 0}>
           <ListItemIcon>
             <ClearAllIcon />
           </ListItemIcon>

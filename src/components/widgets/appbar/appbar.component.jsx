@@ -55,7 +55,7 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
           </ListItemIcon>
           <Typography variant="inherit">Profile</Typography>
         </MenuItem>
-        <MenuItem onClick={() => handleLogoutClick()}>
+        <MenuItem onClick={handleLogoutClick}>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -73,7 +73,7 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
             color="inherit"
             aria-label="Open drawer"
             edge="start"
-            onClick={() => toggleMobileDrawer()}
+            onClick={toggleMobileDrawer}
             className={classes.menuButton}
           >
             <MenuIcon />

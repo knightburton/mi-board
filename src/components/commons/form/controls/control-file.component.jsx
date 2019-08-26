@@ -33,7 +33,7 @@ export default class ControlText extends React.PureComponent {
 
     return (
       <Fragment>
-        <IconButton color="primary" onClick={() => this.handleAddPhotoClick()}>
+        <IconButton color="primary" onClick={this.handleAddPhotoClick}>
           <AddPhotoIcon />
         </IconButton>
         <ControlWrapper
