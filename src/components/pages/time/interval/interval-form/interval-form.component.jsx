@@ -73,7 +73,6 @@ export default class IntervalForm extends React.PureComponent {
               </Button>
             )}
             buttonPosition="center"
-            buttonFloated
             allowControlsChange
           />
         </Section>

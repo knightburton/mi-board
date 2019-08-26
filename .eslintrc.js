@@ -25,7 +25,8 @@ module.exports = {
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
     'max-len': ['error', { code: 140, ignoreTemplateLiterals: true, ignoreRegExpLiterals: true }],
     'react/prop-types': ['error', { ignore: ['classes'] }],
-    'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }]
+    'react/forbid-prop-types': ['error', { forbid: ['any', 'array'] }],
+    "newline-per-chained-call": ['error', { ignoreChainWithDepth: 5 }]
   },
   overrides: [
     {

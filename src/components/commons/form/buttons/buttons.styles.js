@@ -9,7 +9,7 @@ export default theme => ({
     textAlign: 'right'
   },
   buttonWrapper: {
-    margin: theme.spacing(1, 1.5, 0, 1.5),
+    margin: theme.spacing(3, 1.5, 0, 1.5),
     '& button:nth-child(2)': {
       marginLeft: theme.spacing(2)
     }
