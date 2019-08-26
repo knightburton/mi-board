@@ -55,7 +55,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
       </Section>
 
       <Section title="Stopwatch">
-        <Typography variant="h1" align="center">
+        <Typography variant="h2" align="center">
           {formattedElapsedTime}
         </Typography>
         <Grid spacing={2} justify="center" alignItems="center" className={classes.buttonContainer} container>
