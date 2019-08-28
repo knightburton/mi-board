@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   lapText: {
     ...theme.typography.body1
   },
@@ -9,4 +11,4 @@ export default theme => ({
   buttonContainer: {
     marginTop: theme.spacing(2)
   }
-});
+}));

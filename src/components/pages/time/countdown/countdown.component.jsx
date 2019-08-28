@@ -12,39 +12,37 @@ import Section from '../../../commons/section/section.container';
 
 import controls from './countdown.constants';
 
-export default class Countdown extends React.PureComponent {
-  render() {
-    return (
-      <Container maxWidth="md">
+const Countdown = () => (
+  <Container maxWidth="md">
 
-        <Section>
-          <Typography variant="body1">
-            A countdown timer is a virtual clock on a landing page that counts down from a certain number
-            or date to indicate the beginning or end of an event or offer.
-          </Typography>
-        </Section>
+    <Section>
+      <Typography variant="body1">
+        A countdown timer is a virtual clock on a landing page that counts down from a certain number
+        or date to indicate the beginning or end of an event or offer.
+      </Typography>
+    </Section>
 
-        <Section title="Settings" gutterBottom>
-          <Form
-            controls={controls}
-            submitFunction={() => {}}
-            submitButton={(
-              <Button type="submit" variant="contained" size="small" color="primary">
-                Start
-                <PlayIcon />
-              </Button>
-            )}
-            secondaryButton={(
-              <Button type="submit" variant="contained" size="small" color="secondary">
-                Reset
-                <SetBackIcon />
-              </Button>
-            )}
-            buttonPosition="center"
-          />
-        </Section>
+    <Section title="Settings" gutterBottom>
+      <Form
+        controls={controls}
+        submitFunction={() => {}}
+        submitButton={(
+          <Button type="submit" variant="contained" size="small" color="primary">
+            Start
+            <PlayIcon />
+          </Button>
+        )}
+        secondaryButton={(
+          <Button type="submit" variant="contained" size="small" color="secondary">
+            Reset
+            <SetBackIcon />
+          </Button>
+        )}
+        buttonPosition="center"
+      />
+    </Section>
 
-      </Container>
-    );
-  }
-}
+  </Container>
+);
+
+export default Countdown;

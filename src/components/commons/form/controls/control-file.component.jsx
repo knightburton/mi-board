@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '@material-ui/core/Input';
@@ -10,58 +10,53 @@ import ControlWrapper from './control-wrapper.component';
 
 import { controlPropTypes } from './control.proptypes';
 
-export default class ControlText extends React.PureComponent {
-  static propTypes = {
-    control: controlPropTypes.isRequired,
-    state: PropTypes.shape({
-      value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-      error: PropTypes.string
-    }).isRequired,
-    onChange: PropTypes.func.isRequired
-  };
+const ControlFile = ({ control, state, onChange }) => {
+  const fileInput = useRef(null);
+  const fileName = (state.value && state.value.length && state.value[0].name) || 'No photo selected';
 
-  constructor(props) {
-    super(props);
-    this.fileInput = React.createRef();
-  }
+  const handleAddPhotoClick = () => fileInput.current.children[0].click();
 
-  handleAddPhotoClick = () => this.fileInput.current.children[0].click();
-
-  render() {
-    const { control, state, onChange } = this.props;
-    const fileName = (state.value && state.value.length && state.value[0].name) || 'No photo selected';
-
-    return (
-      <Fragment>
-        <IconButton color="primary" onClick={this.handleAddPhotoClick}>
-          <AddPhotoIcon />
-        </IconButton>
-        <ControlWrapper
-          control={control}
-          state={{
-            ...state,
-            value: fileName
-          }}
-        >
-          <Input
-            id={`${control.key}-text`}
-            type="text"
-            value={fileName}
-            onChange={() => {}}
-            aria-describedby={`${control.key}-helper-text`}
-            disabled
-          />
-        </ControlWrapper>
+  return (
+    <Fragment>
+      <IconButton color="primary" onClick={handleAddPhotoClick}>
+        <AddPhotoIcon />
+      </IconButton>
+      <ControlWrapper
+        control={control}
+        state={{
+          ...state,
+          value: fileName
+        }}
+      >
         <Input
-          ref={this.fileInput}
-          id={control.key}
-          type="file"
-          onChange={e => onChange(control.key, e.target.files)}
-          autoFocus={false}
+          id={`${control.key}-text`}
+          type="text"
+          value={fileName}
+          onChange={() => {}}
           aria-describedby={`${control.key}-helper-text`}
-          style={{ display: 'none' }}
+          disabled
         />
-      </Fragment>
-    );
-  }
-}
+      </ControlWrapper>
+      <Input
+        ref={fileInput}
+        id={control.key}
+        type="file"
+        onChange={e => onChange(control.key, e.target.files)}
+        autoFocus={false}
+        aria-describedby={`${control.key}-helper-text`}
+        style={{ display: 'none' }}
+      />
+    </Fragment>
+  );
+};
+
+ControlFile.propTypes = {
+  control: controlPropTypes.isRequired,
+  state: PropTypes.shape({
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    error: PropTypes.string
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
+};
+
+export default ControlFile;

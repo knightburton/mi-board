@@ -1,6 +1,7 @@
+import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from '../drawer/drawer.constants';
 
-export default theme => ({
+export default makeStyles(theme => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -24,4 +25,4 @@ export default theme => ({
       duration: theme.transitions.duration.enteringScreen
     })
   }
-});
+}));

@@ -1,16 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 
 import Waiting from '../../widgets/waiting/waiting.component';
 
-import styles from './section.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './section.styles';
 
 const Section = ({ title, gutterBottom, children, waitingKey, isWaiting }) => {
   const classes = useStyles();

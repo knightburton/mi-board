@@ -7,9 +7,8 @@ import Typography from '@material-ui/core/Typography';
 
 import useStyles from './form-single-value.styles';
 
-const FormSingleValue = props => {
+const FormSingleValue = ({ label, value }) => {
   const classes = useStyles();
-  const { label, value } = props;
 
   return (
     <Box className={classes.box}>

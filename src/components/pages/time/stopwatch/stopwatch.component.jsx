@@ -1,8 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
 
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -17,17 +15,15 @@ import LapIcon from '@material-ui/icons/FlagOutlined';
 import Section from '../../../commons/section/section.container';
 import LapsActionsMenu from './laps-actions-menu/laps-actions-menu.container';
 
-import styles from './stopwatch.styles';
+import { getFormattedSeconds, getTimestamp } from '../../../../helpers';
 
-const useStyles = makeStyles(styles);
+import useStyles from './stopwatch.styles';
 
 const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLaps, clock, laps, ...props }) => {
   const classes = useStyles();
   const [noOfVisibleLaps, changeNoOfVisibleLaps] = useState(10);
   const active = activeTimer === 'stopwatch';
-  const formattedElapsedTime = clock
-    ? moment().hour(0).minute(0).second(clock).format('HH:mm:ss')
-    : '00:00:00';
+  const formattedElapsedTime = clock ? getFormattedSeconds(clock) : '00:00:00';
 
   const handleStartStopClick = () => {
     const { setActiveTimer, startTimer, stopTimer, intervalID, increaseTimer } = props;
@@ -37,7 +33,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
       clearInterval(intervalID);
       stopTimer();
     } else {
-      const timestamp = moment().valueOf();
+      const timestamp = getTimestamp();
       const interval = setInterval(() => increaseTimer(), 1000);
       setActiveTimer('stopwatch');
       startTimer(timestamp, interval);
@@ -120,7 +116,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
                   {`${laps.length - index}.`}
                 </Typography>
                 <Typography variant="body2" className={classes.lapText}>
-                  {moment().hour(0).minute(0).second(lap).format('HH:mm:ss')}
+                  {getFormattedSeconds(lap)}
                 </Typography>
               </Typography>
             )) : (

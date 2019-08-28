@@ -1,19 +1,16 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
 import FormControl from '@material-ui/core/FormControl';
 
 import InputLabel from './control-input-label.component';
 import HelperText from './control-helper-text.component';
 
-import styles from './control.styles';
+import useStyles from './control.styles';
 import { controlPropTypes, statePropTypes } from './control.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
-
-const useStyles = makeStyles(styles);
 
 const ControlWrapper = ({ control, state, children }) => {
   const classes = useStyles();

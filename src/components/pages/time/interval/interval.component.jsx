@@ -6,27 +6,23 @@ import Container from '@material-ui/core/Container';
 import IntervalForm from './interval-form/interval-form.container';
 import IntervalTimer from './interval-timer/interval-timer.container';
 
-export default class Interval extends React.PureComponent {
-  static propTypes = {
-    visibleTimer: PropTypes.string
-  };
+const Interval = ({ visibleTimer }) => (
+  <Container maxWidth="md">
 
-  static defaultProps = {
-    visibleTimer: null
-  };
+    {visibleTimer && visibleTimer === 'interval'
+      ? <IntervalTimer />
+      : <IntervalForm />
+    }
 
-  render() {
-    const { visibleTimer } = this.props;
+  </Container>
+);
 
-    return (
-      <Container maxWidth="md">
+Interval.propTypes = {
+  visibleTimer: PropTypes.string
+};
 
-        {visibleTimer && visibleTimer === 'interval'
-          ? <IntervalTimer />
-          : <IntervalForm />
-        }
+Interval.defaultProps = {
+  visibleTimer: null
+};
 
-      </Container>
-    );
-  }
-}
+export default Interval;

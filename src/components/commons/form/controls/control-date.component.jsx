@@ -1,16 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
 import { DatePicker } from '@material-ui/pickers';
 
-import styles from './control.styles';
+import useStyles from './control.styles';
 import { controlPropTypes, statePropTypes } from './control.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
-
-const useStyles = makeStyles(styles);
 
 const ControlText = ({ control, state, onChange }) => {
   const classes = useStyles();

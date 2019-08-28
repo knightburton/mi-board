@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
 import InputLabel from '@material-ui/core/InputLabel';
 
-import styles from './control.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './control.styles';
 
 const ControlInputLabel = ({ id, label }) => {
   const classes = useStyles();

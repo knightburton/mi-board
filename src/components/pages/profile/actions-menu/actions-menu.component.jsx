@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -17,7 +17,7 @@ import Confirmation from '../../../widgets/confirmation/confirmation.component';
 import { ProfileConsumer } from '../../../contexts/profile';
 
 const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProfile }) => {
-  const [menu, toggleMenu] = React.useState(null);
+  const [menu, toggleMenu] = useState(null);
 
   const handleSendEmailVerification = () => {
     toggleMenu(null);

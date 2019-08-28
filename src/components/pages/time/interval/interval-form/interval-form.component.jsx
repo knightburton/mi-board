@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -12,72 +12,59 @@ import SectionSelect from '../../../../commons/section-select/section-select.com
 
 import { controls, options, optionsMap } from '../interval.constants';
 
-export default class IntervalForm extends React.PureComponent {
-  static propTypes = {
-    setIntervalParams: PropTypes.func.isRequired,
-    setVisibleTimer: PropTypes.func.isRequired
-  };
-
-  state = {
-    formControls: controls
-  };
-
-  componentWillMount() {
-    this.setState({ formControls: this.changeFormValuesTo('zero') });
-  }
-
-  changeFormValuesTo = key => controls.map(control => ({
+const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
+  const [formControls, updateFormControls] = useState(controls);
+  const changeFormValuesTo = key => controls.map(control => ({
     ...control,
     defaultValue: options[key].data[control.key]
   }));
-
-  handleSectionSelect = key => this.setState({ formControls: this.changeFormValuesTo(key) });
-
-  handleFormSubmit = data => {
-    const { setIntervalParams, setVisibleTimer } = this.props;
-
+  const handleSectionSelect = key => updateFormControls(changeFormValuesTo(key));
+  const handleFormSubmit = data => {
     setIntervalParams(data);
     setVisibleTimer('interval');
   };
 
-  render() {
-    const { formControls } = this.state;
+  return (
+    <Fragment>
 
-    return (
-      <Fragment>
+      <Section>
+        <Typography variant="body1">
+          A digital circuit that is used to determine the time interval between an initial trigger pulse
+          and subsequent logic states that appear after a predetermined delay.
+        </Typography>
+      </Section>
 
-        <Section>
-          <Typography variant="body1">
-            A digital circuit that is used to determine the time interval between an initial trigger pulse
-            and subsequent logic states that appear after a predetermined delay.
-          </Typography>
-        </Section>
+      <SectionSelect
+        title="Presets"
+        options={optionsMap}
+        selectedByDefault="zero"
+        onSelect={handleSectionSelect}
+        breakpoints={{ xs: 12, sm: 6 }}
+      />
 
-        <SectionSelect
-          title="Presets"
-          options={optionsMap}
-          selectedByDefault="zero"
-          onSelect={key => this.handleSectionSelect(key)}
-          breakpoints={{ xs: 12, sm: 6 }}
+      <Section title="Settings" gutterBottom>
+        <Form
+          controls={formControls}
+          submitIcon={CheckIcon}
+          submitFunction={handleFormSubmit}
+          submitButton={(
+            <Button type="submit" variant="contained" size="small" color="primary">
+              Set
+              <CheckIcon />
+            </Button>
+          )}
+          buttonPosition="center"
+          allowControlsChange
         />
+      </Section>
 
-        <Section title="Settings" gutterBottom>
-          <Form
-            controls={formControls}
-            submitIcon={CheckIcon}
-            submitFunction={data => this.handleFormSubmit(data)}
-            submitButton={(
-              <Button type="submit" variant="contained" size="small" color="primary">
-                Set
-                <CheckIcon />
-              </Button>
-            )}
-            buttonPosition="center"
-            allowControlsChange
-          />
-        </Section>
+    </Fragment>
+  );
+};
 
-      </Fragment>
-    );
-  }
-}
+IntervalForm.propTypes = {
+  setIntervalParams: PropTypes.func.isRequired,
+  setVisibleTimer: PropTypes.func.isRequired
+};
+
+export default IntervalForm;

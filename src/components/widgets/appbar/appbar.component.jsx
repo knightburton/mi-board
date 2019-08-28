@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 
 import MuiAppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
@@ -18,9 +17,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import Avatar from '../../commons/avatar/avatar.component';
 
-import styles from './appbar.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './appbar.styles';
 
 const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
   const classes = useStyles();
@@ -29,40 +26,6 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
   const handleLogoutClick = () => {
     logout();
     setAccountMenu(null);
-  };
-
-  const getAccountMenu = () => {
-    const open = Boolean(accountMenu);
-
-    return (
-      <Menu
-        id="menu-appbar"
-        anchorEl={accountMenu}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        open={open}
-        onClose={() => setAccountMenu(null)}
-      >
-        <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
-          <ListItemIcon>
-            <PersonOutlineIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Profile</Typography>
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Logout</Typography>
-        </MenuItem>
-      </Menu>
-    );
   };
 
   return (
@@ -92,7 +55,33 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
         >
           <Avatar size="extraSmall" />
         </IconButton>
-        {getAccountMenu()}
+        <Menu
+          id="menu-appbar"
+          anchorEl={accountMenu}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          open={Boolean(accountMenu)}
+          onClose={() => setAccountMenu(null)}
+        >
+          <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
+            <ListItemIcon>
+              <PersonOutlineIcon />
+            </ListItemIcon>
+            <Typography variant="inherit">Profile</Typography>
+          </MenuItem>
+          <MenuItem onClick={handleLogoutClick}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <Typography variant="inherit">Logout</Typography>
+          </MenuItem>
+        </Menu>
       </Toolbar>
     </MuiAppBar>
   );

@@ -1,6 +1,7 @@
+import { makeStyles } from '@material-ui/core/styles';
 import { DRAWER_WIDTH } from './drawer.constants';
 
-export default theme => ({
+export default makeStyles(theme => ({
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: DRAWER_WIDTH
@@ -73,4 +74,4 @@ export default theme => ({
       color: theme.palette.primary.main
     }
   }
-});
+}));

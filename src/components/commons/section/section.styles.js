@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   paper: {
     position: 'relative',
     padding: theme.spacing(3, 2)
@@ -18,4 +20,4 @@ export default theme => ({
     backgroundColor: theme.palette.action.disabled,
     borderRadius: theme.shape.borderRadius
   }
-});
+}));

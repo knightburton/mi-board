@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   container: {
     height: '100vh'
   },
@@ -25,4 +27,4 @@ export default theme => ({
     fontWight: 'bold',
     margin: theme.spacing(2, 0)
   }
-});
+}));

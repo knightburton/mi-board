@@ -1,13 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Hidden from '@material-ui/core/Hidden';
 
-import styles from './wrapper.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './wrapper.styles';
 
 const Wrapper = ({ isDrawerOpened, children }) => {
   const classes = useStyles();

@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   marginTop: {
     marginTop: theme.spacing(3)
   },
@@ -18,4 +20,4 @@ export default theme => ({
   description: {
     marginLeft: theme.spacing(5)
   }
-});
+}));

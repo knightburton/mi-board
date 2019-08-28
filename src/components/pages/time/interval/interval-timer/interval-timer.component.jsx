@@ -9,22 +9,18 @@ import RestartIcon from '@material-ui/icons/RestoreOutlined';
 
 import Section from '../../../../commons/section/section.container';
 
-const IntervalTimer = props => {
-  const { isActive } = props;
-
-  return (
-    <Section>
-      <Button variant="contained" size="small" color="secondary">
-        Restart
-        <RestartIcon />
-      </Button>
-      <Button variant="contained" size="small" color="primary">
-        {isActive ? 'Stop' : 'Start'}
-        {isActive ? <StopIcon /> : <StartIcon />}
-      </Button>
-    </Section>
-  );
-};
+const IntervalTimer = ({ isActive }) => (
+  <Section>
+    <Button variant="contained" size="small" color="secondary">
+      Restart
+      <RestartIcon />
+    </Button>
+    <Button variant="contained" size="small" color="primary">
+      {isActive ? 'Stop' : 'Start'}
+      {isActive ? <StopIcon /> : <StartIcon />}
+    </Button>
+  </Section>
+);
 
 IntervalTimer.propTypes = {
   isActive: PropTypes.bool.isRequired

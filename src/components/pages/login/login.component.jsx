@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
@@ -14,9 +13,7 @@ import ProjectTitle from '../../commons/project-title/project-title.component';
 
 import Logo from '../../../assets/images/icon.png';
 
-import styles from './login.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './login.styles';
 
 const Login = ({ error, authInProgress, login }) => {
   const classes = useStyles();

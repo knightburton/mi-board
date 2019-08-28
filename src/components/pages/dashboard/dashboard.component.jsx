@@ -1,10 +1,11 @@
 import React from 'react';
 
+import Container from '@material-ui/core/Container';
 
-export default class Dashboard extends React.PureComponent {
-  render() {
-    return (
-      <div>Dashboard</div>
-    );
-  }
-}
+const Dashboard = () => (
+  <Container maxWidth={false}>
+    <div>Dashboard</div>
+  </Container>
+);
+
+export default Dashboard;

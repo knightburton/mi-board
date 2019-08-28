@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   appBar: {
     boxShadow: 'none'
   },
@@ -11,4 +13,4 @@ export default theme => ({
   profileName: {
     marginRight: theme.spacing(0.5)
   }
-});
+}));
