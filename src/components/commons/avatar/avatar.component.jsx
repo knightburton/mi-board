@@ -13,9 +13,8 @@ import styles from './avatar.styles';
 
 const useStyles = makeStyles(styles);
 
-const Avatar = props => {
+const Avatar = ({ alt, size, withGutter, withDisabledColor }) => {
   const classes = useStyles();
-  const { alt, size, withGutter, withDisabledColor } = props;
 
   return (
     <ProfileConsumer>

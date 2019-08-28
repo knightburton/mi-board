@@ -13,14 +13,8 @@ import styles from './buttons.styles';
 
 const useStyles = makeStyles(styles);
 
-const ButtonsSingle = props => {
+const ButtonsSingle = ({ edit, onEditEnable, onEditDisable, secondaryButton }) => {
   const classes = useStyles();
-  const {
-    edit,
-    onEditEnable,
-    onEditDisable,
-    secondaryButton
-  } = props;
 
   return (
     <Box className={classes.single}>
