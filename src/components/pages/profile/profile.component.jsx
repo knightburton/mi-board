@@ -20,82 +20,74 @@ import { ProfileConsumer } from '../../contexts/profile';
 import { getFormattedTimestamp } from '../../../helpers';
 import { FORM_DISPLAY_NAME, FORM_EMAIL, FORM_PHOTO } from './profile.constants';
 
-export default class Profile extends React.PureComponent {
-  static propTypes = {
-    updataAuth: PropTypes.func.isRequired,
-    updataEmail: PropTypes.func.isRequired,
-    uploadProfilePhoto: PropTypes.func.isRequired,
-    deleteProfilePhoto: PropTypes.func.isRequired
-  };
+const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePhoto }) => (
+  <Container maxWidth="md">
 
-  render() {
-    const {
-      updataAuth,
-      updataEmail,
-      uploadProfilePhoto,
-      deleteProfilePhoto
-    } = this.props;
-
-    return (
-      <Container maxWidth="md">
-
-        <Section title="Profile" waitingKey="profile">
-          <Grid spacing={0} justify="flex-end" alignItems="flex-start" container>
-            <Grid xs="auto" item>
-              <ActionsMenu />
-            </Grid>
+    <Section title="Profile" waitingKey="profile">
+      <Grid spacing={0} justify="flex-end" alignItems="flex-start" container>
+        <Grid xs="auto" item>
+          <ActionsMenu />
+        </Grid>
+      </Grid>
+      <Grid spacing={0} container>
+        <Grid xs={12} sm={4} justify="center" alignItems="center" direction="column" item container>
+          <Grid xs item>
+            <Avatar size="huge" withDisabledColor />
           </Grid>
-          <Grid spacing={0} container>
-            <Grid xs={12} sm={4} justify="center" alignItems="center" direction="column" item container>
-              <Grid xs item>
-                <Avatar size="huge" withDisabledColor />
-              </Grid>
-            </Grid>
-            <ProfileConsumer>
-              {profile => (
-                <Grid xs={12} sm={8} item>
-                  <Form
-                    controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profile.name || '' }]}
-                    submitFunction={attributes => updataAuth(attributes)}
-                    single
-                  />
-                  <Form
-                    controls={[{
-                      ...FORM_EMAIL,
-                      defaultValue: profile.email || '',
-                      label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`
-                    }]}
-                    submitFunction={({ email }) => updataEmail(email)}
-                    single
-                  />
-                  <Form
-                    controls={[{ ...FORM_PHOTO, defaultValue: profile.photoURL || '' }]}
-                    submitFunction={({ photo }) => uploadProfilePhoto(photo[0])}
-                    secondaryButton={(
-                      <Confirmation
-                        id="delete-profile-photo"
-                        title="Delete profile photo?"
-                        description="Your photo will be completely removed from everywhere and will be replaced with the default avatar."
-                        onAgree={() => deleteProfilePhoto()}
-                        toggle={show => (
-                          <IconButton onClick={() => show()} disabled={!profile.photoURL}>
-                            <DeleteIcon fontSize="small" color="error" />
-                          </IconButton>
-                        )}
-                      />
+        </Grid>
+        <ProfileConsumer>
+          {profile => (
+            <Grid xs={12} sm={8} item>
+              <Form
+                controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profile.name || '' }]}
+                submitFunction={attributes => updataAuth(attributes)}
+                single
+              />
+              <Form
+                controls={[{
+                  ...FORM_EMAIL,
+                  defaultValue: profile.email || '',
+                  label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`
+                }]}
+                submitFunction={({ email }) => updataEmail(email)}
+                single
+              />
+              <Form
+                controls={[{ ...FORM_PHOTO, defaultValue: profile.photoURL || '' }]}
+                submitFunction={({ photo }) => uploadProfilePhoto(photo[0])}
+                secondaryButton={(
+                  <Confirmation
+                    id="delete-profile-photo"
+                    title="Delete profile photo?"
+                    description="Your photo will be completely removed from everywhere and will be replaced with the default avatar."
+                    onAgree={() => deleteProfilePhoto()}
+                    toggle={show => (
+                      <IconButton onClick={() => show()} disabled={!profile.photoURL}>
+                        <DeleteIcon fontSize="small" color="error" />
+                      </IconButton>
                     )}
-                    allowControlsChange
-                    single
                   />
-                  <FormSingleValue label="Created at" value={getFormattedTimestamp(profile.createdAt)} />
-                  <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profile.lastLoginAt)} />
-                </Grid>
-              )}
-            </ProfileConsumer>
-          </Grid>
-        </Section>
+                )}
+                allowControlsChange
+                single
+              />
+              <FormSingleValue label="Created at" value={getFormattedTimestamp(profile.createdAt)} />
+              <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profile.lastLoginAt)} />
+            </Grid>
+          )}
+        </ProfileConsumer>
+      </Grid>
+    </Section>
 
-      </Container>
-    );
-  }
-}
+  </Container>
+);
+
+Profile.propTypes = {
+  updataAuth: PropTypes.func.isRequired,
+  updataEmail: PropTypes.func.isRequired,
+  uploadProfilePhoto: PropTypes.func.isRequired,
+  deleteProfilePhoto: PropTypes.func.isRequired
+};
+
+
+export default Profile;
