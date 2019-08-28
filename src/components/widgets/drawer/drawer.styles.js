@@ -34,6 +34,10 @@ export default makeStyles(theme => ({
     padding: theme.spacing(0, 1.5),
     ...theme.mixins.toolbar
   },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit'
+  },
   list: {
     padding: theme.spacing(3, 0)
   },
