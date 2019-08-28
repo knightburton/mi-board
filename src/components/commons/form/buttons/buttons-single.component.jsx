@@ -26,7 +26,7 @@ const ButtonsSingle = props => {
     <Box className={classes.single}>
       {edit ? (
         <Fragment>
-          <IconButton onClick={() => onEditDisable()}>
+          <IconButton onClick={onEditDisable}>
             <CloseIcon fontSize="small" />
           </IconButton>
           <IconButton type="submit" color="primary">
@@ -35,7 +35,7 @@ const ButtonsSingle = props => {
         </Fragment>
       ) : (
         <Fragment>
-          <IconButton onClick={() => onEditEnable()}>
+          <IconButton onClick={onEditEnable}>
             <EditIcon fontSize="small" />
           </IconButton>
           {secondaryButton}

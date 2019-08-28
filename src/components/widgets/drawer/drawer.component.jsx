@@ -51,7 +51,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
             component={Link}
             to={item.to}
             selected={isMenuItemSelected(item)}
-            onClick={() => handleMenuItemClick()}
+            onClick={handleMenuItemClick}
             classes={{ selected: classes.selected }}
             className={classes.listItem}
             disableRipple
@@ -67,7 +67,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
       <Hidden smDown>
         <Toolbar className={classes.toggleToolbar}>
           <Box
-            onClick={() => toggleDrawer()}
+            onClick={toggleDrawer}
             className={classes.toggleButton}
             aria-label="expand or collapse navigation bar"
           >
@@ -109,7 +109,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
             paper: classes.drawerOpen,
           }}
           open={isMobileDrawerOpened}
-          onClose={() => toggleMobileDrawer()}
+          onClose={toggleMobileDrawer}
           ModalProps={{
             keepMounted: true
           }}

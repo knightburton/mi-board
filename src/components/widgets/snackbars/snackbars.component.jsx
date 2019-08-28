@@ -45,7 +45,7 @@ const Snackbars = ({ notifications, removeNotification, removeAllNotification })
           color="primary"
           size="small"
           className={classes.button}
-          onClick={() => removeAllNotification()}
+          onClick={removeAllNotification}
         >
           Close All
         </Button>

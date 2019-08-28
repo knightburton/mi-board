@@ -64,7 +64,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
               variant="contained"
               size="small"
               color="primary"
-              onClick={() => handleStartStopClick()}
+              onClick={handleStartStopClick}
             >
               {active ? (
                 <Fragment>
@@ -85,7 +85,7 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
               variant="contained"
               size="small"
               color="primary"
-              onClick={() => resetTimer()}
+              onClick={resetTimer}
               disabled={clock === 0 || active}
             >
               Reset

@@ -22,7 +22,7 @@ const Confirmation = ({ id, title, description, onAgree, toggle }) => {
       {toggle(show)}
       <Dialog
         open={isShown}
-        onClose={() => hide()}
+        onClose={hide}
         aria-labelledby={`${id}-confirmation-dialog-title`}
         aria-describedby={`${id}-confirmation-dialog-description`}
       >
@@ -33,10 +33,10 @@ const Confirmation = ({ id, title, description, onAgree, toggle }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => hide()} color="secondary">
+          <Button onClick={hide} color="secondary">
             Disagree
           </Button>
-          <Button onClick={() => handleAgree()} color="primary" autoFocus>
+          <Button onClick={handleAgree} color="primary" autoFocus>
             Agree
           </Button>
         </DialogActions>
