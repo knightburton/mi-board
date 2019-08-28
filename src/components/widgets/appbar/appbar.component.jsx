@@ -31,40 +31,6 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
     setAccountMenu(null);
   };
 
-  const getAccountMenu = () => {
-    const open = Boolean(accountMenu);
-
-    return (
-      <Menu
-        id="menu-appbar"
-        anchorEl={accountMenu}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
-        }}
-        open={open}
-        onClose={() => setAccountMenu(null)}
-      >
-        <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
-          <ListItemIcon>
-            <PersonOutlineIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Profile</Typography>
-        </MenuItem>
-        <MenuItem onClick={handleLogoutClick}>
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <Typography variant="inherit">Logout</Typography>
-        </MenuItem>
-      </Menu>
-    );
-  };
-
   return (
     <MuiAppBar position="sticky" className={classes.appBar}>
       <Toolbar>
@@ -92,7 +58,33 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
         >
           <Avatar size="extraSmall" />
         </IconButton>
-        {getAccountMenu()}
+        <Menu
+          id="menu-appbar"
+          anchorEl={accountMenu}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right'
+          }}
+          open={Boolean(accountMenu)}
+          onClose={() => setAccountMenu(null)}
+        >
+          <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
+            <ListItemIcon>
+              <PersonOutlineIcon />
+            </ListItemIcon>
+            <Typography variant="inherit">Profile</Typography>
+          </MenuItem>
+          <MenuItem onClick={handleLogoutClick}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <Typography variant="inherit">Logout</Typography>
+          </MenuItem>
+        </Menu>
       </Toolbar>
     </MuiAppBar>
   );

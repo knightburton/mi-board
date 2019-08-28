@@ -28,16 +28,14 @@ import styles from './drawer.styles';
 
 const useStyles = makeStyles(styles);
 
-const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDrawer, isDrawerOpened, toggleDrawer }) => {
+const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer, isDrawerOpened, isMobileDrawerOpened }) => {
   const classes = useStyles();
-
   const isMenuItemSelected = ({ to, exact }) => (exact ? to === pathname : pathname.includes(to));
-
   const handleMenuItemClick = () => {
     if (isMobileDrawerOpened) toggleMobileDrawer();
   };
 
-  const getContent = (isMobile = false) => (
+  return (
     <Fragment>
       <Toolbar className={classes.toolbar}>
         <Avatar className={classes.avatar} src={Logo} imgProps={{ draggable: false }} alt="Project Logo" />
@@ -71,7 +69,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
             className={classes.toggleButton}
             aria-label="expand or collapse navigation bar"
           >
-            {!isMobile && isDrawerOpened
+            {!mobileView && isDrawerOpened
               ? <ChevronLeftIcon />
               : <ChevronRightIcon />
             }
@@ -80,6 +78,24 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
       </Hidden>
     </Fragment>
   );
+};
+
+DrawerContent.propTypes = {
+  mobileView: PropTypes.bool,
+  pathname: PropTypes.string.isRequired,
+  toggleDrawer: PropTypes.func.isRequired,
+  toggleMobileDrawer: PropTypes.func.isRequired,
+  isDrawerOpened: PropTypes.bool.isRequired,
+  isMobileDrawerOpened: PropTypes.bool.isRequired
+};
+
+DrawerContent.defaultProps = {
+  mobileView: false
+};
+
+const Drawer = ({ location: { pathname }, ...rest }) => {
+  const classes = useStyles();
+  const { isMobileDrawerOpened, toggleMobileDrawer, isDrawerOpened } = rest;
 
   return (
     <Fragment>
@@ -98,7 +114,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
           }}
           open={isDrawerOpened}
         >
-          {getContent()}
+          <DrawerContent pathname={pathname} {...rest} />
         </MuiDrawer>
       </Hidden>
       <Hidden mdUp>
@@ -114,7 +130,7 @@ const Drawer = ({ location: { pathname }, isMobileDrawerOpened, toggleMobileDraw
             keepMounted: true
           }}
         >
-          {getContent(true)}
+          <DrawerContent mobileView pathname={pathname} {...rest} />
         </MuiDrawer>
       </Hidden>
     </Fragment>
