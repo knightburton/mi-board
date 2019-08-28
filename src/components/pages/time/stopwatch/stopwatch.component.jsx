@@ -1,5 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
@@ -17,9 +16,7 @@ import LapIcon from '@material-ui/icons/FlagOutlined';
 import Section from '../../../commons/section/section.container';
 import LapsActionsMenu from './laps-actions-menu/laps-actions-menu.container';
 
-import styles from './stopwatch.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './stopwatch.styles';
 
 const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLaps, clock, laps, ...props }) => {
   const classes = useStyles();

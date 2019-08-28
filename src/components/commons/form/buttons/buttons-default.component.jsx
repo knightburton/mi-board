@@ -1,14 +1,11 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 
 import { buttonsPropTypes, buttonsDefaultProps } from './buttons.proptypes';
 import { BUTTON_POSITIONS } from '../form.constants';
-import styles from './buttons.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './buttons.styles';
 
 const ButtonsDefault = props => {
   const classes = useStyles();

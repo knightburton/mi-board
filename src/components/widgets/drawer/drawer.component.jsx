@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import { withRouter, Link } from 'react-router-dom';
 
 import MuiDrawer from '@material-ui/core/Drawer';
@@ -24,9 +23,7 @@ import Logo from '../../../assets/images/icon.png';
 
 import { DRAWER_MENU } from './drawer.constants';
 
-import styles from './drawer.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './drawer.styles';
 
 const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer, isDrawerOpened, isMobileDrawerOpened }) => {
   const classes = useStyles();

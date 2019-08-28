@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -13,9 +12,7 @@ import Box from '@material-ui/core/Box';
 import CheckedIcon from '@material-ui/icons/RadioButtonChecked';
 import UncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
-import styles from './section-select.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './section-select.styles';
 
 const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, options, breakpoints }) => {
   const classes = useStyles();

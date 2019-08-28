@@ -1,4 +1,6 @@
-export default theme => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(theme => ({
   // General control styles
   formControl: {
     marginBottom: theme.spacing(1.5),
@@ -59,4 +61,4 @@ export default theme => ({
       marginLeft: theme.spacing(1.5)
     }
   }
-});
+}));

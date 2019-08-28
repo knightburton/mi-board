@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import Box from '@material-ui/core/Box';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -14,9 +13,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import CloseIcon from '@material-ui/icons/Close';
 import WarningIcon from '@material-ui/icons/Warning';
 
-import styles from './snackbars.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './snackbars.styles';
 
 const variantIcon = {
   success: CheckCircleIcon,

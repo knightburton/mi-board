@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 
 import MuiAvatar from '@material-ui/core/Avatar';
 
@@ -9,9 +8,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 import { ProfileConsumer } from '../../contexts/profile';
 
-import styles from './avatar.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './avatar.styles';
 
 const Avatar = ({ alt, size, withGutter, withDisabledColor }) => {
   const classes = useStyles();

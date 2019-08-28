@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import styles from './top-tabs.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './top-tabs.styles';
 
 const TopTabs = ({ items, selectedByDefault }) => {
   const classes = useStyles();

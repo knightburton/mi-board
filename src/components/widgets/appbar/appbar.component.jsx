@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 
 import MuiAppBar from '@material-ui/core/AppBar';
 import Hidden from '@material-ui/core/Hidden';
@@ -18,9 +17,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import Avatar from '../../commons/avatar/avatar.component';
 
-import styles from './appbar.styles';
-
-const useStyles = makeStyles(styles);
+import useStyles from './appbar.styles';
 
 const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
   const classes = useStyles();

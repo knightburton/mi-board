@@ -1,6 +1,7 @@
+import { makeStyles } from '@material-ui/core/styles';
 import { amber, green, lightBlue } from '@material-ui/core/colors';
 
-export default theme => ({
+export default makeStyles(theme => ({
   box: {
     position: 'absolute',
     bottom: 0,
@@ -57,4 +58,4 @@ export default theme => ({
     alignItems: 'flex-start',
     marginTop: theme.spacing(0.5)
   }
-});
+}));

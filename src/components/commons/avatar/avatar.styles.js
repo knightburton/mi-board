@@ -1,4 +1,6 @@
-export default () => ({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(() => ({
   margin: {
     margin: 10
   },
@@ -26,4 +28,4 @@ export default () => ({
     width: 200,
     height: 200
   }
-});
+}));
