@@ -55,6 +55,7 @@ const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
           step={control.step || CONTROL_DEFAULTS.SLIDER_STEP}
           marks={control.marks || CONTROL_DEFAULTS.SLIDER_MARKS}
           valueLabelDisplay="auto"
+          disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
         />
         {control.buttons && (
           <IconButton
