@@ -17,7 +17,7 @@ import ActionsMenu from './actions-menu/actions-menu.container';
 
 import { ProfileConsumer } from '../../contexts/profile';
 
-import { getFormattedTimestamp } from '../../../helpers';
+import { getFormattedTimestamp } from '../../../utils';
 import { FORM_DISPLAY_NAME, FORM_EMAIL, FORM_PHOTO } from './profile.constants';
 
 const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePhoto }) => (

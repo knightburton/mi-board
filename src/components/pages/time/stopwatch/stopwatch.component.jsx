@@ -15,7 +15,7 @@ import Section from '../../../commons/section/section.container';
 import LapsActionsMenu from './laps-actions-menu/laps-actions-menu.container';
 import LapsList from './laps-list/laps-list.component';
 
-import { getFormattedSeconds, getTimestamp } from '../../../../helpers';
+import { getFormattedSeconds, getTimestamp } from '../../../../utils';
 
 import useStyles from './stopwatch.styles';
 

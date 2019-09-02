@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import Typography from '@material-ui/core/Typography';
 
 import useStyles from '../stopwatch.styles';
-import { getFormattedSeconds } from '../../../../../helpers';
+import { getFormattedSeconds } from '../../../../../utils';
 
 const LapsList = ({ laps, noOfVisibleLaps }) => {
   const classes = useStyles();
