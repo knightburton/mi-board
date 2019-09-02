@@ -8,7 +8,7 @@ import AddPhotoIcon from '@material-ui/icons/AddPhotoAlternateOutlined';
 
 import ControlWrapper from './control-wrapper.component';
 
-import { controlPropTypes } from './control.proptypes';
+import { controlPropTypes } from './controls.proptypes';
 
 const ControlFile = ({ control, state, onChange }) => {
   const fileInput = useRef(null);

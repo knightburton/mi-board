@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import { DatePicker } from '@material-ui/pickers';
 
-import useStyles from './control.styles';
-import { controlPropTypes, statePropTypes } from './control.proptypes';
+import useStyles from './controls.styles';
+import { controlPropTypes, statePropTypes } from './controls.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
 

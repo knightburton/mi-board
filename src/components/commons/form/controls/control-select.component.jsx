@@ -6,7 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import ControlWrapper from './control-wrapper.component';
 
-import { controlPropTypes, statePropTypes } from './control.proptypes';
+import { controlPropTypes, statePropTypes } from './controls.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
 

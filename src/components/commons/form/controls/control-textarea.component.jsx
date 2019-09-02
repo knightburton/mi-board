@@ -5,7 +5,7 @@ import Input from '@material-ui/core/Input';
 
 import ControlWrapper from './control-wrapper.component';
 
-import { controlPropTypes, statePropTypes } from './control.proptypes';
+import { controlPropTypes, statePropTypes } from './controls.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
 
