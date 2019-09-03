@@ -119,12 +119,6 @@ export const signOut = firebase => async dispatch => {
   }
 };
 
-export const checkSignIn = () => (dispatch, getState, { history }) => {
-  const authIsLoaded = getFirebaseAuthIsLoaded(getState());
-  const authIsEmpty = getFirebaseAuthIsEmpty(getState());
-  if (authIsLoaded && authIsEmpty) history.push('/sign-in');
-};
-
 export const updateAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
   dispatch(setSectionWaiting(true, 'profile'));
   try {
