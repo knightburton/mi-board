@@ -96,7 +96,7 @@ export const reducer = handleActions(
  * ASYNC ACTION CREATORS
  */
 
-export const login = (firebase, credentials) => async (dispatch, getState, { history }) => {
+export const signIn = (firebase, credentials) => async (dispatch, getState, { history }) => {
   dispatch(setAuthInProgress(true));
   try {
     await firebase.login(credentials);
@@ -108,7 +108,7 @@ export const login = (firebase, credentials) => async (dispatch, getState, { his
   }
 };
 
-export const logout = firebase => async dispatch => {
+export const signOut = firebase => async dispatch => {
   dispatch(setAuthInProgress(true));
   try {
     await firebase.logout();

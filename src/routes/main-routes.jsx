@@ -3,7 +3,7 @@ import { Switch } from 'react-router-dom';
 
 import ProtectedRoute from './protected-route/protected-route.container';
 
-import SignIn from '../components/pages/login/login.container';
+import SignIn from '../components/pages/sign-in/sign-in.container';
 import App from '../components/app.container';
 
 const MainRoutes = () => (

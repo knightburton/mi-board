@@ -13,9 +13,9 @@ import ProjectTitle from '../../commons/project-title/project-title.component';
 
 import Logo from '../../../assets/images/icon.png';
 
-import useStyles from './login.styles';
+import useStyles from './sign-in.styles';
 
-const Login = ({ error, authInProgress, login }) => {
+const SignIn = ({ error, authInProgress, signIn }) => {
   const classes = useStyles();
 
   return (
@@ -55,10 +55,10 @@ const Login = ({ error, authInProgress, login }) => {
                 required: true
               }
             ]}
-            submitFunction={credentials => login(credentials)}
+            submitFunction={signIn}
             submitButton={(
               <Button type="submit" color="primary" variant="text" disabled={authInProgress}>
-                Login
+                Sign In
               </Button>
             )}
           />
@@ -68,14 +68,14 @@ const Login = ({ error, authInProgress, login }) => {
   );
 };
 
-Login.propTypes = {
+SignIn.propTypes = {
   authInProgress: PropTypes.bool.isRequired,
   error: PropTypes.string,
-  login: PropTypes.func.isRequired
+  signIn: PropTypes.func.isRequired
 };
 
-Login.defaultProps = {
+SignIn.defaultProps = {
   error: null,
 };
 
-export default Login;
+export default SignIn;
