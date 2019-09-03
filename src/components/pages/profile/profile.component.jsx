@@ -20,7 +20,7 @@ import { ProfileConsumer } from '../../contexts/profile';
 import { getFormattedTimestamp } from '../../../utils';
 import { FORM_DISPLAY_NAME, FORM_EMAIL, FORM_PHOTO } from './profile.constants';
 
-const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePhoto }) => (
+const Profile = ({ updateAuth, updateEmail, uploadProfilePhoto, deleteProfilePhoto }) => (
   <Container maxWidth="md">
 
     <Section title="Profile" waitingKey="profile">
@@ -40,7 +40,7 @@ const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePho
             <Grid xs={12} sm={8} item>
               <Form
                 controls={[{ ...FORM_DISPLAY_NAME, defaultValue: profile.name || '' }]}
-                submitFunction={attributes => updataAuth(attributes)}
+                submitFunction={attributes => updateAuth(attributes)}
                 single
               />
               <Form
@@ -49,7 +49,7 @@ const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePho
                   defaultValue: profile.email || '',
                   label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`
                 }]}
-                submitFunction={({ email }) => updataEmail(email)}
+                submitFunction={({ email }) => updateEmail(email)}
                 single
               />
               <Form
@@ -83,8 +83,8 @@ const Profile = ({ updataAuth, updataEmail, uploadProfilePhoto, deleteProfilePho
 );
 
 Profile.propTypes = {
-  updataAuth: PropTypes.func.isRequired,
-  updataEmail: PropTypes.func.isRequired,
+  updateAuth: PropTypes.func.isRequired,
+  updateEmail: PropTypes.func.isRequired,
   uploadProfilePhoto: PropTypes.func.isRequired,
   deleteProfilePhoto: PropTypes.func.isRequired
 };

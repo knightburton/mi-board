@@ -125,7 +125,7 @@ export const checkSignIn = () => (dispatch, getState, { history }) => {
   if (authIsLoaded && authIsEmpty) history.push('/sign-in');
 };
 
-export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
+export const updateAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
   dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateAuth(attributes, updateProfile);
@@ -136,7 +136,7 @@ export const updataAuth = (firebase, attributes, updateProfile = false) => async
   }
 };
 
-export const updataEmail = (firebase, email) => async dispatch => {
+export const updateEmail = (firebase, email) => async dispatch => {
   dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateEmail(email, true);
@@ -153,7 +153,7 @@ export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState)
     const profileID = getProfileID(getState());
     const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(`profiles/${profileID}`, file);
     const downloadUrl = await firebase.storage().ref().child(metadata.fullPath).getDownloadURL();
-    await dispatch(updataAuth(firebase, { photoURL: downloadUrl, photoName: metadata.name }, true));
+    await dispatch(updateAuth(firebase, { photoURL: downloadUrl, photoName: metadata.name }, true));
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
@@ -168,7 +168,7 @@ export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
     const profilePhotoName = getProfilePhotoName(getState());
     if (profilePhotoName) {
       await firebase.deleteFile(`profiles/${profileID}/${profilePhotoName}`);
-      await dispatch(updataAuth(firebase, { photoURL: null, photoName: null }, true));
+      await dispatch(updateAuth(firebase, { photoURL: null, photoName: null }, true));
     } else {
       dispatch(addNotification('There is no available profile photo', 'error'));
     }
