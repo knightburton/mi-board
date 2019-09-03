@@ -72,7 +72,7 @@ const Profile = ({ updateAuth, updateEmail, uploadProfilePhoto, deleteProfilePho
                 single
               />
               <FormSingleValue label="Created at" value={getFormattedTimestamp(profile.createdAt)} />
-              <FormSingleValue label="Last Login at" value={getFormattedTimestamp(profile.lastLoginAt)} />
+              <FormSingleValue label="Last Sign In at" value={getFormattedTimestamp(profile.lastLoginAt)} />
             </Grid>
           )}
         </ProfileConsumer>
