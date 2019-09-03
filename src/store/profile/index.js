@@ -96,10 +96,11 @@ export const reducer = handleActions(
  * ASYNC ACTION CREATORS
  */
 
-export const login = (firebase, credentials) => async dispatch => {
+export const login = (firebase, credentials) => async (dispatch, getState, { history }) => {
   dispatch(setAuthInProgress(true));
   try {
     await firebase.login(credentials);
+    history.push('/dashboard');
   } catch (error) {
     /* Handled by react-redux-firebase */
   } finally {
@@ -116,6 +117,12 @@ export const logout = firebase => async dispatch => {
   } finally {
     dispatch(setAuthInProgress(false));
   }
+};
+
+export const checkSignIn = () => (dispatch, getState, { history }) => {
+  const authIsLoaded = getFirebaseAuthIsLoaded(getState());
+  const authIsEmpty = getFirebaseAuthIsEmpty(getState());
+  if (authIsLoaded && authIsEmpty) history.push('/sign-in');
 };
 
 export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
