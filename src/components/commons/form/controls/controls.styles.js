@@ -60,5 +60,10 @@ export default makeStyles(theme => ({
     '& > label:first-of-type': {
       marginLeft: theme.spacing(1.5)
     }
+  },
+
+  // Select styles
+  select: {
+    textAlign: 'left'
   }
 }));
