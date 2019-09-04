@@ -8,6 +8,7 @@ import ControlSelect from './control-select.component';
 import ControlSlider from './control-slider.component';
 import ControlDate from './control-date.component';
 import ControlFile from './control-file.component';
+import ControlSwitch from './control-switch.component';
 
 import { CONTROL_TYPES } from '../form.constants';
 
@@ -33,6 +34,7 @@ const Controls = ({ controls, state, onChange, onIncrease, onDecrease }) => (
       if (control.type === CONTROL_TYPES.SLIDER) return [...acc, <ControlSlider {...props} />];
       if (control.type === CONTROL_TYPES.DATE) return [...acc, <ControlDate {...props} />];
       if (control.type === CONTROL_TYPES.FILE) return [...acc, <ControlFile {...props} />];
+      if (control.type === CONTROL_TYPES.SWITCH) return [...acc, <ControlSwitch {...props} />];
       return acc;
     }, [])}
   </Fragment>

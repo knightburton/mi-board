@@ -65,5 +65,17 @@ export default makeStyles(theme => ({
   // Select styles
   select: {
     textAlign: 'left'
+  },
+
+  // Switch styles
+  switchControl: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap: 'nowrap',
+    justifyContent: 'flex-start',
+    alignItems: 'stretch',
+    alignContent: 'stretch',
+    padding: theme.spacing(0, 1.5),
+    marginBottom: theme.spacing(1.5),
   }
 }));

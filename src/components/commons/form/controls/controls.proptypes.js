@@ -6,7 +6,7 @@ export const controlPropTypes = PropTypes.shape({
   key: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.values(CONTROL_TYPES)).isRequired,
   label: PropTypes.string.isRequired,
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object, PropTypes.number, PropTypes.bool]),
   required: PropTypes.bool,
   disabled: PropTypes.bool,
   autocomplete: PropTypes.string,
@@ -28,7 +28,8 @@ export const controlPropTypes = PropTypes.shape({
     })),
     PropTypes.arrayOf(PropTypes.string)
   ]),
-  format: PropTypes.string
+  format: PropTypes.string,
+  color: PropTypes.oneOf(['primary', 'secondary'])
 });
 
 
@@ -36,7 +37,8 @@ export const statePropTypes = PropTypes.shape({
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.object
+    PropTypes.object,
+    PropTypes.bool,
   ]),
   error: PropTypes.string
 });
