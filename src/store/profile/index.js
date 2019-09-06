@@ -29,7 +29,7 @@ export const setAuthInProgress = createAction(
  * SELECTORS
  */
 
-export const getAuthInProgress = state => state.user.authInProgress;
+export const getAuthInProgress = state => state.profile.authInProgress;
 
 export const getFirebaseProfile = state => state.firebase.profile;
 export const getFirebaseAuth = state => state.firebase.auth;
