@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import InputLabel from '@material-ui/core/InputLabel';
 
-import useStyles from './control.styles';
+import useStyles from './controls.styles';
 
 const ControlInputLabel = ({ id, label }) => {
   const classes = useStyles();

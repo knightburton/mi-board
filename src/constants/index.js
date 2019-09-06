@@ -1,4 +1,5 @@
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import CalendarIcon from '@material-ui/icons/DateRangeOutlined';
 import TimeIcon from '@material-ui/icons/WatchLaterOutlined';
 import TodoIcon from '@material-ui/icons/PlaylistAddCheck';
 
@@ -11,7 +12,15 @@ export const DRAWER_MENU = [
     exact: true,
     text: 'Dashboard',
     icon: DashboardIcon
-  }, {
+  },
+  {
+    key: 'calendar',
+    to: '/calendar',
+    exact: true,
+    text: 'Calendar',
+    icon: CalendarIcon
+  },
+  {
     key: 'time',
     to: '/time',
     exact: false,

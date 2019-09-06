@@ -7,8 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from './control-input-label.component';
 import HelperText from './control-helper-text.component';
 
-import useStyles from './control.styles';
-import { controlPropTypes, statePropTypes } from './control.proptypes';
+import useStyles from './controls.styles';
+import { controlPropTypes, statePropTypes } from './controls.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
 

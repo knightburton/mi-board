@@ -29,7 +29,7 @@ export const setAuthInProgress = createAction(
  * SELECTORS
  */
 
-export const getAuthInProgress = state => state.user.authInProgress;
+export const getAuthInProgress = state => state.profile.authInProgress;
 
 export const getFirebaseProfile = state => state.firebase.profile;
 export const getFirebaseAuth = state => state.firebase.auth;
@@ -96,10 +96,11 @@ export const reducer = handleActions(
  * ASYNC ACTION CREATORS
  */
 
-export const login = (firebase, credentials) => async dispatch => {
+export const signIn = (firebase, credentials) => async (dispatch, getState, { history }) => {
   dispatch(setAuthInProgress(true));
   try {
     await firebase.login(credentials);
+    history.push('/dashboard');
   } catch (error) {
     /* Handled by react-redux-firebase */
   } finally {
@@ -107,7 +108,7 @@ export const login = (firebase, credentials) => async dispatch => {
   }
 };
 
-export const logout = firebase => async dispatch => {
+export const signOut = firebase => async dispatch => {
   dispatch(setAuthInProgress(true));
   try {
     await firebase.logout();
@@ -118,7 +119,7 @@ export const logout = firebase => async dispatch => {
   }
 };
 
-export const updataAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
+export const updateAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
   dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateAuth(attributes, updateProfile);
@@ -129,7 +130,7 @@ export const updataAuth = (firebase, attributes, updateProfile = false) => async
   }
 };
 
-export const updataEmail = (firebase, email) => async dispatch => {
+export const updateEmail = (firebase, email) => async dispatch => {
   dispatch(setSectionWaiting(true, 'profile'));
   try {
     await firebase.updateEmail(email, true);
@@ -146,7 +147,7 @@ export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState)
     const profileID = getProfileID(getState());
     const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(`profiles/${profileID}`, file);
     const downloadUrl = await firebase.storage().ref().child(metadata.fullPath).getDownloadURL();
-    await dispatch(updataAuth(firebase, { photoURL: downloadUrl, photoName: metadata.name }, true));
+    await dispatch(updateAuth(firebase, { photoURL: downloadUrl, photoName: metadata.name }, true));
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
@@ -161,7 +162,7 @@ export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
     const profilePhotoName = getProfilePhotoName(getState());
     if (profilePhotoName) {
       await firebase.deleteFile(`profiles/${profileID}/${profilePhotoName}`);
-      await dispatch(updataAuth(firebase, { photoURL: null, photoName: null }, true));
+      await dispatch(updateAuth(firebase, { photoURL: null, photoName: null }, true));
     } else {
       dispatch(addNotification('There is no available profile photo', 'error'));
     }

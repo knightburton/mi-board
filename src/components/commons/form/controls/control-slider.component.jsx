@@ -9,11 +9,11 @@ import Slider from '@material-ui/core/Slider';
 import LeftIcon from '@material-ui/icons/ChevronLeft';
 import RightIcon from '@material-ui/icons/ChevronRight';
 
-import { controlPropTypes, statePropTypes } from './control.proptypes';
+import { controlPropTypes, statePropTypes } from './controls.proptypes';
 
 import { CONTROL_DEFAULTS } from '../form.constants';
 
-import useStyles from './control.styles';
+import useStyles from './controls.styles';
 
 const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
   const classes = useStyles();
@@ -55,6 +55,7 @@ const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
           step={control.step || CONTROL_DEFAULTS.SLIDER_STEP}
           marks={control.marks || CONTROL_DEFAULTS.SLIDER_MARKS}
           valueLabelDisplay="auto"
+          disabled={control.disabled || CONTROL_DEFAULTS.DISABLED}
         />
         {control.buttons && (
           <IconButton

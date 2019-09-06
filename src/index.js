@@ -15,7 +15,7 @@ import firebase from './side-effects/firebase';
 import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
-import App from './components/app.container';
+import MainRoutes from './routes/main-routes';
 
 import 'typeface-roboto';
 
@@ -37,7 +37,7 @@ ReactDOM.render(
         <CssBaseline />
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Router history={history}>
-            <App />
+            <MainRoutes />
           </Router>
         </MuiPickersUtilsProvider>
       </MuiThemeProvider>

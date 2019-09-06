@@ -21,7 +21,7 @@ import ProjectTitle from '../../commons/project-title/project-title.component';
 
 import Logo from '../../../assets/images/icon.png';
 
-import { DRAWER_MENU } from './drawer.constants';
+import { DRAWER_MENU } from '../../../constants';
 
 import useStyles from './drawer.styles';
 
@@ -35,8 +35,12 @@ const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer,
   return (
     <Fragment>
       <Toolbar className={classes.toolbar}>
-        <Avatar className={classes.avatar} src={Logo} imgProps={{ draggable: false }} alt="Project Logo" />
-        <ProjectTitle />
+        <Link to="/dashboard">
+          <Avatar className={classes.avatar} src={Logo} imgProps={{ draggable: false }} alt="Project Logo" />
+        </Link>
+        <Link to="/dashboard" className={classes.link}>
+          <ProjectTitle />
+        </Link>
       </Toolbar>
       <Divider />
       <MenuList className={classes.list}>

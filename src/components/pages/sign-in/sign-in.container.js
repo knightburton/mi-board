@@ -1,8 +1,8 @@
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
-import { getAuthInProgress, getFirebaseAuthErrorMessage, login } from '../../../store/profile';
-import Login from './login.component';
+import { getAuthInProgress, getFirebaseAuthErrorMessage, signIn } from '../../../store/profile';
+import SignIn from './sign-in.component';
 
 const mapStateToProps = state => ({
   authInProgress: getAuthInProgress(state),
@@ -10,10 +10,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
-  login: credentials => dispatch(login(firebase, credentials))
+  signIn: credentials => dispatch(signIn(firebase, credentials))
 });
 
 export default compose(
   firebaseConnect(),
   connect(mapStateToProps, mapDispatchToProps)
-)(Login);
+)(SignIn);

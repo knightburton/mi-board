@@ -19,12 +19,12 @@ import Avatar from '../../commons/avatar/avatar.component';
 
 import useStyles from './appbar.styles';
 
-const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
+const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
   const classes = useStyles();
   const [accountMenu, setAccountMenu] = React.useState(null);
 
-  const handleLogoutClick = () => {
-    logout();
+  const handleSignOutClick = () => {
+    signOut();
     setAccountMenu(null);
   };
 
@@ -75,11 +75,11 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
             </ListItemIcon>
             <Typography variant="inherit">Profile</Typography>
           </MenuItem>
-          <MenuItem onClick={handleLogoutClick}>
+          <MenuItem onClick={handleSignOutClick}>
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
-            <Typography variant="inherit">Logout</Typography>
+            <Typography variant="inherit">Sign Out</Typography>
           </MenuItem>
         </Menu>
       </Toolbar>
@@ -88,7 +88,7 @@ const AppBar = ({ logout, toggleMobileDrawer, profileDisplayName }) => {
 };
 
 AppBar.propTypes = {
-  logout: PropTypes.func.isRequired,
+  signOut: PropTypes.func.isRequired,
   toggleMobileDrawer: PropTypes.func.isRequired,
   profileDisplayName: PropTypes.string
 };

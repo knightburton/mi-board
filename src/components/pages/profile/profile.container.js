@@ -2,8 +2,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firebaseConnect from 'react-redux-firebase/lib/firebaseConnect';
 import {
-  updataAuth,
-  updataEmail,
+  updateAuth,
+  updateEmail,
   uploadProfilePhoto,
   deleteProfilePhoto
 } from '../../../store/profile';
@@ -13,8 +13,8 @@ import Profile from './profile.component';
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
-  updataAuth: attributes => dispatch(updataAuth(firebase, attributes, true)),
-  updataEmail: email => dispatch(updataEmail(firebase, email)),
+  updateAuth: attributes => dispatch(updateAuth(firebase, attributes, true)),
+  updateEmail: email => dispatch(updateEmail(firebase, email)),
   uploadProfilePhoto: file => dispatch(uploadProfilePhoto(firebase, file)),
   deleteProfilePhoto: () => dispatch(deleteProfilePhoto(firebase))
 });

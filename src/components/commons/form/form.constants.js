@@ -6,7 +6,8 @@ export const CONTROL_TYPES = {
   SELECT: 'select',
   SLIDER: 'slider',
   DATE: 'date',
-  FILE: 'file'
+  FILE: 'file',
+  SWITCH: 'switch',
 };
 
 export const CONTROL_DEFAULTS = {
@@ -22,7 +23,8 @@ export const CONTROL_DEFAULTS = {
   SLIDER_MAX: 60,
   SLIDER_STEP: 1,
   SLIDER_MARKS: Array.from({ length: 6 }, (v, i) => ({ value: i * 10, label: i * 10 })),
-  DATE_FORMAT: 'YYYY-MM-DD'
+  DATE_FORMAT: 'YYYY-MM-DD',
+  SWITCH_COLOR: 'primary'
 };
 
 export const BUTTON_POSITIONS = {

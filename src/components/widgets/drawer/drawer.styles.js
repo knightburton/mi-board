@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { DRAWER_WIDTH } from './drawer.constants';
+import { DRAWER_WIDTH } from '../../../constants';
 
 export default makeStyles(theme => ({
   drawer: {
@@ -33,6 +33,10 @@ export default makeStyles(theme => ({
   toolbar: {
     padding: theme.spacing(0, 1.5),
     ...theme.mixins.toolbar
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit'
   },
   list: {
     padding: theme.spacing(3, 0)

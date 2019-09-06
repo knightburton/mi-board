@@ -1,4 +1,6 @@
-export default {
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles(() => ({
   form: {
     position: 'relative',
     padding: 0,
@@ -9,4 +11,4 @@ export default {
     flexDirection: 'row',
     alignItems: 'flex-start'
   }
-};
+}));

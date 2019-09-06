@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -14,8 +13,9 @@ import LapIcon from '@material-ui/icons/FlagOutlined';
 
 import Section from '../../../commons/section/section.container';
 import LapsActionsMenu from './laps-actions-menu/laps-actions-menu.container';
+import LapsList from './laps-list/laps-list.component';
 
-import { getFormattedSeconds, getTimestamp } from '../../../../helpers';
+import { getFormattedSeconds, getTimestamp } from '../../../../utils';
 
 import useStyles from './stopwatch.styles';
 
@@ -77,7 +77,6 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
           </Grid>
           <Grid xs="auto" item>
             <Button
-              type="submit"
               variant="contained"
               size="small"
               color="primary"
@@ -90,7 +89,6 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
           </Grid>
           <Grid xs="auto" item>
             <Button
-              type="submit"
               variant="contained"
               size="small"
               color="primary"
@@ -110,16 +108,9 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
             <LapsActionsMenu noOfVisibleLaps={noOfVisibleLaps} changeNoOfVisibleLaps={changeNoOfVisibleLaps} />
           </Grid>
           <Grid xs={12} item>
-            {laps.length ? [...laps].reverse().splice(0, noOfVisibleLaps).map((lap, index) => (
-              <Typography key={Math.random() + lap} variant="body1" align="center">
-                <Typography variant="body2" className={clsx(classes.lapText, classes.lapIndex)}>
-                  {`${laps.length - index}.`}
-                </Typography>
-                <Typography variant="body2" className={classes.lapText}>
-                  {getFormattedSeconds(lap)}
-                </Typography>
-              </Typography>
-            )) : (
+            {laps.length ? (
+              <LapsList laps={laps} noOfVisibleLaps={noOfVisibleLaps} />
+            ) : (
               <Typography variant="body1" align="center">
                 There is no registered lap yet...
               </Typography>
