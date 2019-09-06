@@ -1,7 +1,7 @@
 export const TODO_PRIORITY_LEVELS = {
   LOW: 'low',
   NORMAL: 'normal',
-  HIGH: 'high'
+  HIGH: 'high',
 };
 
 export const BASIC_TODO_CONTROLS = [
@@ -11,7 +11,7 @@ export const BASIC_TODO_CONTROLS = [
     defaultValue: '',
     label: 'I should...',
     required: true,
-    rows: 1
+    rows: 1,
   },
   {
     key: 'priority',
@@ -19,15 +19,13 @@ export const BASIC_TODO_CONTROLS = [
     defaultValue: TODO_PRIORITY_LEVELS.NORMAL,
     label: 'Priority',
     options: Object.values(TODO_PRIORITY_LEVELS).map(value => ({ label: value.replace(/^\w/, c => c.toUpperCase()), value })),
-    required: true,
-  }
-];
-
-export const ADVANCED_TODO_CONTROLS = [
+    inline: true,
+  },
   {
-    key: 'date',
+    key: 'expiry-date',
     type: 'date',
     defaultValue: new Date(),
-    label: 'Date'
+    label: 'Expiry Date',
+    inline: true,
   }
 ];
