@@ -21,7 +21,7 @@ import ProjectTitle from '../../commons/project-title/project-title.component';
 
 import Logo from '../../../assets/images/icon.png';
 
-import { DRAWER_MENU } from './drawer.constants';
+import { DRAWER_MENU } from '../../../constants';
 
 import useStyles from './drawer.styles';
 
