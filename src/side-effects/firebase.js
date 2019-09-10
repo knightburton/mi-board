@@ -4,16 +4,22 @@ import 'firebase/database';
 import 'firebase/storage';
 import 'firebase/auth';
 
-export const config = {
+export const fConfig = {
   apiKey: 'AIzaSyAV7DjVwDy7HePlIBzOU7uN9tu2B7sTWio',
   authDomain: 'mi-board.firebaseapp.com',
   databaseURL: 'https://mi-board.firebaseio.com',
   projectId: 'mi-board',
   storageBucket: 'mi-board.appspot.com',
-  messagingSenderId: '177718294395'
+  messagingSenderId: '177718294395',
 };
 
-firebase.initializeApp(config);
+export const rfConfig = {
+  userProfile: 'profiles',
+  useFirestoreForProfile: true,
+  useFirestoreForStorageMeta: true,
+};
+
+firebase.initializeApp(fConfig);
 firebase.firestore();
 firebase.storage();
 

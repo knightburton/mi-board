@@ -9,9 +9,9 @@ import { Provider } from 'react-redux';
 import { createFirestoreInstance } from 'redux-firestore';
 import { Router } from 'react-router-dom';
 
-import store from './store/configure-store';
 import history from './side-effects/history';
-import firebase from './side-effects/firebase';
+import firebase, { rfConfig } from './side-effects/firebase';
+import store from './store/configure-store';
 import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
@@ -19,20 +19,14 @@ import MainRoutes from './routes/main-routes';
 
 import 'typeface-roboto';
 
-const rrfProps = {
-  firebase,
-  config: {
-    userProfile: 'profiles',
-    useFirestoreForProfile: true,
-    useFirestoreForStorageMeta: true
-  },
-  dispatch: store.dispatch,
-  createFirestoreInstance
-};
-
 ReactDOM.render(
   <Provider store={store}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
+    <ReactReduxFirebaseProvider
+      firebase={firebase}
+      config={rfConfig}
+      dispatch={store.dispatch}
+      createFirestoreInstance={createFirestoreInstance}
+    >
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <MuiPickersUtilsProvider utils={MomentUtils}>
