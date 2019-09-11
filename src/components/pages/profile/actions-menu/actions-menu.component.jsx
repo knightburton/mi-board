@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -35,7 +35,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         aria-label="Actions"
         aria-controls="actions-menu"
@@ -90,7 +90,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
           )}
         />
       </Menu>
-    </Fragment>
+    </>
   );
 };
 

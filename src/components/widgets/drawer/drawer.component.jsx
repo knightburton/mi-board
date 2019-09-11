@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { withRouter, Link } from 'react-router-dom';
@@ -21,7 +21,7 @@ import ProjectTitle from '../../commons/project-title/project-title.component';
 
 import Logo from '../../../assets/images/icon.png';
 
-import { DRAWER_MENU } from '../../../constants';
+import { MENU } from '../../../constants';
 
 import useStyles from './drawer.styles';
 
@@ -33,7 +33,7 @@ const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer,
   };
 
   return (
-    <Fragment>
+    <>
       <Toolbar className={classes.toolbar}>
         <Link to="/dashboard">
           <Avatar className={classes.avatar} src={Logo} imgProps={{ draggable: false }} alt="Project Logo" />
@@ -44,7 +44,7 @@ const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer,
       </Toolbar>
       <Divider />
       <MenuList className={classes.list}>
-        {DRAWER_MENU.map(item => (
+        {MENU.map(item => (
           <MenuItem
             key={item.key}
             component={Link}
@@ -70,14 +70,15 @@ const DrawerContent = ({ mobileView, pathname, toggleDrawer, toggleMobileDrawer,
             className={classes.toggleButton}
             aria-label="expand or collapse navigation bar"
           >
-            {!mobileView && isDrawerOpened
-              ? <ChevronLeftIcon />
-              : <ChevronRightIcon />
-            }
+            {!mobileView && isDrawerOpened ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </Box>
         </Toolbar>
       </Hidden>
-    </Fragment>
+    </>
   );
 };
 
@@ -94,12 +95,11 @@ DrawerContent.defaultProps = {
   mobileView: false
 };
 
-const Drawer = ({ location: { pathname }, ...rest }) => {
+const Drawer = ({ location: { pathname }, isDrawerOpened, isMobileDrawerOpened, toggleDrawer, toggleMobileDrawer }) => {
   const classes = useStyles();
-  const { isMobileDrawerOpened, toggleMobileDrawer, isDrawerOpened } = rest;
 
   return (
-    <Fragment>
+    <>
       <Hidden smDown>
         <MuiDrawer
           variant="permanent"
@@ -115,7 +115,13 @@ const Drawer = ({ location: { pathname }, ...rest }) => {
           }}
           open={isDrawerOpened}
         >
-          <DrawerContent pathname={pathname} {...rest} />
+          <DrawerContent
+            pathname={pathname}
+            toggleDrawer={toggleDrawer}
+            toggleMobileDrawer={toggleMobileDrawer}
+            isDrawerOpened={isDrawerOpened}
+            isMobileDrawerOpened={isMobileDrawerOpened}
+          />
         </MuiDrawer>
       </Hidden>
       <Hidden mdUp>
@@ -131,10 +137,17 @@ const Drawer = ({ location: { pathname }, ...rest }) => {
             keepMounted: true
           }}
         >
-          <DrawerContent mobileView pathname={pathname} {...rest} />
+          <DrawerContent
+            mobileView
+            pathname={pathname}
+            toggleDrawer={toggleDrawer}
+            toggleMobileDrawer={toggleMobileDrawer}
+            isDrawerOpened={isDrawerOpened}
+            isMobileDrawerOpened={isMobileDrawerOpened}
+          />
         </MuiDrawer>
       </Hidden>
-    </Fragment>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -25,7 +25,7 @@ const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
   };
 
   return (
-    <Fragment>
+    <>
 
       <Section>
         <Typography variant="body1">
@@ -58,7 +58,7 @@ const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
         />
       </Section>
 
-    </Fragment>
+    </>
   );
 };
 

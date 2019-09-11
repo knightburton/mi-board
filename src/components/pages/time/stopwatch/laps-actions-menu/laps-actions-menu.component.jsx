@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -27,7 +27,7 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         aria-label="Actions"
         aria-controls="laps-actions-menu"
@@ -64,7 +64,7 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
           <ListItemText primary="Clear all" />
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   );
 };
 

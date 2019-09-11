@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Button from '@material-ui/core/Button';
@@ -18,7 +18,7 @@ const Confirmation = ({ id, title, description, onAgree, toggle }) => {
   };
 
   return (
-    <Fragment>
+    <>
       {toggle(show)}
       <Dialog
         open={isShown}
@@ -41,7 +41,7 @@ const Confirmation = ({ id, title, description, onAgree, toggle }) => {
           </Button>
         </DialogActions>
       </Dialog>
-    </Fragment>
+    </>
   );
 };
 

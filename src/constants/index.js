@@ -5,7 +5,7 @@ import TodoIcon from '@material-ui/icons/PlaylistAddCheck';
 
 export const DRAWER_WIDTH = 240;
 
-export const DRAWER_MENU = [
+export const MENU = [
   {
     key: 'dashboard',
     to: '/dashboard',

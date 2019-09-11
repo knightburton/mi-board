@@ -9,10 +9,11 @@ import IntervalTimer from './interval-timer/interval-timer.container';
 const Interval = ({ visibleTimer }) => (
   <Container maxWidth="md">
 
-    {visibleTimer && visibleTimer === 'interval'
-      ? <IntervalTimer />
-      : <IntervalForm />
-    }
+    {visibleTimer && visibleTimer === 'interval' ? (
+      <IntervalTimer />
+    ) : (
+      <IntervalForm />
+    )}
 
   </Container>
 );

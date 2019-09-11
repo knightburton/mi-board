@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -15,7 +15,7 @@ const Wrapper = ({ isDrawerOpened, children }) => {
   const mediumClasses = clsx(classes.content, classes.contentFull);
 
   return (
-    <Fragment>
+    <>
       <Hidden smDown>
         <main className={smallClasses}>
           {children}
@@ -26,7 +26,7 @@ const Wrapper = ({ isDrawerOpened, children }) => {
           {children}
         </main>
       </Hidden>
-    </Fragment>
+    </>
   );
 };
 
