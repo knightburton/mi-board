@@ -85,6 +85,7 @@ export const getProfileEmailVerified = createSelector(
 /**
  * REDUCER
  */
+
 export const reducer = handleActions(
   {
     [setAuthInProgress]: (state, { payload: authInProgress }) => ({ ...state, authInProgress })
