@@ -10,8 +10,8 @@ import { createFirestoreInstance } from 'redux-firestore';
 import { Router } from 'react-router-dom';
 
 import history from './side-effects/history';
-import firebase, { rfConfig } from './side-effects/firebase';
 import store from './store/configure-store';
+import firebase, { rfConfig } from './side-effects/firebase';
 import theme from './theme';
 import * as serviceWorker from './serviceWorker';
 
