@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import Typography from '@material-ui/core/Typography';
 
+import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -29,61 +30,63 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
   };
 
   return (
-    <MuiAppBar position="sticky" className={classes.appBar}>
-      <Toolbar>
-        <Hidden mdUp>
+    <Container maxWidth={false}>
+      <MuiAppBar position="sticky" className={classes.appBar}>
+        <Toolbar disableGutters>
+          <Hidden mdUp>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              edge="start"
+              onClick={toggleMobileDrawer}
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Hidden>
+          <div className={classes.grow} />
+          {profileDisplayName && (
+            <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
+          )}
           <IconButton
+            edge="end"
+            aria-owns={accountMenu ? 'material-appbar' : undefined}
+            aria-haspopup="true"
+            onClick={e => setAccountMenu(e.currentTarget)}
             color="inherit"
-            aria-label="Open drawer"
-            edge="start"
-            onClick={toggleMobileDrawer}
-            className={classes.menuButton}
           >
-            <MenuIcon />
+            <Avatar size="extraSmall" />
           </IconButton>
-        </Hidden>
-        <div className={classes.grow} />
-        {profileDisplayName && (
-          <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
-        )}
-        <IconButton
-          edge="end"
-          aria-owns={accountMenu ? 'material-appbar' : undefined}
-          aria-haspopup="true"
-          onClick={e => setAccountMenu(e.currentTarget)}
-          color="inherit"
-        >
-          <Avatar size="extraSmall" />
-        </IconButton>
-        <Menu
-          id="menu-appbar"
-          anchorEl={accountMenu}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right'
-          }}
-          open={Boolean(accountMenu)}
-          onClose={() => setAccountMenu(null)}
-        >
-          <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
-            <ListItemIcon>
-              <PersonOutlineIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Profile</Typography>
-          </MenuItem>
-          <MenuItem onClick={handleSignOutClick}>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <Typography variant="inherit">Sign Out</Typography>
-          </MenuItem>
-        </Menu>
-      </Toolbar>
-    </MuiAppBar>
+          <Menu
+            id="menu-appbar"
+            anchorEl={accountMenu}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            open={Boolean(accountMenu)}
+            onClose={() => setAccountMenu(null)}
+          >
+            <MenuItem component={Link} to="/profile" onClick={() => setAccountMenu(null)}>
+              <ListItemIcon>
+                <PersonOutlineIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Profile</Typography>
+            </MenuItem>
+            <MenuItem onClick={handleSignOutClick}>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <Typography variant="inherit">Sign Out</Typography>
+            </MenuItem>
+          </Menu>
+        </Toolbar>
+      </MuiAppBar>
+    </Container>
   );
 };
 

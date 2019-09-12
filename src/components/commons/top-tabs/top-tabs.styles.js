@@ -2,19 +2,24 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
   root: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    padding: theme.spacing(0, 1)
+    // backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
+    borderBottomWidth: 1,
+    borderBottomStyle: 'solid',
+    borderBottomColor: theme.palette.primary.light,
   },
   tab: {
     minWidth: '80px',
     padding: theme.spacing(1, 2),
-    textTransform: 'none'
+    textTransform: 'none',
+  },
+  selected: {
+    color: theme.palette.primary.main,
   },
   indicator: {
     height: '4px',
     borderTopLeftRadius: theme.shape.borderRadius,
     borderTopRightRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.common.white
+    backgroundColor: theme.palette.primary.main,
   }
 }));
