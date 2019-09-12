@@ -20,9 +20,13 @@ import Avatar from '../../commons/avatar/avatar.component';
 
 import useStyles from './appbar.styles';
 
-const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
+import { MENU } from '../../../constants';
+
+const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName, location: { pathname } }) => {
   const classes = useStyles();
   const [accountMenu, setAccountMenu] = React.useState(null);
+  const menuItem = MENU.find(item => pathname.includes(item.to));
+  const title = (menuItem && menuItem.text) || 'MI - Board';
 
   const handleSignOutClick = () => {
     signOut();
@@ -44,9 +48,14 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
               <MenuIcon />
             </IconButton>
           </Hidden>
+          <Typography variant="h5">
+            {title}
+          </Typography>
           <div className={classes.grow} />
           {profileDisplayName && (
-            <Typography variant="body2" className={classes.profileName}>{profileDisplayName}</Typography>
+            <Typography variant="body2" className={classes.profileName}>
+              {profileDisplayName}
+            </Typography>
           )}
           <IconButton
             edge="end"
@@ -91,6 +100,9 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
 };
 
 AppBar.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
   signOut: PropTypes.func.isRequired,
   toggleMobileDrawer: PropTypes.func.isRequired,
   profileDisplayName: PropTypes.string,
