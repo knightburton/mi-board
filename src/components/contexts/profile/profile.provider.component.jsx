@@ -11,7 +11,7 @@ const ProfileProvider = ({ children, profile }) => (
 
 ProfileProvider.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
 export default ProfileProvider;

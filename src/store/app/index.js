@@ -10,7 +10,7 @@ export const initialState = {
   isMobileDrawerOpened: false,
   appWaiting: 0,
   sectionWaiting: {},
-  notifications: []
+  notifications: [],
 };
 
 /**
@@ -87,7 +87,7 @@ export const reducer = handleActions(
     [toggleMobileDrawer]: state => ({ ...state, isMobileDrawerOpened: !state.isMobileDrawerOpened }),
     [setAppWaiting]: (state, { payload: waiting }) => ({
       ...state,
-      appWaiting: waiting ? state.appWaiting + 1 : state.appWaiting - 1
+      appWaiting: waiting ? state.appWaiting + 1 : state.appWaiting - 1,
     }),
     [setSectionWaiting]: (state, { payload: { waiting, section } }) => ({
       ...state,
@@ -97,21 +97,21 @@ export const reducer = handleActions(
           ...o,
           ...s === section && state.sectionWaiting[section] === 1
             ? {}
-            : { [section]: state.sectionWaiting[section] - 1 }
-        }), {})
+            : { [section]: state.sectionWaiting[section] - 1 },
+        }), {}),
     }),
     [addNotification]: (state, { payload: { message, variant = 'info' } }) => ({
       ...state,
       notifications: [
         ...state.notifications,
-        { key: new Date().getTime(), message, variant }
-      ]
+        { key: new Date().getTime(), message, variant },
+      ],
     }),
     [removeNotification]: (state, { payload: key }) => ({
       ...state,
-      notifications: state.notifications.filter(notification => notification.key !== key)
+      notifications: state.notifications.filter(notification => notification.key !== key),
     }),
-    [removeAllNotification]: state => ({ ...state, notifications: [] })
+    [removeAllNotification]: state => ({ ...state, notifications: [] }),
   },
   initialState
 );

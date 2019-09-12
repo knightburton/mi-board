@@ -14,5 +14,5 @@ export default combineReducers({
   profile,
   todo,
   firestore,
-  firebase
+  firebase,
 });

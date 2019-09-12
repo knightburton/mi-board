@@ -4,11 +4,11 @@ export default makeStyles(() => ({
   form: {
     position: 'relative',
     padding: 0,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   single: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start'
-  }
+    alignItems: 'flex-start',
+  },
 }));

@@ -88,11 +88,11 @@ DrawerContent.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
   toggleMobileDrawer: PropTypes.func.isRequired,
   isDrawerOpened: PropTypes.bool.isRequired,
-  isMobileDrawerOpened: PropTypes.bool.isRequired
+  isMobileDrawerOpened: PropTypes.bool.isRequired,
 };
 
 DrawerContent.defaultProps = {
-  mobileView: false
+  mobileView: false,
 };
 
 const Drawer = ({ location: { pathname }, isDrawerOpened, isMobileDrawerOpened, toggleDrawer, toggleMobileDrawer }) => {
@@ -134,7 +134,7 @@ const Drawer = ({ location: { pathname }, isDrawerOpened, isMobileDrawerOpened, 
           open={isMobileDrawerOpened}
           onClose={toggleMobileDrawer}
           ModalProps={{
-            keepMounted: true
+            keepMounted: true,
           }}
         >
           <DrawerContent
@@ -157,8 +157,8 @@ Drawer.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
   toggleMobileDrawer: PropTypes.func.isRequired,
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(Drawer);

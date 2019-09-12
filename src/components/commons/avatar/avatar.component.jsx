@@ -29,7 +29,7 @@ const Avatar = ({ alt, size, withGutter, withDisabledColor }) => {
         <AccountCircleIcon
           className={clsx({
             [classes[size]]: size,
-            [classes.margin]: withGutter
+            [classes.margin]: withGutter,
           })}
           color={withDisabledColor ? 'disabled' : 'inherit'}
         />
@@ -42,14 +42,14 @@ Avatar.propTypes = {
   alt: PropTypes.string,
   size: PropTypes.oneOf(['extraSmall', 'small', 'medium', 'large', 'extraLarge', 'huge']),
   withGutter: PropTypes.bool,
-  withDisabledColor: PropTypes.bool
+  withDisabledColor: PropTypes.bool,
 };
 
 Avatar.defaultProps = {
   alt: 'Profile avatar',
   size: 'medium',
   withGutter: false,
-  withDisabledColor: false
+  withDisabledColor: false,
 };
 
 export default Avatar;

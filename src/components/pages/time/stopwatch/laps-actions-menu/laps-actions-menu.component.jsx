@@ -41,11 +41,11 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
         anchorEl={menu}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         keepMounted
         open={Boolean(menu)}
@@ -72,7 +72,7 @@ LapsActionsMenu.propTypes = {
   lapsLength: PropTypes.number.isRequired,
   noOfVisibleLaps: PropTypes.number.isRequired,
   changeNoOfVisibleLaps: PropTypes.func.isRequired,
-  clearStopwatchLaps: PropTypes.func.isRequired
+  clearStopwatchLaps: PropTypes.func.isRequired,
 };
 
 export default LapsActionsMenu;

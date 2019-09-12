@@ -1,15 +1,15 @@
 import {
   CONTROL_TYPES,
   ERROR_TEXTS,
-  VALIDATORS
+  VALIDATORS,
 } from './form.constants';
 
 export const getDefaultControlValuesFrom = controls => controls.reduce((o, { key, defaultValue }) => ({
   ...o,
   [key]: {
     value: defaultValue,
-    error: null
-  }
+    error: null,
+  },
 }), {});
 
 export const getControlState = (state, key) => {
@@ -55,6 +55,6 @@ export const validateForm = (controls, state) => controls.reduce((o, control) =>
   ...o,
   [control.key]: {
     ...state[control.key],
-    error: validateControl(control, state)
-  }
+    error: validateControl(control, state),
+  },
 }), {});

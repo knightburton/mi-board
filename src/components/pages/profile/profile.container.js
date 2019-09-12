@@ -5,7 +5,7 @@ import {
   updateAuth,
   updateEmail,
   uploadProfilePhoto,
-  deleteProfilePhoto
+  deleteProfilePhoto,
 } from '../../../store/profile';
 
 import Profile from './profile.component';
@@ -16,7 +16,7 @@ const mapDispatchToProps = (dispatch, { firebase }) => ({
   updateAuth: attributes => dispatch(updateAuth(firebase, attributes, true)),
   updateEmail: email => dispatch(updateEmail(firebase, email)),
   uploadProfilePhoto: file => dispatch(uploadProfilePhoto(firebase, file)),
-  deleteProfilePhoto: () => dispatch(deleteProfilePhoto(firebase))
+  deleteProfilePhoto: () => dispatch(deleteProfilePhoto(firebase)),
 });
 
 export default compose(

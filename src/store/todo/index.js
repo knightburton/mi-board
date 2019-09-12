@@ -9,7 +9,7 @@ import { getTimestampFromDate } from '../../utils';
  */
 
 export const initialState = {
-  filter: []
+  filter: [],
 };
 
 /**
@@ -46,7 +46,7 @@ export const getPersonalTodos = createSelector(
 
 export const reducer = handleActions(
   {
-    [changeFilter]: (state, { payload: filter }) => ({ ...state, filter })
+    [changeFilter]: (state, { payload: filter }) => ({ ...state, filter }),
   },
   initialState
 );
@@ -63,12 +63,12 @@ export const addTodo = (firestore, todo) => async (dispatch, getState) => {
       {
         collection: 'todos',
         doc: profileID,
-        subcollections: [{ collection: 'personal' }]
+        subcollections: [{ collection: 'personal' }],
       },
       {
         ...todo,
         'expiry-date': getTimestampFromDate(todo['expiry-date']),
-        complete: false
+        complete: false,
       }
     );
     dispatch(addNotification('The new todo is created successfully', 'success'));

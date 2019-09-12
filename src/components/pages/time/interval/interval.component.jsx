@@ -19,11 +19,11 @@ const Interval = ({ visibleTimer }) => (
 );
 
 Interval.propTypes = {
-  visibleTimer: PropTypes.string
+  visibleTimer: PropTypes.string,
 };
 
 Interval.defaultProps = {
-  visibleTimer: null
+  visibleTimer: null,
 };
 
 export default Interval;

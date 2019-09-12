@@ -50,7 +50,7 @@ Confirmation.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onAgree: PropTypes.func.isRequired,
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
 };
 
 export default Confirmation;

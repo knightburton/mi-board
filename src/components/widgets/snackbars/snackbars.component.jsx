@@ -19,7 +19,7 @@ const variantIcon = {
   success: CheckCircleIcon,
   warning: WarningIcon,
   error: ErrorIcon,
-  info: InfoIcon
+  info: InfoIcon,
 };
 
 const Snackbars = ({ notifications, removeNotification, removeAllNotification }) => {
@@ -52,7 +52,7 @@ const Snackbars = ({ notifications, removeNotification, removeAllNotification })
           key={notification.key}
           anchorOrigin={{
             vertical: 'bottom',
-            horizontal: 'right'
+            horizontal: 'right',
           }}
           classes={{ root: classes.snackbar }}
           autoHideDuration={(notifications.length - index + 1) * 10000}
@@ -71,10 +71,10 @@ const Snackbars = ({ notifications, removeNotification, removeAllNotification })
               onClick={() => removeNotification(notification.key)}
             >
               <CloseIcon className={classes.icon} />
-            </IconButton>
+            </IconButton>,
           ]}
           ContentProps={{
-            className: clsx(classes[notification.variant], classes.snackbarContent)
+            className: clsx(classes[notification.variant], classes.snackbarContent),
           }}
           open
         />
@@ -87,14 +87,14 @@ Snackbars.propTypes = {
   notifications: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.number.isRequired,
     variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
-    message: PropTypes.string.isRequired
+    message: PropTypes.string.isRequired,
   })),
   removeNotification: PropTypes.func.isRequired,
-  removeAllNotification: PropTypes.func.isRequired
+  removeAllNotification: PropTypes.func.isRequired,
 };
 
 Snackbars.defaultProps = {
-  notifications: []
+  notifications: [],
 };
 
 export default Snackbars;

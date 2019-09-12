@@ -26,7 +26,7 @@ ProtectedRoute.propTypes = {
 ProtectedRoute.defaultProps = {
   disabledAfterSignIn: false,
   path: null,
-  exact: false
+  exact: false,
 };
 
 export default ProtectedRoute;

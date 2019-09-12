@@ -14,5 +14,5 @@ export default makeStyles(theme => ({
   },
   profileName: {
     marginRight: theme.spacing(0.5),
-  }
+  },
 }));

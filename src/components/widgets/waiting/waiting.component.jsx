@@ -44,7 +44,7 @@ const ScreenWaiting = ({ label }) => {
 };
 
 ScreenWaiting.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 const AppWaiting = ({ label }) => {
@@ -66,7 +66,7 @@ const AppWaiting = ({ label }) => {
 };
 
 AppWaiting.propTypes = {
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 const Waiting = ({ app, screen, progressbar, label }) => {
@@ -80,14 +80,14 @@ Waiting.propTypes = {
   app: PropTypes.bool,
   screen: PropTypes.bool,
   progressbar: PropTypes.bool,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 Waiting.defaultProps = {
   app: false,
   screen: false,
   progressbar: false,
-  label: 'Loading...'
+  label: 'Loading...',
 };
 
 export default Waiting;

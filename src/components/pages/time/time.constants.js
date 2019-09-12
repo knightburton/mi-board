@@ -2,14 +2,14 @@ export default [
   {
     key: 'interval',
     label: 'Interval',
-    to: '/time/interval'
+    to: '/time/interval',
   }, {
     key: 'countdown',
     label: 'Countdown',
-    to: '/time/countdown'
+    to: '/time/countdown',
   }, {
     key: 'stopwatch',
     label: 'Stopwatch',
-    to: '/time/stopwatch'
-  }
+    to: '/time/stopwatch',
+  },
 ];

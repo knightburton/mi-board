@@ -11,27 +11,27 @@ export const MENU = [
     to: '/dashboard',
     exact: true,
     text: 'Dashboard',
-    icon: DashboardIcon
+    icon: DashboardIcon,
   },
   {
     key: 'calendar',
     to: '/calendar',
     exact: true,
     text: 'Calendar',
-    icon: CalendarIcon
+    icon: CalendarIcon,
   },
   {
     key: 'time',
     to: '/time',
     exact: false,
     text: 'Time',
-    icon: TimeIcon
+    icon: TimeIcon,
   },
   {
     key: 'todo',
     to: '/todo',
     exact: true,
     text: 'To Do List',
-    icon: TodoIcon
-  }
+    icon: TodoIcon,
+  },
 ];

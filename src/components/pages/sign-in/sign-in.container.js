@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
-  signIn: credentials => dispatch(signIn(firebase, credentials))
+  signIn: credentials => dispatch(signIn(firebase, credentials)),
 });
 
 export default compose(

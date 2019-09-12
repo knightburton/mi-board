@@ -10,7 +10,7 @@ const Wrapper = ({ isDrawerOpened, children }) => {
   const classes = useStyles();
   const smallClasses = clsx(classes.content, {
     [classes.contentCollapse]: isDrawerOpened,
-    [classes.contentExpand]: !isDrawerOpened
+    [classes.contentExpand]: !isDrawerOpened,
   });
   const mediumClasses = clsx(classes.content, classes.contentFull);
 
@@ -32,7 +32,7 @@ const Wrapper = ({ isDrawerOpened, children }) => {
 
 Wrapper.propTypes = {
   isDrawerOpened: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Wrapper;

@@ -30,7 +30,7 @@ const ControlTextarea = ({ control, state, onChange }) => (
 ControlTextarea.propTypes = {
   control: controlPropTypes.isRequired,
   state: statePropTypes.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ControlTextarea;

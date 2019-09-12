@@ -24,7 +24,7 @@ const LapsList = ({ laps, noOfVisibleLaps }) => {
 
 LapsList.proptypes = {
   laps: PropTypes.arrayOf(PropTypes.number).isRequired,
-  noOfVisibleLaps: PropTypes.number.isRequired
+  noOfVisibleLaps: PropTypes.number.isRequired,
 };
 
 export default LapsList;

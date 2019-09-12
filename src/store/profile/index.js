@@ -7,7 +7,7 @@ import { setSectionWaiting, addNotification } from '../app';
  */
 
 export const initialState = {
-  authInProgress: false
+  authInProgress: false,
 };
 
 /**
@@ -54,7 +54,7 @@ export const getProfile = createSelector(
     emailVerified: auth.emailVerified,
     photoURL: profile.photoURL || auth.photoURL,
     lastLoginAt: auth.lastLoginAt,
-    createdAt: auth.createdAt
+    createdAt: auth.createdAt,
   }
 );
 export const getDisplayName = createSelector(
@@ -88,7 +88,7 @@ export const getProfileEmailVerified = createSelector(
 
 export const reducer = handleActions(
   {
-    [setAuthInProgress]: (state, { payload: authInProgress }) => ({ ...state, authInProgress })
+    [setAuthInProgress]: (state, { payload: authInProgress }) => ({ ...state, authInProgress }),
   },
   initialState
 );

@@ -24,8 +24,8 @@ const Time = ({ location: { pathname } }) => (
 
 Time.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(Time);

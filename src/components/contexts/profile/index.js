@@ -4,7 +4,7 @@ import ProfileProviderComponent from './profile.provider.component';
 import ProfileContext from './context';
 
 const mapStateToProps = state => ({
-  profile: getProfile(state)
+  profile: getProfile(state),
 });
 
 const mapDispatchToProps = {};
@@ -13,5 +13,5 @@ export const ProfileProvider = connect(mapStateToProps, mapDispatchToProps)(Prof
 export const ProfileConsumer = ProfileContext.Consumer;
 export default {
   ProfileProvider,
-  ProfileConsumer
+  ProfileConsumer,
 };

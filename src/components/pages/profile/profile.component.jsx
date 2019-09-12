@@ -47,7 +47,7 @@ const Profile = ({ updateAuth, updateEmail, uploadProfilePhoto, deleteProfilePho
                 controls={[{
                   ...FORM_EMAIL,
                   defaultValue: profile.email || '',
-                  label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`
+                  label: `Email (${profile.emailVerified ? 'Verified' : 'Not verified'})`,
                 }]}
                 submitFunction={({ email }) => updateEmail(email)}
                 single
@@ -86,7 +86,7 @@ Profile.propTypes = {
   updateAuth: PropTypes.func.isRequired,
   updateEmail: PropTypes.func.isRequired,
   uploadProfilePhoto: PropTypes.func.isRequired,
-  deleteProfilePhoto: PropTypes.func.isRequired
+  deleteProfilePhoto: PropTypes.func.isRequired,
 };
 
 

@@ -3,18 +3,18 @@ import {
   getIsDrawerOpened,
   getIsMobileDrawerOpened,
   toggleDrawer,
-  toggleMobileDrawer
+  toggleMobileDrawer,
 } from '../../../store/app';
 import Drawer from './drawer.component';
 
 const mapStateToProps = state => ({
   isDrawerOpened: getIsDrawerOpened(state),
-  isMobileDrawerOpened: getIsMobileDrawerOpened(state)
+  isMobileDrawerOpened: getIsMobileDrawerOpened(state),
 });
 
 const mapDispatchToProps = {
   toggleDrawer,
-  toggleMobileDrawer
+  toggleMobileDrawer,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drawer);

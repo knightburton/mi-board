@@ -62,11 +62,11 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
             anchorEl={accountMenu}
             anchorOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'right',
             }}
             transformOrigin={{
               vertical: 'top',
-              horizontal: 'right'
+              horizontal: 'right',
             }}
             open={Boolean(accountMenu)}
             onClose={() => setAccountMenu(null)}
@@ -93,11 +93,11 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName }) => {
 AppBar.propTypes = {
   signOut: PropTypes.func.isRequired,
   toggleMobileDrawer: PropTypes.func.isRequired,
-  profileDisplayName: PropTypes.string
+  profileDisplayName: PropTypes.string,
 };
 
 AppBar.defaultProps = {
-  profileDisplayName: null
+  profileDisplayName: null,
 };
 
 export default withRouter(AppBar);

@@ -49,11 +49,11 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
         anchorEl={menu}
         anchorOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         keepMounted
         open={Boolean(menu)}
@@ -97,7 +97,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
 ActionsMenu.propTypes = {
   sendEmailVerification: PropTypes.func.isRequired,
   sendPasswordResetEmail: PropTypes.func.isRequired,
-  deleteProfile: PropTypes.func.isRequired
+  deleteProfile: PropTypes.func.isRequired,
 };
 
 export default ActionsMenu;

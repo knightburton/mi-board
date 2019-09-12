@@ -9,7 +9,7 @@ export default [
     min: 0,
     max: 60,
     step: 1,
-    inline: true
+    inline: true,
   },
   {
     key: 'seconds',
@@ -19,6 +19,6 @@ export default [
     min: 0,
     max: 59,
     step: 1,
-    inline: true
-  }
+    inline: true,
+  },
 ];

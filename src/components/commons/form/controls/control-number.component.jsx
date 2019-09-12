@@ -24,7 +24,7 @@ const ControlNumber = ({ control, state, onChange }) => (
       inputProps={{
         min: control.min || CONTROL_DEFAULTS.NUMBER_MIN,
         max: control.max || CONTROL_DEFAULTS.NUMBER_MAX,
-        step: control.step || CONTROL_DEFAULTS.NUMBER_STEP
+        step: control.step || CONTROL_DEFAULTS.NUMBER_STEP,
       }}
       aria-describedby={`${control.key}-helper-text`}
     />
@@ -34,7 +34,7 @@ const ControlNumber = ({ control, state, onChange }) => (
 ControlNumber.propTypes = {
   control: controlPropTypes.isRequired,
   state: statePropTypes.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ControlNumber;

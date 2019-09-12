@@ -43,7 +43,7 @@ const SignIn = ({ error, authInProgress, signIn }) => {
                 autocomplete: 'email',
                 defaultValue: '',
                 disabled: authInProgress,
-                required: true
+                required: true,
               },
               {
                 key: 'password',
@@ -52,8 +52,8 @@ const SignIn = ({ error, authInProgress, signIn }) => {
                 autocomplete: 'password',
                 defaultValue: '',
                 disabled: authInProgress,
-                required: true
-              }
+                required: true,
+              },
             ]}
             submitFunction={signIn}
             submitButton={(
@@ -71,7 +71,7 @@ const SignIn = ({ error, authInProgress, signIn }) => {
 SignIn.propTypes = {
   authInProgress: PropTypes.bool.isRequired,
   error: PropTypes.string,
-  signIn: PropTypes.func.isRequired
+  signIn: PropTypes.func.isRequired,
 };
 
 SignIn.defaultProps = {

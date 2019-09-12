@@ -6,7 +6,7 @@ export const FORM_DISPLAY_NAME = {
   label: 'Name',
   required: true,
   validators: [VALIDATORS.TEXT_MIN(3)],
-  errorTexts: [ERROR_TEXTS.TEXT_MIN(3)]
+  errorTexts: [ERROR_TEXTS.TEXT_MIN(3)],
 };
 
 export const FORM_EMAIL = {
@@ -15,7 +15,7 @@ export const FORM_EMAIL = {
   label: 'Email',
   required: true,
   validators: [VALIDATORS.EMAIL],
-  errorTexts: [ERROR_TEXTS.EMAIL]
+  errorTexts: [ERROR_TEXTS.EMAIL],
 };
 
 export const FORM_PHOTO = {
@@ -25,28 +25,28 @@ export const FORM_PHOTO = {
   required: true,
   validators: [
     VALIDATORS.FILE_MAX_SIZE(1000000),
-    VALIDATORS.FILE_IMAGE_TYPE
+    VALIDATORS.FILE_IMAGE_TYPE,
   ],
   errorTexts: [
     ERROR_TEXTS.FILE_MAX_SIZE(1000000),
-    ERROR_TEXTS.FILE_IMAGE_TYPE
-  ]
+    ERROR_TEXTS.FILE_IMAGE_TYPE,
+  ],
 };
 
 export const FORM_PASSWORD = [
   {
     key: 'verificationCode',
     type: CONTROL_TYPES.TEXT,
-    label: 'Verification Code'
+    label: 'Verification Code',
   },
   {
     key: 'newPassword',
     type: CONTROL_TYPES.PASSWORD,
-    label: 'New Password'
+    label: 'New Password',
   },
   {
     key: 'confirmPassword',
     type: CONTROL_TYPES.PASSWORD,
-    label: 'Confirm Password'
-  }
+    label: 'Confirm Password',
+  },
 ];

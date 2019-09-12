@@ -13,13 +13,13 @@ const ButtonsDefault = props => {
     buttonPosition,
     buttonFloated,
     submitButton,
-    secondaryButton
+    secondaryButton,
   } = props;
 
   const wrapperClasses = clsx(
     {
       [classes.floated]: buttonFloated,
-      [classes[buttonPosition]]: Object.values(BUTTON_POSITIONS).includes(buttonPosition)
+      [classes[buttonPosition]]: Object.values(BUTTON_POSITIONS).includes(buttonPosition),
     },
     classes.buttonWrapper
   );

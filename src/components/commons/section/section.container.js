@@ -7,7 +7,7 @@ const mapStateToProps = (state, props) => {
   const isWaiting = waitingKey ? getIsSectionWaiting(waitingKey)(state) : false;
 
   return {
-    isWaiting
+    isWaiting,
   };
 };
 

@@ -8,12 +8,12 @@ import { toggleMobileDrawer } from '../../../store/app';
 import AppBar from './appbar.component';
 
 const mapStateToProps = state => ({
-  profileDisplayName: getDisplayName(state)
+  profileDisplayName: getDisplayName(state),
 });
 
 const mapDispatchToProps = (dispatch, { firebase }) => ({
   signOut: () => dispatch(signOut(firebase)),
-  toggleMobileDrawer: () => dispatch(toggleMobileDrawer())
+  toggleMobileDrawer: () => dispatch(toggleMobileDrawer()),
 });
 
 export default compose(

@@ -24,13 +24,13 @@ export const CONTROL_DEFAULTS = {
   SLIDER_STEP: 1,
   SLIDER_MARKS: Array.from({ length: 6 }, (v, i) => ({ value: i * 10, label: i * 10 })),
   DATE_FORMAT: 'YYYY-MM-DD',
-  SWITCH_COLOR: 'primary'
+  SWITCH_COLOR: 'primary',
 };
 
 export const BUTTON_POSITIONS = {
   LEFT: 'left',
   CENTER: 'center',
-  RIGHT: 'right'
+  RIGHT: 'right',
 };
 
 export const VALIDATORS = {
@@ -45,7 +45,7 @@ export const VALIDATORS = {
   NUMBER_BETWEEN: (min, max) => value => value >= min && value <= max,
   EMAIL: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
   FILE_MAX_SIZE: size => list => list && list.length && list[0].size <= size,
-  FILE_IMAGE_TYPE: list => list && list.length && ['image/jpeg', 'image/png'].includes(list[0].type)
+  FILE_IMAGE_TYPE: list => list && list.length && ['image/jpeg', 'image/png'].includes(list[0].type),
 };
 
 export const ERROR_TEXTS = {
@@ -60,5 +60,5 @@ export const ERROR_TEXTS = {
   NUMBER_BETWEEN: (min, max) => `This field must be between ${min} and ${max}`,
   EMAIL: 'This field must be a valid email address',
   FILE_MAX_SIZE: size => `The selected file must be ${size / 1000000}MB maximum`,
-  FILE_IMAGE_TYPE: 'The selected file must be a jpeg or a png image'
+  FILE_IMAGE_TYPE: 'The selected file must be a jpeg or a png image',
 };

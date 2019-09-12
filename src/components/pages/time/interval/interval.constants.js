@@ -5,7 +5,7 @@ const from1To100 = {
   max: 100,
   step: 1,
   errorTexts: [ERROR_TEXTS.NUMBER_BETWEEN(1, 100)],
-  validators: [VALIDATORS.NUMBER_BETWEEN(1, 100)]
+  validators: [VALIDATORS.NUMBER_BETWEEN(1, 100)],
 };
 
 const minuteProps = {
@@ -14,7 +14,7 @@ const minuteProps = {
   min: 0,
   max: 60,
   step: 1,
-  inline: true
+  inline: true,
 };
 
 const secondProps = {
@@ -23,7 +23,7 @@ const secondProps = {
   min: 0,
   max: 59,
   step: 1,
-  inline: true
+  inline: true,
 };
 
 export const controls = [
@@ -33,7 +33,7 @@ export const controls = [
     defaultValue: '',
     label: 'Number of Tasks',
     required: true,
-    ...from1To100
+    ...from1To100,
   },
   {
     key: 'repeats',
@@ -41,48 +41,48 @@ export const controls = [
     defaultValue: '',
     label: 'Number of Sets',
     required: true,
-    ...from1To100
+    ...from1To100,
   },
   {
     key: 'warmupMin',
     label: 'Warmup minutes',
-    ...minuteProps
+    ...minuteProps,
   },
   {
     key: 'warmupSec',
     label: 'Warmup seconds',
-    ...secondProps
+    ...secondProps,
   },
   {
     key: 'highMin',
     label: 'High Intensity minutes',
-    ...minuteProps
+    ...minuteProps,
   },
   {
     key: 'highSec',
     label: 'High Intensity seconds',
-    ...secondProps
+    ...secondProps,
   },
   {
     key: 'lowMin',
     label: 'Low Intensity minutes',
-    ...minuteProps
+    ...minuteProps,
   },
   {
     key: 'lowSec',
     label: 'Low Intensity seconds',
-    ...secondProps
+    ...secondProps,
   },
   {
     key: 'cooldownMin',
     label: 'Cooldown minutes',
-    ...minuteProps
+    ...minuteProps,
   },
   {
     key: 'cooldownSec',
     label: 'Cooldown seconds',
-    ...secondProps
-  }
+    ...secondProps,
+  },
 ];
 
 export const options = {
@@ -100,7 +100,7 @@ export const options = {
       lowSec: 0,
       cooldownMin: 0,
       cooldownSec: 0,
-    }
+    },
   },
   fiveOne: {
     title: 'Five-one',
@@ -116,7 +116,7 @@ export const options = {
       lowSec: 15,
       cooldownMin: 5,
       cooldownSec: 0,
-    }
+    },
   },
   goldenThree: {
     title: '3-3x-33-three',
@@ -132,7 +132,7 @@ export const options = {
       lowSec: 33,
       cooldownMin: 3,
       cooldownSec: 0,
-    }
+    },
   },
   theHour: {
     title: 'The hour',
@@ -148,8 +148,8 @@ export const options = {
       lowSec: 0,
       cooldownMin: 5,
       cooldownSec: 0,
-    }
-  }
+    },
+  },
 };
 
 export const optionsMap = Object.keys(options).reduce((a, key) => ([
@@ -157,6 +157,6 @@ export const optionsMap = Object.keys(options).reduce((a, key) => ([
   {
     key,
     title: options[key].title,
-    description: options[key].description
-  }
+    description: options[key].description,
+  },
 ]), []);
