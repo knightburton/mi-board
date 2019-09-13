@@ -23,7 +23,7 @@ import { FORM_DISPLAY_NAME, FORM_EMAIL, FORM_PHOTO } from './profile.constants';
 const Profile = ({ updateAuth, updateEmail, uploadProfilePhoto, deleteProfilePhoto }) => (
   <Container maxWidth="md">
 
-    <Section title="Profile" waitingKey="profile">
+    <Section title="Details" waitingKey="profileDetails">
       <Grid spacing={0} justify="flex-end" alignItems="flex-start" container>
         <Grid xs="auto" item>
           <ActionsMenu />

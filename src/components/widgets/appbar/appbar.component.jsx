@@ -26,7 +26,7 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName, location: { p
   const classes = useStyles();
   const [accountMenu, setAccountMenu] = React.useState(null);
   const menuItem = MENU.find(item => pathname.includes(item.to));
-  const title = (menuItem && menuItem.text) || 'MI - Board';
+  const title = (menuItem && menuItem.text) || (pathname.includes('/profile') && 'Profile') || 'MI - Board';
 
   const handleSignOutClick = () => {
     signOut();
