@@ -47,8 +47,9 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
       <Menu
         id="actions-menu"
         anchorEl={menu}
+        getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'right',
         }}
         transformOrigin={{

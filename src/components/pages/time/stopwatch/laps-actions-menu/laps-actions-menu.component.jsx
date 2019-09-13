@@ -39,8 +39,9 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
       <Menu
         id="actions-menu"
         anchorEl={menu}
+        getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
+          vertical: 'bottom',
           horizontal: 'right',
         }}
         transformOrigin={{

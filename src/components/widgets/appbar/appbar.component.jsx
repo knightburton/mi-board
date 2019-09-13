@@ -69,8 +69,9 @@ const AppBar = ({ signOut, toggleMobileDrawer, profileDisplayName, location: { p
           <Menu
             id="menu-appbar"
             anchorEl={accountMenu}
+            getContentAnchorEl={null}
             anchorOrigin={{
-              vertical: 'top',
+              vertical: 'bottom',
               horizontal: 'right',
             }}
             transformOrigin={{
