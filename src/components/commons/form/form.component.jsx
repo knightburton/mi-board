@@ -19,7 +19,6 @@ const Form = ({
   submitFunction,
   allowControlsChange,
   buttonPosition,
-  buttonFloated,
   submitButton,
   secondaryButton,
 }) => {
@@ -107,7 +106,6 @@ const Form = ({
       />
       <ButtonsDefault
         buttonPosition={buttonPosition}
-        buttonFloated={buttonFloated}
         submitButton={submitButton}
         secondaryButton={secondaryButton}
       />

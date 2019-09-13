@@ -16,11 +16,6 @@ export default makeStyles(theme => ({
       marginLeft: theme.spacing(2),
     },
   },
-  floated: {
-    position: 'absolute',
-    width: `calc(100% - ${theme.spacing(3)}px)`,
-    bottom: -theme.spacing(5),
-  },
   single: {
     display: 'flex',
     flexDirection: 'row',
