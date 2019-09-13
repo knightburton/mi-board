@@ -8,8 +8,7 @@ export default makeStyles(theme => ({
     borderBottomColor: theme.palette.primary.light,
   },
   tab: {
-    minWidth: '80px',
-    padding: theme.spacing(1, 2),
+    minWidth: theme.spacing(8),
     textTransform: 'none',
   },
   selected: {
