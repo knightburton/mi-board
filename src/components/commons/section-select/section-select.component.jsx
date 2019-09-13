@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -14,12 +14,12 @@ import UncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 
 import useStyles from './section-select.styles';
 
-const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, options, breakpoints }) => {
+const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, options, breakpoints: { xs, sm, md, lg } }) => {
   const classes = useStyles();
   const [selected, updateSelected] = useState(null);
   const gridClassNames = clsx({
     [classes.marginTop]: !title,
-    [classes.marginBottom]: gutterBottom
+    [classes.marginBottom]: gutterBottom,
   });
 
   const handleCardClick = key => {
@@ -32,7 +32,7 @@ const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, optio
   }, [selectedByDefault]);
 
   return (
-    <Fragment>
+    <>
       {title && (
         <Typography variant="subtitle1" className={classes.marginTop}>
           {title}
@@ -40,15 +40,16 @@ const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, optio
       )}
       <Grid className={gridClassNames} spacing={3} container>
         {options.map(option => (
-          <Grid key={option.key} {...breakpoints} item>
+          <Grid key={option.key} xs={xs} sm={sm} md={md} lg={lg} item>
             <Card className={classes.card}>
               <CardActionArea onClick={() => handleCardClick(option.key)} disableRipple>
                 <CardContent>
                   <Box className={classes.header}>
-                    {selected === option.key
-                      ? <CheckedIcon color="primary" className={classes.icon} />
-                      : <UncheckedIcon className={classes.icon} />
-                    }
+                    {selected === option.key ? (
+                      <CheckedIcon color="primary" className={classes.icon} />
+                    ) : (
+                      <UncheckedIcon className={classes.icon} />
+                    )}
                     <Typography className={classes.title} variant="h5" component="p" gutterBottom>
                       {option.title}
                     </Typography>
@@ -64,7 +65,7 @@ const SectionSelect = ({ selectedByDefault, onSelect, title, gutterBottom, optio
           </Grid>
         ))}
       </Grid>
-    </Fragment>
+    </>
   );
 };
 
@@ -74,7 +75,7 @@ SectionSelect.propTypes = {
   options: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
   })).isRequired,
   onSelect: PropTypes.func.isRequired,
   selectedByDefault: PropTypes.string,
@@ -82,15 +83,20 @@ SectionSelect.propTypes = {
     xs: PropTypes.number,
     sm: PropTypes.number,
     md: PropTypes.number,
-    lg: PropTypes.number
-  })
+    lg: PropTypes.number,
+  }),
 };
 
 SectionSelect.defaultProps = {
   title: '',
   gutterBottom: false,
   selectedByDefault: null,
-  breakpoints: { xs: 12 }
+  breakpoints: {
+    xs: 12,
+    sm: 12,
+    md: 12,
+    lg: 12,
+  },
 };
 
 export default SectionSelect;

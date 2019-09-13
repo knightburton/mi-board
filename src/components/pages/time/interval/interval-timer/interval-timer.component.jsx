@@ -23,7 +23,7 @@ const IntervalTimer = ({ isActive }) => (
 );
 
 IntervalTimer.propTypes = {
-  isActive: PropTypes.bool.isRequired
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default IntervalTimer;

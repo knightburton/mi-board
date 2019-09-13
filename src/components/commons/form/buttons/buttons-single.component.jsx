@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Box from '@material-ui/core/Box';
@@ -16,21 +16,21 @@ const ButtonsSingle = ({ edit, onEditEnable, onEditDisable, secondaryButton }) =
   return (
     <Box className={classes.single}>
       {edit ? (
-        <Fragment>
+        <>
           <IconButton onClick={onEditDisable}>
             <CloseIcon fontSize="small" />
           </IconButton>
           <IconButton type="submit" color="primary">
             <CheckIcon fontSize="small" />
           </IconButton>
-        </Fragment>
+        </>
       ) : (
-        <Fragment>
+        <>
           <IconButton onClick={onEditEnable}>
             <EditIcon fontSize="small" />
           </IconButton>
           {secondaryButton}
-        </Fragment>
+        </>
       )}
     </Box>
   );
@@ -40,11 +40,11 @@ ButtonsSingle.propTypes = {
   edit: PropTypes.bool.isRequired,
   onEditEnable: PropTypes.func.isRequired,
   onEditDisable: PropTypes.func.isRequired,
-  secondaryButton: PropTypes.node
+  secondaryButton: PropTypes.node,
 };
 
 ButtonsSingle.defaultProps = {
-  secondaryButton: null
+  secondaryButton: null,
 };
 
 export default ButtonsSingle;

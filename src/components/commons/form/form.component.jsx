@@ -13,7 +13,15 @@ import { controlPropTypes } from './controls/controls.proptypes';
 import { buttonsPropTypes, buttonsDefaultProps } from './buttons/buttons.proptypes';
 import useSyles from './form.styles';
 
-const Form = ({ controls, single, submitFunction, allowControlsChange, ...rest }) => {
+const Form = ({
+  controls,
+  single,
+  submitFunction,
+  allowControlsChange,
+  buttonPosition,
+  submitButton,
+  secondaryButton,
+}) => {
   const classes = useSyles();
   const [singleEdit, setSingleEdit] = useState(false);
   const [state, setState] = useState(helpers.getDefaultControlValuesFrom(controls));
@@ -31,8 +39,8 @@ const Form = ({ controls, single, submitFunction, allowControlsChange, ...rest }
       ...state,
       [key]: {
         value: nextValue <= (max || CONTROL_DEFAULTS.SLIDER_MAX) ? nextValue : value,
-        error: null
-      }
+        error: null,
+      },
     });
   };
   const handleDecreaseClick = ({ key, min }) => {
@@ -43,8 +51,8 @@ const Form = ({ controls, single, submitFunction, allowControlsChange, ...rest }
       ...state,
       [key]: {
         value: nextValue >= (min || CONTROL_DEFAULTS.SLIDER_MIN) ? nextValue : value,
-        error: null
-      }
+        error: null,
+      },
     });
   };
   const handleSubmit = e => {
@@ -79,13 +87,12 @@ const Form = ({ controls, single, submitFunction, allowControlsChange, ...rest }
           label={controls.length && controls[0].label}
           value={controls.length && helpers.getControlDisplayValue(controls, state, controls[0].key)}
         />
-      )
-      }
+      )}
       <ButtonsSingle
         edit={singleEdit}
         onEditEnable={handleSingleEditEnable}
         onEditDisable={handleSingleEditDisable}
-        secondaryButton={rest.secondaryButton}
+        secondaryButton={secondaryButton}
       />
     </form>
   ) : (
@@ -97,7 +104,11 @@ const Form = ({ controls, single, submitFunction, allowControlsChange, ...rest }
         onIncrease={handleIncreaseClick}
         onDecrease={handleDecreaseClick}
       />
-      <ButtonsDefault {...rest} />
+      <ButtonsDefault
+        buttonPosition={buttonPosition}
+        submitButton={submitButton}
+        secondaryButton={secondaryButton}
+      />
     </form>
   );
 };
@@ -108,14 +119,14 @@ Form.propTypes = {
   single: PropTypes.bool,
   allowControlsChange: PropTypes.bool,
   ...buttonsPropTypes,
-  submitButton: PropTypes.node
+  submitButton: PropTypes.node,
 };
 
 Form.defaultProps = {
   single: false,
   allowControlsChange: false,
   ...buttonsDefaultProps,
-  submitButton: null
+  submitButton: null,
 };
 
 export default Form;

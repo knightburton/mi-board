@@ -6,24 +6,24 @@ const theme = createMuiTheme({
       light: '#fbaf37',
       main: '#fb9b05',
       dark: '#af6c03',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
     secondary: {
       light: '#aaabab',
       main: '#959697',
       dark: '#686969',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
     background: {
-      default: '#eceff1'
-    }
+      default: '#eceff1',
+    },
   },
   props: {
     MuiTypography: {
       variantMapping: {
-        body2: 'span'
-      }
-    }
+        body2: 'span',
+      },
+    },
   },
 });
 

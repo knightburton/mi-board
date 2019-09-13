@@ -27,13 +27,13 @@ export const intialState = {
     cooldownSec: 0,
   },
   countdown: {
-    time: 0
+    time: 0,
   },
   stopwatch: {
-    laps: []
+    laps: [],
   },
   active: null,
-  visible: null
+  visible: null,
 };
 
 /**
@@ -155,7 +155,7 @@ export const reducer = handleActions(
     [clearStopwatchLaps]: state => ({ ...state, stopwatch: intialState.stopwatch }),
 
     [setActiveTimer]: (state, { payload: timer }) => ({ ...state, active: timer }),
-    [setVisibleTimer]: (state, { payload: timer }) => ({ ...state, visible: timer })
+    [setVisibleTimer]: (state, { payload: timer }) => ({ ...state, visible: timer }),
   },
   intialState
 );

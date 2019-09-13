@@ -4,10 +4,10 @@ import { Route, Redirect } from 'react-router-dom';
 
 import Waiting from '../../components/widgets/waiting/waiting.component';
 
-const ProtectedRoute = ({ authIsEmpty, authIsLoaded, disabledAfterSignIn, component, ...rest }) => {
+const ProtectedRoute = ({ authIsEmpty, authIsLoaded, disabledAfterSignIn, component, path, exact }) => {
   if (authIsLoaded) {
-    if (disabledAfterSignIn && authIsEmpty) return <Route {...rest} component={component} />;
-    if (!disabledAfterSignIn && !authIsEmpty) return <Route {...rest} component={component} />;
+    if (disabledAfterSignIn && authIsEmpty) return <Route path={path} exact={exact} component={component} />;
+    if (!disabledAfterSignIn && !authIsEmpty) return <Route path={path} exact={exact} component={component} />;
     if (disabledAfterSignIn && !authIsEmpty) return <Redirect to="/dashboard" />;
     if (!disabledAfterSignIn && authIsEmpty) return <Redirect to="/sign-in" />;
   }
@@ -18,11 +18,15 @@ ProtectedRoute.propTypes = {
   authIsEmpty: PropTypes.bool.isRequired,
   authIsLoaded: PropTypes.bool.isRequired,
   disabledAfterSignIn: PropTypes.bool,
+  path: PropTypes.string,
+  exact: PropTypes.bool,
   component: PropTypes.elementType.isRequired,
 };
 
 ProtectedRoute.defaultProps = {
   disabledAfterSignIn: false,
+  path: null,
+  exact: false,
 };
 
 export default ProtectedRoute;

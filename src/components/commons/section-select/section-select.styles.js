@@ -2,22 +2,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(theme => ({
   marginTop: {
-    marginTop: theme.spacing(3)
+    marginTop: theme.spacing(3),
   },
   marginBottom: {
-    marginBottom: theme.spacing(3)
+    marginBottom: theme.spacing(3),
   },
   header: {
     display: 'flex',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   icon: {
-    marginTop: theme.spacing(0.4)
+    marginTop: theme.spacing(0.4),
   },
   title: {
-    marginLeft: theme.spacing(2)
+    marginLeft: theme.spacing(2),
   },
   description: {
-    marginLeft: theme.spacing(5)
-  }
+    marginLeft: theme.spacing(5),
+  },
 }));

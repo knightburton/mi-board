@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -27,7 +27,7 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         aria-label="Actions"
         aria-controls="laps-actions-menu"
@@ -39,13 +39,14 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
       <Menu
         id="actions-menu"
         anchorEl={menu}
+        getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         keepMounted
         open={Boolean(menu)}
@@ -64,7 +65,7 @@ const LapsActionsMenu = ({ lapsLength, noOfVisibleLaps, changeNoOfVisibleLaps, c
           <ListItemText primary="Clear all" />
         </MenuItem>
       </Menu>
-    </Fragment>
+    </>
   );
 };
 
@@ -72,7 +73,7 @@ LapsActionsMenu.propTypes = {
   lapsLength: PropTypes.number.isRequired,
   noOfVisibleLaps: PropTypes.number.isRequired,
   changeNoOfVisibleLaps: PropTypes.func.isRequired,
-  clearStopwatchLaps: PropTypes.func.isRequired
+  clearStopwatchLaps: PropTypes.func.isRequired,
 };
 
 export default LapsActionsMenu;

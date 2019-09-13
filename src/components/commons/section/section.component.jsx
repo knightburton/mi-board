@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -14,13 +14,13 @@ const Section = ({ title, gutterBottom, children, waitingKey, isWaiting }) => {
   const paperClassNames = clsx(
     {
       [classes.marginTop]: !title,
-      [classes.marginBottom]: gutterBottom
+      [classes.marginBottom]: gutterBottom,
     },
     classes.paper
   );
 
   return (
-    <Fragment>
+    <>
       {title && (
         <Typography variant="subtitle1" className={classes.marginTop}>
           {title}
@@ -30,7 +30,7 @@ const Section = ({ title, gutterBottom, children, waitingKey, isWaiting }) => {
         {children}
         {waitingKey && isWaiting && <Waiting progressbar />}
       </Paper>
-    </Fragment>
+    </>
   );
 };
 
@@ -39,14 +39,14 @@ Section.propTypes = {
   gutterBottom: PropTypes.bool,
   children: PropTypes.node.isRequired,
   waitingKey: PropTypes.string,
-  isWaiting: PropTypes.bool
+  isWaiting: PropTypes.bool,
 };
 
 Section.defaultProps = {
   title: '',
   gutterBottom: false,
   waitingKey: '',
-  isWaiting: false
+  isWaiting: false,
 };
 
 export default Section;

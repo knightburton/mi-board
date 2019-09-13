@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Input from '@material-ui/core/Input';
@@ -17,7 +17,7 @@ const ControlFile = ({ control, state, onChange }) => {
   const handleAddPhotoClick = () => fileInput.current.children[0].click();
 
   return (
-    <Fragment>
+    <>
       <IconButton color="primary" onClick={handleAddPhotoClick}>
         <AddPhotoIcon />
       </IconButton>
@@ -25,7 +25,7 @@ const ControlFile = ({ control, state, onChange }) => {
         control={control}
         state={{
           ...state,
-          value: fileName
+          value: fileName,
         }}
       >
         <Input
@@ -46,7 +46,7 @@ const ControlFile = ({ control, state, onChange }) => {
         aria-describedby={`${control.key}-helper-text`}
         style={{ display: 'none' }}
       />
-    </Fragment>
+    </>
   );
 };
 
@@ -54,9 +54,9 @@ ControlFile.propTypes = {
   control: controlPropTypes.isRequired,
   state: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    error: PropTypes.string
+    error: PropTypes.string,
   }).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ControlFile;

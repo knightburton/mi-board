@@ -2,7 +2,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import firestoreConnect from 'react-redux-firebase/lib/firestoreConnect';
 import {
-  addTodo
+  addTodo,
 } from '../../../../store/todo';
 
 import AddSections from './add-section.component';

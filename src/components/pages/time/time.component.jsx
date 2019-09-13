@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import Stopwatch from './stopwatch/stopwatch.container';
 import Tools from './time.constants';
 
 const Time = ({ location: { pathname } }) => (
-  <Fragment>
+  <>
     <TopTabs items={Tools} selectedByDefault={pathname} />
     <Switch>
       <Route exact path="/time/Interval" component={Interval} />
@@ -19,13 +19,13 @@ const Time = ({ location: { pathname } }) => (
       <Route exact path="/time/stopwatch" component={Stopwatch} />
       <Redirect to="/time/Interval" />
     </Switch>
-  </Fragment>
+  </>
 );
 
 Time.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string.isRequired
-  }).isRequired
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default withRouter(Time);

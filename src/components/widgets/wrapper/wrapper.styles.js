@@ -6,23 +6,23 @@ export default makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    paddingBottom: theme.spacing(6)
+    paddingBottom: theme.spacing(6),
   },
   contentFull: {
-    marginLeft: 0
+    marginLeft: 0,
   },
   contentCollapse: {
     marginLeft: DRAWER_WIDTH,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+      duration: theme.transitions.duration.leavingScreen,
+    }),
   },
   contentExpand: {
     marginLeft: theme.spacing(9) + 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  }
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
 }));

@@ -20,7 +20,7 @@ const ControlText = ({ control, state, onChange, onDecrease, onIncrease }) => {
   const className = clsx(
     {
       [classes.inline]: control.inline,
-      [classes.sliderFullWidth]: !control.inline
+      [classes.sliderFullWidth]: !control.inline,
     },
     classes.sliderControl
   );
@@ -76,7 +76,7 @@ ControlText.propTypes = {
   state: statePropTypes.isRequired,
   onChange: PropTypes.func.isRequired,
   onDecrease: PropTypes.func.isRequired,
-  onIncrease: PropTypes.func.isRequired
+  onIncrease: PropTypes.func.isRequired,
 };
 
 export default ControlText;

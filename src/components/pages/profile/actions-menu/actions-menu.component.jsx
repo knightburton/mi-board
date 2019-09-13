@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import IconButton from '@material-ui/core/IconButton';
@@ -35,7 +35,7 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
   };
 
   return (
-    <Fragment>
+    <>
       <IconButton
         aria-label="Actions"
         aria-controls="actions-menu"
@@ -47,13 +47,14 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
       <Menu
         id="actions-menu"
         anchorEl={menu}
+        getContentAnchorEl={null}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right'
+          vertical: 'bottom',
+          horizontal: 'right',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'right'
+          horizontal: 'right',
         }}
         keepMounted
         open={Boolean(menu)}
@@ -90,14 +91,14 @@ const ActionsMenu = ({ sendEmailVerification, sendPasswordResetEmail, deleteProf
           )}
         />
       </Menu>
-    </Fragment>
+    </>
   );
 };
 
 ActionsMenu.propTypes = {
   sendEmailVerification: PropTypes.func.isRequired,
   sendPasswordResetEmail: PropTypes.func.isRequired,
-  deleteProfile: PropTypes.func.isRequired
+  deleteProfile: PropTypes.func.isRequired,
 };
 
 export default ActionsMenu;

@@ -11,7 +11,7 @@ import {
   resetTimer,
   increaseTimer,
   addStopwatchLap,
-  clearStopwatchLaps
+  clearStopwatchLaps,
 } from '../../../../store/time';
 import Stopwatch from './stopwatch.component';
 
@@ -20,7 +20,7 @@ const mapStateToProps = state => ({
   offset: getOffset(state),
   intervalID: getIntervalID(state),
   clock: getClock(state),
-  laps: getStopwatchLaps(state)
+  laps: getStopwatchLaps(state),
 });
 
 const mapDispatchToProps = {
@@ -30,7 +30,7 @@ const mapDispatchToProps = {
   resetTimer,
   increaseTimer,
   addStopwatchLap,
-  clearStopwatchLaps
+  clearStopwatchLaps,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stopwatch);

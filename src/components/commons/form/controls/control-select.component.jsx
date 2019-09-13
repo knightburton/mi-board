@@ -42,7 +42,7 @@ const ControlSelect = ({ control, state, onChange }) => {
 ControlSelect.propTypes = {
   control: controlPropTypes.isRequired,
   state: statePropTypes.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ControlSelect;

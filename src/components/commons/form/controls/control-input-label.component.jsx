@@ -17,7 +17,7 @@ const ControlInputLabel = ({ id, label }) => {
 
 ControlInputLabel.propTypes = {
   id: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired
+  label: PropTypes.string.isRequired,
 };
 
 export default ControlInputLabel;

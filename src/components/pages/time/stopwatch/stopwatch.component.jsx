@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Container from '@material-ui/core/Container';
@@ -63,15 +63,15 @@ const Stopwatch = ({ activeTimer, resetTimer, addStopwatchLap, clearStopwatchLap
               onClick={handleStartStopClick}
             >
               {active ? (
-                <Fragment>
+                <>
                   Stop
                   <StopIcon />
-                </Fragment>
+                </>
               ) : (
-                <Fragment>
+                <>
                   Start
                   <PlayIcon />
-                </Fragment>
+                </>
               )}
             </Button>
           </Grid>
@@ -134,13 +134,13 @@ Stopwatch.propTypes = {
   resetTimer: PropTypes.func.isRequired,
   increaseTimer: PropTypes.func.isRequired,
   addStopwatchLap: PropTypes.func.isRequired,
-  clearStopwatchLaps: PropTypes.func.isRequired
+  clearStopwatchLaps: PropTypes.func.isRequired,
 };
 
 Stopwatch.defaultProps = {
   activeTimer: null,
   intervalID: null,
-  laps: []
+  laps: [],
 };
 
 export default Stopwatch;

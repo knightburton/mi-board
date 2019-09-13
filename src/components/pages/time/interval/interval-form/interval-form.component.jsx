@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +16,7 @@ const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
   const [formControls, updateFormControls] = useState(controls);
   const changeFormValuesTo = key => controls.map(control => ({
     ...control,
-    defaultValue: options[key].data[control.key]
+    defaultValue: options[key].data[control.key],
   }));
   const handleSectionSelect = key => updateFormControls(changeFormValuesTo(key));
   const handleFormSubmit = data => {
@@ -25,7 +25,7 @@ const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
   };
 
   return (
-    <Fragment>
+    <>
 
       <Section>
         <Typography variant="body1">
@@ -58,13 +58,13 @@ const IntervalForm = ({ setIntervalParams, setVisibleTimer }) => {
         />
       </Section>
 
-    </Fragment>
+    </>
   );
 };
 
 IntervalForm.propTypes = {
   setIntervalParams: PropTypes.func.isRequired,
-  setVisibleTimer: PropTypes.func.isRequired
+  setVisibleTimer: PropTypes.func.isRequired,
 };
 
 export default IntervalForm;

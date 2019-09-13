@@ -9,20 +9,21 @@ import IntervalTimer from './interval-timer/interval-timer.container';
 const Interval = ({ visibleTimer }) => (
   <Container maxWidth="md">
 
-    {visibleTimer && visibleTimer === 'interval'
-      ? <IntervalTimer />
-      : <IntervalForm />
-    }
+    {visibleTimer && visibleTimer === 'interval' ? (
+      <IntervalTimer />
+    ) : (
+      <IntervalForm />
+    )}
 
   </Container>
 );
 
 Interval.propTypes = {
-  visibleTimer: PropTypes.string
+  visibleTimer: PropTypes.string,
 };
 
 Interval.defaultProps = {
-  visibleTimer: null
+  visibleTimer: null,
 };
 
 export default Interval;

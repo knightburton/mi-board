@@ -29,7 +29,7 @@ const ControlText = ({ control, state, onChange }) => (
 ControlText.propTypes = {
   control: controlPropTypes.isRequired,
   state: statePropTypes.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ControlText;

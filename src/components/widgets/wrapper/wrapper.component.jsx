@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 
@@ -10,12 +10,12 @@ const Wrapper = ({ isDrawerOpened, children }) => {
   const classes = useStyles();
   const smallClasses = clsx(classes.content, {
     [classes.contentCollapse]: isDrawerOpened,
-    [classes.contentExpand]: !isDrawerOpened
+    [classes.contentExpand]: !isDrawerOpened,
   });
   const mediumClasses = clsx(classes.content, classes.contentFull);
 
   return (
-    <Fragment>
+    <>
       <Hidden smDown>
         <main className={smallClasses}>
           {children}
@@ -26,13 +26,13 @@ const Wrapper = ({ isDrawerOpened, children }) => {
           {children}
         </main>
       </Hidden>
-    </Fragment>
+    </>
   );
 };
 
 Wrapper.propTypes = {
   isDrawerOpened: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Wrapper;

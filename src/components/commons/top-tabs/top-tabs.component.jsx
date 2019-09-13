@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import Container from '@material-ui/core/Container';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -16,24 +17,29 @@ const TopTabs = ({ items, selectedByDefault }) => {
   );
 
   return (
-    <Tabs
-      value={selected}
-      onChange={(e, value) => updateSelected(value)}
-      className={classes.root}
-      TabIndicatorProps={{ className: classes.indicator }}
-    >
-      {items.map(item => (
-        <Tab
-          key={item.key}
-          value={item.to}
-          label={item.label}
-          className={classes.tab}
-          component={Link}
-          to={item.to}
-          disableRipple
-        />
-      ))}
-    </Tabs>
+    <Container maxWidth={false}>
+      <Tabs
+        value={selected}
+        onChange={(e, value) => updateSelected(value)}
+        className={classes.root}
+        TabIndicatorProps={{ className: classes.indicator }}
+      >
+        {items.map(item => (
+          <Tab
+            key={item.key}
+            value={item.to}
+            label={item.label}
+            className={classes.tab}
+            classes={{
+              selected: classes.selected,
+            }}
+            component={Link}
+            to={item.to}
+            disableRipple
+          />
+        ))}
+      </Tabs>
+    </Container>
   );
 };
 
@@ -41,9 +47,9 @@ TopTabs.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     key: PropTypes.string,
     label: PropTypes.string,
-    to: PropTypes.string
+    to: PropTypes.string,
   })).isRequired,
-  selectedByDefault: PropTypes.string.isRequired
+  selectedByDefault: PropTypes.string.isRequired,
 };
 
 export default TopTabs;

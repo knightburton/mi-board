@@ -12,12 +12,12 @@ const ControlHelperText = ({ id, error, helperText }) => (
 ControlHelperText.propTypes = {
   id: PropTypes.string.isRequired,
   error: PropTypes.string,
-  helperText: PropTypes.string
+  helperText: PropTypes.string,
 };
 
 ControlHelperText.defaultProps = {
   error: null,
-  helperText: null
+  helperText: null,
 };
 
 export default ControlHelperText;

@@ -20,12 +20,12 @@ ListSection.propTypes = {
     todo: PropTypes.string,
     priority: PropTypes.string,
     'expiry-date': PropTypes.number,
-    complete: PropTypes.bool
+    complete: PropTypes.bool,
   })),
 };
 
 ListSection.defaultProps = {
-  personalTodos: []
+  personalTodos: [],
 };
 
 export default ListSection;

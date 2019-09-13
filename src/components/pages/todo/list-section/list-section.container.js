@@ -13,7 +13,7 @@ const mapDispatchToProps = {};
 
 export default compose(
   firestoreConnect(props => [
-    { collection: 'todos', doc: props.profileID, subcollections: [{ collection: 'personal' }], storeAs: 'personalTodos' }
+    { collection: 'todos', doc: props.profileID, subcollections: [{ collection: 'personal' }], storeAs: 'personalTodos' },
   ]),
   connect(mapStateToProps, mapDispatchToProps)
 )(ListSection);

@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import ControlText from './control-text.component';
@@ -16,14 +17,14 @@ import * as helpers from '../form.helpers';
 import { controlPropTypes } from './controls.proptypes';
 
 const Controls = ({ controls, state, onChange, onIncrease, onDecrease }) => (
-  <Fragment>
+  <>
     {controls.reduce((acc, control) => {
       const props = {
         key: control.key,
         control,
         state: helpers.getControlState(state, control.key),
         onChange,
-        ...control.type === CONTROL_TYPES.SLIDER ? { onDecrease, onIncrease } : {}
+        ...control.type === CONTROL_TYPES.SLIDER ? { onDecrease, onIncrease } : {},
       };
 
       if (control.type === CONTROL_TYPES.PASSWORD) return [...acc, <ControlText {...props} />];
@@ -37,7 +38,7 @@ const Controls = ({ controls, state, onChange, onIncrease, onDecrease }) => (
       if (control.type === CONTROL_TYPES.SWITCH) return [...acc, <ControlSwitch {...props} />];
       return acc;
     }, [])}
-  </Fragment>
+  </>
 );
 
 Controls.propTypes = {
@@ -45,7 +46,7 @@ Controls.propTypes = {
   state: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onIncrease: PropTypes.func.isRequired,
-  onDecrease: PropTypes.func.isRequired
+  onDecrease: PropTypes.func.isRequired,
 };
 
 export default Controls;

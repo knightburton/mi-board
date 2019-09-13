@@ -27,5 +27,5 @@ export const BASIC_TODO_CONTROLS = [
     defaultValue: new Date(),
     label: 'Expiry Date',
     inline: true,
-  }
+  },
 ];

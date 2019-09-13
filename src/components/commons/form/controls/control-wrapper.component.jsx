@@ -41,7 +41,7 @@ const ControlWrapper = ({ control, state, children }) => {
 ControlWrapper.propTypes = {
   control: controlPropTypes.isRequired,
   state: statePropTypes.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default ControlWrapper;

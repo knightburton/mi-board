@@ -7,7 +7,7 @@ import { setSectionWaiting, addNotification } from '../app';
  */
 
 export const initialState = {
-  authInProgress: false
+  authInProgress: false,
 };
 
 /**
@@ -54,7 +54,7 @@ export const getProfile = createSelector(
     emailVerified: auth.emailVerified,
     photoURL: profile.photoURL || auth.photoURL,
     lastLoginAt: auth.lastLoginAt,
-    createdAt: auth.createdAt
+    createdAt: auth.createdAt,
   }
 );
 export const getDisplayName = createSelector(
@@ -88,7 +88,7 @@ export const getProfileEmailVerified = createSelector(
 
 export const reducer = handleActions(
   {
-    [setAuthInProgress]: (state, { payload: authInProgress }) => ({ ...state, authInProgress })
+    [setAuthInProgress]: (state, { payload: authInProgress }) => ({ ...state, authInProgress }),
   },
   initialState
 );
@@ -121,29 +121,29 @@ export const signOut = firebase => async dispatch => {
 };
 
 export const updateAuth = (firebase, attributes, updateProfile = false) => async dispatch => {
-  dispatch(setSectionWaiting(true, 'profile'));
+  dispatch(setSectionWaiting(true, 'profileDetails'));
   try {
     await firebase.updateAuth(attributes, updateProfile);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setSectionWaiting(false, 'profile'));
+    dispatch(setSectionWaiting(false, 'profileDetails'));
   }
 };
 
 export const updateEmail = (firebase, email) => async dispatch => {
-  dispatch(setSectionWaiting(true, 'profile'));
+  dispatch(setSectionWaiting(true, 'profileDetails'));
   try {
     await firebase.updateEmail(email, true);
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setSectionWaiting(false, 'profile'));
+    dispatch(setSectionWaiting(false, 'profileDetails'));
   }
 };
 
 export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState) => {
-  dispatch(setSectionWaiting(true, 'profile'));
+  dispatch(setSectionWaiting(true, 'profileDetails'));
   try {
     const profileID = getProfileID(getState());
     const { uploadTaskSnapshot: { metadata } } = await firebase.uploadFile(`profiles/${profileID}`, file);
@@ -152,12 +152,12 @@ export const uploadProfilePhoto = (firebase, file) => async (dispatch, getState)
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setSectionWaiting(false, 'profile'));
+    dispatch(setSectionWaiting(false, 'profileDetails'));
   }
 };
 
 export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
-  dispatch(setSectionWaiting(true, 'profile'));
+  dispatch(setSectionWaiting(true, 'profileDetails'));
   try {
     const profileID = getProfileID(getState());
     const profilePhotoName = getProfilePhotoName(getState());
@@ -170,7 +170,7 @@ export const deleteProfilePhoto = firebase => async (dispatch, getState) => {
   } catch (error) {
     dispatch(addNotification(error.message, 'error'));
   } finally {
-    dispatch(setSectionWaiting(false, 'profile'));
+    dispatch(setSectionWaiting(false, 'profileDetails'));
   }
 };
 
