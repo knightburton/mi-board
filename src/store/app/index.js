@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { createSelector } from 'reselect';
+import { getTimestamp } from '../../utils';
 
 /**
  * INITIAL STATE
@@ -104,7 +105,7 @@ export const reducer = handleActions(
       ...state,
       notifications: [
         ...state.notifications,
-        { key: new Date().getTime(), message, variant },
+        { key: getTimestamp(), message, variant },
       ],
     }),
     [removeNotification]: (state, { payload: key }) => ({
