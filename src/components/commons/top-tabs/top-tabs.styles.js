@@ -8,11 +8,19 @@ export default makeStyles(theme => ({
     borderBottomColor: theme.palette.primary.light,
   },
   tab: {
-    minWidth: theme.spacing(8),
+    minWidth: theme.spacing(6),
+    padding: 0,
     textTransform: 'none',
+    '&:not(:last-child)': {
+      marginRight: theme.spacing(2),
+    },
+    '&:not(:first-child)': {
+      marginLeft: theme.spacing(2),
+    },
   },
   selected: {
     color: theme.palette.primary.main,
+    padding: 0,
   },
   indicator: {
     height: '4px',
